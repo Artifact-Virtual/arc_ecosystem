@@ -30,6 +30,7 @@ Thumbs.db
 
 # Misc
 *.tgz
+temp/*
 
 # Build
 /dist/
