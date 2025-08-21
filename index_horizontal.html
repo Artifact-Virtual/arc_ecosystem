@@ -46,14 +46,28 @@
   <style>
     .code-keyword { color: #ff79c6; } .code-string { color: #f1fa8c; } .code-variable { color: #8be9fd; } .code-function { color: #50fa7b; } .code-comment { color: #6272a4; }
     /* Scale down all content by 10% and center it */
-    body {
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+      background: #000000 !important;
+    }
+    /* Hide scrollbar but allow scrolling */
+    html::-webkit-scrollbar, body::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+    }
+    html {
+      scrollbar-width: none; /* Firefox */
+    }
+    .scale-container {
       transform: scale(0.9);
       transform-origin: center top;
       width: 100vw;
       min-height: 100vh;
-      margin: 0;
-      padding: 0;
-      overflow-x: auto;
+      background: #000000 !important;
     }
     input[type=range] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; width: 100%; }
     input[type=range]::-webkit-slider-runnable-track { background: #1f1f1f; height: 2px; }
@@ -62,51 +76,49 @@
     input[type=range]::-moz-range-thumb { background-color: #ff4500; height: 12px; width: 12px; border-radius: 50%; border: 2px solid #0a0a0a; box-shadow: 0 0 5px rgba(255, 69, 0, 0.5); }
     .panel-border { border: 1px solid; border-image-slice: 1; border-image-source: linear-gradient(to bottom right, #4a4a4a, #1a1a1a); }
     @media (min-width: 1024px) {
-      html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background-color: #000000; }
-      .horizontal-container { display: flex; width: 100%; height: 100vh; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
-      .section { width: 100vw; height: 100vh; flex-shrink: 0; scroll-snap-align: start; position: relative; padding-left: 4rem; }
-      ::-webkit-scrollbar { height: 3px; } ::-webkit-scrollbar-track { background: #0a0a0a; } ::-webkit-scrollbar-thumb { background: #4a4a4a; border-radius: 2px; } ::-webkit-scrollbar-thumb:hover { background: #ff4500; }
+      html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background-color: #000000 !important; }
+      .horizontal-container { display: flex; width: 100%; height: 100vh; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; background: #000000 !important; }
+      .section { width: 100vw; height: 100vh; flex-shrink: 0; scroll-snap-align: start; position: relative; padding-left: 4rem; background: #000000 !important; }
+      ::-webkit-scrollbar { height: 3px; } ::-webkit-scrollbar-track { background: #000000; } ::-webkit-scrollbar-thumb { background: #4a4a4a; border-radius: 2px; } ::-webkit-scrollbar-thumb:hover { background: #ff4500; }
       .writing-mode-vertical-rl { writing-mode: vertical-rl; }
     }
     @media (max-width: 1023px) {
-       html, body { overflow-x: hidden; scroll-behavior: smooth; }
-      .horizontal-container { display: flex; flex-direction: column; }
-      .section { height: auto; min-height: 100vh; padding: 6rem 1rem 4rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      html, body { overflow-x: hidden; scroll-behavior: smooth; background: #000000 !important; }
+      .horizontal-container { display: flex; flex-direction: column; background: #000000 !important; }
+      .section { height: auto; min-height: 100vh; padding: 6rem 1rem 4rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000000 !important; }
     }
   </style>
 </head>
 <body class="bg-adam-dark text-gray-200 font-sans font-light">
-  
-  <div class="fixed top-0 left-0 w-full h-full bg-adam-dark -z-10">
-    <div class="absolute top-0 left-0 w-full h-full bg-grid-pattern bg-grid-size animate-background-pan opacity-50"></div>
-  </div>
+  <div class="scale-container">
 
-  <header id="app-header" class="fixed top-0 h-screen w-16 bg-black/50 backdrop-blur-sm z-50 flex-col items-center justify-between py-8 transition-opacity duration-300 ease-in-out left-0 border-r border-white/10 hidden lg:flex">
-    <div id="header-title" data-scroll-to="#adam-home" class="text-adam-orange font-light text-2xl tracking-[0.3em] writing-mode-vertical-rl cursor-pointer transform rotate-180">ADAM</div>
-    <nav id="header-nav" class="flex flex-col items-center space-y-6 relative"></nav>
-    <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="bg-adam-orange/80 hover:bg-adam-orange text-white font-semibold py-3 px-2 rounded-sm text-xs transition-all duration-300 writing-mode-vertical-rl tracking-widest uppercase transform rotate-180">Buy</a>
-  </header>
-  
-  <header class="sticky top-0 z-50 bg-black/50 backdrop-blur-md border-b border-white/10 lg:hidden">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center"><span class="text-adam-orange font-light text-2xl tracking-[0.3em]">ADAM</span></div>
-        <div class="flex items-center"><a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="bg-adam-orange/80 hover:bg-adam-orange text-white font-semibold py-2 px-4 rounded-sm text-xs transition-all duration-300 tracking-widest uppercase">Buy Token</a></div>
+    <header id="app-header" class="fixed top-0 h-screen w-16 bg-black/50 backdrop-blur-sm z-50 flex-col items-center justify-between py-8 transition-opacity duration-300 ease-in-out left-0 border-r border-white/10 hidden lg:flex">
+      <div id="header-title" data-scroll-to="#adam-home" class="text-adam-orange font-light text-2xl tracking-[0.3em] writing-mode-vertical-rl cursor-pointer transform rotate-180">ADAM</div>
+      <nav id="header-nav" class="flex flex-col items-center space-y-6 relative"></nav>
+      <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="bg-adam-orange/80 hover:bg-adam-orange text-white font-semibold py-3 px-2 rounded-sm text-xs transition-all duration-300 writing-mode-vertical-rl tracking-widest uppercase transform rotate-180">Buy</a>
+    </header>
+    
+    <header class="sticky top-0 z-50 bg-black/50 backdrop-blur-md border-b border-white/10 lg:hidden">
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center"><span class="text-adam-orange font-light text-2xl tracking-[0.3em]">ADAM</span></div>
+          <div class="flex items-center"><a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="bg-adam-orange/80 hover:bg-adam-orange text-white font-semibold py-2 px-4 rounded-sm text-xs transition-all duration-300 tracking-widest uppercase">Buy Token</a></div>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main id="main-container" class="horizontal-container">
-    <section id="adam-home" class="section"></section>
-    <section id="adam-about" class="section"></section>
-    <section id="adam-architecture" class="section"></section>
-    <section id="adam-lifecycle" class="section"></section>
-    <section id="adam-parameters" class="section"></section>
-    <section id="adam-sandbox" class="section"></section>
-    <section id="adam-security" class="section"></section>
-    <section id="adam-tokenomics" class="section"></section>
-    <section id="adam-join" class="section"></section>
-  </main>
+    <main id="main-container" class="horizontal-container">
+      <section id="adam-home" class="section"></section>
+      <section id="adam-about" class="section"></section>
+      <section id="adam-architecture" class="section"></section>
+      <section id="adam-lifecycle" class="section"></section>
+      <section id="adam-parameters" class="section"></section>
+      <section id="adam-sandbox" class="section"></section>
+      <section id="adam-security" class="section"></section>
+      <section id="adam-tokenomics" class="section"></section>
+      <section id="adam-join" class="section"></section>
+    </main>
+  </div>
 
 <script>
 // COMPLETE, UNABBREVIATED SCRIPT TO RENDER AND MANAGE ALL INTERACTIONS

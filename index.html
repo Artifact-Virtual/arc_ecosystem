@@ -13,7 +13,7 @@
   <style>
     /* --- Base Theming & Hero Styles --- */
     :root {
-      --bg-primary: #0a0505;
+      --bg-primary: #000000;
       --accent-primary: #b8002a;
       --accent-secondary: #ff3300;
       --accent-tertiary: #ff9944;
@@ -32,7 +32,7 @@
     body {
       font-family: 'Lexend', 'Montserrat', sans-serif;
       overflow-x: hidden;
-      background-color: var(--bg-primary);
+      background-color: #000000 !important;
       color: var(--text-secondary);
     }
     
@@ -71,7 +71,7 @@
     .adam-header { position: absolute; top: 0; height: 100vh; width: 4rem; z-index: 50; }
     
     /* --- Hero Section Styles --- */
-    .header { width: 100%; position: fixed; top: 0; left: 0; z-index: 1000; background: var(--bg-primary); box-shadow: 0 2px 16px rgba(0,0,0,0.12); padding: 0.5rem 2rem; display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
+  .header { width: 100%; position: fixed; top: 0; left: 0; z-index: 1000; background: #000000 !important; box-shadow: 0 2px 16px rgba(0,0,0,0.12); padding: 0.5rem 2rem; display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
     .nav { width: 100%; display: flex; align-items: center; justify-content: space-between; }
     .nav-brand { display: flex; align-items: center; gap: 1rem; }
     .av-logo { height: 40px; width: auto; }
@@ -96,7 +96,7 @@
   #card { position: absolute; left: 0; top: 0; width: 190px; height: 332px; z-index: 0; display: flex; justify-content: center; align-items: center; border-radius: 20px; transition: transform 0.25s cubic-bezier(0.23,1,0.32,1); background: linear-gradient(43deg, rgb(65, 88, 208) 0%, rgb(200, 80, 192) 46%, rgb(255, 204, 112) 100%); overflow: hidden; }
     .card-mp4 { position: absolute; top: -2px; left: -2px; width: calc(100% + 4px); height: calc(100% + 4px); object-fit: cover; z-index: 1; border-radius: 20px; pointer-events: none; filter: contrast(1.25) brightness(1.05) saturate(1.1); }
     .hero-bottom-center-overlay { position: absolute; left: 50%; bottom: 2.5vh; transform: translateX(-50%); z-index: 10; font-family: 'Montserrat', 'Lexend', sans-serif; font-size: clamp(1.1rem, 2vw, 2rem); font-weight: 600; letter-spacing: 2px; color: #fff; text-align: center; text-shadow: 0 2px 8px #000a; pointer-events: none; }
-    .footer { background: var(--bg-primary); padding: 3rem 2rem 2rem; text-align: center; border-top: 1px solid var(--glass-light); margin-top: 0; position: relative; z-index: 20; }
+  .footer { background: #000000 !important; padding: 3rem 2rem 2rem; text-align: center; border-top: 1px solid var(--glass-light); margin-top: 0; position: relative; z-index: 20; }
     .footer-content { max-width: 1200px; margin: 0 auto; }
     .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
     .footer-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.3s ease; }
@@ -235,13 +235,13 @@
         .iframe-fullscreen-section {
           position: relative;
           width: 5px;
-          height: 100vh;
+          height: 100dvh;
           min-width: 100vw;
-          min-height: 100vh;
+          min-height: 100dvh;
           margin: 0;
           padding: 0;
           overflow: hidden;
-          background: #000;
+          background: #000000 !important;
           display: flex;
         }
         .iframe-fullscreen {
@@ -249,9 +249,9 @@
           top: 50%;
           left: 50%;
           width: 100vw;
-          height: 100vh;
+          height: 100dvh;
           min-width: 100vw;
-          min-height: 100vh;
+          min-height: 100dvh;
           border: none;
           display: block;
           box-sizing: border-box;
@@ -268,10 +268,21 @@
         }
         html, body {
           width: 100vw;
-          height: 100vh;
+          height: 100dvh;
           margin: 0;
           padding: 0;
           overflow-x: hidden;
+          /* allow vertical scrolling, but hide scrollbar visually */
+          background: #000000 !important;
+        }
+
+        /* Hide scrollbar but allow scrolling */
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+          width: 0px;
+          background: transparent;
+        }
+        html {
+          scrollbar-width: none; /* Firefox */
         }
       </style>
 
