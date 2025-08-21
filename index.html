@@ -3,1007 +3,158 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARCx — Constitutional Intelligence Primer</title>
+  <title>ARCx — Constitutional Intelligence</title>
   <meta name="description" content="ARCx: The genesis token powering constitutional intelligence infrastructure. Built on Base, fully live, and transforming onchain governance.">
   <link rel="icon" href="css/arcx-logo.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
+    /* --- Base Theming & Hero Styles --- */
     :root {
       --bg-primary: #0a0505;
-      --bg-secondary: #1a0f0f;
-      --bg-tertiary: #2a1515;
-      --accent-primary: #ff6600;
+      --accent-primary: #b8002a;
       --accent-secondary: #ff3300;
       --accent-tertiary: #ff9944;
-      --accent-glow: #ff660033;
-      --accent-glow-intense: #ff660066;
+      --accent-glow: #b8002a33;
+      --accent-glow-intense: #b8002a66;
       --text-primary: #ffffff;
       --text-secondary: #cccccc;
       --text-muted: #888888;
       --glass-light: rgba(255, 255, 255, 0.1);
-      --glass-dark: rgba(255, 255, 255, 0.05);
-      --border-glow: rgba(255, 102, 0, 0.3);
-      --shadow-intense: 0 0 40px rgba(255, 102, 0, 0.4);
-      --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
       --glitch-1: #ff0040;
       --glitch-2: #00ffff;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Lexend', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-weight: 200;
-      background: radial-gradient(ellipse at center, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-      color: var(--text-primary);
+      font-family: 'Lexend', 'Montserrat', sans-serif;
       overflow-x: hidden;
-      line-height: 1.6;
-      min-height: 100vh;
-      position: relative;
-    }
-
-    /* Enhanced animated background */
-    .bg-particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      background: 
-        radial-gradient(circle at 20% 30%, var(--accent-glow) 0%, transparent 60%),
-        radial-gradient(circle at 80% 70%, var(--accent-glow) 0%, transparent 60%),
-        radial-gradient(circle at 40% 80%, var(--accent-glow) 0%, transparent 60%);
-      animation: particle-float 25s ease-in-out infinite alternate;
-    }
-
-    @keyframes particle-float {
-      0% { 
-        transform: translateY(0px) rotate(0deg);
-        filter: brightness(1);
-      }
-      100% { 
-        transform: translateY(-30px) rotate(8deg);
-        filter: brightness(1.3);
-      }
-    }
-
-    /* 3D Hero Element */
-    .hero-3d-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 400px;
-      height: 400px;
-      perspective: 1000px;
-      z-index: 5;
-    }
-
-    .hero-orb {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.1s ease-out;
-    }
-
-    .orb-layer {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, var(--accent-primary), var(--accent-secondary));
-      box-shadow: 
-        0 0 60px var(--accent-glow-intense),
-        inset 0 0 60px rgba(255, 255, 255, 0.1);
-      animation: orb-pulse 4s ease-in-out infinite alternate;
-    }
-
-    .orb-layer:nth-child(1) {
-      transform: translateZ(0px);
-      opacity: 1;
-    }
-
-    .orb-layer:nth-child(2) {
-      transform: translateZ(-20px) scale(0.9);
-      opacity: 0.7;
-      animation-delay: -1s;
-    }
-
-    .orb-layer:nth-child(3) {
-      transform: translateZ(-40px) scale(0.8);
-      opacity: 0.4;
-      animation-delay: -2s;
-    }
-
-    @keyframes orb-pulse {
-      0% { 
-        transform: scale(1) rotateY(0deg);
-        box-shadow: 
-          0 0 60px var(--accent-glow-intense),
-          inset 0 0 60px rgba(255, 255, 255, 0.1);
-      }
-      100% { 
-        transform: scale(1.1) rotateY(180deg);
-        box-shadow: 
-          0 0 100px var(--accent-glow-intense),
-          inset 0 0 80px rgba(255, 255, 255, 0.2);
-      }
-    }
-
-    .orb-core {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(45deg, var(--accent-primary), var(--accent-tertiary));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      box-shadow: 0 0 40px var(--accent-glow-intense);
-      padding: 20px;
-    }
-
-    .orb-logo {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      filter: brightness(2) contrast(1.2);
-      animation: logo-glow 3s ease-in-out infinite alternate;
-    }
-
-    @keyframes logo-glow {
-      0% { 
-        filter: brightness(2) contrast(1.2) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
-      }
-      100% { 
-        filter: brightness(2.5) contrast(1.5) drop-shadow(0 0 20px rgba(255, 255, 255, 1));
-      }
-    }
-
-    .orb-symbol {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 2.5rem;
-      color: white;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-      -webkit-user-select: none;
-      user-select: none;
-      display: none; /* Hide when using logo */
-    }
-
-    /* Glitch Effects */
-    .glitch {
-      position: relative;
-    }
-
-    .glitch::before,
-    .glitch::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-    }
-
-    .glitch::before {
-      animation: glitch-1 0.3s ease-in-out infinite alternate;
-      color: var(--glitch-1);
-      z-index: -1;
-    }
-
-    .glitch::after {
-      animation: glitch-2 0.3s ease-in-out infinite alternate-reverse;
-      color: var(--glitch-2);
-      z-index: -2;
-    }
-
-    @keyframes glitch-1 {
-      0% { transform: translateX(0); opacity: 0; }
-      10% { transform: translateX(-2px); opacity: 1; }
-      20% { transform: translateX(2px); opacity: 0; }
-      30% { transform: translateX(-1px); opacity: 1; }
-      40% { transform: translateX(1px); opacity: 0; }
-      50% { transform: translateX(0); opacity: 1; }
-      100% { transform: translateX(0); opacity: 0; }
-    }
-
-    @keyframes glitch-2 {
-      0% { transform: translateX(0); opacity: 0; }
-      15% { transform: translateX(1px); opacity: 1; }
-      25% { transform: translateX(-1px); opacity: 0; }
-      35% { transform: translateX(2px); opacity: 1; }
-      45% { transform: translateX(-2px); opacity: 0; }
-      55% { transform: translateX(0); opacity: 1; }
-      100% { transform: translateX(0); opacity: 0; }
-    }
-
-    /* Header */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(10, 5, 5, 0.9);
-      -webkit-backdrop-filter: blur(20px);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--glass-light);
-      padding: 1rem 2rem;
-    }
-
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .av-logo {
-      height: 32px;
-      width: auto;
-      filter: brightness(1.1);
-      transition: all 0.3s ease;
-    }
-
-    .av-logo:hover {
-      filter: brightness(1.3) drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
-      transform: scale(1.05);
-    }
-
-    .logo {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--accent-primary);
-      text-decoration: none;
-      letter-spacing: 3px;
-      text-shadow: 0 0 20px var(--accent-glow);
-      transition: all 0.3s ease;
-    }
-
-    .logo:hover {
-      text-shadow: 0 0 30px var(--accent-glow-intense);
-      transform: scale(1.05);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: 'Lexend', sans-serif;
-      font-weight: 300;
+      background-color: var(--bg-primary);
       color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      position: relative;
-      letter-spacing: 0.5px;
     }
-
-    .nav-links a:hover {
-      color: var(--accent-primary);
-      text-shadow: 0 0 10px var(--accent-glow);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 60% 40%;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(10, 5, 5, 0.9), rgba(15, 8, 8, 0.9));
-      padding: 0 4rem;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 10;
-      text-align: left;
-      max-width: 600px;
-      padding: 2rem 0;
-    }
-
-    .hero-visual {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .interactive-token {
-      width: 250px;
-      height: 250px;
-      position: relative;
-      cursor: pointer;
-      transition: none;
-      transform-style: preserve-3d;
-    }
-
-    .constitutional-core {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      background: radial-gradient(circle at 30% 30%, rgba(255, 69, 0, 0.2), rgba(255, 20, 0, 0.05), transparent 70%);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(255, 69, 0, 0.3);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      overflow: visible;
-    }
-
-    .energy-rays {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .energy-ray {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 200px;
-      height: 2px;
-      background: linear-gradient(
-        90deg, 
-        rgba(255, 69, 0, 0.8) 0%, 
-        rgba(255, 69, 0, 0.6) 30%, 
-        rgba(255, 69, 0, 0.2) 70%, 
-        transparent 100%
-      );
-      transform-origin: 0 50%;
-      opacity: 0;
-      transition: opacity 0.3s ease, transform 0.1s ease-out;
-      box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
-    }
-
-    .energy-ray::before {
-      content: '';
-      position: absolute;
-      top: -1px;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(
-        90deg, 
-        rgba(255, 255, 255, 0.6) 0%, 
-        rgba(255, 255, 255, 0.3) 30%, 
-        transparent 70%
-      );
-      filter: blur(1px);
-    }
-
-    .energy-ray::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 20px;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-      animation: energyPulse 2s ease-in-out infinite;
-    }
-
-    /* Position each ray at different angles */
-    .energy-ray[data-angle="0"] { transform: translate(-50%, -50%) rotate(0deg); }
-    .energy-ray[data-angle="45"] { transform: translate(-50%, -50%) rotate(45deg); }
-    .energy-ray[data-angle="90"] { transform: translate(-50%, -50%) rotate(90deg); }
-    .energy-ray[data-angle="135"] { transform: translate(-50%, -50%) rotate(135deg); }
-    .energy-ray[data-angle="180"] { transform: translate(-50%, -50%) rotate(180deg); }
-    .energy-ray[data-angle="225"] { transform: translate(-50%, -50%) rotate(225deg); }
-    .energy-ray[data-angle="270"] { transform: translate(-50%, -50%) rotate(270deg); }
-    .energy-ray[data-angle="315"] { transform: translate(-50%, -50%) rotate(315deg); }
-
-    .energy-ray.active {
-      opacity: 1;
-      animation: rayShoot 0.8s ease-out;
-    }
-
-    @keyframes rayShoot {
-      0% { 
-        width: 0px; 
-        opacity: 1;
-      }
-      50% { 
-        width: 150px; 
-        opacity: 0.8;
-      }
-      100% { 
-        width: 200px; 
-        opacity: 0.3;
-      }
-    }
-
-    @keyframes energyPulse {
-      0%, 100% { 
-        opacity: 0.8; 
-        transform: scaleX(1);
-      }
-      50% { 
-        opacity: 1; 
-        transform: scaleX(1.5);
-      }
-    }
-
-    .constitution-layers {
-      position: relative;
-      width: 180px;
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .layer {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .intelligence-web {
-      z-index: 2;
-      animation: intelligenceFloat 8s ease-in-out infinite;
-    }
-
-    .intelligence-nodes {
-      width: 140px;
-      height: 140px;
-    }
-
-    .node {
-      fill: rgba(255, 69, 0, 0.7);
-      animation: nodeFlicker 3s ease-in-out infinite;
-    }
-
-    .node:nth-child(odd) {
-      animation-delay: 1s;
-    }
-
-    .connection {
-      stroke: rgba(255, 69, 0, 0.4);
-      stroke-width: 1;
-      animation: connectionPulse 4s ease-in-out infinite;
-    }
-
-    .connection:nth-child(even) {
-      animation-delay: 2s;
-    }
-
-    .governance-symbol {
-      z-index: 3;
-    }
-
-    .arcx-emblem {
-      width: 80px;
-      height: 80px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .emblem-ring {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border: 2px solid rgba(255, 69, 0, 0.6);
-      border-radius: 50%;
-      animation: emblemRotate 20s linear infinite;
-    }
-
-    .emblem-ring::before {
-      content: '';
-      position: absolute;
-      top: -3px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 6px;
-      height: 6px;
-      background: var(--accent-primary);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--accent-primary);
-    }
-
-    .emblem-center {
-      background: rgba(26, 26, 26, 0.9);
-      border: 1px solid rgba(255, 69, 0, 0.4);
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 4;
-    }
-
-    .arcx-text {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--accent-primary);
-      letter-spacing: 1px;
-      text-shadow: 0 0 8px rgba(255, 69, 0, 0.5);
-    }
-
-    /* Animations */
-    @keyframes intelligenceFloat {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-8px) rotate(2deg); }
-    }
-
-    @keyframes nodeFlicker {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 1; }
-    }
-
-    @keyframes connectionPulse {
-      0%, 100% { stroke-opacity: 0.2; }
-      50% { stroke-opacity: 0.6; }
-    }
-
-    @keyframes emblemRotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .orbital-rings {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
-
-    .orbital-ring {
-      position: absolute;
-      border: 1px solid rgba(255, 69, 0, 0.2);
-      border-radius: 50%;
-      transition: none;
-    }
-
-    .orbital-ring:nth-child(1) {
-      width: 300px;
-      height: 300px;
-      top: -25px;
-      left: -25px;
-    }
-
-    .orbital-ring:nth-child(2) {
-      width: 400px;
-      height: 400px;
-      top: -75px;
-      left: -75px;
-      border-style: dashed;
-      opacity: 0.5;
-    }
-
-    .floating-particles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-
-    .particle {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: var(--accent-primary);
-      border-radius: 50%;
-      opacity: 0.6;
-      transition: none;
-    }
-
-    .particle:nth-child(1) { top: 15%; left: 10%; }
-    .particle:nth-child(2) { top: 70%; left: 15%; }
-    .particle:nth-child(3) { top: 25%; right: 20%; }
-    .particle:nth-child(4) { bottom: 30%; left: 25%; }
-    .particle:nth-child(5) { bottom: 60%; right: 15%; }
-    .particle:nth-child(6) { top: 50%; left: 5%; }
-
-    .data-streams {
-      position: absolute;
-      top: 0;
-      right: -10%;
-      width: 200px;
-      height: 100%;
-      opacity: 0.1;
-      pointer-events: none;
-    }
-
-    .stream-line {
-      position: absolute;
-      background: linear-gradient(to bottom, transparent, var(--accent-primary), transparent);
-      width: 1px;
-      height: 60%;
-      transition: none;
-    }
-
-    .stream-line:nth-child(1) { left: 20%; top: 10%; }
-    .stream-line:nth-child(2) { left: 50%; top: 20%; }
-    .stream-line:nth-child(3) { left: 80%; top: 15%; }
-
-    .hero-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 100;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: 4px;
-      line-height: 1.1;
-      position: relative;
-    }
-
-    .hero-subtitle {
-      font-family: 'Lexend', sans-serif;
-      font-size: clamp(1rem, 2.5vw, 1.5rem);
-      font-weight: 200;
-      color: var(--text-secondary);
-      margin-bottom: 1.5rem;
-      opacity: 0.9;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .hero-description {
-      font-family: 'Lexend', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 300;
-      color: var(--text-muted);
-      margin-bottom: 2.5rem;
-      max-width: 500px;
-      line-height: 1.7;
-      letter-spacing: 0.3px;
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 2rem;
-      margin-bottom: 2.5rem;
-      flex-wrap: wrap;
-    }
-
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
-    .stat-value {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 300;
-      color: var(--accent-primary);
-    }
-
-    .stat-label {
-      font-family: 'Lexend', sans-serif;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 3rem;
-    }
-
-    .btn {
-      padding: 1rem 2rem;
-      border: none;
-      border-radius: 0; /* Sharp corners for Artifact theme */
-      font-family: 'Lexend', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      display: inline-block;
-      letter-spacing: 0.5px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-      color: white;
-      box-shadow: var(--shadow-intense);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 60px var(--accent-glow);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--accent-primary);
-      border: 2px solid var(--accent-primary);
-    }
-
-    .btn-secondary:hover {
-      background: var(--accent-primary);
-      color: white;
-      transform: translateY(-3px);
-    }
-
-
-
-
-    /* Features Section */
-    .features-section {
-      padding: 6rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2.5rem;
-      font-weight: 200;
-      text-align: center;
-      margin-bottom: 3rem;
-      color: var(--text-primary);
-      letter-spacing: 2px;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .feature-card {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 2rem;
-      border-radius: 0; /* Sharp corners for Artifact theme */
-      border: 1px solid var(--glass-light);
-      transition: all 0.3s ease;
-    }
-
-    .feature-card:hover {
-      border-color: var(--accent-primary);
-      transform: translateY(-2px);
-      background: rgba(255, 69, 0, 0.05);
-    }
-
-    .feature-icon {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 1.5rem;
-      stroke: var(--accent-primary);
-      fill: none;
-      stroke-width: 2;
-    }
-
-    .feature-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 300;
-      margin-bottom: 1rem;
-      color: var(--text-primary);
-      letter-spacing: 1px;
-    }
-
-    .feature-description {
-      font-family: 'Lexend', sans-serif;
-      font-weight: 300;
-      color: var(--text-muted);
-      line-height: 1.7;
-      letter-spacing: 0.3px;
-    }
-
-    /* Footer */
-    .footer {
-      background: var(--bg-tertiary);
-      padding: 3rem 2rem 2rem;
-      text-align: center;
-      border-top: 1px solid var(--glass-light);
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: var(--accent-primary);
-    }
-
-    .footer-text {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 1200px) {
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding: 2rem;
-      }
-      
-      .hero-visual {
-        height: 50vh;
-        order: -1;
-      }
-      
-      .interactive-token {
-        width: 200px;
-        height: 200px;
-      }
-      
-      .hero-content {
-        max-width: 100%;
-        padding: 1rem 0;
-      }
-      
-      .hero-stats {
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .header {
-        padding: 1rem;
-      }
-      
-      .nav {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      
-      .nav-links {
-        gap: 1rem;
-      }
-      
-      .hero {
-        padding: 1rem;
-      }
-      
-      .interactive-token {
-        width: 150px;
-        height: 150px;
-      }
-      
-      .token-logo {
-        width: 100px;
-        height: 100px;
-      }
-      
-      .orbital-ring:nth-child(1) {
-        width: 200px;
-        height: 200px;
-        top: -25px;
-        left: -25px;
-      }
-      
-      .orbital-ring:nth-child(2) {
-        width: 250px;
-        height: 250px;
-        top: -50px;
-        left: -50px;
-      }
-      
-      .hero-stats {
-        gap: 1rem;
-        justify-content: center;
-      }
-      
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .btn {
+    
+    /* --- Scroll Hijacking & Horizontal Section Styles --- */
+    #horizontal-scroll-section {
+        position: sticky;
+        top: 0;
+        height: 100vh;
         width: 100%;
-        max-width: 300px;
-      }
-      
-      .stats-container {
-        grid-template-columns: 1fr;
-      }
-      
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .footer-links {
-        flex-direction: column;
-        gap: 1rem;
-      }
+        overflow: hidden;
+    }
+    .horizontal-container {
+      display: flex;
+      height: 100vh;
+      will-change: transform;
+    }
+    .horizontal-container .section {
+      width: 100vw;
+      height: 100vh;
+      flex-shrink: 0;
+      position: relative;
+    }
+    
+    /* --- ADAM Protocol Specific Styles --- */
+    .writing-mode-vertical-rl { writing-mode: vertical-rl; }
+    .code-keyword { color: #ff79c6; }
+    .code-function { color: #50fa7b; }
+    .code-variable { color: #8be9fd; }
+    .code-comment { color: #6272a4; }
+    .code-string { color: #f1fa8c; }
+    input[type=range] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; width: 100%; }
+    input[type=range]::-webkit-slider-runnable-track { background: #1f1f1f; height: 2px; }
+    input[type=range]::-moz-range-track { background: #1f1f1f; height: 2px; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; margin-top: -6px; background-color: #ff4500; height: 14px; width: 14px; border-radius: 50%; border: 2px solid #0a0a0a; box-shadow: 0 0 5px rgba(255, 69, 0, 0.5); }
+    .panel-border { border: 1px solid; border-image-slice: 1; border-image-source: linear-gradient(to bottom right, #4a4a4a, #1a1a1a); }
+    .adam-header { position: absolute; top: 0; height: 100vh; width: 4rem; z-index: 50; }
+    
+    /* --- Hero Section Styles --- */
+    .header { width: 100%; position: fixed; top: 0; left: 0; z-index: 1000; background: var(--bg-primary); box-shadow: 0 2px 16px rgba(0,0,0,0.12); padding: 0.5rem 2rem; display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
+    .nav { width: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav-brand { display: flex; align-items: center; gap: 1rem; }
+    .av-logo { height: 40px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; list-style: none; margin-left: auto; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 300; letter-spacing: 1px; transition: color 0.3s ease; }
+    .nav-links a:hover { color: var(--accent-primary); }
+    .hero { display: grid; grid-template-columns: 1fr 1fr; align-items: center; min-height: 100vh; padding: 80px 2rem 0 2rem; gap: 2rem; }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-title { font-family: 'Montserrat', sans-serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 100; margin-bottom: 1rem; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 4px; line-height: 1.1; position: relative; text-shadow: 0 0 25px var(--accent-glow-intense); }
+    .hero-stats { display: flex; gap: 2rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .stat-item { display: flex; flex-direction: column; gap: 0.3rem; }
+    .stat-value { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; font-weight: 300; color: var(--accent-primary); }
+    .stat-label { font-family: 'Lexend', sans-serif; font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+    .cta-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .btn { padding: 1rem 2rem; border: none; border-radius: 0; font-family: 'Lexend', sans-serif; font-size: 1.1rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: all 0.3s ease; display: inline-block; letter-spacing: 0.5px; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: white; box-shadow: 0 0 40px rgba(184, 0, 42, 0.4); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 60px var(--accent-glow); }
+    .btn-secondary { background: transparent; color: var(--accent-primary); border: 2px solid var(--accent-primary); }
+    .btn-secondary:hover { background: var(--accent-primary); color: white; transform: translateY(-3px); }
+    .hero-visual { display: flex; justify-content: center; align-items: center; height: 100%; position: relative; z-index: 1; }
+    .interactive-token { width: 350px; height: 350px; position: relative; display: flex; justify-content: center; align-items: center; }
+  #card { position: absolute; left: 0; top: 0; width: 190px; height: 284px; z-index: 0; display: flex; justify-content: center; align-items: center; border-radius: 20px; transition: transform 0.25s cubic-bezier(0.23,1,0.32,1); background: linear-gradient(43deg, rgb(65, 88, 208) 0%, rgb(200, 80, 192) 46%, rgb(255, 204, 112) 100%); overflow: hidden; }
+    .card-mp4 { position: absolute; top: -2px; left: -2px; width: calc(100% + 4px); height: calc(100% + 4px); object-fit: cover; z-index: 1; border-radius: 20px; pointer-events: none; filter: contrast(1.25) brightness(1.05) saturate(1.1); }
+    .hero-bottom-center-overlay { position: absolute; left: 50%; bottom: 2.5vh; transform: translateX(-50%); z-index: 10; font-family: 'Montserrat', 'Lexend', sans-serif; font-size: clamp(1.1rem, 2vw, 2rem); font-weight: 600; letter-spacing: 2px; color: #fff; text-align: center; text-shadow: 0 2px 8px #000a; pointer-events: none; }
+    .footer { background: var(--bg-primary); padding: 3rem 2rem 2rem; text-align: center; border-top: 1px solid var(--glass-light); margin-top: 0; position: relative; z-index: 20; }
+    .footer-content { max-width: 1200px; margin: 0 auto; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.3s ease; }
+    .footer-links a:hover { color: var(--accent-primary); }
+    .footer-text { color: var(--text-muted); font-size: 0.9rem; }
+
+    /* --- Header Auto-Hide --- */
+    .header {
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+    }
+    .header.header--hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* --- Responsive Adjustments --- */
+    @media (max-width: 1023px) {
+        body { overflow-y: auto; }
+        .hero { grid-template-columns: 1fr; text-align: center; padding-top: 100px; }
+        .hero-visual { height: 50vh; order: -1; margin-bottom: 2rem; }
+        .interactive-token { width: 250px; height: 250px; }
+        .stats-and-cta { display: flex; flex-direction: column; align-items: center; }
+        #horizontal-scroll-container { height: auto !important; }
+        #horizontal-scroll-section { position: relative; height: auto; }
+        .horizontal-container { flex-direction: column; height: auto; }
+        .horizontal-container .section { height: auto; min-height: 100vh; padding: 6rem 1rem 4rem 1rem !important; }
+        .adam-header { display: none; }
     }
   </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Poppins', 'sans-serif'], },
+          colors: { 'adam-orange': '#ff4500', 'adam-orange-dark': '#c03300', 'adam-dark': '#0a0a0a', 'adam-black': '#000000', 'adam-slate': '#11131a', 'adam-light-gray': '#a0a0a0', 'adam-medium-gray': '#4a4a4a' },
+          backgroundImage: { 'grid-pattern': "linear-gradient(rgba(255, 69, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 69, 0, 0.05) 1px, transparent 1px)" },
+          backgroundSize: { 'grid-size': '30px 30px' },
+          boxShadow: { 'glow-orange': '0 0 25px 5px rgba(255, 69, 0, 0.4)', 'orange-hard': '0 0 15px rgba(255, 69, 0, 0.7)', 'inner-glow': 'inset 0 0 10px rgba(10, 10, 10, 0.5)' },
+          keyframes: { 'fade-in-down': { '0%': { opacity: '0', transform: 'translateY(-20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } }, 'fade-in-up': { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } }, 'fade-in-left': { '0%': { opacity: '0', transform: 'translateX(-20px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } }, 'fade-in-right': { '0%': { opacity: '0', transform: 'translateX(20px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } }, 'background-pan': { '0%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' }, '100%': { backgroundPosition: '0% 50%' } }, 'pulse-bright': { '0%, 100%': { textShadow: '0 0 10px rgba(255, 69, 0, 0.5)' }, '50%': { textShadow: '0 0 25px rgba(255, 69, 0, 1)' } }, 'path-draw': { 'to': { strokeDashoffset: '0' } }, 'fade-in': { 'from': { opacity: '0' }, 'to': { opacity: '1' } }, 'threat-move': { 'from': { transform: 'translateX(-150px) scaleX(0.2)', opacity: 0 }, '70%': { transform: 'translateX(0) scaleX(1)', opacity: 1 }, '100%': { transform: 'translateX(10px) scaleX(1)', opacity: 1 } }, 'shield-activate': { '0%': { opacity: '0', transform: 'scale(0.8)' }, '100%': { opacity: '1', transform: 'scale(1)' } }, 'flow-step-grow': { 'from': { transform: 'scale(0.9)', opacity: 0.7 }, 'to': { transform: 'scale(1)', opacity: 1 } } },
+          animation: { 'fade-in-down': 'fade-in-down 0.8s ease-out forwards', 'fade-in-up': 'fade-in-up 0.8s ease-out 0.3s forwards', 'fade-in-left': 'fade-in-left 0.8s ease-out 0.3s forwards', 'fade-in-right': 'fade-in-right 0.8s ease-out 0.3s forwards', 'background-pan': 'background-pan 30s ease-in-out infinite', 'pulse-bright': 'pulse-bright 3s ease-in-out infinite', 'path-draw': 'path-draw 1.5s ease-out forwards', 'fade-in': 'fade-in 0.5s ease-out forwards', 'threat-move': 'threat-move 1.2s ease-out forwards', 'shield-activate': 'shield-activate 0.3s ease-out forwards', 'flow-step-grow': 'flow-step-grow 0.3s ease-in-out forwards' }
+        }
+      }
+    };
+  </script>
 </head>
 <body>
-  <div class="bg-particles"></div>
   
-  <header class="header">
-    <nav class="nav">
-      <div class="nav-brand">
-        <img src="logo/av-white-logo-removebg-preview.png" alt="Artifact Virtual" class="av-logo">
-        <a href="#" class="logo">ARCx</a>
+  <header class="header header-vertical">
+    <nav class="nav nav-vertical">
+      <div class="nav-brand nav-brand-vertical">
+        <img src="logo/av-black-logo-removebg-preview.png" alt="AV Logo" class="av-logo">
       </div>
-      <ul class="nav-links">
-        <li><a href="#trade">Trade</a></li>
-        <li><a href="#features">Features</a></li>
+      <ul class="nav-links nav-links-vertical">
+        <li><a href="#roadmap">Roadmap</a></li>
         <li><a href="https://basescan.org/token/0xA4093669DAFbD123E37d52e0939b3aB3C2272f44" target="_blank" rel="noopener">Contract</a></li>
         <li><a href="documentation.html">Docs</a></li>
+        <li><a href="https://app.uniswap.org/#/swap?outputCurrency=0xA4093669DAFbD123E37d52e0939b3aB3C2272f44&chain=base" class="btn btn-primary" target="_blank" rel="noopener">Trade</a></li>
       </ul>
     </nav>
   </header>
@@ -1012,549 +163,134 @@
     <section class="hero">
       <div class="hero-content">
         <h1 class="hero-title glitch" data-text="ARCx Token">ARCx</h1>
-        <p class="hero-subtitle">Live on Base Network</p>
-        <p class="hero-description">
-          Decentralized governance meets constitutional intelligence. ARCx powers transparent, 
-          community-driven decision making with full onchain execution.
-        </p>
-        
-        <div class="hero-stats">
-          <div class="stat-item">
-            <div class="stat-value">1M</div>
-            <div class="stat-label">Supply</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">Base</div>
-            <div class="stat-label">Network</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">Live</div>
-            <div class="stat-label">Status</div>
-          </div>
-        </div>
-        
-        <div class="cta-buttons">
-          <a href="https://app.uniswap.org/#/swap?outputCurrency=0xA4093669DAFbD123E37d52e0939b3aB3C2272f44&chain=base" class="btn btn-primary" target="_blank" rel="noopener">
-            Trade Now
-          </a>
-          <a href="airdrop_interface.html" class="btn btn-secondary">
-            Claim Airdrop
-          </a>
-          <a href="https://basescan.org/token/0xA4093669DAFbD123E37d52e0939b3aB3C2272f44" class="btn btn-secondary" target="_blank" rel="noopener">
-            View Contract
-          </a>
+        <div class="stats-and-cta">
+            <div class="hero-stats">
+              <div class="stat-item">
+                <div class="stat-value">1.1M</div>
+                <div class="stat-label">Supply</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value"><img src="logo/base-logo.png" alt="Base Network" style="height: 1.5em; vertical-align: middle; margin-right: 0.3em;">Base</div>
+                <div class="stat-label">Network</div>
+              </div>
+            </div>
+            <div class="cta-buttons">
+              <a href="https://app.uniswap.org/#/swap?outputCurrency=0xA4093669DAFbD123E37d52e0939b3aB3C2272f44&chain=base" class="btn btn-primary" target="_blank" rel="noopener">Trade Now</a>
+              <a href="airdrop_interface.html" class="btn btn-secondary">Claim Airdrop</a>
+            </div>
         </div>
       </div>
-      
       <div class="hero-visual">
-        <div class="interactive-token" id="interactiveToken">
-          <div class="orbital-rings">
-            <div class="orbital-ring"></div>
-            <div class="orbital-ring"></div>
-          </div>
-          <div class="constitutional-core">
-            <!-- Energy Rays -->
-            <div class="energy-rays">
-              <div class="energy-ray" data-angle="0"></div>
-              <div class="energy-ray" data-angle="45"></div>
-              <div class="energy-ray" data-angle="90"></div>
-              <div class="energy-ray" data-angle="135"></div>
-              <div class="energy-ray" data-angle="180"></div>
-              <div class="energy-ray" data-angle="225"></div>
-              <div class="energy-ray" data-angle="270"></div>
-              <div class="energy-ray" data-angle="315"></div>
-            </div>
-            <!-- Constitutional Intelligence Symbol -->
-            <div class="constitution-layers">
-              <div class="layer intelligence-web">
-                <svg class="intelligence-nodes" viewBox="0 0 200 200">
-                  <!-- Neural network representation -->
-                  <g class="node-group">
-                    <circle class="node" cx="100" cy="50" r="4"/>
-                    <circle class="node" cx="70" cy="80" r="3"/>
-                    <circle class="node" cx="130" cy="80" r="3"/>
-                    <circle class="node" cx="50" cy="120" r="3"/>
-                    <circle class="node" cx="100" cy="110" r="4"/>
-                    <circle class="node" cx="150" cy="120" r="3"/>
-                    <circle class="node" cx="80" cy="150" r="3"/>
-                    <circle class="node" cx="120" cy="150" r="3"/>
-                    <!-- Connections -->
-                    <line class="connection" x1="100" y1="50" x2="70" y2="80"/>
-                    <line class="connection" x1="100" y1="50" x2="130" y2="80"/>
-                    <line class="connection" x1="70" y1="80" x2="50" y2="120"/>
-                    <line class="connection" x1="70" y1="80" x2="100" y2="110"/>
-                    <line class="connection" x1="130" y1="80" x2="150" y2="120"/>
-                    <line class="connection" x1="130" y1="80" x2="100" y2="110"/>
-                    <line class="connection" x1="100" y1="110" x2="80" y2="150"/>
-                    <line class="connection" x1="100" y1="110" x2="120" y2="150"/>
-                  </g>
-                </svg>
-              </div>
-              <div class="layer governance-symbol">
-                <div class="arcx-emblem">
-                  <div class="emblem-ring"></div>
-                  <div class="emblem-center">
-                    <span class="arcx-text">ARCx</span>
-                  </div>
-                </div>
+        <div class="interactive-token">
+          <div id="face-3d-container">
+            <div class="container noselect" style="width: 190px; height: 284px;">
+              <div id="card">
+                <video id="card-mp4" class="card-mp4" src="governance/assets/arcx_lp_nft.mp4" autoplay loop muted playsinline style="display: block; margin: 0 auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; object-fit: cover; border-radius: 20px;"></video>
               </div>
             </div>
           </div>
         </div>
-        
-        <div class="floating-particles">
-          <div class="particle"></div>
-          <div class="particle"></div>
-          <div class="particle"></div>
-          <div class="particle"></div>
-          <div class="particle"></div>
-          <div class="particle"></div>
-        </div>
-        
-        <div class="data-streams">
-          <div class="stream-line"></div>
-          <div class="stream-line"></div>
-          <div class="stream-line"></div>
-        </div>
       </div>
-    </section>
-
-
-
-
-
-    <section class="features-section" id="features">
-      <h2 class="section-title">Constitutional Intelligence</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <svg class="feature-icon" viewBox="0 0 24 24">
-            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 5.5V7.5C13.8 7.5 12.7 8.1 12 9C11.3 8.1 10.2 7.5 9 7.5V5.5L3 7V9L9 7.5V9.5C9 12 11 14 13.5 14S18 12 15.5 9.5V7.5L21 9Z"/>
-          </svg>
-          <h3 class="feature-title">Intelligent Governance</h3>
-          <p class="feature-description">
-            Advanced constitutional frameworks that evolve with community needs, powered by transparent onchain logic.
-          </p>
-        </div>
-        <div class="feature-card">
-          <svg class="feature-icon" viewBox="0 0 24 24">
-            <path d="M7 2V13H10V22L17 10H13L17 2H7Z"/>
-          </svg>
-          <h3 class="feature-title">Base Native</h3>
-          <p class="feature-description">
-            Built on Coinbase's Base network for fast, low-cost transactions with enterprise-grade security.
-          </p>
-        </div>
-        <div class="feature-card">
-          <svg class="feature-icon" viewBox="0 0 24 24">
-            <path d="M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M12,17A2,2 0 0,1 10,15A2,2 0 0,1 12,13A2,2 0 0,1 14,15A2,2 0 0,1 12,17M15.1,8H8.9V6A3.1,3.1 0 0,1 12,2.9A3.1,3.1 0 0,1 15.1,6V8Z"/>
-          </svg>
-          <h3 class="feature-title">Fully Audited</h3>
-          <p class="feature-description">
-            Comprehensive security audits ensure your tokens are safe and the smart contracts are bulletproof.
-          </p>
-        </div>
-        <div class="feature-card">
-          <svg class="feature-icon" viewBox="0 0 24 24">
-            <path d="M12,2L13.09,8.26L22,9L17,14L18.18,21L12,17.77L5.82,21L7,14L2,9L10.91,8.26L12,2Z"/>
-          </svg>
-          <h3 class="feature-title">Community Driven</h3>
-          <p class="feature-description">
-            Fair distribution through merit-based airdrops and transparent community governance mechanisms.
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-links">
-        <a href="https://basescan.org/token/0xA4093669DAFbD123E37d52e0939b3aB3C2272f44" target="_blank" rel="noopener">Contract</a>
-        <a href="documentation.html">Documentation</a>
-        <a href="transparency.html">Transparency</a>
-        <a href="whitepaper.html">Whitepaper</a>
-      </div>
-      <p class="footer-text">
-        ARCx © 2024. Constitutional Intelligence Infrastructure.
-      </p>
-    </div>
-  </footer>
-
   <script>
-    // Interactive Token - Mouse-Only Animations with Energy Rays
+    // Mouse-responsive card animation
     document.addEventListener('DOMContentLoaded', function() {
-      const hero = document.querySelector('.hero-content');
-      const interactiveToken = document.getElementById('interactiveToken');
-      const glitchTitle = document.querySelector('.glitch');
-      const particles = document.querySelectorAll('.particle');
-      const orbitalRings = document.querySelectorAll('.orbital-ring');
-      const streamLines = document.querySelectorAll('.stream-line');
-      const energyRays = document.querySelectorAll('.energy-ray');
-      
-      let isMouseOver = false;
-      let mouseX = 0;
-      let mouseY = 0;
-      let lastEnergyTime = 0;
-      
-      // Function to calculate angle from center to mouse
-      function getAngleToMouse(centerX, centerY, mouseClientX, mouseClientY) {
-        const dx = mouseClientX - centerX;
-        const dy = mouseClientY - centerY;
-        return Math.atan2(dy, dx) * (180 / Math.PI);
-      }
-      
-      // Function to trigger energy rays away from mouse
-      function triggerEnergyRays(mouseAngle) {
-        const now = Date.now();
-        if (now - lastEnergyTime < 150) return; // Throttle energy rays
-        lastEnergyTime = now;
-        
-        energyRays.forEach(ray => {
-          const rayAngle = parseFloat(ray.dataset.angle);
-          // Calculate angular difference
-          let angleDiff = Math.abs(rayAngle - mouseAngle);
-          if (angleDiff > 180) angleDiff = 360 - angleDiff;
-          
-          // Trigger rays that are opposite to mouse direction (within 90 degrees)
-          if (angleDiff > 90) {
-            ray.classList.remove('active');
-            setTimeout(() => {
-              ray.classList.add('active');
-              setTimeout(() => ray.classList.remove('active'), 800);
-            }, Math.random() * 100);
+      var card = document.getElementById('card');
+      if (card) {
+        let ticking = false;
+        function onMove(e) {
+          if (!ticking) {
+            window.requestAnimationFrame(function() {
+              var rect = card.getBoundingClientRect();
+              var cardX = rect.left + rect.width / 2;
+              var cardY = rect.top + rect.height / 2;
+              var deltaX = e.clientX - cardX;
+              var deltaY = e.clientY - cardY;
+              var rotateX = Math.max(-12, Math.min(12, (deltaY / rect.height) * 12));
+              var rotateY = Math.max(-12, Math.min(12, (deltaX / rect.width) * -12));
+              card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+              ticking = false;
+            });
+            ticking = true;
           }
+        }
+        document.addEventListener('mousemove', onMove);
+        card.addEventListener('mouseleave', function() {
+          card.style.transform = '';
         });
       }
-      
-      // Mouse movement handler - ONLY activates on mouse move
-      hero.addEventListener('mousemove', function(e) {
-        if (!interactiveToken || !isMouseOver) return;
-        
-        const rect = hero.getBoundingClientRect();
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const tokenRect = interactiveToken.getBoundingClientRect();
-        const tokenCenterX = tokenRect.left + tokenRect.width / 2;
-        const tokenCenterY = tokenRect.top + tokenRect.height / 2;
-        
-        // Normalize mouse position (-1 to 1)
-        mouseX = (e.clientX - rect.left - centerX) / centerX;
-        mouseY = (e.clientY - rect.top - centerY) / centerY;
-        
-        // Calculate angle from token center to mouse
-        const mouseAngle = getAngleToMouse(tokenCenterX, tokenCenterY, e.clientX, e.clientY);
-        
-        // Trigger energy rays
-        triggerEnergyRays(mouseAngle);
-        
-        // Apply subtle 3D rotation to token
-        const rotateX = mouseY * -10;
-        const rotateY = mouseX * 10;
-        interactiveToken.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        
-        // Move particles based on mouse
-        particles.forEach((particle, index) => {
-          const moveX = mouseX * (15 + index * 5);
-          const moveY = mouseY * (10 + index * 3);
-          particle.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        });
-        
-        // Rotate orbital rings
-        orbitalRings.forEach((ring, index) => {
-          const rotation = (mouseX * 50) + (index * 180);
-          ring.style.transform = `rotate(${rotation}deg)`;
-        });
-        
-        // Move stream lines
-        streamLines.forEach((line, index) => {
-          const moveY = mouseY * (30 + index * 10);
-          line.style.transform = `translateY(${moveY}px)`;
-          line.style.opacity = 0.3 + Math.abs(mouseX) * 0.4;
-        });
-        
-        // Occasional glitch on movement
-        if (Math.random() < 0.01) {
-          triggerGlitch();
-        }
-      });
-          const rotation = mouseX * (20 + index * 10);
-          ring.style.transform = `rotate(${rotation}deg)`;
-        });
-        
-        // Move stream lines
-        streamLines.forEach((line, index) => {
-          const moveY = mouseY * (30 + index * 10);
-          line.style.transform = `translateY(${moveY}px)`;
-          line.style.opacity = 0.3 + Math.abs(mouseX) * 0.4;
-        });
-        
-        // Occasional glitch on movement
-        if (Math.random() < 0.01) {
-          triggerGlitch();
-        }
-        
-        // Random energy bursts
-        if (Math.random() < 0.02) {
-          triggerRandomEnergyBurst();
-        }
-      });
-      
-      // Function to trigger random energy bursts
-      function triggerRandomEnergyBurst() {
-        const randomRays = [...energyRays].sort(() => 0.5 - Math.random()).slice(0, 3);
-        randomRays.forEach((ray, index) => {
-          setTimeout(() => {
-            ray.classList.add('active');
-            setTimeout(() => ray.classList.remove('active'), 800);
-          }, index * 100);
-        });
-      }
-      
-      // Mouse enter - prepare for interactions
-      hero.addEventListener('mouseenter', function() {
-        isMouseOver = true;
-        if (interactiveToken) {
-          interactiveToken.style.transition = 'transform 0.1s ease-out';
-        }
-        particles.forEach(particle => {
-          particle.style.transition = 'transform 0.2s ease-out';
-        });
-        orbitalRings.forEach(ring => {
-          ring.style.transition = 'transform 0.3s ease-out';
-        });
-        streamLines.forEach(line => {
-          line.style.transition = 'transform 0.2s ease-out, opacity 0.2s ease-out';
-        });
-      });
-      
-      // Mouse leave - reset all elements
-      hero.addEventListener('mouseleave', function() {
-        isMouseOver = false;
-        
-        // Reset token position
-        if (interactiveToken) {
-          interactiveToken.style.transition = 'transform 0.8s ease-out';
-          interactiveToken.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-        }
-        
-        // Reset particles
-        particles.forEach(particle => {
-          particle.style.transition = 'transform 0.6s ease-out';
-          particle.style.transform = 'translate(0px, 0px)';
-        });
-        
-        // Reset orbital rings
-        orbitalRings.forEach(ring => {
-          ring.style.transition = 'transform 0.8s ease-out';
-          ring.style.transform = 'rotate(0deg)';
-        });
-        
-        // Reset stream lines
-        streamLines.forEach(line => {
-          line.style.transition = 'transform 0.6s ease-out, opacity 0.6s ease-out';
-          line.style.transform = 'translateY(0px)';
-          line.style.opacity = 0.1;
-        });
-      });
-      
-      // Glitch effect - only triggered by mouse interaction
-      function triggerGlitch() {
-        if (!glitchTitle) return;
-        
-        glitchTitle.classList.add('glitch-active');
-        setTimeout(() => {
-          glitchTitle.classList.remove('glitch-active');
-        }, 200);
-      }
-      
-      // NO auto-animations - everything is mouse-driven
-      
-      // Enhanced glitch CSS
-      const style = document.createElement('style');
-      style.textContent = `
-        .glitch-active::before {
-          opacity: 0.8;
-          animation: glitch-1 0.15s ease-in-out;
-        }
-        
-        .glitch-active::after {
-          opacity: 0.6;
-          animation: glitch-2 0.15s ease-in-out;
-        }
-      `;
-      document.head.appendChild(style);
-      
-      // Uniswap Widget Implementation using official embeddable widget
-      function initUniswapWidget() {
-        const widgetContainer = document.getElementById('uniswap-widget');
-        const placeholder = widgetContainer.querySelector('.widget-placeholder');
-        
-        // Load Uniswap Widget Library
-        const script = document.createElement('script');
-        script.src = 'https://unpkg.com/@uniswap/widgets@2.51.0/dist/widgets.js';
-        script.onload = () => {
-          // Create the widget container
-          const widgetDiv = document.createElement('div');
-          widgetDiv.id = 'uniswap-widget-container';
-          widgetDiv.style.width = '100%';
-          widgetDiv.style.height = '500px';
-          widgetDiv.style.borderRadius = '0';
-          widgetDiv.style.overflow = 'hidden';
-          widgetDiv.style.border = '1px solid rgba(255, 69, 0, 0.3)';
-          
-          // Initialize the Uniswap Widget
-          try {
-            if (window.Uniswap && window.Uniswap.createWidget) {
-              const widget = window.Uniswap.createWidget({
-                jsonRpcEndpoint: 'https://mainnet.base.org',
-                tokenList: 'https://gateway.ipfs.io/ipns/tokens.uniswap.org',
-                theme: {
-                  primary: '#FF4500',
-                  secondary: '#FF6B35',
-                  background: '#1A1A1A',
-                  container: '#2A2A2A',
-                  module: '#333333',
-                  accent: '#FF4500',
-                  outline: '#444444',
-                  dialog: '#2A2A2A',
-                  fontFamily: 'Lexend, sans-serif',
-                  borderRadius: 0
-                },
-                width: '100%',
-                height: 500,
-                defaultInputTokenAddress: 'NATIVE',
-                defaultOutputTokenAddress: '0xA4093669DAFbD123E37d52e0939b3aB3C2272f44',
-                defaultInputAmount: '0.1',
-                hideConnectionUI: false,
-                chainId: 8453, // Base network
-                provider: window.ethereum
-              });
-              
-              widget.load(widgetDiv);
-              
-              // Hide placeholder and show widget
-              placeholder.style.opacity = '0';
-              setTimeout(() => {
-                placeholder.style.display = 'none';
-                widgetContainer.appendChild(widgetDiv);
-                widgetDiv.style.opacity = '0';
-                widgetDiv.style.transition = 'opacity 0.5s ease';
-                setTimeout(() => {
-                  widgetDiv.style.opacity = '1';
-                }, 100);
-              }, 300);
-            } else {
-              throw new Error('Uniswap Widget not available');
-            }
-          } catch (error) {
-            console.log('Primary widget failed, trying alternative method');
-            loadAlternativeWidget();
-          }
-        };
-        
-        script.onerror = () => {
-          console.log('Widget script failed to load, showing alternative');
-          loadAlternativeWidget();
-        };
-        
-        document.head.appendChild(script);
-        
-        function loadAlternativeWidget() {
-          // Use direct iframe to widget URL as fallback
-          const widgetWrapper = document.createElement('div');
-          widgetWrapper.style.width = '100%';
-          widgetWrapper.style.height = '500px';
-          widgetWrapper.style.borderRadius = '0';
-          widgetWrapper.style.overflow = 'hidden';
-          widgetWrapper.style.border = '1px solid rgba(255, 69, 0, 0.3)';
-          
-          const iframe = document.createElement('iframe');
-          iframe.src = 'https://widget.uniswap.org/#/swap?theme=dark&exactField=input&exactAmount=0.1&inputCurrency=ETH&outputCurrency=0xA4093669DAFbD123E37d52e0939b3aB3C2272f44&chain=base';
-          iframe.width = '100%';
-          iframe.height = '100%';
-          iframe.style.border = 'none';
-          iframe.title = 'Uniswap Trading Interface';
-          iframe.allow = 'web3, clipboard-write, autoplay, camera, microphone, payment, usb, geolocation, publickey-credentials-get';
-          iframe.referrerPolicy = 'origin';
-          
-          widgetWrapper.appendChild(iframe);
-          
-          iframe.onload = () => {
-            placeholder.style.opacity = '0';
-            setTimeout(() => {
-              placeholder.style.display = 'none';
-              widgetContainer.appendChild(widgetWrapper);
-              widgetWrapper.style.opacity = '0';
-              widgetWrapper.style.transition = 'opacity 0.5s ease';
-              setTimeout(() => {
-                widgetWrapper.style.opacity = '1';
-              }, 100);
-            }, 300);
-          };
-          
-          // Fallback to enhanced placeholder after timeout
-          setTimeout(() => {
-            if (placeholder.style.display !== 'none') {
-              showEnhancedFallback();
-            }
-          }, 8000);
-        }
-        
-        function showEnhancedFallback() {
-          const fallbackContent = `
-            <div style="text-align: center; padding: 3rem; background: linear-gradient(135deg, rgba(255, 69, 0, 0.1), rgba(255, 20, 0, 0.05)); border-radius: 0; border: 1px solid rgba(255, 69, 0, 0.3); position: relative; overflow: hidden;">
-              <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255, 69, 0, 0.05) 0%, transparent 70%); animation: pulse 4s ease-in-out infinite;"></div>
-              <div style="position: relative; z-index: 2;">
-                <div style="font-size: 4rem; margin-bottom: 1.5rem; filter: drop-shadow(0 0 10px rgba(255, 69, 0, 0.5));">🔄</div>
-                <h3 style="color: var(--text-primary); margin-bottom: 1rem; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 1.8rem;">Trade ARCx Token</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 2.5rem; font-family: 'Lexend', sans-serif; max-width: 450px; margin-left: auto; margin-right: auto; line-height: 1.7; font-size: 1.1rem;">
-                  Access the full Uniswap trading interface with optimal liquidity, real-time pricing, and secure Base network integration.
-                </p>
-                <a href="${widgetUrl.toString()}" 
-                   class="btn btn-primary" target="_blank" rel="noopener"
-                   style="display: inline-block; padding: 1.3rem 3rem; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: white; text-decoration: none; border-radius: 0; font-weight: 600; box-shadow: 0 8px 30px rgba(255, 69, 0, 0.4); transition: all 0.3s ease; font-family: 'Lexend', sans-serif; font-size: 1.1rem; position: relative; overflow: hidden;">
-                  <span style="position: relative; z-index: 2;">Launch Trading Interface</span>
-                  <div style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: left 0.5s ease;"></div>
-                </a>
-                <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(255, 69, 0, 0.2);">
-                  <p style="font-size: 1rem; color: var(--text-muted); font-family: 'Lexend', sans-serif; margin-bottom: 0.8rem; font-weight: 300;">
-                    ARCx Token Contract Address
-                  </p>
-                  <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                    <code style="font-size: 0.9rem; color: var(--accent-primary); background: rgba(255, 69, 0, 0.1); padding: 0.8rem 1.2rem; border-radius: 0; font-family: 'Courier New', monospace; border: 1px solid rgba(255, 69, 0, 0.2);">
-                      0xA4093669DAFbD123E37d52e0939b3aB3C2272f44
-                    </code>
-                    <button onclick="navigator.clipboard.writeText('0xA4093669DAFbD123E37d52e0939b3aB3C2272f44')" 
-                            style="background: rgba(255, 69, 0, 0.2); border: 1px solid rgba(255, 69, 0, 0.3); color: var(--accent-primary); padding: 0.5rem 1rem; border-radius: 0; cursor: pointer; font-family: 'Lexend', sans-serif; transition: all 0.2s ease;">
-                      📋 Copy
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <style>
-              @keyframes pulse {
-                0%, 100% { transform: scale(1); opacity: 0.5; }
-                50% { transform: scale(1.1); opacity: 0.8; }
-              }
-            </style>
-          `;
-          placeholder.innerHTML = fallbackContent;
-          placeholder.style.display = 'block';
-          placeholder.style.opacity = '1';
-        }
-        
-        widgetWrapper.appendChild(iframe);
-        
-        // Start loading the widget
-        setTimeout(() => {
-          // Small delay to show loading state
-        }, 500);
-      }
-      
-      // Initialize widget after DOM is ready
-      setTimeout(initUniswapWidget, 1000);
     });
   </script>
-</body>
-</html>
+  <!-- Overlay removed as requested -->
+    </section>
+
+      <!-- Iframe Section: Inserted after hero -->
+      <section class="iframe-fullscreen-section">
+        <iframe src="index_horizontal.html" class="iframe-fullscreen" title="Horizontal Demo" allowfullscreen></iframe>
+      </section>
+
+    </main>
+
+
+      <style>
+        .iframe-fullscreen-section {
+          position: relative;
+          width: 5px;
+          height: 100vh;
+          min-width: 100vw;
+          min-height: 100vh;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background: #000;
+          display: flex;
+        }
+        .iframe-fullscreen {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 100vw;
+          height: 100vh;
+          min-width: 100vw;
+          min-height: 100vh;
+          border: none;
+          display: block;
+          box-sizing: border-box;
+          transform: translate(-50%, -50%) scale(1.18);
+          transform-origin: center center;
+        }
+        @media (max-width: 1023px) {
+          .iframe-fullscreen-section, .iframe-fullscreen {
+            width: 100vw;
+            height: 100vh;
+            min-width: 100vw;
+            min-height: 100vh;
+          }
+        }
+        html, body {
+          width: 100vw;
+          height: 100vh;
+          margin: 0;
+          padding: 0;
+          overflow-x: hidden;
+        }
+      </style>
+
+  <script>
+    // Auto-hide header when leaving hero section
+    document.addEventListener('DOMContentLoaded', function() {
+      var header = document.querySelector('.header');
+      var hero = document.querySelector('.hero');
+      if (!header || !hero) return;
+      var observer = new window.IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          header.classList.remove('header--hidden');
+        } else {
+          header.classList.add('header--hidden');
+        }
+      }, { threshold: 0.01 });
+      observer.observe(hero);
+    });
+  </script>
+
+  </body>
+  </html>
