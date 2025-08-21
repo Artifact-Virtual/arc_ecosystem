@@ -32,13 +32,16 @@
     "@uniswap/v4-periphery": "^1.0.3",
     "@uniswap/v4-sdk": "^1.21.4",
     "axios": "^1.7.7",
-    "dotenv": "^16.4.5",
-    "node-fetch": "^3.3.2",
+    "bignumber.js": "^9.1.2",
     "cross-fetch": "^4.0.0",
-    "web3-utils": "^4.3.1",
-    "bignumber.js": "^9.1.2"
+    "dotenv": "^16.4.5",
+    "framer-motion": "^12.23.12",
+    "lucide-react": "^0.540.0",
+    "node-fetch": "^3.3.2",
+    "web3-utils": "^4.3.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.32.0",
     "@nomicfoundation/hardhat-chai-matchers": "^2.1.0",
     "@nomicfoundation/hardhat-ethers": "^3.1.0",
     "@nomicfoundation/hardhat-ignition": "^0.15.13",
@@ -55,6 +58,9 @@
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.2.0",
     "chai": "^4.5.0",
+    "eslint": "^9.32.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "ethers": "^6.13.4",
     "hardhat": "^2.26.2",
     "hardhat-gas-reporter": "^2.3.0",
@@ -64,11 +70,7 @@
     "solidity-coverage": "^0.8.16",
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
-    "typescript": "^5.9.2",
-    "@eslint/js": "^9.32.0",
-    "eslint": "^9.32.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1"
+    "typescript": "^5.9.2"
   },
   "overrides": {
     "cookie": ">=0.7.0",

@@ -20,6 +20,7 @@ coverage.json
 # Env
 .env
 .env.*
+.assistant/*
 
 # OS
 .DS_Store
