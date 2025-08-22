@@ -1,16 +1,19 @@
-# ADAM Protocol — Continuous Intelligence System for The ARC
+# ADAM Protocol — Governance Model
+
+> version 0.1
 
 ![Status: Draft](https://img.shields.io/badge/status-draft-yellow)
 ![Governance](https://img.shields.io/badge/governance-DAO-blue)
 ![Security](https://img.shields.io/badge/security-auditable-brightgreen)
 ![RWA](https://img.shields.io/badge/RWA-integrated-blueviolet)
 
+
 <p align="center">
   <img src="../../logo/arcx_logo1-modified.png" alt="ARCx Logo" width="120"/>
 </p>
 
 <div align="center">
-  <b>ARCx Constitutional Intelligence — Authoritative Governance Specification (v0.1)</b>
+  <b>ARCx Constitutional Intelligence — Authoritative Governance Specification</b>
 </div>
 
 ---
@@ -469,7 +472,13 @@ interface IParamManager {
 - **SBT:** Soulbound Token—non-transferable identity credential.
 - **RWA:** Real-World Asset/Proof.
 - **QV:** Quadratic Voting transformation.
-- **Dual-quorum:** Simultaneous token & SBT quorums for emergency actions.
+
+## 24. Governance Matrix
+
+# ADAM Protocol Governance Matrix
+
+## Overview
+This
 
 ---
 
