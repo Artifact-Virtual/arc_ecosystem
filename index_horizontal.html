@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARCx — Horizontal Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#000;--muted:#9CA3AF;--soft:#BFC7D6;--accent:#ff4500}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:var(--bg);color:var(--soft);font-family:Lexend,system-ui,Segoe UI,Roboto}
+  .wrap{height:100vh;display:flex;align-items:stretch;overflow:auto}
+  .col{min-width:60vw;flex:0 0 60vw;padding:4rem;display:flex;flex-direction:column;justify-content:center;gap:1.25rem;border-right:1px solid rgba(255,255,255,0.03)}
+  .col.alt{background:linear-gradient(180deg, rgba(255,69,0,0.02), transparent)}
+  h2{font-family:Montserrat,system-ui;font-size:2.25rem;font-weight:200;letter-spacing:.06em}
+  p{color:var(--muted);max-width:56ch}
+  .small{font-size:.95rem;color:var(--muted)}
+  .muted-block{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);padding:1rem;border-radius:8px}
+  .fade-in{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
+  .visible{opacity:1;transform:none}
+  @media (max-width:900px){.col{min-width:100vw;padding:2rem}}
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <section class="col" id="col-1">
+    <h2>ARCx — Constitutional Intelligence</h2>
+    <div class="muted-block fade-in">
+      <p>Genesis token for the ARC ecosystem. This demo shows the horizontal content panels used in the main site. All motion is intentionally subtle to preserve a low-power AMOLED-friendly aesthetic.</p>
+    </div>
+    <p class="small">Use horizontal scroll or swipe to move between panels. Keyboard left/right also supported.</p>
+  </section>
+  <section class="col alt" id="col-2">
+    <h2>ADAM — Policy Engine</h2>
+    <div class="muted-block fade-in">
+      <p>ADAM is a WASM-based constitutional policy engine. Policies evaluate proofs and emit allow/deny decisions. See the docs for the full spec.</p>
+    </div>
+  </section>
+  <section class="col" id="col-3">
+    <h2>ARCx SBT — Attested Identity</h2>
+    <div class="muted-block fade-in">
+      <p>Non-transferable credentials issued via EAS attestations. Designed to capture decay-weighted reputation signals and role masks.</p>
+    </div>
+  </section>
+  <section class="col alt" id="col-4">
+    <h2>Security & Migration</h2>
+    <div class="muted-block fade-in">
+      <p>All contracts verified, audits completed, and a constitutional migration path is defined for future ARC network launch.</p>
+    </div>
+  </section>
+</div>
+<script>
+  // Fade in visible columns
+  const cols = document.querySelectorAll('.col');
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) e.target.classList.add('visible');
+    })
+  },{threshold:0.3});
+  cols.forEach(c=>obs.observe(c));
+
+  // Keyboard navigation
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight' || e.key==='Right') document.getElementById('wrap').scrollBy({left:window.innerWidth*0.6,behavior:'smooth'});
+    if(e.key==='ArrowLeft' || e.key==='Left') document.getElementById('wrap').scrollBy({left:-window.innerWidth*0.6,behavior:'smooth'});
+  });
+
+  // touch -> keep subtle
+</script>
+</body>
+</html>
