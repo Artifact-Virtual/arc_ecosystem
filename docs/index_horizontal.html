@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ARCx & ADAM Protocol</title>
+  <title>Welcome to the Arc & ADAM Protocol</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -149,20 +149,7 @@
   </div>
 
   <!-- ARCx Header -->
-  <header id="arcx-header" class="fixed top-0 w-full z-50 bg-black/30 backdrop-blur-md border-b border-white/10 transition-opacity duration-500">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center">
-          <span class="text-adam-orange font-light text-2xl tracking-[0.3em]">ARCx</span>
-        </div>
-        <div class="flex items-center space-x-4">
-          <a href="#" class="text-adam-light-gray hover:text-white text-sm tracking-widest uppercase">Contract</a>
-          <a href="docs/index.html" class="text-adam-light-gray hover:text-white text-sm tracking-widest uppercase">Docs</a>
-          <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="bg-adam-orange/80 hover:bg-adam-orange text-white font-semibold py-2 px-4 rounded-sm text-xs transition-all duration-300 tracking-widest uppercase">Buy Token</a>
-        </div>
-      </div>
-    </div>
-  </header>
+  <!-- ARCx Header removed as per user request -->
   
   <!-- ADAM Header -->
   <header id="app-header" class="fixed top-0 h-screen w-16 bg-black/50 backdrop-blur-sm z-50 flex-col items-center justify-between py-8 transition-opacity duration-300 ease-in-out left-0 border-r border-white/10 hidden lg:flex opacity-0 pointer-events-none">
@@ -172,18 +159,7 @@
   </header>
   
   <!-- Mobile Header (Simplified, context-aware) -->
-  <header id="mobile-header" class="sticky top-0 z-50 bg-black/50 backdrop-blur-md border-b border-white/10 lg:hidden">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center">
-          <span id="mobile-header-title" class="font-light text-2xl tracking-[0.3em] transition-colors duration-500 text-adam-orange">ARCx</span>
-        </div>
-        <div class="flex items-center">
-          <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" id="mobile-buy-button" class="bg-adam-orange/80 hover:bg-adam-orange text-white font-semibold py-2 px-4 rounded-sm text-xs transition-all duration-300 tracking-widest uppercase">Buy Token</a>
-        </div>
-      </div>
-    </div>
-  </header>
+  <!-- Mobile Header removed as per user request -->
 
   <main id="main-container" class="horizontal-container">
     
@@ -195,44 +171,25 @@
   <div class="relative z-10 w-full flex flex-col lg:flex-row items-center lg:justify-end justify-center gap-8">
       <div class="lg:w-1/2 flex flex-col items-center lg:items-start lg:text-left mb-8 lg:mb-0">
         <h1 class="text-5xl md:text-8xl font-thin text-gray-200 tracking-[0.2em] uppercase animate-fade-in-down">
-          ARC<span class="text-adam-orange">x</span>
+          <span class="text-fluor-green">ARC</span><span class="text-adam-orange">x</span>
+        <div class="mt-4 text-xl md:text-2xl font-light text-gray-300 animate-fade-in-up delay-03s">The Genesis of Onchain Reputation and Attestation</div>
         </h1>
         <p class="text-md md:text-xl text-gray-400 mt-6 max-w-xl font-light animate-fade-in-up tracking-wider">
           The Genesis of Constitutional Intelligence.
         </p>
   <div class="flex items-center space-x-8 mt-8 animate-fade-in-up delay-03s">
-            <div class="text-left">
-                <p class="text-3xl font-mono text-adam-orange">1.1M</p>
-                <p class="text-xs uppercase tracking-widest text-gray-500">Total Supply</p>
-            </div>
-            <div class="text-left">
-                <p class="text-3xl font-mono text-adam-blue">Base</p>
-                <p class="text-xs uppercase tracking-widest text-gray-500">Live Network</p>
-            </div>
+      <div class="absolute top-4 left-4 z-20 flex items-center">
+        <img src="logo/base-logo.png" alt="Base Network" class="h-10 w-10" title="Base Network" />
+      </div>
         </div>
       </div>
-      <div class="lg:w-1/2 flex flex-col lg:flex-row items-center justify-center gap-8">
+  <div class="lg:w-1/2 flex flex-row items-center justify-end gap-8">
         <!-- Card 1 -->
+        <!-- ARCx Token Card -->
         <div id="arcx-hero-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] bg-gradient-to-br from-adam-slate/80 to-adam-black/90 rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate">
           <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-adam-blue/40 rounded-full blur-2xl animate-pulse-bright-blue"></div>
           <div class="relative z-10 flex flex-col items-center justify-center h-full p-8">
-            <img src="logo/arcx_logo1-modified.png" alt="ARCx Logo" class="w-20 h-20 mb-6 animate-fade-in-down" style="animation-delay: 0.2s;" />
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down" style="animation-delay: 0.3s;">ARCx Token</h2>
-            <p class="text-adam-blue text-lg font-mono mb-4 animate-fade-in-down" style="animation-delay: 0.4s;">The Onchain Reputation Layer</p>
-            <p class="text-gray-300 text-base font-light animate-fade-in-up" style="animation-delay: 0.5s;">
-              Secure, composable, and privacy-preserving identity and reputation for DeFi, DAOs, and beyond.
-            </p>
-            <div class="flex items-center space-x-4 mt-8 animate-fade-in-up" style="animation-delay: 0.6s;">
-              <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/90 hover:bg-adam-blue text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Read Docs</a>
-              <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="bg-adam-orange/90 hover:bg-adam-orange text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Buy ARCx</a>
-            </div>
-          </div>
-        </div>
-        <!-- Card 2 (duplicate) -->
-        <div id="arcx-hero-card-2" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] bg-gradient-to-br from-adam-slate/80 to-adam-black/90 rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate">
-          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-adam-blue/40 rounded-full blur-2xl animate-pulse-bright-blue"></div>
-          <div class="relative z-10 flex flex-col items-center justify-center h-full p-8">
-            <img src="logo/arcx_logo1-modified.png" alt="ARCx Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
+            <img src="logo/arcx_logo1-modified.png" alt="ARCx Token Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">ARCx Token</h2>
             <p class="text-adam-blue text-lg font-mono mb-4 animate-fade-in-down delay-04s">The Onchain Reputation Layer</p>
             <p class="text-gray-300 text-base font-light animate-fade-in-up delay-05s">
@@ -241,6 +198,21 @@
             <div class="flex items-center space-x-4 mt-8 animate-fade-in-up delay-06s">
               <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/90 hover:bg-adam-blue text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Read Docs</a>
               <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="bg-adam-orange/90 hover:bg-adam-orange text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Buy ARCx</a>
+            </div>
+          </div>
+        </div>
+        <!-- ARCxSBT Card -->
+        <div id="arcx-sbt-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] bg-gradient-to-br from-adam-slate/80 to-adam-black/90 rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate">
+          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-adam-blue/40 rounded-full blur-2xl animate-pulse-bright-blue"></div>
+          <div class="relative z-10 flex flex-col items-center justify-center h-full p-8">
+            <img src="logo/arcx_logo1-modified.png" alt="ARCxSBT Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">ARCxSBT</h2>
+            <p class="text-adam-blue text-lg font-mono mb-4 animate-fade-in-down delay-04s">Soulbound Identity Layer</p>
+            <p class="text-gray-300 text-base font-light animate-fade-in-up delay-05s">
+              Non-transferable, verifiable credentials for onchain reputation, governance, and access.
+            </p>
+            <div class="flex items-center space-x-4 mt-8 animate-fade-in-up delay-06s">
+              <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/90 hover:bg-adam-blue text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Read Docs</a>
             </div>
           </div>
         </div>
@@ -451,11 +423,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
     // --- DOM ELEMENTS ---
-    const arcxHeader = document.getElementById('arcx-header');
-    const adamHeader = document.getElementById('app-header');
-    const mobileHeaderTitle = document.getElementById('mobile-header-title');
-    const mobileBuyButton = document.getElementById('mobile-buy-button');
-    const backgroundRenderer = document.getElementById('background-renderer')?.firstElementChild;
+  const arcxHeader = document.getElementById('arcx-header');
+  // adamHeader is already declared above, so do not redeclare here
+  const mobileHeaderTitle = document.getElementById('mobile-header-title');
+  const mobileBuyButton = document.getElementById('mobile-buy-button');
+  const backgroundRenderer = document.getElementById('background-renderer')?.firstElementChild;
     
     // --- HEADER AND NAVIGATION ---
     const headerNav = document.getElementById('header-nav');

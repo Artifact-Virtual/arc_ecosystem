@@ -1,3 +1,8 @@
+/* Fluorescent Green for ARC */
+.text-fluor-green {
+  color: #39ff14 !important;
+  text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14, 0 0 2px #fff;
+}
 /* Animation Delay Utility Classes */
 .delay-02s { animation-delay: 0.2s !important; }
 .delay-03s { animation-delay: 0.3s !important; }
