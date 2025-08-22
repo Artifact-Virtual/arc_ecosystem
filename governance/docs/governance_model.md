@@ -1,487 +1,230 @@
-# ADAM Protocol — Governance Model
 
-> version 0.1
+# ARCx Governance Matrix
 
-![Status: Draft](https://img.shields.io/badge/status-draft-yellow)
-![Governance](https://img.shields.io/badge/governance-DAO-blue)
-![Security](https://img.shields.io/badge/security-auditable-brightgreen)
-![RWA](https://img.shields.io/badge/RWA-integrated-blueviolet)
-
-
-<p align="center">
-  <img src="../../logo/arcx_logo1-modified.png" alt="ARCx Logo" width="120"/>
+<p align="left">
+  <img src="https://img.shields.io/badge/Status-Stable-brightgreen?style=flat-square" alt="Status"/>
+  <img src="https://img.shields.io/badge/Chain-Base%20(EVM)-blue?style=flat-square" alt="Chain"/>
+  <img src="https://img.shields.io/badge/License-AGPL--3.0-blueviolet?style=flat-square" alt="License"/>
+  <img src="https://img.shields.io/badge/Admin-Timelock%2BSafe-orange?style=flat-square" alt="Admin"/>
+  <img src="https://img.shields.io/badge/Integrates-ARCxGovernor%2C%20MACI%2C%20AdamHost%2C%20EAS%2C%20RWA%20Registry-9cf?style=flat-square" alt="Integrates"/>
 </p>
 
-<div align="center">
-  <b>ARCx Constitutional Intelligence — Authoritative Governance Specification</b>
-</div>
-
 ---
 
-> **An RWA-aware DAO model designed for real-world impact, perpetual adaptability, and maximum security.**  
-> This is the canonical, implementation-ready specification for ARCx governance on Base (chain-agnostic where possible).
+**Version:** 1.0 BETA (Lean/Authoritative, hardened)
 
----
+## 0. Purpose & Scope
 
-## Preamble
+Canonical, chain-enforced configuration for topics, layers, quorums, supermajorities, windows, bonds, concurrency, batching, and rounding. Values are on-chain, versioned, and emitted as JSON. No policy prose here—just rules the contracts must enforce.
 
-- **Objective:** Bind capital, reputation, and verifiable real-world proofs into a single, composable voting system with autonomous execution, strict safety rails, and transparent monitoring.
-- **Design stance:** Deterministic, auditable, minimally trust-assumptive. Every rule here is implementable without hand-waving.
-- **Non-goals:** Vibes-based voting, opaque committees, “ad hoc exceptions.” Emergency powers are bytecode-limited.
+## 1. Topic & Layer Constants
 
----
+Layers (bitmask): `TOKEN=1<<0`, `SBT=1<<1`, `RWA_ENERGY=1<<2`, `RWA_CARBON=1<<3`.
+Topic IDs (enum): `PARAMS=0`, `TREASURY=1`, `ENERGY=2`, `CARBON=3`, `GRANTS=4`.
+Topic→layers:
 
-## 1. Scope & Definitions
+* `TREASURY: TOKEN|SBT`
+* `PARAMS:  TOKEN|SBT`
+* `ENERGY:  TOKEN|SBT|RWA_ENERGY`
+* `CARBON:  TOKEN|SBT|RWA_CARBON`
+* `GRANTS:  TOKEN|SBT`
 
-- **ARCx Token (ARCx):** ERC-20 with vote power from stake & duration. Minting finalized.
+## 2. Deterministic Math & Rounding
 
----
+Fixed-point WAD `1e18`. Snapshot at `onVoteStart`.
+Eligible totals: `E_total = Σ_v W(v)`; per-layer `E_L = Σ_v W_L(v)`.
+Participation (tally): `P_total = Σ_v (yes+no+abstain)`; per-layer `P_L` analogous.
+Quorum: `P_total ≥ ceil(qTotalWad * E_total)` and for each layer `L` in topic: `P_L ≥ ceil(qL_Wad * E_L)`.
+Approval: `yesRatio = yes / (yes+no)` (WAD); pass if `yesRatio ≥ supermajorityWad`.
+Rounding: floor at voter level → sum in WAD → comparisons use ceil as specified. Abstain counts for quorum, not approval.
 
-## 📚 Appendix: Implementation Requirements
+## 3. Default Topic Configuration
 
-### Text/Narrative Requirements
+| Topic                                                                            | Layers                  | qTotal | qTOKEN | qSBT | qRWA | Supermajority | Voting | Timelock | Challenge |
+| -------------------------------------------------------------------------------- | ----------------------- | :----: | :----: | :--: | :--: | :-----------: | :----: | :------: | :-------: |
+| TREASURY                                                                         | TOKEN, SBT              |  0.08  |  0.06  | 0.10 |   —  |      0.60     |   5d   |    7d    |    48h    |
+| PARAMS                                                                           | TOKEN, SBT              |  0.06  |  0.05  | 0.08 |   —  |      0.55     |   5d   |    5d    |    48h    |
+| ENERGY                                                                           | TOKEN, SBT, RWA\_ENERGY |  0.07  |  0.05  | 0.08 | 0.05 |      0.58     |   6d   |    7d    |    72h    |
+| CARBON                                                                           | TOKEN, SBT, RWA\_CARBON |  0.07  |  0.05  | 0.08 | 0.05 |      0.58     |   6d   |    7d    |    72h    |
+| GRANTS                                                                           | TOKEN, SBT              |  0.05  |  0.04  | 0.06 |   —  |      0.55     |   5d   |    5d    |    48h    |
+| Notes: `qRwaWad=0` **must** be set when the topic lacks an RWA layer (enforced). |                         |        |        |      |      |               |        |          |           |
 
-- Governance Model Whitepaper / Spec
-- README / Governance Overview
-- Proposal Submission Guide
-- Deliberation & Discussion Policy
-- Voting Guide
-- Execution Pathways
-- Emergency Procedures
-- RWA Onboarding Playbook
-- SBT/NFT Issuance & Revocation Policy
-- Challenge & Dispute Resolution Process
-- Upgrade & Amendment Procedures
-- Security Policy & Incident Response Plan
-- Treasury Management Policy
-- Terms of Service & Participation Agreement
-- Privacy Policy
-- RWA Regulatory Compliance Checklist
-- Jurisdictional Risk Matrix
-- Onboarding Guide for New Members
-- Code of Conduct
-- Community Moderation Policy
-- Transparency Reports (periodic)
-- FAQ & Troubleshooting
-- Docs Site Structure
+## 4. Proposers, Bonds, Concurrency & Admission
 
-### Code/Artifact Requirements
+Eligibility: proposer must be eligible for the topic at snapshot and satisfy identity floor `f_id(addr) ≥ minIdWad` (default `0.1e18`).
+Bonds (flat bonds are in ARCx; % bonds are in the requested asset unless `bondAssetOverride` is set):
 
-- System Architecture Diagram (SVG/PNG)
-- Proposal → Vote → Execute Flow Diagram
-- Proposal Lifecycle State Machine Diagram
-- Governance Config Template (JSON/YAML)
-- Governance Matrix (Excel/CSV)
-- Weighting Aggregator Contract Interface (Solidity/Foundry)
-- Governor Contract Interface (Solidity/Foundry)
-- Module Registry & Permissions Map
-- Smart Contract Audit Reports
-- Oracle Integration Docs
-- Sybil Resistance & Privacy Proofs (MACI/Semaphore, etc.)
-- Monitoring & Transparency Dashboard Spec
-- Subgraph/Indexing Documentation
-- API Reference for Governance Modules
-- Tokenomics Sheet (Excel/CSV)
-- Vesting Schedules & Unlocks (Excel/CSV)
-- Liquidity Provisioning Plan
-- Auction/Distribution Mechanism Docs
-- RWA Valuation & Risk Assessment Templates
-- DAO Legal Entity Formation Docs
-- Brand Assets (SVG/PNG, color palette)
-- Launch Landing Page (HTML)
-- Open Graph/Twitter Meta Tags
-- Favicon Set
-- Per-Proposal “What-If” Simulators (Excel/JS)
-- CSV Importer for On-Chain Balances (Tool)
-- Governance Analytics & Sensitivity Dashboards
-- Automated Alerts & Anomaly Detection Spec
-- Periodic Review & Audit Checklist
+* TREASURY: `ceil(0.01 * requestedOutlay)`; full slash on spam/invalid target or `<20%` yes.
+* PARAMS: `1000 ARCx`; 25% slash on out-of-bounds submission.
+* ENERGY/CARBON: `100 ARCx`; 50% slash if oracle proofs invalid.
+* GRANTS: `0.005 * requestedOutlay`; milestone-based partial refunds.
+  Concurrency per topic (max Active): TREASURY=4, PARAMS=6, ENERGY=6, CARBON=6, GRANTS=8.
+  Admission when full: FIFO **queue** per topic (maxQueue configurable). If queue full, the **oldest queued** auto-evicts with bond refund minus `queueFee` (configurable). Duplicate cooldown: 14d after fail; 7d after pass (same param key/treasury target).
 
----
+## 5. Lifecycle & Hooks
 
-### Key Terms
+`Draft → Submitted → Review(≤24h) → Voting → (Passed|Failed) → Timelock → ChallengeWindow → Execute → Monitor`
+Static checks at Review (targets, bounds, diffs). Tally only at period end. Challenge uses bonded dispute; AdamHost re-checks on `onQueue/onExecute`.
 
-- **SBT (IdentityRole):** Soulbound credential proving contributor roles (code, validator ops, governance, RWA curation).
-- **RWA Proof:** On-chain attestation (EAS) of a real-world asset/impact (e.g., energy receipt, carbon credit, data feed, LP receipt).
-- **Proposal Topic:** Category that gates eligibility & rules (e.g., TREASURY, PARAMS, ENERGY, CARBON, GRANTS).
-- **Constitutional Engine:** Governor + Timelock + Safe Module that executes passed proposals.
-- **MACI/Semaphore:** Anti-collusion, Sybil-resistant secret ballot infrastructure.
-- **EAS:** Ethereum Attestation Service; canonical attestation layer.
+## 6. Allowlisted Execution Targets
 
----
+* TREASURY → `ARCxTreasury.{transfer,stream,swap,lpAdd,lpRemove}`
+* PARAMS   → `ARCxParamManager.{setUint,setAddr,setBool}` (bounds enforced)
+* ENERGY/CARBON → `ARCxRWARegistry.{attest,update}` (+ allowed `ParamManager` keys)
+* GRANTS   → `ARCxGrants.{create,release,clawback}`
 
-## 2. Key Principles
+## 7. MACI Integration
 
-- **Multi-Asset, Multi-Layer Voting Power:** Weight is a deterministic function of ARCx stake, SBTs, and attested RWA proofs; eligibility is per-proposal and enforced on-chain.
-- **Context-Gated Ballots:** Only relevant voters (by topic) can vote; cross-domain proposals require layered quorums.
-- **Autonomous, Modular Execution:** Proposals map to modular executors (treasury, parameters, RWA onboarding). Emergency actions are strictly bytecode-limited, time-locked, and dual-quorum gated.
-- **Programmable RWA Integration:** 2-of-N oracle attestations, operator staking & slashing, recency-weighted impact.
-- **Sybil/Collusion Resistance:** MACI/Semaphore + per-proposal salts + per-layer delegation.
+When `maci.enabled=true`: voice credits `C(v) = floor(W(v)/unitWad)` (`unitWad=1e16` ⇒ 0.01 weight per credit). Adapter enforces per-layer delegations and reverse-maps credits to WAD for quorum/approval. Fallback Governor uses raw `W(v)`.
 
----
+## 8. DoS & Gas Bounds
 
-## 3. Actors & Roles
+* `maxRolesPerAddress=16` (SBT).
+* `maxRWAProofsPerProposal=32`.
+* `maxParamOpsPerProposal=8`.
+* Batched tally: `batchTallySize` voters per batch; `maxVotersPerBatch` hard cap; gas-bounded loop with resumable cursor.
 
-- **Voter:** Address holding any subset of (ARCx stake, SBTs, RWA proofs).
-- **Proposer:** Voter posting a proposal with a proposer bond.
-- **Oracle Operator:** Signs RWA updates; posts stake; subject to slashing.
-- **Emergency Council (bytecode-restricted):** Can `pause()` protocol, `cancel()` pre-execution. Nothing else.
-- **Coordinator (MACI):** Runs anti-collusion tally process under published parameters.
+## 9. Emergency (Bytecode-limited)
 
----
+Actions: `pause()` and `cancel()` only (pre-execution).
+Dual-quorum: `TOKEN ≥ 0.04 * E_TOKEN` **and** `SBT ≥ 0.20 * E_SBT`; supermajority `0.60`.
+Inter-block 2FA (AdamHost `DUAL_QUORUM`): second confirmation within `[2, 7200]` blocks by SBT-only quorum.
 
-## 4. Assets & Attestations
-
-### 4.1 ARCx Stake (Capital)
-
-- **Stake unit:** ARCx tokens locked `stake_amount` with measured `stake_days`.
-- **Slashing risk factor:** Multiplier ∈ (0,1] reflecting exposure to slashing (if applied to certain roles).
-
-### 4.2 Identity (SBT)
-
-- **SBT issuance:** EAS attestation + soulbound token mint; one per role; upgradable metadata; non-transferable.
-- **Activity decay:** Reduces role weight if no on-chain contribution heartbeat.
-
-### 4.3 RWA Proofs
-
-- **Types:** RWA_Energy, RWA_Carbon, RWA_Data, etc.
-- **Attestation:** EAS schema + oracle multi-sig (2-of-N) with operator stakes.
-- **Impact score:** Function of quantity, quality, and recency.
-
----
-
-## 5. Canonical Voting Weight
-
-For a voter `v` on proposal `p` with topic `τ`:
-
-```
-W(v,p) = α·f_token(v,p) + β·f_id(v,p) + Σ_k γ_k(τ)·f_rwa,k(v,p)
-```
-
-**Components:**
-
-- `f_token = QV( sqrt(stake_days_weight · stake_amount) ) · slashing_risk_factor`
-- `stake_days_weight = min(1 + log(1 + stake_days / D0), cap_sd)`
-- `QV(x) = min( floor(√x), cap_qv )` (quadratic voting compression)
-- `f_id = Σ_i role_i_weight · activity_decay(t_now - t_last_contrib_i)`
-- `activity_decay(Δt) = e^(−Δt / T_decay)` (bounded below by decay_floor)
-- `f_rwa,k = impact_score_k · recency_decay_k(Δt) · stake_lock_factor_k`
-- `recency_decay_k(Δt) = e^(−Δt / R_k)`
-- `stake_lock_factor_k ∈ [0.5, 1.2]` depending on lock duration & slashing exposure
-
-**Normalization & Caps:**
-
-- Normalize W to [0, W_max].
-- Component ceiling: any single component ≤ max_component_share · W.
-
-**Starter constants (on-chain configurable):**
-
-- α=0.5, β=0.2, γ_energy=0.2, γ_carbon=0.1, W_max=10,000, max_component_share=0.6, D0=30d, cap_sd=2.0, cap_qv=100, T_decay=90d.
-
-_All constants & curves live in on-chain config; changes require governance._
-
----
-
-## 6. Eligibility Engine (Deterministic)
-
-### 6.1 Topic Taxonomy (Bitmasks)
-
-```text
-TREASURY = TOKEN|SBT
-PARAMS   = TOKEN|SBT
-ENERGY   = TOKEN|SBT|RWA_ENERGY
-CARBON   = TOKEN|SBT|RWA_CARBON
-GRANTS   = TOKEN|SBT
-```
-
-### 6.2 On-chain Check
+## 10. Interfaces (authoritative types)
 
 ```solidity
+interface ITopicConfig {
+  struct TopicCfg {
+    uint256 layerMask;
+    uint256 qTotalWad;
+    uint256 qTokenWad;
+    uint256 qSbtWad;
+    uint256 qRwaWad;     // must be 0 when topic has no RWA layer
+    uint256 supermajorityWad;
+    uint64  votingDays;
+    uint64  timelockDays;
+    uint64  challengeHours;
+    uint8   maxActive;
+  }
+  function get(uint256 topicId) external view returns (TopicCfg memory);
+}
+
 interface IEligibility {
   function canVote(uint256 proposalId, address voter)
-    external view returns (
-      bool eligible,
-      uint256 wToken,
-      uint256 wSBT,
-      uint256 wRWA
-    );
+    external view returns (bool eligible, uint256 wToken, uint256 wSBT, uint256 wRWA);
 }
 ```
 
-- Single source of truth used by Governor/MACI tally adapter.
-- Returns component weights for transparency.
+## 11) Canonical On-Chain JSON (WAD strings)
 
----
-
-## 7. Attestation & Revocation Semantics
-
-- **EAS schemas** for IdentityRole, RWA_* with strict fields, issuer lists, versioning.
-- **Revocation:** Prospective only; a revoked attestation invalidates future votes. Past finalized tallies are immutable.
-- **Oracle quorum:** At least 2-of-N unique operators must sign an RWA update; operators post collateral to a slashing vault.
-
----
-
-## 8. Proposal Types & Templates
-
-- **TREASURY:** Payout/stream (Sablier-compatible), swap, LP add/remove, bond purchases.
-- **PARAMS:** Update protocol parameter (`bytes32→{u256,address,bool}`).
-- **RWA_ONBOARD:** Register new RWA schema & oracle set; set initial impact function.
-- **RWA_UPDATE:** Accept new impact metrics from oracle quorum (subject to challenge window).
-- **GRANTS:** Milestone-based grant issuance; clawback rules attached.
-
-Each template declares:
-
-- Topic τ, required quorums, supermajority thresholds, timelock, challenge window, proposer bond, and execution target(s).
-
----
-
-## 9. Lifecycle & State Machine
-
-```
-Draft → Submitted → Review → Voting → (Passed | Failed)
-If Passed → Timelock → ChallengeWindow → Execute → Monitor
-```
-
-**Key parameters (per topic):**
-
-- quorum (fraction of eligible weight)
-- supermajority (e.g., 60% yes)
-- votingPeriod (e.g., 5–7 days)
-- timelockDays (e.g., 5–14 days)
-- challengeWindow (e.g., 48–72h)
-- proposerBond (e.g., 0.5–2% of requested outlay for TREASURY; fixed for PARAMS)
-
-**Anti-spam:**
-
-- Proposer bond slashed for invalid/spam.
-- Concurrency caps + cooldown for duplicate topics.
-
----
-
-## 10. Voting & MACI Integration
-
-- **Mode:** MACI for secret voting; classic Governor as fallback (configurable per topic).
-- **Delegation:** Per layer (TOKEN, SBT, RWA_k) with independent delegates; revocable at any time; block-level effect.
-- **Per-proposal salts:** Prevent replay or sale of vote intent.
-- **Tally adapter:** Computes W via IEligibility at snapshot height; applies MACI voice credits → effective weights.
-
----
-
-## 11. Execution, Timelocks, Emergency Brake
-
-- **Timelock:** OZ TimelockController, per-topic delays; emits Queued, Executed, Cancelled.
-- **Executor:** Gnosis Safe module calling target modules (Treasury, ParamManager, RWAOnboarder, Grants).
-- **Emergency (dual quorum):**
-  - Actions allowed: `pause()`, `cancel()` (pre-execution) only.
-  - Requires both (TOKEN quorum subset & SBT quorum subset) within a short window.
-  - Bytecode-enforced allowlist—no treasury moves, no param changes.
-
----
-
-## 12. RWA Integration (Oracles, Slashing, Disputes)
-
-- **Oracle operators:** Register keys, post stake.
-- **Updates:** RWA_UPDATE requires 2-of-N signatures + EAS record with payload hash & block timestamp.
-- **Slashing:** Proven fraud → operator stake burned/redistributed; proof via dispute module.
-- **Dispute module:** Reality.eth-style challenge: bond, evidence, adjudication window; outcome flips or confirms update; losing side forfeits bond.
-
----
-
-## 13. Contract Map (Minimal)
-
-- **ARCxVotes:** ERC20Votes + stake duration multiplier + optional slashing hook.
-- **ARCxIdentitySBT:** Soulbound roles; EAS-linked; `revoke()`, `setRoleWeight()`.
-- **ARCxRWARegistry:** RWA schemas, oracle sets, operator stakes, impact functions, slashing vault.
-- **ARCxEligibility:** Topic masks; returns eligibility & component weights.
-- **ARCxGovernor:** Custom Governor; plugs MACI tally; pulls weights via IEligibility.
-- **ARCxTimelock:** Per-topic delays & challenge windows.
-- **ARCxExecutor:** Safe module with call routing to:
-  - ARCxTreasury (payouts/streams/swaps/LP)
-  - ARCxParamManager (protocol params)
-  - ARCxRWAOnboarder (register RWA types)
-  - ARCxGrants (milestones/clawbacks)
-- **ARCxEmergencyBrake:** Bytecode-limited emergency interface.
-
-**Interfaces:**
-
-```solidity
-interface IRWARegistry {
-  function attest(bytes32 schemaId, bytes calldata data, bytes[] calldata oracleSigs) external;
-  function impactOf(address voter, uint256 topicId) external view returns (uint256 weight);
-}
-
-interface IParamManager {
-  function setUint(bytes32 key, uint256 val) external;
-  function setAddr(bytes32 key, address val) external;
-  function setBool(bytes32 key, bool val) external;
-}
-```
-
----
-
-## 14. Governance Config (on-chain JSON, emitted & stored)
+All decimals below are **WAD strings** (base-10 strings representing 1e18-scaled values).
 
 ```json
 {
-  "weights": {
-    "alpha_token": 0.5,
-    "beta_identity": 0.2,
-    "gamma": { "energy": 0.2, "carbon": 0.1 }
-  },
-  "caps": { "max_component_share": 0.6, "W_max": 10000 },
-  "curves": {
-    "stake_days": { "D0_days": 30, "cap_sd": 2.0 },
-    "decay": { "T_decay_days": 90, "floor": 0.25 },
-    "rwa_recency": { "energy_R_days": 60, "carbon_R_days": 90 }
-  },
-  "topics": {
-    "TREASURY": { "quorum": 0.08, "supermajority": 0.60, "votingDays": 5, "timelockDays": 7, "challengeHours": 48, "layers": ["TOKEN","SBT"] },
-    "PARAMS":   { "quorum": 0.06, "supermajority": 0.55, "votingDays": 5, "timelockDays": 5, "challengeHours": 48, "layers": ["TOKEN","SBT"] },
-    "ENERGY":   { "quorum": 0.07, "supermajority": 0.58, "votingDays": 6, "timelockDays": 7, "challengeHours": 72, "layers": ["TOKEN","SBT","RWA_ENERGY"] },
-    "CARBON":   { "quorum": 0.07, "supermajority": 0.58, "votingDays": 6, "timelockDays": 7, "challengeHours": 72, "layers": ["TOKEN","SBT","RWA_CARBON"] },
-    "GRANTS":   { "quorum": 0.05, "supermajority": 0.55, "votingDays": 5, "timelockDays": 5, "challengeHours": 48, "layers": ["TOKEN","SBT"] }
-  },
-  "maci": { "enabled": true, "coordinator": "0x...", "voiceCredits": 100 },
-  "emergency": { "dualQuorum": { "tokenPct": 0.04, "sbtPct": 0.20 }, "actions": ["pause","cancel"] },
-  "bonds": { "proposerPct_TREASURY": 0.01, "proposerFlat_PARAMS": "1000 ARCx" }
+  "governance": {
+    "version": "1.0.0-beta",
+    "scale": "wad",
+    "topics": {
+      "TREASURY": {
+        "id": 1,
+        "layers": ["TOKEN","SBT"],
+        "qTotalWad": "80000000000000000",
+        "qTokenWad": "60000000000000000",
+        "qSbtWad":   "100000000000000000",
+        "qRwaWad":   "0",
+        "supermajorityWad":"600000000000000000",
+        "votingDays":5,"timelockDays":7,"challengeHours":48,"maxActive":4
+      },
+      "PARAMS": {
+        "id": 0,
+        "layers": ["TOKEN","SBT"],
+        "qTotalWad": "60000000000000000",
+        "qTokenWad": "50000000000000000",
+        "qSbtWad":   "80000000000000000",
+        "qRwaWad":   "0",
+        "supermajorityWad":"550000000000000000",
+        "votingDays":5,"timelockDays":5,"challengeHours":48,"maxActive":6
+      },
+      "ENERGY": {
+        "id": 2,
+        "layers": ["TOKEN","SBT","RWA_ENERGY"],
+        "qTotalWad": "70000000000000000",
+        "qTokenWad": "50000000000000000",
+        "qSbtWad":   "80000000000000000",
+        "qRwaWad":   "50000000000000000",
+        "supermajorityWad":"580000000000000000",
+        "votingDays":6,"timelockDays":7,"challengeHours":72,"maxActive":6
+      },
+      "CARBON": {
+        "id": 3,
+        "layers": ["TOKEN","SBT","RWA_CARBON"],
+        "qTotalWad": "70000000000000000",
+        "qTokenWad": "50000000000000000",
+        "qSbtWad":   "80000000000000000",
+        "qRwaWad":   "50000000000000000",
+        "supermajorityWad":"580000000000000000",
+        "votingDays":6,"timelockDays":7,"challengeHours":72,"maxActive":6
+      },
+      "GRANTS": {
+        "id": 4,
+        "layers": ["TOKEN","SBT"],
+        "qTotalWad": "50000000000000000",
+        "qTokenWad": "40000000000000000",
+        "qSbtWad":   "60000000000000000",
+        "qRwaWad":   "0",
+        "supermajorityWad":"550000000000000000",
+        "votingDays":5,"timelockDays":5,"challengeHours":48,"maxActive":8
+      }
+    },
+    "bonds": {
+      "TREASURY_pctWad":"10000000000000000",
+      "PARAMS_flatARCx":"1000000000000000000000",
+      "ENERGY_flatARCx":"100000000000000000000",
+      "CARBON_flatARCx":"100000000000000000000",
+      "GRANTS_pctWad":"5000000000000000",
+      "bondAssetOverride":"0x0000000000000000000000000000000000000000"
+    },
+    "proposer": {
+      "minIdWad":"100000000000000000",
+      "cooldownDays_pass":7,
+      "cooldownDays_fail":14
+    },
+    "emergency": {
+      "dualQuorum": {
+        "tokenPctWad":"40000000000000000",
+        "sbtPctWad":"200000000000000000"
+      },
+      "supermajorityWad":"600000000000000000",
+      "twoFA":{"minBlocks":2,"maxBlocks":7200}
+    },
+    "maci":{"enabled":true,"unitWad":"10000000000000000"},
+    "limits":{
+      "maxRolesPerAddress":16,
+      "maxRWAProofsPerProposal":32,
+      "maxParamOpsPerProposal":8,
+      "batchTallySize":500,
+      "maxVotersPerBatch":750,
+      "maxQueuePerTopic":24,
+      "queueFeeARCx":"1000000000000000000"
+    }
+  }
 }
 ```
 
----
+## 12) Enforcement Notes
 
-## 15. Security Model & Mitigations
+* Governor must reject transitions to Voting if `Active(topic) == maxActive`; place proposal into FIFO queue.
+* When `Queue(topic)` is full, evict the **oldest queued** (refund bond minus `queueFee`).
+* Enforce `qRwaWad==0` when `RWA_*` not in `layerMask`; otherwise revert config.
 
-- **Oracle spoofing:** 2-of-N signatures + operator stake + dispute game + slashing.
-- **Vote buying:** MACI secrecy, per-proposal salts, layer-scoped delegation, no global brokers.
-- **Plutocracy:** QV + component caps + SBT/RWA floors.
-- **SBT cartelization:** Activity decay + revocation on inactivity; EAS lineage with issuer rate-limits & audits.
-- **Governance halting:** Proposal concurrency caps; proposer bonds; anti-spam filters; liveness alarms.
-- **Council capture:** Bytecode-limited emergency actions; dual-quorum; public timelocks.
-- **Reorg/MEV risk:** Snapshot block fixed; timelock delays; execution proofs logged.
+## 13) MACI Equivalence Check
 
----
+Adapter guarantees `Σ credits * unitWad` equals raw WAD within ≤`unitWad` per voter. Tests must assert reversibility bounds.
 
-## 16. Upgradability, Migrations, Versioning
+## 14) Gas/Bounds Invariants
 
-- **Modules upgradable** behind Timelock + Executor (no proxy admin keys without gov).
-- **Config versioning** with immutable audit trail; semantic version bump on breaking changes.
-- **Migration path** for successor governance: one-way bridge proposal that deploys vNext contracts and binds state roots; requires supermajority & extended timelock.
+No unbounded loops; all per-address/per-proposal iterations bounded by config; batched tally must be resumable without duplication; all math uses WAD with ceil/floor rules above.
 
----
+## 15) Changelog
 
-## 17. Monitoring & Transparency
-
-- **Subgraph indexing:** proposals, weights, tallies, executions, oracle updates, disputes.
-- **Dashboards:** Eligibility explorer (address → topic breakdown), proposal drill-downs, oracle operator SLAs, slashing history.
-- **Event canon:** Emitted for every critical transition; IPFS/Arweave pin for deliberation summaries.
-
----
-
-## 18. Operations & Rollout Plan
-
-**T-2 weeks**
-- Publish math spec & config.
-- Deploy: ARCxVotes, ARCxTimelock, ARCxExecutor (Safe module).
-- EAS schemas: IdentityRole, RWA_Energy, RWA_Carbon.
-- Register oracle operators; collect stake.
-
-**T-1 week**
-- Issue initial SBTs; open attestation issuer UI.
-- Shadow MACI vote on test proposal; verify tally adapter vs. IEligibility.
-- Launch eligibility explorer (read-only).
-
-**T-0**
-- Enable PARAMS & GRANTS topics; keep TREASURY gated for one week.
-- Run ratification votes (config constants, issuer lists).
-
-**T+1–2 weeks**
-- Enable TREASURY, ENERGY, CARBON once RWA attestations flow cleanly.
-- Start RWA pilot (capped weight).
-
-**T+4 weeks**
-- Turn on MACI for all topics; publish external audit of eligibility engine & RWA registry.
-- Incident response: emergency pause available via dual-quorum; retrospective post-mortems mandated.
-
----
-
-## 19. Example Walkthroughs
-
-### 19.1 Treasury Grant
-
-- Proposer deposits 1% bond; submits GRANTS with milestones.
-- Eligibility: TOKEN+SBT.
-- MACI vote → pass (≥ quorum & supermajority) → 5-day timelock → 48h challenge → Execute.
-- ARCxGrants streams funds; clawback if milestones missed.
-
-### 19.2 ENERGY Parameter Update via RWA
-
-- Oracle set posts EAS attestation with energy output; 2-of-N signatures.
-- RWA_UPDATE proposal auto-filed (or batched) → voters include TOKEN+SBT+RWA_ENERGY.
-- On pass: ARCxParamManager.setUint(ENERGY_CAP, …); dispute window allows overturn with bonded challenge.
-
----
-
-## 20. Off-Chain Artifacts
-
-**EAS schema (example):**
-
-```json
-{
-  "name": "RWA_Energy_v1",
-  "fields": [
-    { "name": "plantId", "type": "string" },
-    { "name": "kwh", "type": "uint256" },
-    { "name": "periodStart", "type": "uint64" },
-    { "name": "periodEnd", "type": "uint64" },
-    { "name": "sourceHash", "type": "bytes32" }
-  ]
-}
-```
-
-- **Deliberation log:** Forum/Discord threads summarized by AI; content-hash pinned to IPFS/Arweave; CID stored in proposal metadata.
-
----
-
-## 21. Testing & Formal Methods
-
-- **Unit/property tests:**
-  - Weight math (monotonicity, caps, normalization).
-  - Eligibility masks & edge cases.
-  - Timelock & challenge flows.
-  - Oracle disputes & slashing.
-- **Fuzzing:** Proposer spam, griefing, timing edge cases.
-- **Invariants:** No unauthorized calls from Emergency; component caps never exceeded; RWA updates require quorum.
-- **Formal spec (TLA+ skeleton):** Invariants for timelock, challenge, dual-quorum emergency, and “no fund movement without TREASURY pass.”
-
----
-
-## 22. Parameters & Defaults (Suggested, Tune Per Vote)
-
-- **Quorums:** 5–8% depending on topic.
-- **Supermajorities:** 55–60%.
-- **Windows:** Voting 5–7d; Timelock 5–14d; Challenge 48–72h.
-- **Bonds:** 0.5–2% (TREASURY); flat for PARAMS.
-- **RWA weights:** Start conservative; raise as data quality proves stable.
-
----
-
-## 23. Glossary
-
-- **MACI:** Minimal Anti-Collusion Infrastructure.
-- **EAS:** Ethereum Attestation Service.
-- **SBT:** Soulbound Token—non-transferable identity credential.
-- **RWA:** Real-World Asset/Proof.
-- **QV:** Quadratic Voting transformation.
-
-## 24. Governance Matrix
-
-# ADAM Protocol Governance Matrix
-
-## Overview
-This
-
----
-
-## Closing
-
-This model is meant to be used, not admired: the math is fixed on-chain, eligibility is deterministic, attestations are revocable, oracles are slashable, and execution is automated with explicit guardrails. Capital, reputation, and verified impact speak together—and only within the domain where each is relevant. That’s the point.
+v1.0-beta — Unified WAD types (incl. supermajority), fixed topic IDs, added FIFO admission/eviction, explicit bond denominations, RWA-absent `qRwaWad=0` rule, and batching limits.

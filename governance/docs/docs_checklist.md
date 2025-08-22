@@ -1,103 +1,63 @@
-# DAO Documentation Requirements Checklist
 
-## 1. Governance Design & Architecture
-
-- [ ] Governance Model Whitepaper / Spec  
-    Detailed markdown or PDF outlining the governance model.
-- [ ] System Architecture Diagram  
-    SVG/PNG visual of the overall system.
-- [ ] Proposal → Vote → Execute Flow Diagram  
-    Visualizes the end-to-end proposal process.
-- [ ] Proposal Lifecycle State Machine Diagram  
-    Shows proposal states and transitions.
-- [ ] Governance Config Template  
-    JSON/YAML template for governance parameters.
-- [ ] Governance Matrix  
-    Excel/CSV listing all voting houses, weights, quorums, slashing, veto, etc.
-- [ ] README / Governance Overview  
-    Markdown summary of governance structure.
-- [ ] Weighting Aggregator Contract Interface  
-    Solidity/Foundry interface for vote weighting.
-- [ ] Governor Contract Interface  
-    Solidity/Foundry interface for proposal execution.
-- [ ] Module Registry & Permissions Map  
-    Overview of modules and their permissions.
+# DAO Documentation Checklist
 
 ---
 
-## 2. Operational & Process Documentation
+## Governance Design & Architecture
 
-- [ ] Proposal Submission Guide  
-    Step-by-step instructions for submitting proposals.
-- [ ] Deliberation & Discussion Policy  
-    Guidelines for forums, Discord, and logging (on/off-chain).
-- [ ] Voting Guide  
-    Explains weight calculation, privacy, ZK proofs.
-- [ ] Execution Pathways  
-    Describes post-approval execution steps.
-- [ ] Emergency Procedures  
-    Multi-sig council, veto, timelocks, rollback protocols.
-- [ ] RWA Onboarding Playbook  
-    Attestation standards, oracle integration, slashing.
-- [ ] SBT/NFT Issuance & Revocation Policy  
-    Rules for issuing and revoking tokens.
-- [ ] Challenge & Dispute Resolution Process  
-    Steps for handling disputes.
-- [ ] Upgrade & Amendment Procedures  
-    How governance/constitution can be changed.
+- [ ] Governance Model Whitepaper / Spec
+- [ ] System Architecture Diagram
+- [ ] Proposal → Vote → Execute Flow Diagram
+- [ ] Proposal Lifecycle State Machine Diagram
+- [ ] Governance Config Template
+- [ ] Governance Matrix
+- [ ] Governance Overview (README)
+- [ ] Weighting Aggregator Contract Interface
+- [ ] Governor Contract Interface
+- [ ] Module Registry & Permissions Map
 
 ---
 
-## 3. Technical & Security
-
-- [ ] Smart Contract Audit Reports  
-    Security audits for all contracts.
-- [ ] Security Policy & Incident Response Plan  
-    Procedures for handling security incidents.
-- [ ] Oracle Integration Docs  
-    Documentation for oracle usage.
-- [ ] Sybil Resistance & Privacy Proofs  
-    MACI/Semaphore or similar solutions.
-- [ ] Monitoring & Transparency Dashboard Spec  
-    Requirements for monitoring tools.
-- [ ] Subgraph/Indexing Documentation  
-    How to query and index DAO data.
-- [ ] API Reference for Governance Modules  
-    Technical API documentation.
+## Operational & Process
+- [ ] Proposal Submission Guide
+- [ ] Deliberation & Discussion Policy
+- [ ] Voting Guide
+- [ ] Execution Pathways
+- [ ] Emergency Procedures
+- [ ] RWA Onboarding Playbook
+- [ ] SBT/NFT Issuance & Revocation Policy
+- [ ] Challenge & Dispute Resolution Process
+- [ ] Upgrade & Amendment Procedures
 
 ---
 
-## 4. Economics & Treasury
-
-- [ ] Tokenomics Sheet  
-    Excel/CSV with token distribution and economics.
-- [ ] Treasury Management Policy  
-    Guidelines for treasury operations.
-- [ ] Vesting Schedules & Unlocks  
-    Excel/CSV with vesting details.
-- [ ] Liquidity Provisioning Plan  
-    Strategy for liquidity management.
-- [ ] Auction/Distribution Mechanism Docs  
-    Details on token distribution mechanisms.
-- [ ] RWA Valuation & Risk Assessment Templates  
-    Templates for real-world asset evaluation.
+## Technical & Security
+- [ ] Smart Contract Audit Reports
+- [ ] Security Policy & Incident Response Plan
+- [ ] Oracle Integration Docs
+- [ ] Sybil Resistance & Privacy Proofs
+- [ ] Monitoring & Transparency Dashboard Spec
+- [ ] Subgraph/Indexing Documentation
+- [ ] API Reference for Governance Modules
 
 ---
 
-## 5. Legal & Compliance
-
-- [ ] DAO Legal Entity Formation Docs  
-    Documentation for legal setup.
-- [ ] Terms of Service & Participation Agreement  
-    Legal agreements for members.
-- [ ] Privacy Policy  
-    Data privacy guidelines.
-- [ ] RWA Regulatory Compliance Checklist  
-    Checklist for regulatory requirements.
-- [ ] Jurisdictional Risk Matrix  
-    Matrix of legal risks by jurisdiction.
+## Economics & Treasury
+- [ ] Tokenomics Sheet
+- [ ] Treasury Management Policy
+- [ ] Vesting Schedules & Unlocks
+- [ ] Liquidity Provisioning Plan
+- [ ] Auction/Distribution Mechanism Docs
+- [ ] RWA Valuation & Risk Assessment Templates
 
 ---
+
+## Legal & Compliance
+- [ ] DAO Legal Entity Formation Docs
+- [ ] Terms of Service & Participation Agreement
+- [ ] Privacy Policy
+- [ ] RWA Regulatory Compliance Checklist
+- [ ] Jurisdictional Risk Matrix
 
 ## 6. Community & Communication
 
@@ -156,3 +116,16 @@
 | Community   | Onboarding, code of conduct, moderation, transparency                               |
 | Assets/Site | Logos, site, meta, favicons                                                         |
 | Advanced    | Simulators, importers, analytics, alerts, review lists                              |
+
+### Deliverables
+
+1. **Upgradability & Versioning** — module upgrade paths via Timelock+Executor; config migration semantics; semantic versioning; deprecation policy.
+2. **Monitoring & Transparency** — subgraph schema; dashboards (eligibility explorer, proposal drill-downs, oracle SLAs, slashing history); event canon & IPFS/Arweave pins.
+3. **Operations & Rollout Plan** — T-minus schedules, dry-runs, phased topic enablement, MACI cutover, external audits, incident playbooks.
+4. **Worked Walkthroughs** — end-to-end examples for Treasury streams, Energy cap raises, Param updates, Grants clawbacks.
+5. **Off-Chain Artifacts** — EAS schemas (`IdentityRole_v1`, `RWA_*_v1`), deliberation log format, auditor attestations, oracle operator onboarding kit.
+6. **Testing & Formal Methods** — property/fuzz suites; TLA+/Scribble invariants for timelocks, challenges, dual-quorum emergency, “no funds without TREASURY.”
+7. **Parameters & Defaults Guidance** — rationale and tuning ranges for quorum/supermajority/windows/bonds beyond the defaults.
+8. **Glossary & Actor Guides** — Voter/Proposer/Oracle/Coordinator roles; interplay with SBT/MACI; per-layer delegation guide.
+9. **Docs Deliverables** — Whitepaper/Spec, README, Proposal Guide, Deliberation Policy, Voting Guide, Execution Pathways, Emergency Procedures, RWA Playbook, SBT Issuance/Revocation, Dispute Resolution, Upgrade & Amendment, Security/IR, Treasury Policy, ToS/Participation, Privacy, RWA Compliance Checklist, Jurisdictional Risk Matrix, Onboarding, Code of Conduct, Moderation, Transparency Reports, FAQ/Troubleshooting, Docs site structure.
+10. **Code/Artifact Deliverables** — Architecture & lifecycle diagrams, config templates (JSON/YAML), Foundry interfaces, module registry/permissions map, audit reports, oracle/MACI integration docs, subgraph/indexing, module APIs, tokenomics/vesting sheets, LP plan, distribution docs, valuation/risk templates, legal entity docs, brand assets & web meta, simulators, CSV importers, analytics dashboards, alerting specs, periodic review checklists.
