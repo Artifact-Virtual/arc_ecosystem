@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE ARC - ROADMAP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00ffcc;
+            --secondary-color: #ff6a00;
+            --background-dark: #000000;
+            --text-light: #eeeeee;
+            --glow-color: #ff4500;
+        }
+
+        body {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 2rem 1rem;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 100;
+            letter-spacing: 2px;
+            /* Removed text-shadow for no glow */
+        }
+
+        .roadmap-container {
+            position: relative;
+            max-width: 900px;
+            margin: auto;
+            padding-top: 2rem;
+        }
+
+        .line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, transparent, var(--glow-color), transparent);
+            transform: translateX(-50%);
+            animation: meteor-glow 5s infinite;
+        }
+
+        .phase {
+            position: relative;
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            margin: 4rem 0;
+            border-left: 3px solid rgba(255, 106, 0, 0.2);
+            transition: all 0.4s ease-in-out;
+            box-sizing: border-box;
+            background: rgba(17, 17, 17, 0.5);
+            border-radius: 8px;
+        }
+
+        .phase.active {
+            border-left-color: var(--secondary-color);
+            box-shadow: 0 0 15px rgba(255, 106, 0, 0.4);
+        }
+
+        .phase.completed {
+            border-left-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+        }
+
+        .marker {
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 3px solid var(--secondary-color);
+            background-color: var(--background-dark);
+            box-shadow: 0 0 10px var(--secondary-color);
+            z-index: 2;
+            transition: all 0.4s ease-in-out;
+        }
+        
+        .phase.completed .marker {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+        }
+
+        .phase h2 {
+            margin: 0 0 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--text-light);
+            transition: color 0.4s ease;
+        }
+
+        .phase.active h2 {
+            color: var(--secondary-color);
+        }
+
+        .phase.completed h2 {
+            color: var(--primary-color);
+        }
+
+        .phase p {
+            font-size: 0.9rem;
+            color: #cccccc;
+            margin: 0.5rem 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            opacity: 0;
+            padding: 0;
+        }
+
+        .phase.open p {
+            max-height: 200px; /* Adjust as needed */
+            padding-top: 1rem;
+            opacity: 1;
+        }
+
+        .toggle {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: var(--primary-color);
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .toggle:hover {
+            color: var(--secondary-color);
+        }
+        
+        @media (min-width: 768px) {
+            .line {
+                animation: none; /* Disable glow on desktop for cleaner look */
+            }
+
+            .phase {
+                width: 45%;
+                padding: 1rem 2rem;
+                margin: 4rem 0;
+            }
+
+            .phase.left {
+                left: 0;
+                text-align: right;
+                padding-right: 3rem;
+                padding-left: 1rem;
+                border-left: none;
+                border-right: 3px solid rgba(255, 106, 0, 0.2);
+            }
+
+            .phase.left .marker {
+                left: unset;
+                right: 0;
+                transform: translateX(50%);
+            }
+
+            .phase.right {
+                left: 55%;
+            }
+
+            .phase.left.active {
+                border-right-color: var(--secondary-color);
+            }
+            
+            .phase.left.completed {
+                 border-right-color: var(--primary-color);
+            }
+        }
+
+        /* Keyframes for the meteor effect */
+        @keyframes meteor-glow {
+            0% {
+                background: linear-gradient(to bottom, transparent, rgba(255, 106, 0, 0.2), transparent);
+            }
+            50% {
+                background: linear-gradient(to bottom, transparent, rgba(255, 106, 0, 1), transparent);
+            }
+            100% {
+                background: linear-gradient(to bottom, transparent, rgba(255, 106, 0, 0.2), transparent);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div style="text-align: center;">
+        <h1 style="color: var(--whiter); margin-bottom: 0.5rem;">WELCOME TO THE ARC</h1>
+        <h3 style="display: inline-block; font-weight: 300; letter-spacing: 2px; color: var(--secondary-color); margin: 0; text-align: center;">ROADMAP</h3>
+    </div>
+
+    </div>
+    <div class="roadmap-container">
+        <div class="line"></div>
+
+        <div class="phase left completed">
+            <div class="marker"></div>
+            <h2>Phase 1 
+                <p> </p>ARCxSBT Identity</h2>
+            <span class="toggle">Show details</span>
+            <p>
+                - SBT roles deployed (dev, validator, gov, oracle, curator)<br>
+                - EAS-gated issuance, heartbeat decay, eligibility integrated<br>
+                - Subgraph indexing in progress<br>
+                - Current focus: expand role weights + issuers
+            </p>
+        </div>
+
+        <div class="phase right active">
+            <div class="marker"></div>
+            <h2>Phase 2
+                <p> </p>Governance Matrix (β)</h2>
+            <span class="toggle">Show details</span>
+            <p>
+                - On-chain JSON config for topics (Treasury, Params, Energy, Carbon, Grants)<br>
+                - Quorums, thresholds, proposer bonds, concurrency caps<br>
+                - Emergency dual-quorum path defined<br>
+                - Current task: ratification votes on Base testnet
+            </p>
+        </div>
+
+        <div class="phase left">
+            <div class="marker"></div>
+            <h2>Phase 3
+                <p> </p>ADAM Protocol</h2>
+            <span class="toggle">Show details</span>
+            <p>
+                - Wasm sandbox for constitutional policies<br>
+                - Policy chain: ParamsGuard, RWARecency, TreasuryLimiter<br>
+                - Inter-block 2FA for high-impact proposals<br>
+                - Current task: Deploy Host + Registry, shadow-evaluate proposals
+            </p>
+        </div>
+
+        <div class="phase right">
+            <div class="marker"></div>
+            <h2>Phase 4
+                <p> </p>ARCxGovernor + Timelock</h2>
+            <span class="toggle">Show details</span>
+            <p>
+                - MACI/eligibility integration<br>
+                - Proposal lifecycle enforcement (vote → tally → timelock → execute)<br>
+                - Challenge windows active<br>
+                - Current task: Bind Governor to ADAM Host
+            </p>
+        </div>
+
+        <div class="phase left">
+            <div class="marker"></div>
+            <h2>Phase 5
+                <p> </p>Execution Modules</h2>
+            <span class="toggle">Show details</span>
+            <p>
+                - Treasury (transfers, streams, swaps)<br>
+                - Grants (milestones, clawbacks)<br>
+                - ParamManager (bounded updates)<br>
+                - RWA Registry (attestations, disputes, slashing)<br>
+                - Current task: Pilot Energy/Carbon onboarding
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const phase = btn.parentElement;
+                phase.classList.toggle('open');
+                btn.textContent = phase.classList.contains('open') ? 'Hide details' : 'Show details';
+            });
+        });
+    </script>
+</body>
+</html>
