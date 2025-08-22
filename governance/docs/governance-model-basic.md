@@ -1,3 +1,7 @@
+ADAM Protocol — Continuous Intelligence System for ARCx
+
+The ARCx Constitutional Intelligence (CI) system is implemented and operated as the ADAM protocol. ADAM protocol serves as the canonical governance, attestation, and automation layer for ARCx, providing the infrastructure for all governance, monitoring, and execution described in this specification.
+
 ARCx Constitutional Intelligence — Authoritative Governance Specification (v0.1)
 
 A buildable, non-conventional, RWA-aware DAO model designed for real-world impact, perpetual adaptability, and maximum security. This is the canonical, implementation-ready specification for ARCx governance on Base (chain-agnostic where possible).
