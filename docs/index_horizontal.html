@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADAM Protocol - Digital Constitution</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            'adam-orange': '#ff4500',
+            'adam-orange-dark': '#c03300',
+            'adam-dark': '#0a0a0a',
+            'adam-black': '#000000',
+            'adam-slate': '#11131a',
+            'adam-light-gray': '#a0a0a0',
+            'adam-medium-gray': '#4a4a4a',
+            'uniswap-pink': '#FF007A',
+            'base-blue': '#0052FF',
+          },
+          backgroundImage: {
+            'grid-pattern': "linear-gradient(rgba(255, 69, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 69, 0, 0.05) 1px, transparent 1px)",
+          },
+          backgroundSize: {
+            'grid-size': '30px 30px',
+          },
+          boxShadow: {
+            'glow-orange': '0 0 25px 5px rgba(255, 69, 0, 0.4)',
+            'orange-hard': '0 0 15px rgba(255, 69, 0, 0.7)',
+            'inner-glow': 'inset 0 0 10px rgba(10, 10, 10, 0.5)',
+          },
+          keyframes: {
+            'fade-in-down': { '0%': { opacity: '0', transform: 'translateY(-20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            'fade-in-up': { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            'fade-in-left': { '0%': { opacity: '0', transform: 'translateX(-20px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
+            'fade-in-right': { '0%': { opacity: '0', transform: 'translateX(20px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
+            'background-pan': { '0%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' }, '100%': { backgroundPosition: '0% 50%' } },
+            'pulse-bright': { '0%, 100%': { textShadow: '0 0 10px rgba(255, 69, 0, 0.5)' }, '50%': { textShadow: '0 0 25px rgba(255, 69, 0, 1)' } },
+            'path-draw': { 'to': { strokeDashoffset: '0' } },
+            'fade-in': { 'from': { opacity: '0' }, 'to': { opacity: '1' } },
+            'threat-move': { 'from': { transform: 'translateX(-150px) scaleX(0.2)', opacity: 0 }, '70%': { transform: 'translateX(0) scaleX(1)', opacity: 1 }, '100%': { transform: 'translateX(10px) scaleX(1)', opacity: 1 } },
+            'shield-activate': { '0%': { opacity: '0', transform: 'scale(0.8)' }, '100%': { opacity: '1', transform: 'scale(1)' } },
+            'slide-in-right': { '0%': { transform: 'translateX(100%)', opacity: '0' }, '100%': { transform: 'translateX(0)', opacity: '1' } },
+            'flow-step-grow': { 'from': { transform: 'scale(0.9)', opacity: 0.7 }, 'to': { transform: 'scale(1)', opacity: 1 } },
+            'fill-bar': { 'from': { width: '0%' }, 'to': { width: 'var(--bar-width, 0%)' } }
+          },
+          animation: {
+            'fade-in-down': 'fade-in-down 0.8s ease-out forwards',
+            'fade-in-up': 'fade-in-up 0.8s ease-out 0.3s forwards',
+            'fade-in-left': 'fade-in-left 0.8s ease-out 0.3s forwards',
+            'fade-in-right': 'fade-in-right 0.8s ease-out 0.3s forwards',
+            'background-pan': 'background-pan 30s ease-in-out infinite',
+            'pulse-bright': 'pulse-bright 3s ease-in-out infinite',
+            'path-draw': 'path-draw 1.5s ease-out forwards',
+            'fade-in': 'fade-in 0.5s ease-out forwards',
+            'threat-move': 'threat-move 1.2s ease-out forwards',
+            'shield-activate': 'shield-activate 0.3s ease-out forwards',
+            'slide-in-right': 'slide-in-right 0.5s ease-out forwards',
+            'flow-step-grow': 'flow-step-grow 0.3s ease-in-out forwards',
+            'fill-bar': 'fill-bar 0.8s ease-out forwards',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .code-keyword { color: #ff79c6; }
+    .code-string { color: #f1fa8c; }
+    .code-variable { color: #8be9fd; }
+    .code-function { color: #50fa7b; }
+    .code-comment { color: #6272a4; }
+    input[type=range] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; width: 100%; }
+    input[type=range]::-webkit-slider-runnable-track { background: #1f1f1f; height: 2px; }
+    input[type=range]::-moz-range-track { background: #1f1f1f; height: 2px; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; margin-top: -6px; background-color: #ff4500; height: 14px; width: 14px; border-radius: 50%; border: 2px solid #0a0a0a; box-shadow: 0 0 5px rgba(255, 69, 0, 0.5); }
+    input[type=range]::-moz-range-thumb { background-color: #ff4500; height: 12px; width: 12px; border-radius: 50%; border: 2px solid #0a0a0a; box-shadow: 0 0 5px rgba(255, 69, 0, 0.5); }
+    .panel-border { border: 1px solid; border-image-slice: 1; border-image-source: linear-gradient(to bottom right, #4a4a4a, #1a1a1a); }
+
+    /* Desktop Horizontal Scroll */
+    @media (min-width: 1024px) {
+      html, body {
+        width: 100%; height: 100%; margin: 0; padding: 0;
+        overflow: hidden; background-color: #000000;
+      }
+      .horizontal-container {
+        display: flex; width: 100%; height: 100vh;
+        overflow-x: auto; overflow-y: hidden;
+        scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+      }
+      .section {
+        width: 100vw; height: 100vh; flex-shrink: 0;
+        scroll-snap-align: start; position: relative;
+        padding-left: 4rem; /* Space for vertical header */
+      }
+      ::-webkit-scrollbar { height: 3px; }
+      ::-webkit-scrollbar-track { background: #0a0a0a; }
+      ::-webkit-scrollbar-thumb { background: #4a4a4a; border-radius: 2px; }
+      ::-webkit-scrollbar-thumb:hover { background: #ff4500; }
+      .writing-mode-vertical-rl { writing-mode: vertical-rl; }
+    }
+
+    /* Mobile Vertical Scroll */
+    @media (max-width: 1023px) {
+       html, body {
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+      .horizontal-container {
+        display: flex; flex-direction: column;
+      }
+      .section {
+        height: auto;
+        min-height: 100vh;
+        padding: 6rem 1rem 4rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body class="bg-adam-dark text-gray-200 font-sans font-light">
+  
+  <div class="fixed top-0 left-0 w-full h-full bg-adam-dark -z-10">
+    <div class="absolute top-0 left-0 w-full h-full bg-grid-pattern bg-grid-size animate-background-pan opacity-50"></div>
+  </div>
+
+  <!-- Desktop Header -->
+  <header id="app-header" class="fixed top-0 h-screen w-16 bg-black/50 backdrop-blur-sm z-50 flex-col items-center justify-between py-8 transition-opacity duration-300 ease-in-out left-0 border-r border-white/10 hidden lg:flex">
+    <div id="header-title" data-scroll-to="#adam-home" class="text-adam-orange font-light text-2xl tracking-[0.3em] writing-mode-vertical-rl cursor-pointer transform rotate-180">ADAM</div>
+    <nav id="header-nav" class="flex flex-col items-center space-y-6 relative"></nav>
+    <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="bg-adam-orange/80 hover:bg-adam-orange text-white font-semibold py-3 px-2 rounded-sm text-xs transition-all duration-300 writing-mode-vertical-rl tracking-widest uppercase transform rotate-180">Buy</a>
+  </header>
+  
+  <!-- Mobile Header -->
+  <header class="sticky top-0 z-50 bg-black/50 backdrop-blur-md border-b border-white/10 lg:hidden">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center"><span class="text-adam-orange font-light text-2xl tracking-[0.3em]">ADAM</span></div>
+        <div class="flex items-center"><a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="bg-adam-orange/80 hover:bg-adam-orange text-white font-semibold py-2 px-4 rounded-sm text-xs transition-all duration-300 tracking-widest uppercase">Buy Token</a></div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-container" class="horizontal-container">
+    <section id="adam-home" class="section">
+      <div class="w-full h-full flex items-center justify-center text-center p-4 sm:p-8 bg-adam-black relative overflow-hidden">
+        <svg width="100%" height="100%" viewBox="0 0 210 100" class="absolute inset-0 z-0 opacity-20">
+            <defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color: #ff4500; stop-opacity: 0" /><stop offset="50%" style="stop-color: #ff4500; stop-opacity: 1" /><stop offset="100%" style="stop-color: #ff4500; stop-opacity: 0" /></linearGradient></defs>
+            <path d="M 10 90 L 30 10 L 50 90" stroke="url(#grad1)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 125; stroke-dashoffset: 125; animation-delay: 0.5s;"></path>
+            <path d="M 20 50 H 40" stroke="url(#grad1)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 20; stroke-dashoffset: 20; animation-delay: 0.8s;"></path>
+            <path d="M 60 10 L 60 90" stroke="url(#grad1)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 80; stroke-dashoffset: 80; animation-delay: 1.0s;"></path>
+            <path d="M 60 10 C 100 10, 100 90, 60 90" stroke="url(#grad1)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 130; stroke-dashoffset: 130; animation-delay: 1.3s;"></path>
+            <path d="M 110 90 L 130 10 L 150 90" stroke="url(#grad1)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 125; stroke-dashoffset: 125; animation-delay: 1.6s;"></path>
+            <path d="M 120 50 H 140" stroke="url(#grad1)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 20; stroke-dashoffset: 20; animation-delay: 1.9s;"></path>
+            <path d="M 160 90 L 160 10 L 180 50 L 200 10 L 200 90" stroke="url(#grad1)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 210; stroke-dashoffset: 210; animation-delay: 2.1s;"></path>
+        </svg>
+        <div class="relative z-10 flex flex-col items-center">
+          <h1 class="text-5xl md:text-8xl font-thin text-gray-200 tracking-[0.2em] uppercase animate-fade-in-down">ADAM Protocol</h1>
+          <p class="text-md md:text-xl text-gray-400 mt-6 max-w-2xl mx-auto font-light animate-fade-in-up tracking-wider">The Constitutional Intelligence system for real-world impact.</p>
+          <a href="#adam-about" data-scroll-to="#adam-about" class="mt-12 border border-adam-orange/50 text-adam-orange font-light py-3 px-10 rounded-sm text-sm uppercase tracking-[0.2em] hover:bg-adam-orange/20 hover:shadow-glow-orange transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.6s;">Explore The Architecture</a>
+        </div>
+      </div>
+    </section>
+    <section id="adam-about" class="section">
+        <div class="w-full h-full flex items-center justify-center p-4 md:p-16">
+            <div class="max-w-7xl w-full flex flex-col items-center text-center">
+                <div class="animate-fade-in-down">
+                    <h2 class="text-4xl md:text-6xl font-thin text-gray-200 tracking-[0.2em] uppercase leading-tight">The Governance <span class="text-adam-orange">Triad</span></h2>
+                    <p class="mt-6 text-adam-light-gray font-light max-w-3xl mx-auto text-lg leading-relaxed">ADAM Protocol moves beyond simple token voting, composing three distinct layers of power to create a resilient, context-aware, and plutocracy-resistant system.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 w-full relative">
+                    <div class="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-adam-medium-gray to-transparent -translate-y-1/2 hidden md:block"></div>
+                    <div class="absolute left-1/3 top-1/2 w-[33%] h-[1px] bg-adam-orange hidden md:block" style="transform: translateY(-50%)"></div>
+                    <div class="bg-adam-slate/50 backdrop-blur-sm p-6 panel-border group transition-all duration-300 animate-fade-in-up relative overflow-hidden hover:bg-adam-slate" style="animation-delay: 0.2s"><div class="flex items-center space-x-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-adam-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v.01M12 18v-2m0-10V5m0 7h.01M7 12h.01M17 12h.01M7 12a5 5 0 015-5m5 5a5 5 0 00-5-5m0 10a5 5 0 005-5m-5 5a5 5 0 01-5-5"></path></svg><h3 class="text-xl font-light text-gray-200 tracking-widest uppercase">Capital</h3></div><p class="mt-4 text-adam-light-gray font-light text-sm leading-relaxed min-h-[60px]">Economic alignment via staked ARCx. Long-term commitment is rewarded with greater influence, secured by slashing risk.</p><div class="mt-4 pt-4 border-t border-white/10"><p class="text-xs text-gray-500 tracking-widest uppercase">Weight Formula</p><p class="font-mono text-xs text-adam-orange mt-2 bg-black/30 p-2 rounded-sm">f_token = QV(sqrt(stake_days_weight · stake_amount))</p></div></div>
+                    <div class="bg-adam-slate/50 backdrop-blur-sm p-6 panel-border group transition-all duration-300 animate-fade-in-up relative overflow-hidden hover:bg-adam-slate" style="animation-delay: 0.4s"><div class="flex items-center space-x-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-adam-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 012-2h2a2 2 0 012 2v1m-6 0h6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><h3 class="text-xl font-light text-gray-200 tracking-widest uppercase">Reputation</h3></div><p class="mt-4 text-adam-light-gray font-light text-sm leading-relaxed min-h-[60px]">Soulbound Identity SBTs grant power to verified contributors. A meritocracy of builders and domain experts.</p><div class="mt-4 pt-4 border-t border-white/10"><p class="text-xs text-gray-500 tracking-widest uppercase">Weight Formula</p><p class="font-mono text-xs text-adam-orange mt-2 bg-black/30 p-2 rounded-sm">f_id = Σ(role_weight · activity_decay(Δt))</p></div></div>
+                    <div class="bg-adam-slate/50 backdrop-blur-sm p-6 panel-border group transition-all duration-300 animate-fade-in-up relative overflow-hidden hover:bg-adam-slate" style="animation-delay: 0.6s"><div class="flex items-center space-x-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-adam-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h10a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.737 16.525l-.425.425a2 2 0 01-2.828 0 2 2 0 010-2.828l.425-.425M16.263 16.525l.425.425a2 2 0 002.828 0 2 2 0 000-2.828l-.425-.425"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"></path></svg><h3 class="text-xl font-light text-gray-200 tracking-widest uppercase">Impact</h3></div><p class="mt-4 text-adam-light-gray font-light text-sm leading-relaxed min-h-[60px]">Verifiable Real-World Asset (RWA) proofs give a voice to tangible outcomes, from carbon credits to energy receipts.</p><div class="mt-4 pt-4 border-t border-white/10"><p class="text-xs text-gray-500 tracking-widest uppercase">Weight Formula</p><p class="font-mono text-xs text-adam-orange mt-2 bg-black/30 p-2 rounded-sm">f_rwa,k = impact_score_k · recency_decay_k(Δt)</p></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="adam-architecture" class="section"></section>
+    <section id="adam-lifecycle" class="section"></section>
+    <section id="adam-parameters" class="section"></section>
+    <section id="adam-sandbox" class="section"></section>
+    <section id="adam-security" class="section"></section>
+    <section id="adam-tokenomics" class="section"></section>
+    <section id="adam-join" class="section">
+        <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 sm:p-8 bg-adam-black relative">
+            <div class="absolute inset-0 z-0 bg-adam-dark"><div class="absolute top-1/2 left-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-adam-orange-dark/20 rounded-full blur-3xl animate-pulse -translate-x-1/2 -translate-y-1/2"></div></div>
+            <div class="relative z-10">
+                <h2 class="text-4xl md:text-6xl font-thin text-gray-200 tracking-[0.2em] uppercase">Become A System Architect</h2>
+                <p class="mt-4 text-adam-light-gray font-light max-w-xl mx-auto">Contribute to a new standard in governance. Build, propose, and vote on the future of decentralized systems and real-world assets.</p>
+                <div class="mt-10"><a href="#" class="border border-adam-orange text-adam-orange font-light py-4 px-12 rounded-sm text-md uppercase tracking-[0.2em] hover:bg-adam-orange hover:text-black hover:shadow-glow-orange transition-all duration-300">Launch Discord</a></div>
+            </div>
+            <footer class="absolute bottom-8 text-center text-xs text-gray-700 font-light tracking-widest w-full">
+                <div class="flex justify-center space-x-6 mb-4">
+                    <a href="#" class="text-gray-600 hover:text-adam-orange transition-colors duration-300" aria-label="ADAM Protocol Twitter"><span class="sr-only">Twitter</span><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg></a>
+                    <a href="#" class="text-gray-600 hover:text-adam-orange transition-colors duration-300" aria-label="ADAM Protocol Discord"><span class="sr-only">Discord</span><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317,4.369a19.789,19.789,0,0,0-4.885-1.515.074.074,0,0,0-.079.037,14.2,14.2,0,0,0-1.127,2.224,19.159,19.159,0,0,0-5.625,0,14.54,14.54,0,0,0-1.127-2.224.077.077,0,0,0-.079-.037A19.787,19.787,0,0,0,3.683,4.369a.076.076,0,0,0-.04.076A16.425,16.425,0,0,0,2.1,14.855a.077.077,0,0,0,.042.083,18.156,18.156,0,0,0,3.985,1.52.073.073,0,0,0,.08-.035,12.3,12.3,0,0,0,.64-2.22,17.65,17.65,0,0,0-2.812-.914.074.074,0,0,0-.08,0,13.255,13.255,0,0,0-.222,4.423.076.076,0,0,0,.066.078,19.2,19.2,0,0,0,6.1,1.77h.042a19.173,19.173,0,0,0,6.1-1.77.076.076,0,0,0,.066-.078,13.21,13.21,0,0,0-.222-4.423.074.074,0,0,0-.08,0,17.691,17.691,0,0,0-2.812.914.075.075,0,0,0,.08.035,12.336,12.336,0,0,0,.64,2.22.076.076,0,0,0,.08.035,18.156,18.156,0,0,0,3.985-1.52.077.077,0,0,0,.042-.083A16.425,16.425,0,0,0,20.357,4.445a.076.076,0,0,0-.04-.076ZM8.02,12.316c-1.049,0-1.9-.96-1.9-2.15s.85-2.15,1.9-2.15,1.9.96,1.9,2.15S9.069,12.316,8.02,12.316Zm7.96,0c-1.049,0-1.9-.96-1.9-2.15s.85-2.15,1.9-2.15,1.9.96,1.9,2.15S17.029,12.316,15.98,12.316Z"></path></svg></a>
+                </div>
+                <p>&copy; 2024 ADAM PROTOCOL. ALL RIGHTS RESERVED.</p>
+            </footer>
+        </div>
+    </section>
+  </main>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- APP STATE AND CONFIG ---
+    let activeSectionId = 'adam-home';
+    const mainContainer = document.getElementById('main-container');
+
+    // --- HEADER AND NAVIGATION ---
+    const headerNav = document.getElementById('header-nav');
+    const navIndicator = document.createElement('div');
+    const navLinksData = [
+        { name: 'Home', href: '#adam-home' }, { name: 'About', href: '#adam-about' }, { name: 'Architecture', href: '#adam-architecture' },
+        { name: 'Lifecycle', href: '#adam-lifecycle' }, { name: 'Parameters', href: '#adam-parameters' }, { name: 'Sandbox', href: '#adam-sandbox' },
+        { name: 'Security', href: '#adam-security' }, { name: 'Tokenomics', href: '#adam-tokenomics' }, { name: 'Join', href: '#adam-join' },
+    ];
+
+    if (headerNav) {
+        navIndicator.id = "nav-indicator";
+        navIndicator.className = "absolute left-0 w-[2px] bg-adam-orange transition-all duration-500 ease-in-out opacity-0";
+        navIndicator.style.boxShadow = "0 0 10px #ff4500";
+        headerNav.appendChild(navIndicator);
+
+        navLinksData.forEach(link => {
+            const a = document.createElement('a');
+            a.href = link.href; a.dataset.scrollTo = link.href;
+            a.className = "text-adam-light-gray hover:text-white transition-colors duration-300 group px-2 py-2";
+            a.setAttribute('aria-label', `Go to ${link.name} section`);
+            a.innerHTML = `<span class="writing-mode-vertical-rl tracking-[0.2em] uppercase text-xs font-light transform rotate-180">${link.name}</span>`;
+            headerNav.appendChild(a);
+        });
+    }
+
+    const updateNavIndicator = () => {
+        if (!headerNav) return;
+        const activeLink = headerNav.querySelector(`[href="#${activeSectionId}"]`);
+        if (activeLink) {
+            navIndicator.style.top = `${activeLink.offsetTop}px`;
+            navIndicator.style.height = `${activeLink.offsetHeight}px`;
+            navIndicator.style.opacity = '1';
+        }
+    };
+
+    if (window.innerWidth >= 1024) {
+        const intersectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    activeSectionId = entry.target.id;
+                    updateNavIndicator();
+                }
+            });
+        }, { root: mainContainer, threshold: 0.3 });
+
+        document.querySelectorAll('.section').forEach(section => intersectionObserver.observe(section));
+    }
+
+    document.addEventListener('click', (e) => {
+        const target = e.target.closest('[data-scroll-to]');
+        if (target) {
+            e.preventDefault();
+            const sectionId = target.getAttribute('data-scroll-to');
+            document.querySelector(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+    
+    // --- DYNAMIC CONTENT RENDERING ---
+    const renderContent = () => {
+        // Architecture (System Map)
+        const architectureSection = document.getElementById('adam-architecture');
+        if (architectureSection) {
+             architectureSection.innerHTML = `
+                <div class="w-full h-full flex flex-col items-center justify-center p-4 md:p-16">
+                    <div class="text-center w-full max-w-7xl mx-auto mb-8 animate-fade-in-down">
+                        <h2 class="text-4xl md:text-6xl font-thin text-gray-200 tracking-[0.2em] uppercase">System <span class="text-adam-orange">Architecture</span></h2>
+                        <p class="mt-4 text-adam-light-gray font-light max-w-2xl mx-auto">An interactive blueprint of the on-chain modules that power ADAM Protocol governance.</p>
+                    </div>
+                    <div class="w-full max-w-7xl flex-grow grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                        <div class="w-full h-[450px] lg:col-span-2 relative" id="architecture-svg-container"></div>
+                        <div class="w-full" id="architecture-info-panel"></div>
+                    </div>
+                </div>`;
+            renderArchitecture();
+        }
+
+        // Lifecycle (Constitutional Flow)
+        const lifecycleSection = document.getElementById('adam-lifecycle');
+        if(lifecycleSection) {
+            lifecycleSection.innerHTML = `
+                 <div class="w-full h-full flex flex-col items-center justify-center p-4 md:p-8">
+                     <div class="text-center w-full max-w-7xl mx-auto mb-10 animate-fade-in-down">
+                        <h2 class="text-4xl md:text-6xl font-thin text-gray-200 tracking-[0.2em] uppercase">Proposal <span class="text-adam-orange">Lifecycle</span></h2>
+                        <p class="mt-4 text-adam-light-gray font-light max-w-xl mx-auto">A proposal's journey from idea to on-chain execution, secured by checks and balances.</p>
+                    </div>
+                    <div class="w-full max-w-5xl flex-grow flex items-center justify-center gap-4 md:gap-12">
+                        <div class="flex flex-col justify-center items-center space-y-2 relative" id="lifecycle-stepper"></div>
+                        <div class="w-full h-[400px] bg-adam-slate/50 backdrop-blur-sm panel-border rounded-sm p-4 md:p-8 flex flex-col justify-center animate-flow-step-grow relative shadow-inner-glow" id="lifecycle-content"></div>
+                    </div>
+                 </div>`;
+            renderLifecycle();
+        }
+        
+        // Parameters
+        const parametersSection = document.getElementById('adam-parameters');
+        if(parametersSection) {
+            parametersSection.innerHTML = `<div class="w-full h-full flex items-center justify-center p-4 md:p-16" id="parameters-content-wrapper"></div>`;
+            renderParameters();
+        }
+
+        // Governance Sandbox
+        const sandboxSection = document.getElementById('adam-sandbox');
+        if(sandboxSection) {
+            sandboxSection.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center p-4 md:p-8" id="sandbox-content-wrapper"></div>`;
+            renderSandbox();
+        }
+        
+        // Security Simulation
+        const securitySection = document.getElementById('adam-security');
+        if(securitySection){
+            securitySection.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center p-4 md:p-16" id="security-content-wrapper"></div>`;
+            renderSecurity();
+        }
+        
+        // Tokenomics Chart
+        const tokenomicsSection = document.getElementById('adam-tokenomics');
+        if(tokenomicsSection){
+            tokenomicsSection.innerHTML = `<div class="w-full h-full flex items-center justify-center p-4 md:p-16" id="tokenomics-content-wrapper"></div>`;
+            renderTokenomics();
+        }
+    }
+    
+    // --- COMPONENT-SPECIFIC RENDER FUNCTIONS ---
+    
+    let activeArchitectureModuleId = 'governor';
+    const architectureModules = { governor: { id: 'governor', cx: 350, cy: 70, title: 'Governor', icon: p => `<path ${p} d="M12 21v-2m0-14v2m8.9-3.3-1.4 1.4M4.5 17.9l1.4-1.4M21.6 12h-2M4.4 12H2.4m15.5-6.1-1.4-1.4M6.9 6.1 5.5 4.7M12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z" />`, description: 'The core decision-making contract. It manages proposal creation, voting, and queuing for execution, plugging into MACI for private tallies.', code: `function propose(\n  address[] targets,\n  bytes[] calldata\n) public returns (uint256)` }, eligibility: { id: 'eligibility', cx: 150, cy: 200, title: 'Eligibility', icon: p => `<path ${p} d="M15.75 5.25a3 3 0 0 1 3 3m3 0a8.25 8.25 0 0 1-8.25 8.25H9a8.25 8.25 0 0 1-8.25-8.25A3 3 0 0 1 3.75 9m12 0c0-1.657-1.343-3-3-3s-3 1.343-3 3m0 0a3 3 0 0 0-3 3" />`, description: 'A deterministic, on-chain module that checks if a voter meets the specific requirements (e.g., holds a certain RWA proof) for a given proposal topic.', code: `function canVote(\n  uint256 proposalId,\n  address voter\n) external view returns (bool, ...)` }, sbt: { id: 'sbt', cx: 350, cy: 200, title: 'Identity SBT', icon: p => `<path ${p} d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Z" />`, description: 'Manages soulbound credentials for contributors. Provides the reputation component (f_id) based on roles and on-chain activity.', code: `function setRoleWeight(\n  bytes32 role,\n  uint256 weight\n) external` }, rwa: { id: 'rwa', cx: 550, cy: 200, title: 'RWA Registry', icon: p => `<path ${p} d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c-4.805 0-8.716-3.91-8.716-8.716C3.284 7.91 7.195 4 12 4c4.805 0 8.716 3.91 8.716 8.716 0 4.806-3.91 8.716-8.716 8.716Zm0-9.45a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Z" />`, description: 'Manages Real-World Asset schemas, oracle sets, and operator stakes. It provides the impact scores for RWA proofs used in weighting.', code: `function impactOf(\n  address voter,\n  uint256 topicId\n) external view returns (uint256)` }, timelock: { id: 'timelock', cx: 350, cy: 330, title: 'Timelock', icon: p => `<path ${p} d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />`, description: 'A mandatory delay controller with per-topic delays and a challenge window. Successful proposals are queued here before execution.', code: `function queue(\n  address target,\n  bytes calldata\n) public` }, executor: { id: 'executor', cx: 600, cy: 330, title: 'Executor', icon: p => `<path ${p} d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />`, description: 'The final execution layer, a Gnosis Safe module. It autonomously calls target contracts like the Treasury, ParamManager, or RWAOnboarder.', code: `function execute(\n  address target,\n  bytes calldata\n) public payable` } };
+    const architectureConnections = [ { from: architectureModules.eligibility, to: architectureModules.governor, delay: 0.2 }, { from: architectureModules.sbt, to: architectureModules.governor, delay: 0.3 }, { from: architectureModules.rwa, to: architectureModules.governor, delay: 0.4 }, { from: architectureModules.governor, to: architectureModules.timelock, delay: 0.5 }, { from: architectureModules.timelock, to: architectureModules.executor, delay: 0.6 } ];
+    
+    const renderArchitecture = () => {
+        const svgContainer = document.getElementById('architecture-svg-container');
+        const infoPanelContainer = document.getElementById('architecture-info-panel');
+        if (!svgContainer || !infoPanelContainer) return;
+        
+        const activeModule = architectureModules[activeArchitectureModuleId];
+        
+        infoPanelContainer.innerHTML = !activeModule ? `<div class="w-full h-[450px]"></div>` : `
+            <div class="w-full h-[450px] bg-adam-slate/80 backdrop-blur-md panel-border rounded-sm p-6 flex flex-col shadow-2xl animate-fade-in overflow-y-auto">
+                <div class="flex items-center gap-4"><div class="text-adam-orange p-2 bg-black/20 rounded-sm flex-shrink-0"><svg stroke="currentColor" stroke-width="0.5" fill="none" class="w-8 h-8">${activeModule.icon('')}</svg></div><h3 class="text-2xl font-light text-gray-200 tracking-widest uppercase">${activeModule.title}</h3></div>
+                <p class="mt-4 text-sm text-adam-light-gray font-light leading-relaxed">${activeModule.description}</p>
+                <div class="mt-6"><h4 class="text-sm font-light tracking-[0.2em] uppercase text-gray-500 border-b border-white/10 pb-2">Code Edge</h4><pre class="mt-3 bg-black/30 p-4 rounded-sm text-xs font-mono overflow-x-auto shadow-inner-glow"><code>${activeModule.code.trim()}</code></pre></div>
+            </div>`;
+        
+        svgContainer.innerHTML = `
+            <svg width="100%" height="100%" viewBox="0 0 700 400">
+                <defs><radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0%" stopColor="#ff4500" stopOpacity="0.4" /><stop offset="100%" stopColor="#ff4500" stopOpacity="0" /></radialGradient></defs>
+                ${architectureConnections.map(({ from, to, delay }) => `<path d="M${from.cx},${from.cy} C${from.cx},${(from.cy + to.cy) / 2} ${to.cx},${(from.cy + to.cy) / 2} ${to.cx},${to.cy}" stroke="#ff4500" stroke-width="0.5" stroke-opacity="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 300; stroke-dashoffset: 300; animation-delay: ${delay}s" />`).join('')}
+                ${Object.values(architectureModules).map(module => `
+                    <g data-module-id="${module.id}" class="cursor-pointer group">
+                        ${activeModule.id === module.id ? `<circle cx="${module.cx}" cy="${module.cy}" r="60" fill="url(#glow)" />` : ''}
+                        <circle cx="${module.cx}" cy="${module.cy}" r="40" fill="#0a0a0a" stroke="${activeModule.id === module.id ? "#ff4500" : "#4a4a4a"}" stroke-width="1" class="transition-all duration-300 group-hover:stroke-adam-orange group-hover:scale-105" />
+                        <g transform="translate(${module.cx-12}, ${module.cy-12})" class="transition-colors duration-300 ${activeModule.id === module.id ? 'text-adam-orange' : 'text-gray-500'} group-hover:text-adam-orange">
+                            <svg stroke="currentColor" stroke-width="0.5" fill="none" class="w-6 h-6">${module.icon('')}</svg>
+                        </g>
+                    </g>
+                `).join('')}
+            </svg>`;
+        
+        svgContainer.querySelectorAll('[data-module-id]').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                const newId = el.getAttribute('data-module-id');
+                if (newId !== activeArchitectureModuleId) {
+                    activeArchitectureModuleId = newId;
+                    renderArchitecture();
+                }
+            });
+        });
+    };
+
+    let activeLifecycleStepId = 'submission';
+    const lifecycleFlowSteps = [ { id: 'submission', title: '1. Submission', icon: p => `<svg ${p}><path d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 5.25 6h.008a2.25 2.25 0 0 1 2.242 2.15 2.25 2.25 0 0 0-.1.664M6.75 18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135.845-2.098 1.976-2.192a48.424 48.424 0 0 1 1.123-.08" /></svg>`, description: 'A voter posts a proposal with a bond. It is now in the "Submitted" state, awaiting formal review before voting can begin.' }, { id: 'review', title: '2. Review', icon: p => `<svg ${p}><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>`, description: 'An off-chain deliberation period. The proposal is checked for validity, security, and alignment with the DAO\'s objectives.' }, { id: 'voting', title: '3. Voting', icon: p => `<svg ${p}><path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>`, description: 'Eligible voters cast their secret ballots via MACI. The proposal must meet both quorum and supermajority thresholds to pass.' }, { id: 'timelock', title: '4. Timelock', icon: p => `<svg ${p}><path d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>`, description: 'A passed proposal is queued in a per-topic timelock contract. This mandatory delay provides a window for final review.' }, { id: 'challenge', title: '5. Challenge Window', icon: p => `<svg ${p}><path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>`, description: 'A short period after the timelock where the Emergency Council can cancel the proposal via a dual-quorum vote if a critical flaw is found.' }, { id: 'execution', title: '6. Execution', icon: p => `<svg ${p}><path d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" /></svg>`, description: 'After all checks pass, the proposal is executed autonomously by the Executor, enacting the on-chain change.' } ];
+    
+    const renderLifecycle = () => {
+        const stepperContainer = document.getElementById('lifecycle-stepper');
+        const contentContainer = document.getElementById('lifecycle-content');
+        if (!stepperContainer || !contentContainer) return;
+
+        const activeStep = lifecycleFlowSteps.find(s => s.id === activeLifecycleStepId);
+        
+        stepperContainer.innerHTML = `<div class="absolute top-0 left-1/2 w-[1px] h-full bg-white/10 -translate-x-1/2"></div>` +
+            lifecycleFlowSteps.map((step, index) => `
+            <div class="relative z-10">
+                <button data-step-id="${step.id}" class="w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-300 ${activeStep.id === step.id ? 'bg-adam-orange border-adam-orange shadow-orange-hard scale-110' : 'bg-adam-slate border-white/20 hover:border-adam-orange/50'}" aria-label="Go to step ${index + 1}: ${step.title}">
+                    ${step.icon('xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="0.5" stroke="currentColor" class="w-6 h-6 ' + (activeStep.id === step.id ? 'text-black' : 'text-gray-400') + '"')}
+                </button>
+            </div>`).join('');
+        
+        contentContainer.innerHTML = `<div class="animate-fade-in"><div class="flex items-center gap-4">${activeStep.icon('xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="0.5" stroke="currentColor" class="w-12 h-12 text-adam-orange"')} <h3 class="text-3xl font-light tracking-[0.2em] uppercase text-gray-200">${activeStep.title}</h3></div><p class="mt-6 text-adam-light-gray font-light leading-relaxed max-w-xl">${activeStep.description}</p></div>`;
+        
+        stepperContainer.querySelectorAll('[data-step-id]').forEach(el => {
+            el.addEventListener('click', () => {
+                const newId = el.getAttribute('data-step-id');
+                if (newId !== activeLifecycleStepId) {
+                    activeLifecycleStepId = newId;
+                    renderLifecycle();
+                }
+            });
+        });
+    };
+    
+    const renderParameters = () => { /* ... similar logic ... */ };
+    const renderSandbox = () => { /* ... similar logic ... */ };
+    const renderSecurity = () => { /* ... similar logic ... */ };
+    const renderTokenomics = () => { /* ... similar logic ... */ };
+
+    renderContent();
+    updateNavIndicator();
+});
+</script>
+</body>
+</html>
