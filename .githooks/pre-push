@@ -1,0 +1,33 @@
+#!/bin/sh
+# Git pre-push hook: run the code indexer before push
+# Be tolerant: if python or the script aren't available, skip instead of blocking push.
+
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || echo .)"
+TOOLS_PY="$REPO_ROOT/tools/code_indexer.py"
+
+if [ ! -f "$TOOLS_PY" ]; then
+  echo "[code_indexer] tools/code_indexer.py not found, skipping."
+  exit 0
+fi
+
+# locate python
+if command -v python >/dev/null 2>&1; then
+  PY=python
+elif command -v python3 >/dev/null 2>&1; then
+  PY=python3
+else
+  echo "[code_indexer] python not found on PATH, skipping indexer."
+  exit 0
+fi
+
+echo "[code_indexer] running indexer..."
+"$PY" "$TOOLS_PY"
+RC=$?
+if [ $RC -ne 0 ]; then
+  echo "[code_indexer] indexer failed (exit $RC). Continuing push (not blocking)."
+else
+  git add "$REPO_ROOT/reports/index_raw.md" "$REPO_ROOT/CODEBASE_OVERVIEW.md" 2>/dev/null || true
+fi
+
+echo "[code_indexer] done."
+exit 0

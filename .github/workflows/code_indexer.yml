@@ -1,0 +1,49 @@
+name: Code Indexer
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Run code indexer
+        id: run_indexer
+        run: |
+          python tools/code_indexer.py
+
+      - name: Detect repository changes
+        id: changes
+        run: |
+          # show what changed (for logs)
+          git --no-pager status --porcelain
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push updated reports
+        if: steps.changes.outputs.changes == 'true'
+        run: |
+          git add reports/index_raw.md CODEBASE_OVERVIEW.md || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: update codebase index [skip ci]" || echo "no changes to commit"
+          git push
