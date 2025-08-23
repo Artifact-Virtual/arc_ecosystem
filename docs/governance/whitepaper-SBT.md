@@ -1,5 +1,5 @@
 
-# ARC Identity SBT
+# ARC Soulbound Identity NFT
 
 <p align="left">
   <img src="https://img.shields.io/badge/Access%20Control-Enabled-9cf?style=flat-square&logo=solidity" alt="Access Control"/>
