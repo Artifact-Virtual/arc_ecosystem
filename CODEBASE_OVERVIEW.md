@@ -4,7 +4,7 @@
 
 ## Quick stats
 
-- Root: `arcx_ecosystem`
+- Root: `arc_ecosystem`
 - Files indexed: **169**
 - Total size: **19.8MB**
 
