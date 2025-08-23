@@ -13,8 +13,6 @@
 
 **Version:** 1.0 BETA (hardened)
 
-TodoWrite: [completed] ADAM Protocol v1.2 (hardened); [todo] Foundry tests + formal invariants; [todo] policy toolchain.
-
 ## 0. Purpose & Scope
 
 Deterministic, Wasm-sandboxed policy engine that gates proposal lifecycles, parameter diffs, and RWA updates via explicit guards, proofs, pre/post-conditions, 2FA, and bytecode allowlists. All paths auditable, fuel/memory bounded, replay-safe.
