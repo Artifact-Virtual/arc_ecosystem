@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: MIT
+// Immutable ERC20 Token
+
 pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
