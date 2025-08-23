@@ -1,4 +1,6 @@
-## Smart Contract Overview
+## Smart Contract Overview 
+
+> Concept: A suite of smart contracts designed for DeFi applications within the ARC ecosystem.
 
 ### 1. `contracts/SimpleERC20.sol`
 A standard, ownable, and mintable ERC20 token contract. This serves as a versatile template for deploying various tokens within the ecosystem, such as:
