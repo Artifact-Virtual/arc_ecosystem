@@ -1,6 +1,7 @@
 # ARCx Token
 
-> Enterprise-Grade Genesis Token for Constitutional Intelligence Infrastructure  
+> Genesis Contract for OnChain AI Governance  
+
 ![Live](https://img.shields.io/badge/Status-Live-00FF88?style=for-the-badge) 
 ![Base](https://img.shields.io/badge/Network-Base%20L2-0052FF?style=for-the-badge) 
 ![V4](https://img.shields.io/badge/DEX-Uniswap%20V4-FF0080?style=for-the-badge) 
@@ -15,10 +16,10 @@
 - **Dutch Auction:** [`0x5Da5F567553C8D4F12542Ba608F41626f77Aa836`](https://basescan.org/address/0x5Da5F567553C8D4F12542Ba608F41626f77Aa836) - **100,000 ARCx**
 - **Smart Airdrop:** [`0x79166AbC8c17017436263BcE5f76DaB1c3dEa195`](https://basescan.org/address/0x79166AbC8c17017436263BcE5f76DaB1c3dEa195) - **50,000 ARCx**
 
-### **Enterprise Liquidity Infrastructure**
+### **Liquidity Infrastructure**
 - **Uniswap V4 Pool:** Ready for 25K ARCx + $4 USD worth ETH deployment
 - **Base L2 Network:** Gas-optimized professional trading
-- **Fee Tier:** 0.3% enterprise-grade fee collection
+- **Fee Tier:** 0.3% fee collection
 - **Position Type:** Full range for maximum coverage
 - **Security:** Multi-sig controlled LP NFT for governance
 
@@ -48,7 +49,7 @@
 - **Sourcify:** [Full source match](https://repo.sourcify.dev/contracts/full_match/8453/0xA4093669DAFbD123E37d52e0939b3aB3C2272f44/)
 - **OpenZeppelin:** Battle-tested standard compliant ERC20 implementation
 
-## **ARCx Token Utility**
+## **ARCx Utility**
 
 ### **Genesis Funding Token**
 ARCx serves as the genesis funding mechanism for constitutional intelligence infrastructure development. Unlike speculative tokens, ARCx has clear utility and value accrual:
@@ -161,20 +162,21 @@ npx hardhat run scripts/live-monitor.ts --network base
 
 ### **Overview**
 
-ARCx is a funding instrument that bootstraps the Arc Protocol development and constitutional engine deployment. Built as a fixed-supply ERC20, ARCx provides essential funding to develop governance systems that embed constitutional principles directly into code, ensuring transparent, predictable operations that preserve human agency in an AI-driven future.
+ARCx Token is the foundational asset for the Arc Protocol, enabling transparent, on-chain governance and funding for the development of constitutional AI infrastructure. Designed as a fixed-supply ERC20 token, ARCx powers protocol upgrades, validator incentives, and ecosystem growth, while providing a secure migration path to the future FUEL economy. The project is fully deployed on Base L2, with all contracts verified, audited, and governed by robust multi-signature controls. ARCx ensures complete accountability, immutable supply, and a clear utility as the genesis funding and governance mechanism for the Arc ecosystem.
+
 
 <!-- Badges -->
 <p align="center">
-    <a href="https://github.com/Artifact-Virtual/arcx_token"><img src="https://img.shields.io/badge/Tests-35%20passing-brightgreen?logo=github" alt="Tests Status"></a>
-    <a href="https://github.com/Artifact-Virtual/arcx_token"><img src="https://img.shields.io/github/package-json/v/Artifact-Virtual/arcx_token?label=Version&logo=npm" alt="Version"></a>
-    <a href="https://github.com/Artifact-Virtual/arcx_token/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Artifact-Virtual/arcx_token?label=License" alt="License"></a>
-    <a href="https://hardhat.org/"><img src="https://img.shields.io/badge/Hardhat-v2.26.1-blue?logo=ethereum" alt="Hardhat"></a>
-    <a href="https://www.npmjs.com/package/ethers"><img src="https://img.shields.io/badge/Ethers-v6.15.0-4e5d94?logo=ethereum" alt="Ethers"></a>
-    <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-v5.9.2-3178c6?logo=typescript" alt="TypeScript"></a>
-    <a href="https://soliditylang.org/"><img src="https://img.shields.io/badge/Solidity-0.8.21-black?logo=solidity" alt="Solidity"></a>
-    <a href="#testing--quality-assurance"><img src="https://img.shields.io/badge/Coverage-100%25-brightgreen?logo=codecov" alt="Coverage"></a>
-    <a href="#security-model"><img src="https://img.shields.io/badge/Security-0%20vulnerabilities-brightgreen?logo=shield" alt="Security"></a>
-    <a href="#development-environment"><img src="https://img.shields.io/badge/Packages-568-blue?logo=npm" alt="Packages"></a>
+  <a href="https://github.com/Artifact-Virtual/arcx_token"><img src="https://img.shields.io/badge/Tests-35%20passing-brightgreen?logo=github" alt="Tests Status"></a>
+  <a href="https://github.com/Artifact-Virtual/arcx_token"><img src="https://img.shields.io/github/package-json/v/Artifact-Virtual/arcx_token?label=Version&logo=npm" alt="Version"></a>
+  <a href="https://github.com/Artifact-Virtual/arcx_token/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Artifact-Virtual/arcx_token?label=License" alt="License"></a>
+  <a href="https://hardhat.org/"><img src="https://img.shields.io/badge/Hardhat-v2.26.1-blue?logo=ethereum" alt="Hardhat"></a>
+  <a href="https://www.npmjs.com/package/ethers"><img src="https://img.shields.io/badge/Ethers-v6.15.0-4e5d94?logo=ethereum" alt="Ethers"></a>
+  <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-v5.9.2-3178c6?logo=typescript" alt="TypeScript"></a>
+  <a href="https://soliditylang.org/"><img src="https://img.shields.io/badge/Solidity-0.8.21-black?logo=solidity" alt="Solidity"></a>
+  <a href="#testing--quality-assurance"><img src="https://img.shields.io/badge/Coverage-100%25-brightgreen?logo=codecov" alt="Coverage"></a>
+  <a href="#security-model"><img src="https://img.shields.io/badge/Security-0%20vulnerabilities-brightgreen?logo=shield" alt="Security"></a>
+  <a href="#development-environment"><img src="https://img.shields.io/badge/Packages-568-blue?logo=npm" alt="Packages"></a>
 </p>
 
 ---
@@ -185,12 +187,12 @@ ARCx is a funding instrument that bootstraps the Arc Protocol development and co
   - [**LIVE DEPLOYMENT**](#live-deployment)
     - [**Token Contract**](#token-contract)
     - [**Fair Distribution System**](#fair-distribution-system)
-    - [**Enterprise Liquidity Infrastructure**](#enterprise-liquidity-infrastructure)
+    - [**Liquidity Infrastructure**](#liquidity-infrastructure)
   - [**Token Economics**](#token-economics)
   - [**Security \& Verification**](#security--verification)
     - [**Multi-Layer Security**](#multi-layer-security)
     - [**Verification Status**](#verification-status)
-  - [**ARCx Token Utility**](#arcx-token-utility)
+  - [**ARCx Utility**](#arcx-utility)
     - [**Genesis Funding Token**](#genesis-funding-token)
       - [**1. Infrastructure Funding**](#1-infrastructure-funding)
       - [**2. Bridge to FUEL Economy**](#2-bridge-to-fuel-economy)
@@ -288,18 +290,18 @@ Transaction response:
 
 ```js
 ContractTransactionResponse {
-    blockNumber: null,
-    blockHash: null,
-    hash: '0xe2f323f6bbcb1d01f756bc3d51c7a4ee97b0762aa52480df06e5dcb42b2ed2f3',
-    from: '0x21E914dFBB137F7fEC896F11bC8BAd6BCCDB147B',
-    to: '0xA4093669DAFbD123E37d52e0939b3aB3C2272f44',
-    nonce: 11,
-    gasLimit: 74198n,
-    gasPrice: 50000000n,
-    data: '0x40c10f1900000000000000000000000021e914dfbb137f7fec896f11bc8bad6bccdb147b00000000000000000000000000000000000000000000d3c21bcecceda1000000',
-    value: 0n,
-    chainId: 8453n,
-    ...
+  blockNumber: null,
+  blockHash: null,
+  hash: '0xe2f323f6bbcb1d01f756bc3d51c7a4ee97b0762aa52480df06e5dcb42b2ed2f3',
+  from: '0x21E914dFBB137F7fEC896F11bC8BAd6BCCDB147B',
+  to: '0xA4093669DAFbD123E37d52e0939b3aB3C2272f44',
+  nonce: 11,
+  gasLimit: 74198n,
+  gasPrice: 50000000n,
+  data: '0x40c10f1900000000000000000000000021e914dfbb137f7fec896f11bc8bad6bccdb147b00000000000000000000000000000000000000000000d3c21bcecceda1000000',
+  value: 0n,
+  chainId: 8453n,
+  ...
 }
 ```
 
@@ -476,7 +478,7 @@ REPORT_GAS=true npx hardhat test
 - [`docs/TokenSaleTerms.md`](docs/TokenSaleTerms.md): Sale and distribution terms.
 - [`docs/ENVIRONMENT_SETUP.md`](docs/ENVIRONMENT_SETUP.md): Comprehensive environment configuration guide.
 - [`VESTING_SUMMARY.md`](VESTING_SUMMARY.md): Master vesting contract implementation summary.
-- [`DEPLOYMENT_GUIDE.md`](DEPLOYMENT_GUIDE.md): Enterprise deployment guide for vesting system.
+- [`DEPLOYMENT_GUIDE.md`](DEPLOYMENT_GUIDE.md): Deployment guide for vesting system.
 - [`DEPLOYMENT_STATUS.md`](DEPLOYMENT_STATUS.md): Current deployment status and execution checklist.
 - [`audits/security-report.md`](audits/security-report.md): Comprehensive security audit results.
 
@@ -519,3 +521,4 @@ REPORT_GAS=true npx hardhat test
 - **Duration:** 24 months
 - **Vesting Type:** Linear
 - **Emergency Controls:** Revocable by admin, with audit trail
+

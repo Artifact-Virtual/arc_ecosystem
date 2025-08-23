@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARCx — Constitutional Intelligence</title>
+  <title>Welcome to the Arc</title>
   <meta name="description" content="ARCx: The genesis token powering constitutional intelligence infrastructure. Built on Base, fully live, and transforming onchain governance.">
-  <link rel="icon" href="governance/assets/arcx-logo.png" type="image/png">
+  <link rel="icon" href="/logo/av-white-logo-removebg-preview.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -80,7 +80,16 @@
     .nav-links a:hover { color: var(--accent-primary); }
     .hero { display: grid; grid-template-columns: 1fr 1fr; align-items: center; min-height: 100vh; padding: 80px 2rem 0 2rem; gap: 2rem; }
     .hero-content { position: relative; z-index: 2; }
-    .hero-title { font-family: 'Montserrat', sans-serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 100; margin-bottom: 1rem; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 4px; line-height: 1.1; position: relative; text-shadow: 0 0 25px var(--accent-glow-intense); }
+    .hero-title { font-family: 'Montserrat', sans-serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 100; margin-bottom: 1rem; letter-spacing: 4px; line-height: 1.1; position: relative; text-shadow: none; background: none; -webkit-text-fill-color: initial; }
+    .hero-title span { display: inline-block; }
+    .hero-title span:first-child {
+      background: none;
+      -webkit-text-fill-color: white;
+    }
+    .hero-title span:last-child {
+      background: none;
+      -webkit-text-fill-color: var(--accent-primary);
+    }
     .hero-stats { display: flex; gap: 2rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
     .stat-item { display: flex; flex-direction: column; gap: 0.3rem; }
     .stat-value { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; font-weight: 300; color: var(--accent-primary); }
@@ -148,7 +157,7 @@
   <header class="header header-vertical">
     <nav class="nav nav-vertical">
       <div class="nav-brand nav-brand-vertical">
-  <img src="logo/av-black-logo-removebg-preview.png" alt="AV Logo" class="av-logo">
+  <img src="/logo/av-black-logo-removebg-preview.png" alt="AV Logo" class="av-logo">
       </div>
       <ul class="nav-links nav-links-vertical">
   <li><a href="#roadmap">Roadmap</a></li>
@@ -162,7 +171,9 @@
   <main>
     <section class="hero">
       <div class="hero-content">
-        <h1 class="hero-title glitch" data-text="ARCx Token">ARCx</h1>
+        <h1 class="hero-title glitch" data-text="ARCx Token">
+          <span style="color: white;">ARC</span><span style="color: var(--accent-primary);">x</span>
+        </h1>
         <div class="stats-and-cta">
             <div class="hero-stats">
               <div class="stat-item">
@@ -170,7 +181,10 @@
                 <div class="stat-label">Supply</div>
               </div>
               <div class="stat-item">
-                <div class="stat-value"><img src="logo/base-logo.png" alt="Base Network" style="height: 1.5em; vertical-align: middle; margin-right: 0.3em;">Base</div>
+                <div class="stat-value">
+                  <img src="/logo/base-logo.png" alt="Base Network" style="height: 1.5em; vertical-align: middle; margin-right: 0.3em;">
+                  Base
+                </div>
                 <div class="stat-label">Network</div>
               </div>
             </div>
@@ -302,6 +316,22 @@
       observer.observe(hero);
     });
   </script>
+
+  <!-- Animated Background Layer -->
+  <div class="animated-background">
+    <div class="bg-pattern"></div>
+    <div class="bg-pattern"></div>
+    <div class="bg-pattern"></div>
+    <div class="bg-pattern"></div>
+    <div class="bg-pattern"></div>
+    <div class="bg-line"></div>
+    <div class="bg-line"></div>
+    <div class="bg-line"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+  </div>
 
   </body>
   </html>
