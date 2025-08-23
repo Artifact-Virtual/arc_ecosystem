@@ -16,8 +16,9 @@
 - **Dutch Auction:** [`0x5Da5F567553C8D4F12542Ba608F41626f77Aa836`](https://basescan.org/address/0x5Da5F567553C8D4F12542Ba608F41626f77Aa836) - **100,000 ARCx**
 - **Smart Airdrop:** [`0x79166AbC8c17017436263BcE5f76DaB1c3dEa195`](https://basescan.org/address/0x79166AbC8c17017436263BcE5f76DaB1c3dEa195) - **50,000 ARCx**
 
-### **Liquidity Infrastructure**
-- **Uniswap V4 Pool:** Ready for 25K ARCx + $4 USD worth ETH deployment
+-### **Liquidity Infrastructure**
+- **Uniswap V4 Pool:** Liquidity pool (LP) provisioning (Uniswap V4)
+- **LP Allocation:** 51% of total supply will be allocated to the liquidity pool (managed via multi-sig LP NFT)
 - **Base L2 Network:** Gas-optimized professional trading
 - **Fee Tier:** 0.3% fee collection
 - **Position Type:** Full range for maximum coverage
