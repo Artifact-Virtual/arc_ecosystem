@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADAM Protocol</title>
+  <meta name="description" content="A mysterious and artistic side-scrolling landing page for the ADAM Protocol, featuring a minimal black and royal blue theme with ultra-light typography.">
+  <link rel="icon" href="logo/av-white-logo-removebg-preview.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      /* Base Theme */
+      --bg-primary: #000000;
+      --text-primary: #ffffff;
+      --text-secondary: #cccccc;
+      --text-muted: #888888;
+      
+      /* ADAM BLUE THEME */
+      --adam-primary: #4361ee;
+      --adam-secondary: #3a56d1;
+      --adam-tertiary: #4cc9f0;
+      --adam-glow: rgba(67, 97, 238, 0.4);
+      --adam-glow-intense: rgba(67, 97, 238, 0.7);
+      --glass-bg: rgba(17, 19, 26, 0.5); /* adam-slate at 50% */
+      --glass-border: rgba(67, 97, 238, 0.3);
+
+      /* ARC PURPLE THEME */
+      --arc-accent-primary: #9333ea; /* purple-600 */
+      --arc-accent-secondary: #7e22ce; /* purple-700 */
+      --arc-glow: rgba(147, 51, 234, 0.3);
+      --arc-glow-intense: rgba(147, 51, 234, 0.5);
+
+      /* ARCx ORANGE THEME */
+      --arcx-accent-primary: #f97316; /* orange-500 */
+      --arcx-accent-secondary: #ea580c; /* orange-600 */
+      --arcx-glow: rgba(249, 115, 22, 0.3);
+      --arcx-glow-intense: rgba(249, 115, 22, 0.5);
+
+      /* SBT TEAL THEME */
+      --sbt-accent-primary: #14b8a6; /* teal-500 */
+      --sbt-accent-secondary: #0d9488; /* teal-600 */
+      --sbt-glow: rgba(20, 184, 166, 0.3);
+      --sbt-glow-intense: rgba(20, 184, 166, 0.5);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Vertical Scroll Layout */
+    body {
+      font-family: 'Lexend', 'sans-serif';
+      background-color: #000000 !important;
+      color: var(--text-secondary);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    
+    .section {
+      min-height: 100vh;
+      width: 100%;
+      padding-top: 7rem; /* For fixed header */
+      padding-bottom: 5rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    @media (min-width: 768px) {
+      .section {
+        padding-left: 3rem;
+        padding-right: 3rem;
+      }
+    }
+     @media (min-width: 1024px) {
+      .section {
+        padding-left: 4rem;
+        padding-right: 4rem;
+      }
+    }
+    
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--adam-primary); }
+    
+    .writing-mode-vertical-rl { writing-mode: vertical-rl; }
+    .code-keyword { color: #c792ea; }
+    .code-function { color: #82aaff; }
+    .code-variable { color: var(--adam-tertiary); }
+    .code-comment { color: #6272a4; }
+    .code-string { color: #c3e88d; }
+    
+    /* Custom input range */
+    input[type=range] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; width: 100%; }
+    input[type=range]:focus { outline: none; }
+    input[type=range]::-webkit-slider-runnable-track { background: rgba(0,0,0,0.3); height: 4px; border-radius: 2px; }
+    input[type=range]::-moz-range-track { background: rgba(0,0,0,0.3); height: 4px; border-radius: 2px; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; margin-top: -6px; background-color: var(--adam-primary); height: 16px; width: 16px; border-radius: 50%; border: 2px solid #0a0a0a; box-shadow: 0 0 10px var(--adam-glow); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    input[type=range]:hover::-webkit-slider-thumb { box-shadow: 0 0 15px var(--adam-glow-intense); }
+    input[type=range]:active::-webkit-slider-thumb { transform: scale(1.2); }
+
+    .panel-border { border: 1px solid rgba(255, 255, 255, 0.1); }
+    .glass-pane {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+    }
+  
+    /* Horizontal Scroll */
+    body.horizontal-scroll {
+      overflow: hidden;
+    }
+    .horizontal-scroll-container {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      width: 100vw;
+      height: 100vh;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .horizontal-scroll-container.rtl {
+      direction: rtl;
+    }
+    .horizontal-scroll-container > .section {
+      width: 100vw;
+      height: 100vh;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+    }
+    .horizontal-scroll-container.rtl > .section {
+      direction: ltr;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Lexend', 'sans-serif'], },
+          colors: { 
+            'adam-blue': 'var(--adam-primary)', 
+            'adam-blue-dark': 'var(--adam-secondary)', 
+            'adam-dark': '#0a0a0a', 
+            'adam-black': '#000000', 
+            'adam-slate': '#11131a', 
+            'adam-light-gray': '#a0a0a0', 
+            'adam-medium-gray': '#4a4a4a',
+            'arc-accent-primary': '#9333ea',
+            'arc-accent-secondary': '#7e22ce',
+            'arcx-orange': '#f97316',
+            'arcx-orange-dark': '#ea580c',
+            'sbt-teal': '#14b8a6',
+            'sbt-teal-dark': '#0d9488',
+          },
+          boxShadow: { 
+            'glow-blue': '0 0 25px 5px var(--adam-glow)', 
+            'blue-hard': '0 0 15px var(--adam-glow-intense)', 
+            'glow-orange': '0 0 25px 5px var(--arcx-glow)',
+            'orange-hard': '0 0 15px var(--arcx-glow-intense)',
+            'glow-teal': '0 0 25px 5px var(--sbt-glow)',
+            'teal-hard': '0 0 15px var(--sbt-glow-intense)',
+            'inner-glow': 'inset 0 0 10px rgba(10, 10, 10, 0.5)' 
+          },
+          keyframes: { 
+            'fade-in-down': { '0%': { opacity: '0', transform: 'translateY(-20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } }, 
+            'fade-in-up': { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } }, 
+            'fade-in-left': { '0%': { opacity: '0', transform: 'translateX(-20px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } }, 
+            'fade-in-right': { '0%': { opacity: '0', transform: 'translateX(20px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } }, 
+            'background-pan': { '0%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' }, '100%': { backgroundPosition: '0% 50%' } }, 
+            'pulse-bright': { '0%, 100%': { textShadow: '0 0 10px var(--adam-glow)', color: 'var(--adam-primary)' }, '50%': { textShadow: '0 0 25px var(--adam-glow-intense)', color: '#fff' } },
+            'pulse-bright-orange': { '0%, 100%': { textShadow: '0 0 10px var(--arcx-glow)' }, '50%': { textShadow: '0 0 25px var(--arcx-glow-intense)' } },
+            'pulse-bright-teal': { '0%, 100%': { textShadow: '0 0 10px var(--sbt-glow)' }, '50%': { textShadow: '0 0 25px var(--sbt-glow-intense)' } },
+            'path-draw': { 'to': { strokeDashoffset: '0' } }, 
+            'fade-in': { 'from': { opacity: '0' }, 'to': { opacity: '1' } }, 
+            'threat-move': { 'from': { transform: 'translateX(-150px) scaleX(0.2)', opacity: 0 }, '70%': { transform: 'translateX(0) scaleX(1)', opacity: 1 }, '100%': { transform: 'translateX(10px) scaleX(1)', opacity: 1 } }, 
+            'shield-activate': { '0%': { opacity: '0', transform: 'scale(0.8)' }, '50%': { opacity: '1', transform: 'scale(1.1)' }, '100%': { opacity: '1', transform: 'scale(1)' } },
+            'flow-step-grow': { 'from': { transform: 'scale(0.9)', opacity: 0.7 }, 'to': { transform: 'scale(1)', opacity: 1 } },
+            'float': {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-15px)' },
+            },
+            'glow-in': {
+              '0%': { opacity: '0', textShadow: '0 0 1px rgba(255,255,255,0.5)' },
+              '70%': { opacity: '1', textShadow: '0 0 25px var(--arc-glow-intense)' },
+              '100%': { opacity: '1', textShadow: '0 0 15px var(--arc-glow)' },
+            },
+          },
+          animation: { 
+            'fade-in-down': 'fade-in-down 0.8s ease-out forwards', 
+            'fade-in-up': 'fade-in-up 0.8s ease-out forwards', 
+            'fade-in-left': 'fade-in-left 0.8s ease-out 0.3s forwards', 
+            'fade-in-right': 'fade-in-right 0.8s ease-out 0.3s forwards', 
+            'background-pan': 'background-pan 30s ease-in-out infinite', 
+            'pulse-bright': 'pulse-bright 3s ease-in-out infinite', 
+            'pulse-bright-orange': 'pulse-bright-orange 3s ease-in-out infinite', 
+            'pulse-bright-teal': 'pulse-bright-teal 3s ease-in-out infinite',
+            'path-draw': 'path-draw 1.5s ease-out forwards', 
+            'fade-in': 'fade-in 0.5s ease-out forwards', 
+            'threat-move': 'threat-move 1.2s ease-out forwards', 
+            'shield-activate': 'shield-activate 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards', 
+            'flow-step-grow': 'flow-step-grow 0.3s ease-in-out forwards',
+            'float': 'float 8s ease-in-out infinite',
+            'glow-in': 'glow-in 0.8s ease-out forwards',
+          }
+        }
+      }
+    };
+  </script>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "react": "https://esm.sh/react@^19.1.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "recharts": "https://esm.sh/recharts@^3.1.2"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
