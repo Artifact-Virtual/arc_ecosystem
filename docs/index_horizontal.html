@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo/av-white-logo-removebg-preview.png" type="image/png">
   <script>
     tailwind.config = {
       theme: {
@@ -25,6 +26,7 @@
             'adam-slate': '#11131a',
             'adam-light-gray': '#a0a0a0',
             'adam-medium-gray': '#4a4a4a',
+            'arc-green': '#39FF14',
           },
           backgroundImage: {
             'grid-pattern-orange': "linear-gradient(rgba(255, 69, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 69, 0, 0.05) 1px, transparent 1px)",
@@ -153,7 +155,10 @@
   
   <!-- ADAM Header -->
   <header id="app-header" class="fixed top-0 h-screen w-16 bg-black/50 backdrop-blur-sm z-50 flex-col items-center justify-between py-8 transition-opacity duration-300 ease-in-out left-0 border-r border-white/10 hidden lg:flex opacity-0 pointer-events-none">
-    <div id="header-title" data-scroll-to="#adam-home" class="text-adam-blue font-light text-2xl tracking-[0.3em] writing-mode-vertical-rl cursor-pointer transform rotate-180">ADAM</div>
+    <div class="flex flex-col items-center">
+  <img src="logo/av-black-logo-removebg-preview.png" alt="AV Logo" class="w-10 h-10 mb-2" />
+      <div id="header-title" data-scroll-to="#adam-home" class="text-adam-blue font-light text-2xl tracking-[0.3em] writing-mode-vertical-rl cursor-pointer transform rotate-180">ADAM</div>
+    </div>
     <nav id="header-nav" class="flex flex-col items-center space-y-6 relative"></nav>
     <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/80 hover:bg-adam-blue text-white font-semibold py-3 px-2 rounded-sm text-xs transition-all duration-300 writing-mode-vertical-rl tracking-widest uppercase transform rotate-180">Buy</a>
   </header>
@@ -171,7 +176,7 @@
   <div class="relative z-10 w-full flex flex-col lg:flex-row items-center lg:justify-end justify-center gap-8">
       <div class="lg:w-1/2 flex flex-col items-center lg:items-start lg:text-left mb-8 lg:mb-0">
         <h1 class="text-5xl md:text-8xl font-thin text-gray-200 tracking-[0.2em] uppercase animate-fade-in-down">
-          <span class="text-fluor-green">the</span><span class="text-adam-orange">ARC</span>
+          <span class="text-white">the</span><span class="text-white">ARC</span>
         <div class="mt-4 text-xl md:text-2xl font-light text-gray-300 animate-fade-in-up delay-03s">RWA-Aware,<br>Anti-Sybil, Governance Engine</div>
         </h1>
         <p class="text-md md:text-xl text-gray-400 mt-6 max-w-xl font-light animate-fade-in-up tracking-wider">
@@ -179,7 +184,7 @@
         </p>
   <div class="flex items-center space-x-8 mt-8 animate-fade-in-up delay-03s">
       <div class="absolute top-4 left-4 z-20 flex items-center">
-        <img src="logo/base-logo.png" alt="Base Network" class="h-10 w-10" title="Base Network" />
+  <img src="logo/base-logo.png" alt="Base Network" class="h-10 w-10" title="Base Network" />
       </div>
         </div>
       </div>
@@ -193,7 +198,7 @@
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">ARCx</h2>
             <p class="text-adam-blue text-lg font-mono mb-4 animate-fade-in-down delay-04s">Smart Coins</p>
             <p class="text-gray-300 text-base font-light animate-fade-in-up delay-05s">
-              Secure, extended, and<br>ultra-scarce extended ERC20. The foundational token for the Arc EcoSystem.
+              Secure, extended, and<br>ultra-scarce extended ERC20. The foundational currency for the Arc EcoSystem.
             </p>
             <div class="flex items-center space-x-4 mt-8 animate-fade-in-up delay-06s">
               <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/90 hover:bg-adam-blue text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Read Docs</a>
@@ -205,8 +210,8 @@
         <div id="arcx-sbt-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] bg-gradient-to-br from-adam-slate/80 to-adam-black/90 rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate">
           <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-adam-blue/40 rounded-full blur-2xl animate-pulse-bright-blue"></div>
           <div class="relative z-10 flex flex-col items-center justify-center h-full p-8">
-            <img src="logo/arcx_logo1-modified.png" alt="ARCxSBT Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">ARC Soulbound Token</h2>
+            <img src="logo/soulbound-ntt.png" alt="ARCxSBT Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">SoulBound</h2>
             <p class="text-adam-blue text-lg font-mono mb-4 animate-fade-in-down delay-04s">Onchain Identity & Reputation</p>
             <p class="text-gray-300 text-base font-light animate-fade-in-up delay-05s">
               Non-transferable, verifiable credentials for onchain reputation, governance, and access.
