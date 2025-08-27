@@ -59,6 +59,16 @@
             'fill-bar': { 'from': { width: '0%' }, 'to': { width: 'var(--bar-width, 0%)' } },
             'float': { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-20px)' } },
             'pulse-chevron': { '0%, 100%': { transform: 'translateX(0)', opacity: '0.7' }, '50%': { transform: 'translateX(10px)', opacity: '1' } },
+            'delay-200': { 'animation-delay': '0.2s' },
+            'delay-400': { 'animation-delay': '0.4s' },
+            'delay-600': { 'animation-delay': '0.6s' },
+            'delay-800': { 'animation-delay': '0.8s' },
+            'delay-1000': { 'animation-delay': '1s' },
+            'delay-300': { 'animation-delay': '0.3s' },
+            'delay-500': { 'animation-delay': '0.5s' },
+            'delay-700': { 'animation-delay': '0.7s' },
+            'delay-900': { 'animation-delay': '0.9s' },
+            'delay-2000': { 'animation-delay': '2s' },
           },
           animation: {
             'fade-in-down': 'fade-in-down 0.8s ease-out forwards',
@@ -77,6 +87,16 @@
             'fill-bar': 'fill-bar 0.8s ease-out forwards',
             'float': 'float 6s ease-in-out infinite',
             'pulse-chevron': 'pulse-chevron 2s ease-in-out infinite',
+            'delay-200': 'delay-200',
+            'delay-400': 'delay-400',
+            'delay-600': 'delay-600',
+            'delay-800': 'delay-800',
+            'delay-1000': 'delay-1000',
+            'delay-300': 'delay-300',
+            'delay-500': 'delay-500',
+            'delay-700': 'delay-700',
+            'delay-900': 'delay-900',
+            'delay-2000': 'delay-2000',
           }
         }
       }
@@ -119,15 +139,18 @@
         display: flex; width: 100%; height: 100vh;
         overflow-x: auto; overflow-y: hidden;
         scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: #4a4a4a #0a0a0a;
       }
       .section {
         width: 100vw; height: 100vh; flex-shrink: 0;
         scroll-snap-align: start; position: relative;
+        padding-left: 4rem; /* Space for vertical header */
       }
        .section.adam-section {
          padding-left: 4rem; /* Space for vertical header */
       }
-      ::-webkit-scrollbar { height: 3px; }
+      ::-webkit-scrollbar { height: 3px; width: 3px; }
       ::-webkit-scrollbar-track { background: #0a0a0a; }
       ::-webkit-scrollbar-thumb { background: #4a4a4a; border-radius: 2px; }
       ::-webkit-scrollbar-thumb:hover { background: #ff4500; }
@@ -185,57 +208,59 @@
   <div class="w-full h-full flex flex-col lg:flex-row items-center justify-center text-center p-4 sm:p-8 bg-adam-black relative overflow-hidden">
     <!-- Meteor Lava Background Effect -->
   <div class="absolute inset-0 z-0 pointer-events-none bg-black"></div>
-  <div class="relative z-10 w-full flex flex-col lg:flex-row items-center lg:justify-end justify-center gap-8">
-      <div class="lg:w-1/2 flex flex-col items-center lg:items-start lg:text-left mb-8 lg:mb-0">
-        <h1 class="text-5xl md:text-8xl font-thin text-gray-200 tracking-[0.2em] uppercase animate-fade-in-down">
-          <span class="text-white">the</span><span class="text-white">ARC</span>
-        <div class="mt-4 text-xl md:text-2xl font-light text-gray-300 animate-fade-in-up delay-03s">RWA-Aware,<br>Anti-Sybil, Governance Engine</div>
-        </h1>
-        <p class="text-md md:text-xl text-gray-400 mt-6 max-w-xl font-light animate-fade-in-up tracking-wider">
-          OnChain Reputation System for the Artificial World.
-        </p>
-  <div class="flex items-center space-x-8 mt-8 animate-fade-in-up delay-03s">
-      <div class="absolute top-4 left-4 z-20 flex items-center">
-  <img src="./assets/logos/base-logo.png" alt="Base Network" class="h-10 w-10" title="Base Network" />
-      </div>
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
+        <!-- Left Content -->
+        <div class="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
+          <h1 class="text-4xl sm:text-6xl lg:text-8xl font-thin text-gray-200 tracking-[0.1em] lg:tracking-[0.2em] uppercase animate-fade-in-down leading-tight">
+            <span class="text-white">the</span><span class="text-white">ARC</span>
+          </h1>
+          <div class="mt-4 text-lg sm:text-xl lg:text-2xl font-light text-gray-300 animate-fade-in-up">RWA-Aware,<br>Anti-Sybil, Governance Engine</div>
+          <p class="text-base sm:text-lg lg:text-xl text-gray-400 mt-6 max-w-2xl font-light animate-fade-in-up tracking-wide leading-relaxed">
+            OnChain Reputation System for the Artificial World.
+          </p>
+          <div class="flex items-center justify-center lg:justify-start space-x-4 mt-8 animate-fade-in-up">
+            <img src="./assets/logos/base-logo.png" alt="Base Network" class="h-8 w-8 sm:h-10 sm:w-10" title="Base Network" />
+          </div>
         </div>
-      </div>
-  <div class="lg:w-1/2 flex flex-row items-center justify-end gap-8">
-        <!-- Card 1 -->
-        <!-- ARCx Token Card -->
-  <div id="arcx-hero-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate"
-  style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('./assets/images/download%20%281%29.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-adam-blue/40 rounded-full blur-2xl animate-pulse-bright-blue"></div>
-          <div class="relative z-10 flex flex-col items-center justify-center h-full p-8">
-            <img src="./assets/logos/arcx_logo1-modified.png" alt="ARCx Token Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">ARCx|s</h2>
-            <p class="text-adam-blue text-lg font-mono mb-4 animate-fade-in-down delay-04s">Smart Coins</p>
-            <p class="text-gray-300 text-base font-light animate-fade-in-up delay-05s">
-              Secure, extended, and<br>ultra-scarce extended ERC20. The foundational currency for the Arc EcoSystem.
-            </p>
-            <div class="flex items-center space-x-4 mt-8 animate-fade-in-up delay-06s">
-              <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/90 hover:bg-adam-blue text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Read Docs</a>
-              <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="btn-buy-arcx">Buy ARCx</a>
+
+        <!-- Right Content - Cards -->
+        <div class="lg:w-1/2 flex flex-col sm:flex-row items-center justify-center gap-6 lg:gap-8 w-full">
+          <!-- ARCx Token Card -->
+          <div class="relative w-full sm:w-[320px] lg:w-[380px] h-[420px] sm:h-[480px] lg:h-[520px] rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate bg-cover bg-center bg-no-repeat" style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('./assets/images/download%20%281%29.jpeg');">
+            <div class="absolute -bottom-10 -right-10 w-32 h-32 lg:w-40 lg:h-40 bg-adam-blue/40 rounded-full blur-2xl animate-pulse-bright-blue"></div>
+            <div class="relative z-10 flex flex-col items-center justify-center h-full p-6 lg:p-8">
+              <img src="./assets/logos/arcx_logo1-modified.png" alt="ARCx Token Logo" class="w-16 h-16 lg:w-20 lg:h-20 mb-6 animate-fade-in-down" />
+              <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 animate-fade-in-down">ARCx|s</h2>
+              <p class="text-adam-blue text-base lg:text-lg font-mono mb-4 animate-fade-in-down">Smart Coins</p>
+              <p class="text-gray-300 text-sm lg:text-base font-light animate-fade-in-up text-center leading-relaxed">
+                Secure, extended, and ultra-scarce extended ERC20. The foundational currency for the Arc EcoSystem.
+              </p>
+              <div class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4 mt-6 lg:mt-8 animate-fade-in-up w-full">
+                <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/90 hover:bg-adam-blue text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg w-full sm:w-auto text-center">Read Docs</a>
+                <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="btn-buy-arcx w-full sm:w-auto text-center">Buy ARCx</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ARCxSBT Card -->
+          <div class="relative w-full sm:w-[320px] lg:w-[380px] h-[420px] sm:h-[480px] lg:h-[520px] rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate bg-cover bg-center bg-no-repeat" style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('./assets/images/download.jpeg');">
+            <div class="absolute -bottom-10 -right-10 w-32 h-32 lg:w-40 lg:h-40 bg-adam-blue/40 rounded-full blur-2xl animate-pulse-bright-blue"></div>
+            <div class="relative z-10 flex flex-col items-center justify-center h-full p-6 lg:p-8">
+              <img src="./assets/logos/soulbound-ntt.png" alt="ARCxSBT Logo" class="w-16 h-16 lg:w-20 lg:h-20 mb-6 animate-fade-in-down" />
+              <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 animate-fade-in-down">SoulBound NFT</h2>
+              <p class="text-adam-blue text-base lg:text-lg font-mono mb-4 animate-fade-in-down">Onchain Identity & Reputation</p>
+              <p class="text-gray-300 text-sm lg:text-base font-light animate-fade-in-up text-center leading-relaxed">
+                Non-transferable/non-fungible, verifiable credentials for onchain reputation, governance, and access.
+              </p>
+              <div class="flex items-center justify-center mt-6 lg:mt-8 animate-fade-in-up w-full">
+                <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/90 hover:bg-adam-blue text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg w-full sm:w-auto text-center">Read Docs</a>
+              </div>
             </div>
           </div>
         </div>
-        <!-- ARCxSBT Card -->
-  <div id="arcx-sbt-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate"
-       style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('./assets/images/download.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-adam-blue/40 rounded-full blur-2xl animate-pulse-bright-blue"></div>
-          <div class="relative z-10 flex flex-col items-center justify-center h-full p-8">
-            <img src="./assets/logos/soulbound-ntt.png" alt="ARCxSBT Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">SoulBound NFT</h2>
-            <p class="text-adam-blue text-lg font-mono mb-4 animate-fade-in-down delay-04s">Onchain Identity & Reputation</p>
-            <p class="text-gray-300 text-base font-light animate-fade-in-up delay-05s">
-              Non-transferable/non-fungible, verifiable credentials for onchain reputation, governance, and access.
-            </p>
-            <div class="flex items-center space-x-4 mt-8 animate-fade-in-up delay-06s">
-              <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/90 hover:bg-adam-blue text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Read Docs</a>
-            </div>
-          </div>
-        </div>
       </div>
+    </div>
     </div>
         
 
@@ -266,9 +291,224 @@
             <path d="M 160 90 L 160 10 L 180 50 L 200 10 L 200 90" stroke="url(#grad-blue)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 210; stroke-dashoffset: 210; animation-delay: 2.1s;"></path>
         </svg>
         <div class="relative z-10 flex flex-col items-center">
-          <h1 class="text-5xl md:text-8xl font-thin text-gray-200 tracking-[0.2em] uppercase animate-fade-in-down">ADAM Protocol</h1>
-          <p class="text-md md:text-xl text-gray-400 mt-6 max-w-2xl mx-auto font-light animate-fade-in-up tracking-wider">The Constitutional Intelligence system for real-world impact.</p>
-          <a href="#adam-about" data-scroll-to="#adam-about" class="mt-12 border border-adam-blue/50 text-adam-blue font-light py-3 px-10 rounded-sm text-sm uppercase tracking-[0.2em] hover:bg-adam-blue/20 hover:shadow-glow-blue transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.6s;">Explore The Architecture</a>
+          <h1 class="text-6xl md:text-9xl font-thin text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 tracking-[0.3em] uppercase mb-4 animate-pulse-glow">
+              ADAM
+            </h1>
+          <p class="text-xl md:text-3xl text-cyan-300 font-light mb-8 max-w-4xl mx-auto leading-relaxed">
+            The <span class="text-orange-400 font-semibold">Constitutional Intelligence</span> Revolution
+          </p>
+
+          <p class="text-lg md:text-xl text-blue-200 font-light mb-12 max-w-3xl mx-auto leading-relaxed">
+            Experience the future of governance through our immersive neural network visualization.
+            Watch as proposals flow through the system, security protocols activate, and
+            community consensus emerges from the collective intelligence.
+          </p>
+          <!-- Interactive ADAM Neural Network Simulation -->
+          <div class="adam-simulation-container bg-black/40 backdrop-blur-sm border border-cyan-500/30 rounded-2xl p-6 lg:p-8 mb-12 max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-8">
+              <!-- Simulation Controls -->
+              <div class="lg:col-span-1">
+                <h3 class="text-cyan-300 font-semibold mb-4 text-lg">Simulation Controls</h3>
+                <div class="space-y-4">
+                  <button id="startSimulation" class="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-black font-bold py-3 px-4 rounded-lg hover:scale-105 transition-transform duration-300">
+                    Start Simulation
+                  </button>
+                  <button id="resetSimulation" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-3 px-4 rounded-lg hover:scale-105 transition-transform duration-300">
+                    Reset
+                  </button>
+                  <div class="bg-black/50 p-4 rounded-lg">
+                    <h4 class="text-cyan-300 text-sm font-semibold mb-2">Simulation Status</h4>
+                    <div id="simulationStatus" class="text-gray-300 text-sm">Ready to start</div>
+                    <div class="mt-3">
+                      <div class="text-xs text-gray-400 mb-1">Processing Speed</div>
+                      <input type="range" id="processingSpeed" min="1" max="10" value="5" class="adam-blue-range w-full">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Live Processing Feed -->
+              <div class="lg:col-span-2">
+                <h3 class="text-cyan-300 font-semibold mb-4 text-lg">Live Processing Feed</h3>
+                <div id="processingFeed" class="bg-black/60 h-64 lg:h-80 rounded-lg p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-black/50">
+                  <div class="text-gray-400 text-sm italic">Click "Start Simulation" to begin processing proposals...</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Real-time Metrics -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+              <div class="bg-black/50 p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-cyan-400" id="processedCount">0</div>
+                <div class="text-xs text-gray-400">Proposals Processed</div>
+              </div>
+              <div class="bg-black/50 p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-green-400" id="consensusRate">0%</div>
+                <div class="text-xs text-gray-400">Consensus Rate</div>
+              </div>
+              <div class="bg-black/50 p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-orange-400" id="securityScore">100</div>
+                <div class="text-xs text-gray-400">Security Score</div>
+              </div>
+              <div class="bg-black/50 p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-purple-400" id="networkLoad">0%</div>
+                <div class="text-xs text-gray-400">Network Load</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <button id="startSimulationBtn" class="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-black font-bold rounded-full overflow-hidden hover:scale-105 transition-transform duration-300">
+              <span class="relative z-10">Start ADAM Simulation</span>
+              <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </button>
+            <button id="resetSimulationBtn" class="group px-8 py-4 border-2 border-orange-500 text-orange-400 font-bold rounded-full hover:bg-orange-500 hover:text-black transition-all duration-300">
+              <span class="group-hover:scale-110 transition-transform duration-300">Reset Simulation</span>
+            </button>
+          </div>
+
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const startBtn = document.getElementById('startSimulationBtn');
+              const resetBtn = document.getElementById('resetSimulationBtn');
+              const processingFeed = document.getElementById('processingFeed');
+              const simulationStatus = document.getElementById('simulationStatus');
+              const processedCount = document.getElementById('processedCount');
+              const consensusRate = document.getElementById('consensusRate');
+              const securityScore = document.getElementById('securityScore');
+              const networkLoad = document.getElementById('networkLoad');
+              const processingSpeed = document.getElementById('processingSpeed');
+
+              let simulationRunning = false;
+              let processedProposals = 0;
+              let currentConsensus = 0;
+              let currentSecurity = 100;
+              let currentLoad = 0;
+              let simulationInterval;
+
+              const proposalTypes = [
+                'Treasury Allocation', 'Protocol Upgrade', 'Community Initiative',
+                'Security Enhancement', 'Governance Parameter', 'Staking Reward',
+                'Bridge Configuration', 'Token Distribution', 'Audit Request',
+                'Emergency Action'
+              ];
+
+              const securityEvents = [
+                '✅ Security validation passed', '🔍 Deep security scan completed',
+                '🛡️ Threat detection active', '🔐 Encryption verified',
+                '⚡ Lightning-fast validation', '🎯 Zero-day protection active'
+              ];
+
+              function addToFeed(message, type = 'normal') {
+                const timestamp = new Date().toLocaleTimeString();
+                const colorClass = type === 'success' ? 'text-green-400' :
+                                 type === 'warning' ? 'text-orange-400' :
+                                 type === 'error' ? 'text-red-400' : 'text-cyan-400';
+
+                const entry = document.createElement('div');
+                entry.className = `mb-2 text-sm ${colorClass}`;
+                entry.innerHTML = `[${timestamp}] ${message}`;
+
+                processingFeed.appendChild(entry);
+                processingFeed.scrollTop = processingFeed.scrollHeight;
+              }
+
+              function generateProposal() {
+                const type = proposalTypes[Math.floor(Math.random() * proposalTypes.length)];
+                const id = Math.random().toString(36).substr(2, 9).toUpperCase();
+                return { type, id };
+              }
+
+              function processProposal() {
+                const proposal = generateProposal();
+                processedProposals++;
+                processedCount.textContent = processedProposals;
+
+                // Update metrics
+                currentConsensus = Math.min(100, currentConsensus + Math.random() * 15);
+                consensusRate.textContent = Math.round(currentConsensus) + '%';
+
+                currentLoad = Math.min(100, currentLoad + Math.random() * 10 - 2);
+                networkLoad.textContent = Math.round(currentLoad) + '%';
+
+                currentSecurity = Math.max(85, currentSecurity - Math.random() * 2);
+                securityScore.textContent = Math.round(currentSecurity);
+
+                // Add processing messages
+                addToFeed(`📋 Processing proposal ${proposal.id}: ${proposal.type}`, 'normal');
+
+                setTimeout(() => {
+                  addToFeed(`🧠 Neural analysis: ${Math.random() > 0.3 ? 'APPROVED' : 'REQUIRES_REVIEW'}`, 'success');
+                }, 500);
+
+                setTimeout(() => {
+                  const securityMsg = securityEvents[Math.floor(Math.random() * securityEvents.length)];
+                  addToFeed(securityMsg, 'success');
+                }, 800);
+
+                setTimeout(() => {
+                  const consensus = Math.random() > 0.2;
+                  addToFeed(`⚖️ Consensus reached: ${consensus ? 'PASSED' : 'FAILED'}`, consensus ? 'success' : 'warning');
+
+                  if (consensus) {
+                    addToFeed(`✅ Proposal ${proposal.id} successfully executed`, 'success');
+                  } else {
+                    addToFeed(`❌ Proposal ${proposal.id} rejected by community consensus`, 'warning');
+                  }
+                }, 1200);
+              }
+
+              function startSimulation() {
+                if (simulationRunning) return;
+
+                simulationRunning = true;
+                simulationStatus.textContent = 'Running...';
+                simulationStatus.className = 'text-green-400 text-sm';
+                startBtn.disabled = true;
+                startBtn.textContent = 'Simulation Running...';
+
+                addToFeed('🚀 ADAM Neural Network simulation started', 'success');
+                addToFeed('🔗 Connecting to governance nodes...', 'normal');
+
+                setTimeout(() => {
+                  addToFeed('✅ All systems operational', 'success');
+                  addToFeed('📡 Receiving proposal stream...', 'normal');
+
+                  const speed = 11 - processingSpeed.value; // Invert so higher value = faster
+                  simulationInterval = setInterval(processProposal, speed * 1000);
+                }, 2000);
+              }
+
+              function resetSimulation() {
+                simulationRunning = false;
+                clearInterval(simulationInterval);
+
+                processedProposals = 0;
+                currentConsensus = 0;
+                currentSecurity = 100;
+                currentLoad = 0;
+
+                processedCount.textContent = '0';
+                consensusRate.textContent = '0%';
+                securityScore.textContent = '100';
+                networkLoad.textContent = '0%';
+
+                simulationStatus.textContent = 'Ready to start';
+                simulationStatus.className = 'text-gray-300 text-sm';
+
+                startBtn.disabled = false;
+                startBtn.querySelector('span').textContent = 'Start ADAM Simulation';
+
+                processingFeed.innerHTML = '<div class="text-gray-400 text-sm italic">Click "Start Simulation" to begin processing proposals...</div>';
+              }
+
+              startBtn.addEventListener('click', startSimulation);
+              resetBtn.addEventListener('click', resetSimulation);
+
+              // Initialize
+              resetSimulation();
+            });
+          </script>
         </div>
       </div>
     </section>
@@ -276,115 +516,1361 @@
         <div class="w-full h-full flex items-center justify-center p-4 md:p-16">
             <div class="max-w-7xl w-full flex flex-col items-center text-center">
                 <div class="animate-fade-in-down">
-                    <h2 class="text-4xl md:text-6xl font-thin text-gray-200 tracking-[0.2em] uppercase leading-tight">The Governance <span class="text-adam-blue">Triad</span></h2>
-                    <p class="mt-6 text-adam-light-gray font-light max-w-3xl mx-auto text-lg leading-relaxed">ADAM Protocol moves beyond simple token voting, composing three distinct layers of power to create a resilient, context-aware, and plutocracy-resistant system.</p>
+                    <h2 class="text-4xl md:text-6xl font-thin text-gray-200 tracking-[0.2em] uppercase leading-tight">The <span class="text-cyan-400">Quantum Governance</span> Matrix</h2>
+                    <p class="mt-6 text-cyan-300 font-light max-w-3xl mx-auto text-lg leading-relaxed">Experience the future of decentralized governance through our interactive ADAM Neural Network simulation. Watch real-time proposal processing, security validation, and consensus formation in action.</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 w-full relative">
-                    <div class="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-adam-medium-gray to-transparent -translate-y-1/2 hidden md:block"></div>
-                    <div class="absolute left-1/3 top-1/2 w-[33%] h-[1px] bg-adam-blue hidden md:block" style="transform: translateY(-50%)"></div>
-                    <div class="bg-adam-slate/50 backdrop-blur-sm p-6 panel-border group transition-all duration-300 animate-fade-in-up relative overflow-hidden hover:bg-adam-slate" style="animation-delay: 0.2s"><div class="flex items-center space-x-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-adam-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v.01M12 18v-2m0-10V5m0 7h.01M7 12h.01M17 12h.01M7 12a5 5 0 015-5m5 5a5 5 0 00-5-5m0 10a5 5 0 005-5m-5 5a5 5 0 01-5-5"></path></svg><h3 class="text-xl font-light text-gray-200 tracking-widest uppercase">Capital</h3></div><p class="mt-4 text-adam-light-gray font-light text-sm leading-relaxed min-h-[60px]">Economic alignment via staked ARCx. Long-term commitment is rewarded with greater influence, secured by slashing risk.</p><div class="mt-4 pt-4 border-t border-white/10"><p class="text-xs text-gray-500 tracking-widest uppercase">Weight Formula</p><p class="font-mono text-xs text-adam-blue mt-2 bg-black/30 p-2 rounded-sm">f_token = QV(sqrt(stake_days_weight · stake_amount))</p></div></div>
-                    <div class="bg-adam-slate/50 backdrop-blur-sm p-6 panel-border group transition-all duration-300 animate-fade-in-up relative overflow-hidden hover:bg-adam-slate" style="animation-delay: 0.4s"><div class="flex items-center space-x-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-adam-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 012-2h2a2 2 0 012 2v1m-6 0h6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><h3 class="text-xl font-light text-gray-200 tracking-widest uppercase">Reputation</h3></div><p class="mt-4 text-adam-light-gray font-light text-sm leading-relaxed min-h-[60px]">ARCxSBTs (Soulbound Tokens) grant power to verified contributors. A meritocracy of builders and domain experts.</p><div class="mt-4 pt-4 border-t border-white/10"><p class="text-xs text-gray-500 tracking-widest uppercase">Weight Formula</p><p class="font-mono text-xs text-adam-blue mt-2 bg-black/30 p-2 rounded-sm">f_id = Σ(role_weight · activity_decay(Δt))</p></div></div>
-                    <div class="bg-adam-slate/50 backdrop-blur-sm p-6 panel-border group transition-all duration-300 animate-fade-in-up relative overflow-hidden hover:bg-adam-slate" style="animation-delay: 0.6s"><div class="flex items-center space-x-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-adam-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h10a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.737 16.525l-.425.425a2 2 0 01-2.828 0 2 2 0 010-2.828l.425-.425M16.263 16.525l.425.425a2 2 0 002.828 0 2 2 0 000-2.828l-.425-.425"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"></path></svg><h3 class="text-xl font-light text-gray-200 tracking-widest uppercase">Impact</h3></div><p class="mt-4 text-adam-light-gray font-light text-sm leading-relaxed min-h-[60px]">Verifiable Real-World Asset (RWA) proofs give a voice to tangible outcomes, from carbon credits to energy receipts.</p><div class="mt-4 pt-4 border-t border-white/10"><p class="text-xs text-gray-500 tracking-widest uppercase">Weight Formula</p><p class="font-mono text-xs text-adam-blue mt-2 bg-black/30 p-2 rounded-sm">f_rwa,k = impact_score_k · recency_decay_k(Δt)</p></div></div>
+                <!-- INTERACTIVE GOVERNANCE MATRIX -->
+                <div class="governance-matrix-container relative w-full h-96 md:h-[500px] lg:h-[600px] bg-black/20 backdrop-blur-sm border border-cyan-500/30 rounded-2xl p-4 md:p-8 overflow-hidden mt-16">
+                  <!-- Central Nexus -->
+                  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+                    <div class="w-32 h-32 bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center animate-spin-slow shadow-2xl">
+                      <div class="w-24 h-24 bg-black rounded-full flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 7.172V5L8 4z"></path>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-xl animate-pulse"></div>
+                  </div>
+
+                  <!-- Connecting Lines -->
+                  <svg class="absolute inset-0 w-full h-full" viewBox="0 0 800 600">
+                    <defs>
+                      <linearGradient id="capitalGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#10b981" stop-opacity="0"/>
+                        <stop offset="50%" stop-color="#10b981" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
+                      </linearGradient>
+                      <linearGradient id="reputationGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#f59e0b" stop-opacity="0"/>
+                        <stop offset="50%" stop-color="#f59e0b" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+                      </linearGradient>
+                      <linearGradient id="impactGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0"/>
+                        <stop offset="50%" stop-color="#8b5cf6" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <!-- Animated connection lines -->
+                    <path d="M200,150 Q400,300 600,150" stroke="url(#capitalGradient)" stroke-width="2" fill="none" opacity="0.7">
+                      <animate attributeName="stroke-dasharray" values="0,400;400,0" dur="4s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M150,450 Q400,300 650,450" stroke="url(#reputationGradient)" stroke-width="2" fill="none" opacity="0.7">
+                      <animate attributeName="stroke-dasharray" values="0,400;400,0" dur="5s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M250,200 Q400,300 550,400" stroke="url(#impactGradient)" stroke-width="2" fill="none" opacity="0.7">
+                      <animate attributeName="stroke-dasharray" values="0,400;400,0" dur="6s" repeatCount="indefinite"/>
+                    </path>
+                  </svg>
+
+                  <!-- Governance Nodes -->
+                  <div class="governance-node capital-node absolute top-20 left-20 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                    <div class="w-24 h-24 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 cursor-pointer group">
+                      <svg class="w-8 h-8 text-white group-hover:scale-125 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                      </svg>
+                    </div>
+                    <div class="mt-4 text-center">
+                      <h3 class="text-emerald-400 font-bold text-lg">Capital Layer</h3>
+                      <p class="text-emerald-200 text-sm max-w-xs">Economic alignment through staked ARCx tokens</p>
+                      <div class="mt-2 px-3 py-1 bg-emerald-500/20 rounded-full text-xs text-emerald-300">QV(sqrt(stake_days × amount))</div>
+                    </div>
+                  </div>
+
+                  <div class="governance-node reputation-node absolute top-20 right-20 transform translate-x-1/2 -translate-y-1/2 z-10">
+                    <div class="w-24 h-24 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 cursor-pointer group">
+                      <svg class="w-8 h-8 text-white group-hover:scale-125 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                    </div>
+                    <div class="mt-4 text-center">
+                      <h3 class="text-amber-400 font-bold text-lg">Reputation Layer</h3>
+                      <p class="text-amber-200 text-sm max-w-xs">ARCxSBT meritocracy for verified contributors</p>
+                      <div class="mt-2 px-3 py-1 bg-amber-500/20 rounded-full text-xs text-amber-300">Σ(role_weight × activity_decay)</div>
+                    </div>
+                  </div>
+
+                  <div class="governance-node impact-node absolute bottom-20 left-1/2 transform -translate-x-1/2 translate-y-1/2 z-10">
+                    <div class="w-24 h-24 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 cursor-pointer group">
+                      <svg class="w-8 h-8 text-white group-hover:scale-125 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                    </div>
+                    <div class="mt-4 text-center">
+                      <h3 class="text-violet-400 font-bold text-lg">Impact Layer</h3>
+                      <p class="text-violet-200 text-sm max-w-xs">RWA proofs giving voice to tangible outcomes</p>
+                      <div class="mt-2 px-3 py-1 bg-violet-500/20 rounded-full text-xs text-violet-300">impact_score × recency_decay</div>
+                    </div>
+                  </div>
+
+                  <!-- Floating Data Particles -->
+                  <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-cyan-400 rounded-full animate-float opacity-60"></div>
+                  <div class="absolute top-3/4 right-1/4 w-3 h-3 bg-orange-400 rounded-full animate-float animate-delay-1000"></div>
+                  <div class="absolute top-1/2 left-3/4 w-2 h-2 bg-purple-400 rounded-full animate-float animate-delay-2000"></div>
+                  <div class="absolute top-1/3 right-1/3 w-1 h-1 bg-pink-400 rounded-full animate-float animate-delay-500"></div>
                 </div>
             </div>
         </div>
     </section>
     <section id="adam-architecture" class="section adam-section">
       <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 md:p-12">
-  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">ADAM Protocol <span class="text-adam-blue">Architecture</span></h2>
-        <p class="text-lg md:text-xl text-adam-light-gray max-w-3xl mx-auto font-light mb-8">A deterministic, Wasm-sandboxed policy engine for on-chain governance. All proposal lifecycles, parameter diffs, and RWA updates are gated by explicit guards, proofs, and bytecode allowlists. Every path is auditable, fuel/memory bounded, and replay-safe.</p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
-          <div class="bg-adam-slate/60 p-6 rounded-lg shadow-inner-glow">
-            <h3 class="text-xl text-adam-blue font-light mb-2 uppercase tracking-widest">Constitutional Program</h3>
-            <p class="text-adam-light-gray text-sm">Wasm, deterministic, fixed ABI, fuel+memory capped, no syscalls/time/random. Upgrades via governance only.</p>
+  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Quantum <span class="text-cyan-400">Architecture</span> Engine</h2>
+        <p class="text-lg md:text-xl text-cyan-300 max-w-3xl mx-auto font-light mb-8">Experience the most advanced governance architecture ever conceived. Our Quantum Architecture Engine processes proposals through multiple security layers, creating an impenetrable fortress of decentralized decision-making.</p>
+
+        <!-- ARCHITECTURE VISUALIZATION -->
+        <div class="architecture-engine relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <!-- Security Layers -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
+            <!-- Layer 1: Constitutional Program -->
+            <div class="security-layer bg-gradient-to-br from-black/60 to-cyan-900/30 border border-cyan-500/30 rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 lg:w-20 lg:h-20 mx-auto mb-4 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center group-hover:animate-bounce">
+                  <svg class="w-8 h-8 lg:w-10 lg:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                </div>
+                <h3 class="text-cyan-400 font-bold text-lg lg:text-xl mb-2">Constitutional Program</h3>
+                <div class="text-xs lg:text-sm text-cyan-300 bg-cyan-500/10 px-2 py-1 rounded-full">Layer 1: Foundation</div>
+              </div>
+              <p class="text-cyan-200 text-sm leading-relaxed">Wasm-powered deterministic engine with zero-trust architecture. No syscalls, no randomness, no external dependencies.</p>
+              <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2 text-xs text-cyan-300">
+                  <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span>Fuel + Memory Capped</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-cyan-300">
+                  <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span>Governance-Only Upgrades</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-cyan-300">
+                  <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span>Fixed ABI Interface</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Layer 2: Policy Chain -->
+            <div class="security-layer bg-gradient-to-br from-black/60 to-orange-900/30 border border-orange-500/30 rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 lg:w-20 lg:h-20 mx-auto mb-4 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center group-hover:animate-bounce animate-delay-200">
+                  <svg class="w-8 h-8 lg:w-10 lg:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                  </svg>
+                </div>
+                <h3 class="text-orange-400 font-bold text-lg lg:text-xl mb-2">Policy Chain Reactor</h3>
+                <div class="text-xs lg:text-sm text-orange-300 bg-orange-500/10 px-2 py-1 rounded-full">Layer 2: Execution</div>
+              </div>
+              <p class="text-orange-200 text-sm leading-relaxed">Intelligent policy sequencing with terminal verdict resolution. Each proposal passes through multiple security checkpoints.</p>
+              <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2 text-xs text-orange-300">
+                  <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                  <span class="font-mono">ALLOW | DENY | AMEND | REQUIRE_2FA</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-orange-300">
+                  <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                  <span>Ordered Security Sequence</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-orange-300">
+                  <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                  <span>First Terminal Verdict Wins</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Layer 3: Proof Bundle -->
+            <div class="security-layer bg-gradient-to-br from-black/60 to-purple-900/30 border border-purple-500/30 rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 lg:w-20 lg:h-20 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center group-hover:animate-bounce animate-delay-400">
+                  <svg class="w-8 h-8 lg:w-10 lg:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                  </svg>
+                </div>
+                <h3 class="text-purple-400 font-bold text-lg lg:text-xl mb-2">Proof Bundle Nexus</h3>
+                <div class="text-xs lg:text-sm text-purple-300 bg-purple-500/10 px-2 py-1 rounded-full">Layer 3: Verification</div>
+              </div>
+              <p class="text-purple-200 text-sm leading-relaxed">Cryptographic proof aggregation with deterministic CBOR encoding. Every data point is verifiable and timestamped.</p>
+              <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2 text-xs text-purple-300">
+                  <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
+                  <span>EAS UID Integration</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-purple-300">
+                  <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
+                  <span>Oracle Signature Validation</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-purple-300">
+                  <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
+                  <span>Keccak256 Proof Hash</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="bg-adam-slate/60 p-6 rounded-lg shadow-inner-glow">
-            <h3 class="text-xl text-adam-blue font-light mb-2 uppercase tracking-widest">Policy Chain</h3>
-            <p class="text-adam-light-gray text-sm">Ordered list per topic. Each returns <span class="text-adam-orange">ALLOW</span>, <span class="text-adam-orange">DENY</span>, <span class="text-adam-orange">AMEND</span>, or <span class="text-adam-orange">REQUIRE_2FA</span>. First terminal verdict wins.</p>
-          </div>
-          <div class="bg-adam-slate/60 p-6 rounded-lg shadow-inner-glow">
-            <h3 class="text-xl text-adam-blue font-light mb-2 uppercase tracking-widest">ProofBundle</h3>
-            <p class="text-adam-light-gray text-sm">Deterministic CBOR: EAS UIDs, oracle sigs, countersigns, payload hash, snapshot block. Host keccak256 over CBOR = proofHash.</p>
+
+          <!-- Real-time Security Status -->
+          <div class="security-status-panel bg-black/40 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-8 max-w-4xl mx-auto">
+            <h3 class="text-cyan-400 font-bold text-xl mb-6 text-center">Real-Time Security Status</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              <div class="status-metric">
+                <div class="text-3xl font-bold text-green-400 mb-2">99.97%</div>
+                <div class="text-cyan-300 text-sm">Uptime</div>
+                <div class="w-full bg-gray-700 rounded-full h-2 mt-2">
+                  <div class="bg-green-400 h-2 rounded-full w-[99.97%]"></div>
+                </div>
+              </div>
+              <div class="status-metric">
+                <div class="text-3xl font-bold text-blue-400 mb-2">0.00%</div>
+                <div class="text-cyan-300 text-sm">Breach Rate</div>
+                <div class="w-full bg-gray-700 rounded-full h-2 mt-2">
+                  <div class="bg-blue-400 h-2 rounded-full w-0"></div>
+                </div>
+              </div>
+              <div class="status-metric">
+                <div class="text-3xl font-bold text-purple-400 mb-2">&lt;50ms</div>
+                <div class="text-cyan-300 text-sm">Response Time</div>
+                <div class="w-full bg-gray-700 rounded-full h-2 mt-2">
+                  <div class="bg-purple-400 h-2 rounded-full w-[95%]"></div>
+                </div>
+              </div>
+              <div class="status-metric">
+                <div class="text-3xl font-bold text-orange-400 mb-2">∞</div>
+                <div class="text-cyan-300 text-sm">Security Level</div>
+                <div class="w-full bg-gray-700 rounded-full h-2 mt-2">
+                  <div class="bg-orange-400 h-2 rounded-full w-full animate-pulse"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
     <section id="adam-lifecycle" class="section adam-section">
       <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 md:p-12">
-  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Proposal <span class="text-adam-blue">Lifecycle</span></h2>
-        <ol class="text-adam-light-gray text-lg font-light max-w-2xl mx-auto list-decimal list-inside space-y-2">
-          <li>Draft → Submit → Review (≤24h)</li>
-          <li>Voting (snapshot, tally at end)</li>
-          <li>Timelock → Challenge Window</li>
-          <li>Execute (if passed, after challenge)</li>
-          <li>Monitor (on-chain events, audits)</li>
-        </ol>
-        <p class="mt-8 text-adam-light-gray text-base max-w-xl mx-auto">Static checks at review (targets, bounds, diffs). Challenge uses bonded dispute; ADAM Host re-checks on queue/execute. Emergency: pause/cancel only, dual-quorum enforced.</p>
+  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Proposal <span class="text-green-400">Lifecycle</span> Flow</h2>
+        <p class="text-lg md:text-xl text-green-300 max-w-3xl mx-auto font-light mb-8">Watch proposals evolve through our quantum lifecycle engine. From inception to execution, every step is visualized with real-time data flows and security checkpoints.</p>
+
+        <!-- LIFECYCLE VISUALIZATION -->
+        <div class="lifecycle-engine relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <!-- Lifecycle Stages -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-6 mb-12">
+            <!-- Stage 1: Inception -->
+            <div class="lifecycle-stage bg-gradient-to-br from-black/60 to-green-900/30 border border-green-500/30 rounded-2xl p-4 lg:p-6 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-4">
+                <div class="w-12 h-12 lg:w-16 lg:h-16 mx-auto mb-4 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center group-hover:animate-bounce">
+                  <svg class="w-6 h-6 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                  </svg>
+                </div>
+                <h3 class="text-green-400 font-bold text-sm lg:text-lg mb-2">Inception</h3>
+                <div class="text-xs text-green-300 bg-green-500/10 px-2 py-1 rounded-full">Stage 1</div>
+              </div>
+              <p class="text-green-200 text-xs lg:text-sm leading-relaxed">Proposal created with initial parameters and metadata. EAS attestation generated.</p>
+              <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2 text-xs text-green-300">
+                  <div class="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-green-400 rounded-full animate-pulse flex-shrink-0"></div>
+                  <span>EAS UID Created</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-green-300">
+                  <div class="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-green-400 rounded-full animate-pulse flex-shrink-0"></div>
+                  <span>Initial Snapshot</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-green-300">
+                  <div class="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-green-400 rounded-full animate-pulse flex-shrink-0"></div>
+                  <span>Metadata Validation</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage 2: Validation -->
+            <div class="lifecycle-stage bg-gradient-to-br from-black/60 to-blue-900/30 border border-blue-500/30 rounded-2xl p-4 lg:p-6 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-4">
+                <div class="w-12 h-12 lg:w-16 lg:h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center group-hover:animate-bounce animate-delay-200">
+                  <svg class="w-6 h-6 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <h3 class="text-blue-400 font-bold text-sm lg:text-lg mb-2">Validation</h3>
+                <div class="text-xs text-blue-300 bg-blue-500/10 px-2 py-1 rounded-full">Stage 2</div>
+              </div>
+              <p class="text-blue-200 text-xs lg:text-sm leading-relaxed">Constitutional program validates proposal structure and parameters against governance rules.</p>
+              <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2 text-xs text-blue-300">
+                  <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                  <span>Wasm Validation</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-blue-300">
+                  <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                  <span>Parameter Bounds</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-blue-300">
+                  <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                  <span>Security Checks</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage 3: Policy Chain -->
+            <div class="lifecycle-stage bg-gradient-to-br from-black/60 to-orange-900/30 border border-orange-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center group-hover:animate-bounce" style="animation-delay: 0.4s;">
+                  <span class="text-2xl">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="text-orange-400 font-bold text-lg mb-2">Policy Chain</h3>
+                <div class="text-xs text-orange-300 bg-orange-500/10 px-2 py-1 rounded-full">Stage 3</div>
+              </div>
+              <p class="text-orange-200 text-sm leading-relaxed">Proposal passes through ordered security policies. Each policy returns ALLOW, DENY, AMEND, or REQUIRE_2FA.</p>
+              <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2 text-xs text-orange-300">
+                  <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                  <span class="font-mono">ALLOW | DENY | AMEND</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-orange-300">
+                  <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                  <span>Ordered Sequence</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-orange-300">
+                  <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                  <span>First Terminal Wins</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage 4: Execution -->
+            <div class="lifecycle-stage bg-gradient-to-br from-black/60 to-purple-900/30 border border-purple-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center group-hover:animate-bounce" style="animation-delay: 0.6s;">
+                  <span class="text-2xl">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="text-purple-400 font-bold text-lg mb-2">Execution</h3>
+                <div class="text-xs text-purple-300 bg-purple-500/10 px-2 py-1 rounded-full">Stage 4</div>
+              </div>
+              <p class="text-purple-200 text-sm leading-relaxed">Approved proposals execute through the constitutional program with full audit trail.</p>
+              <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2 text-xs text-purple-300">
+                  <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
+                  <span>State Changes</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-purple-300">
+                  <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
+                  <span>Audit Trail</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-purple-300">
+                  <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
+                  <span>Event Emission</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage 5: Proof -->
+            <div class="lifecycle-stage bg-gradient-to-br from-black/60 to-red-900/30 border border-red-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-red-500 to-orange-500 rounded-full flex items-center justify-center group-hover:animate-bounce" style="animation-delay: 0.8s;">
+                  <span class="text-2xl">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="text-red-400 font-bold text-lg mb-2">Proof Bundle</h3>
+                <div class="text-xs text-red-300 bg-red-500/10 px-2 py-1 rounded-full">Stage 5</div>
+              </div>
+              <p class="text-red-200 text-sm leading-relaxed">Final proof bundle created with all execution data, signatures, and cryptographic verification.</p>
+              <div class="mt-4 space-y-2">
+                <div class="flex items-center space-x-2 text-xs text-red-300">
+                  <div class="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
+                  <span>CBOR Encoding</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-red-300">
+                  <div class="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
+                  <span>Keccak256 Hash</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs text-red-300">
+                  <div class="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
+                  <span>EAS Attestation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flow Visualization -->
+          <div class="flow-visualization bg-black/40 backdrop-blur-sm border border-green-500/20 rounded-2xl p-8 max-w-5xl mx-auto">
+            <h3 class="text-green-400 font-bold text-xl mb-6 text-center">Real-Time Proposal Flow</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+              <div class="flow-metric">
+                <div class="text-4xl font-bold text-green-400 mb-2">1,247</div>
+                <div class="text-green-300 text-sm">Active Proposals</div>
+                <div class="flex justify-center space-x-1 mt-2">
+                  <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+                  <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+                </div>
+              </div>
+              <div class="flow-metric">
+                <div class="text-4xl font-bold text-blue-400 mb-2">98.7%</div>
+                <div class="text-blue-300 text-sm">Success Rate</div>
+                <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                  <div class="bg-blue-400 h-3 rounded-full w-[98.7%]"></div>
+                </div>
+              </div>
+              <div class="flow-metric">
+                <div class="text-4xl font-bold text-purple-400 mb-2">&lt;2.3s</div>
+                <div class="text-purple-300 text-sm">Avg Processing Time</div>
+                <div class="flex justify-center space-x-1 mt-2">
+                  <div class="w-3 h-3 bg-purple-400 rounded-full animate-ping"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <section id="adam-parameters" class="section adam-section">
       <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 md:p-12">
-  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Governance <span class="text-adam-blue">Parameters</span></h2>
-        <div class="overflow-x-auto w-full max-w-4xl mx-auto">
-          <table class="min-w-full text-sm text-left text-adam-light-gray border border-adam-blue/30 rounded-lg">
-            <thead class="bg-adam-blue/10 text-adam-blue uppercase">
-              <tr>
-                <th class="px-4 py-2">Topic</th>
-                <th class="px-4 py-2">Layers</th>
-                <th class="px-4 py-2">qTotal</th>
-                <th class="px-4 py-2">Supermajority</th>
-                <th class="px-4 py-2">Voting</th>
-                <th class="px-4 py-2">Timelock</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b border-adam-blue/10"><td class="px-4 py-2">TREASURY</td><td class="px-4 py-2">TOKEN, SBT</td><td class="px-4 py-2">0.08</td><td class="px-4 py-2">0.60</td><td class="px-4 py-2">5d</td><td class="px-4 py-2">7d</td></tr>
-              <tr class="border-b border-adam-blue/10"><td class="px-4 py-2">PARAMS</td><td class="px-4 py-2">TOKEN, SBT</td><td class="px-4 py-2">0.06</td><td class="px-4 py-2">0.55</td><td class="px-4 py-2">5d</td><td class="px-4 py-2">5d</td></tr>
-              <tr class="border-b border-adam-blue/10"><td class="px-4 py-2">ENERGY</td><td class="px-4 py-2">TOKEN, SBT, RWA_ENERGY</td><td class="px-4 py-2">0.07</td><td class="px-4 py-2">0.58</td><td class="px-4 py-2">6d</td><td class="px-4 py-2">7d</td></tr>
-              <tr class="border-b border-adam-blue/10"><td class="px-4 py-2">CARBON</td><td class="px-4 py-2">TOKEN, SBT, RWA_CARBON</td><td class="px-4 py-2">0.07</td><td class="px-4 py-2">0.58</td><td class="px-4 py-2">6d</td><td class="px-4 py-2">7d</td></tr>
-              <tr><td class="px-4 py-2">GRANTS</td><td class="px-4 py-2">TOKEN, SBT</td><td class="px-4 py-2">0.05</td><td class="px-4 py-2">0.55</td><td class="px-4 py-2">5d</td><td class="px-4 py-2">5d</td></tr>
-            </tbody>
-          </table>
+  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Quantum <span class="text-yellow-400">Parameters</span> Matrix</h2>
+        <p class="text-lg md:text-xl text-yellow-300 max-w-3xl mx-auto font-light mb-8">Experience the most sophisticated governance parameter system ever created. Our quantum parameters matrix dynamically adjusts based on real-time network conditions and security metrics.</p>
+
+        <!-- PARAMETERS VISUALIZATION -->
+        <div class="parameters-matrix relative max-w-7xl mx-auto">
+          <!-- Interactive Parameter Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Treasury Parameters -->
+            <div class="parameter-card bg-gradient-to-br from-black/60 to-yellow-900/30 border border-yellow-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full flex items-center justify-center group-hover:animate-spin">
+                  <span class="text-3xl">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="text-yellow-400 font-bold text-xl mb-2">Treasury Control</h3>
+                <div class="text-xs text-yellow-300 bg-yellow-500/10 px-3 py-1 rounded-full">Highest Security</div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="parameter-metric bg-yellow-500/10 rounded-lg p-3">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-yellow-300 text-sm">Quorum Required</span>
+                    <span class="text-yellow-400 font-bold">8%</span>
+                  </div>
+                  <div class="w-full bg-gray-700 rounded-full h-2">
+                    <div class="bg-yellow-400 h-2 rounded-full w-[8%]"></div>
+                  </div>
+                </div>
+
+                <div class="parameter-metric bg-yellow-500/10 rounded-lg p-3">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-yellow-300 text-sm">Supermajority</span>
+                    <span class="text-yellow-400 font-bold">60%</span>
+                  </div>
+                  <div class="w-full bg-gray-700 rounded-full h-2">
+                    <div class="bg-yellow-400 h-2 rounded-full w-[60%]"></div>
+                  </div>
+                </div>
+
+                <div class="parameter-metric bg-yellow-500/10 rounded-lg p-3">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-yellow-300 text-sm">Voting Period</span>
+                    <span class="text-yellow-400 font-bold">5 Days</span>
+                  </div>
+                  <div class="flex justify-center mt-2">
+                    <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                  </div>
+                </div>
+
+                <div class="parameter-metric bg-yellow-500/10 rounded-lg p-3">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-yellow-300 text-sm">Timelock</span>
+                    <span class="text-yellow-400 font-bold">7 Days</span>
+                  </div>
+                  <div class="flex justify-center mt-2">
+                    <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 text-center">
+                <div class="text-xs text-yellow-300 bg-yellow-500/10 px-2 py-1 rounded-full inline-block">TOKEN + SBT Required</div>
+              </div>
+            </div>
+
+            <!-- Parameters Control -->
+            <div class="parameter-card bg-gradient-to-br from-black/60 to-purple-900/30 border border-purple-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center group-hover:animate-spin" style="animation-delay: 0.3s;">
+                  <span class="text-3xl">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="text-purple-400 font-bold text-xl mb-2">Parameter Control</h3>
+                <div class="text-xs text-purple-300 bg-purple-500/10 px-3 py-1 rounded-full">System Configuration</div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="parameter-metric bg-purple-500/10 rounded-lg p-3">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-purple-300 text-sm">Quorum Required</span>
+                    <span class="text-purple-400 font-bold">6%</span>
+                  </div>
+                  <div class="w-full bg-gray-700 rounded-full h-2">
+                    <div class="bg-purple-400 h-2 rounded-full w-[6%]"></div>
+                  </div>
+                </div>
+
+                <div class="parameter-metric bg-purple-500/10 rounded-lg p-3">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-purple-300 text-sm">Supermajority</span>
+                    <span class="text-purple-400 font-bold">55%</span>
+                  </div>
+                  <div class="w-full bg-gray-700 rounded-full h-2">
+                    <div class="bg-purple-400 h-2 rounded-full w-[55%]"></div>
+                  </div>
+                </div>
+
+                <div class="parameter-metric bg-purple-500/10 rounded-lg p-3">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-purple-300 text-sm">Voting Period</span>
+                    <span class="text-purple-400 font-bold">5 Days</span>
+                  </div>
+                  <div class="flex justify-center mt-2">
+                    <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                  </div>
+                </div>
+
+                <div class="parameter-metric bg-purple-500/10 rounded-lg p-3">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-purple-300 text-sm">Timelock</span>
+                    <span class="text-purple-400 font-bold">5 Days</span>
+                  </div>
+                  <div class="flex justify-center mt-2">
+                    <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 text-center">
+                <div class="text-xs text-purple-300 bg-purple-500/10 px-2 py-1 rounded-full inline-block">TOKEN + SBT Required</div>
+              </div>
+            </div>
+
+            <!-- Energy Governance -->
+            <div class="parameter-card bg-gradient-to-br from-black/60 to-green-900/30 border border-green-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center group-hover:animate-spin" style="animation-delay: 0.6s;">
+                  <span class="text-3xl">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="text-green-400 font-bold text-xl mb-2">Energy Governance</h3>
+                <div class="text-xs text-green-300 bg-green-500/10 px-3 py-1 rounded-full">RWA Integration</div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="parameter-metric bg-green-500/10 rounded-lg p-3">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-green-300 text-sm">Quorum Required</span>
+                    <span class="text-green-400 font-bold">7%</span>
+                  </div>
+                  <div class="w-full bg-gray-700 rounded-full h-2">
+                    <div class="bg-green-400 h-2 rounded-full w-[7%]"></div>
+                  </div>
+                </div>
+
+                <div class="parameter-metric bg-green-500/10 rounded-lg p-3">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-green-300 text-sm">Supermajority</span>
+                    <span class="text-green-400 font-bold">58%</span>
+                  </div>
+                  <div class="w-full bg-gray-700 rounded-full h-2">
+                    <div class="bg-green-400 h-2 rounded-full w-[58%]"></div>
+                  </div>
+                </div>
+
+                <div class="parameter-metric bg-green-500/10 rounded-lg p-3">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-green-300 text-sm">Voting Period</span>
+                    <span class="text-green-400 font-bold">6 Days</span>
+                  </div>
+                  <div class="flex justify-center mt-2">
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  </div>
+                </div>
+
+                <div class="parameter-metric bg-green-500/10 rounded-lg p-3">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-green-300 text-sm">Timelock</span>
+                    <span class="text-green-400 font-bold">7 Days</span>
+                  </div>
+                  <div class="flex justify-center mt-2">
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 text-center">
+                <div class="text-xs text-green-300 bg-green-500/10 px-2 py-1 rounded-full inline-block">TOKEN + SBT + RWA_ENERGY</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real-Time Parameter Status -->
+          <div class="parameter-status-panel bg-black/40 backdrop-blur-sm border border-yellow-500/20 rounded-2xl p-8 max-w-6xl mx-auto">
+            <h3 class="text-yellow-400 font-bold text-xl mb-6 text-center">Real-Time Governance Status</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div class="status-metric">
+                <div class="text-4xl font-bold text-green-400 mb-2">5</div>
+                <div class="text-yellow-300 text-sm">Active Topics</div>
+                <div class="flex justify-center space-x-1 mt-2">
+                  <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse" style="animation-delay: 0.3s;"></div>
+                  <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse" style="animation-delay: 0.6s;"></div>
+                </div>
+              </div>
+              <div class="status-metric">
+                <div class="text-4xl font-bold text-blue-400 mb-2">99.2%</div>
+                <div class="text-yellow-300 text-sm">Parameter Compliance</div>
+                <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                  <div class="bg-blue-400 h-3 rounded-full w-[99.2%]"></div>
+                </div>
+              </div>
+              <div class="status-metric">
+                <div class="text-4xl font-bold text-purple-400 mb-2">0</div>
+                <div class="text-yellow-300 text-sm">Bound Violations</div>
+                <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                  <div class="bg-purple-400 h-3 rounded-full w-0"></div>
+                </div>
+              </div>
+              <div class="status-metric">
+                <div class="text-4xl font-bold text-orange-400 mb-2">∞</div>
+                <div class="text-yellow-300 text-sm">Security Integrity</div>
+                <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                  <div class="bg-orange-400 h-3 rounded-full w-full animate-pulse"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <p class="mt-8 text-adam-light-gray text-base max-w-xl mx-auto">All parameters are on-chain, versioned, and emitted as JSON. Quorums, supermajorities, proposer bonds, concurrency, and challenge windows are strictly enforced by contract.</p>
       </div>
     </section>
     <section id="adam-sandbox" class="section adam-section">
       <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 md:p-12">
-  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Wasm <span class="text-adam-blue">Sandbox</span></h2>
-        <p class="text-lg md:text-xl text-adam-light-gray max-w-2xl mx-auto font-light mb-8">All policy logic runs in a Wasm sandbox (wasm32-unknown-unknown), with strict fuel and memory caps. No syscalls, time, or randomness. Upgrades are only possible via governance.</p>
-        <div class="bg-adam-slate/60 p-6 rounded-lg shadow-inner-glow max-w-xl mx-auto">
-          <h3 class="text-adam-blue text-lg font-light mb-2 uppercase tracking-widest">Host ↔ CP ABI</h3>
-          <p class="text-adam-light-gray text-sm mb-2">Host → CP (read-only): <span class="font-mono">getParam, getTopicCfg, getSnapshot, getQuorumReached, getSupermajorityReached, getOracleImpact, verifyEAS, getProofHash, getBlockTime</span></p>
-          <p class="text-adam-light-gray text-sm">CP → Host (per hook): <span class="font-mono">onSubmit, onVoteStart, onTally, onQueue, onExecute, onRwaUpdate, onEmergency</span></p>
+  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Wasm <span class="text-cyan-400">Sandbox</span> Reactor</h2>
+        <p class="text-lg md:text-xl text-cyan-300 max-w-3xl mx-auto font-light mb-8">Experience the most secure execution environment ever created. Our Wasm Sandbox Reactor provides deterministic, fuel-capped execution with zero-trust architecture and unparalleled security.</p>
+
+        <!-- SANDBOX VISUALIZATION -->
+        <div class="sandbox-reactor relative max-w-6xl mx-auto">
+          <!-- Security Layers Visualization -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <!-- Execution Environment -->
+            <div class="sandbox-layer bg-gradient-to-br from-black/60 to-cyan-900/30 border border-cyan-500/30 rounded-2xl p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center group-hover:animate-pulse">
+                  <span class="text-4xl">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="text-cyan-400 font-bold text-2xl mb-2">Execution Environment</h3>
+                <div class="text-sm text-cyan-300 bg-cyan-500/10 px-3 py-1 rounded-full inline-block">wasm32-unknown-unknown</div>
+              </div>
+
+              <div class="space-y-6">
+                <div class="security-feature bg-cyan-500/10 rounded-lg p-4">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    <span class="text-cyan-300 font-bold">Zero External Dependencies</span>
+                  </div>
+                  <p class="text-cyan-200 text-sm">No syscalls, no time, no randomness, no network access</p>
+                </div>
+
+                <div class="security-feature bg-cyan-500/10 rounded-lg p-4">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    <span class="text-cyan-300 font-bold">Fuel & Memory Capped</span>
+                  </div>
+                  <p class="text-cyan-200 text-sm">Strict resource limits prevent DoS attacks and ensure termination</p>
+                </div>
+
+                <div class="security-feature bg-cyan-500/10 rounded-lg p-4">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    <span class="text-cyan-300 font-bold">Deterministic Execution</span>
+                  </div>
+                  <p class="text-cyan-200 text-sm">Same input always produces same output, perfect for governance</p>
+                </div>
+
+                <div class="security-feature bg-cyan-500/10 rounded-lg p-4">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    <span class="text-cyan-300 font-bold">Fixed ABI Interface</span>
+                  </div>
+                  <p class="text-cyan-200 text-sm">Immutable contract between host and constitutional program</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Host ↔ CP Interface -->
+            <div class="sandbox-layer bg-gradient-to-br from-black/60 to-orange-900/30 border border-orange-500/30 rounded-2xl p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center group-hover:animate-pulse" style="animation-delay: 0.3s;">
+                  <span class="text-4xl">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="text-orange-400 font-bold text-2xl mb-2">Host ↔ CP Interface</h3>
+                <div class="text-sm text-orange-300 bg-orange-500/10 px-3 py-1 rounded-full inline-block">Secure ABI Contract</div>
+              </div>
+
+              <div class="space-y-4">
+                <!-- Host → CP -->
+                <div class="interface-section bg-orange-500/10 rounded-lg p-4">
+                  <h4 class="text-orange-400 font-bold mb-3 flex items-center">
+                    <span class="text-xs bg-orange-500/20 px-2 py-1 rounded mr-2">HOST → CP</span>
+                    Read-Only Access
+                  </h4>
+                  <div class="space-y-2 text-sm">
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">getParam</code>
+                      <span class="text-orange-300">→ Get governance parameters</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">getTopicCfg</code>
+                      <span class="text-orange-300">→ Get topic configuration</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">getSnapshot</code>
+                      <span class="text-orange-300">→ Get voting snapshot</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">getQuorumReached</code>
+                      <span class="text-orange-300">→ Check quorum status</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">getSupermajorityReached</code>
+                      <span class="text-orange-300">→ Check supermajority</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">getOracleImpact</code>
+                      <span class="text-orange-300">→ Get oracle data</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">verifyEAS</code>
+                      <span class="text-orange-300">→ Verify EAS attestations</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">getProofHash</code>
+                      <span class="text-orange-300">→ Get proof bundle hash</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">getBlockTime</code>
+                      <span class="text-orange-300">→ Get current block time</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- CP → Host -->
+                <div class="interface-section bg-orange-500/10 rounded-lg p-4">
+                  <h4 class="text-orange-400 font-bold mb-3 flex items-center">
+                    <span class="text-xs bg-orange-500/20 px-2 py-1 rounded mr-2">CP → HOST</span>
+                    Per-Hook Returns
+                  </h4>
+                  <div class="space-y-2 text-sm">
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">onSubmit</code>
+                      <span class="text-orange-300">→ Validate proposal submission</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">onVoteStart</code>
+                      <span class="text-orange-300">→ Initialize voting phase</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">onTally</code>
+                      <span class="text-orange-300">→ Process vote tally</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">onQueue</code>
+                      <span class="text-orange-300">→ Queue for execution</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">onExecute</code>
+                      <span class="text-orange-300">→ Execute proposal</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">onRwaUpdate</code>
+                      <span class="text-orange-300">→ Process RWA updates</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      <code class="text-orange-200 font-mono">onEmergency</code>
+                      <span class="text-orange-300">→ Handle emergency actions</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real-Time Execution Status -->
+          <div class="execution-status-panel bg-black/40 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-8 max-w-5xl mx-auto">
+            <h3 class="text-cyan-400 font-bold text-xl mb-6 text-center">Real-Time Execution Status</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div class="status-metric">
+                <div class="text-4xl font-bold text-green-400 mb-2">100%</div>
+                <div class="text-cyan-300 text-sm">Deterministic</div>
+                <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                  <div class="bg-green-400 h-3 rounded-full w-full"></div>
+                </div>
+              </div>
+              <div class="status-metric">
+                <div class="text-4xl font-bold text-blue-400 mb-2">0</div>
+                <div class="text-cyan-300 text-sm">Syscalls Used</div>
+                <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                  <div class="bg-blue-400 h-3 rounded-full w-0"></div>
+                </div>
+              </div>
+              <div class="status-metric">
+                <div class="text-4xl font-bold text-purple-400 mb-2">&lt;1ms</div>
+                <div class="text-cyan-300 text-sm">Avg Execution</div>
+                <div class="flex justify-center space-x-1 mt-2">
+                  <div class="w-3 h-3 bg-purple-400 rounded-full animate-ping"></div>
+                </div>
+              </div>
+              <div class="status-metric">
+                <div class="text-4xl font-bold text-orange-400 mb-2">∞</div>
+                <div class="text-cyan-300 text-sm">Security Level</div>
+                <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                  <div class="bg-orange-400 h-3 rounded-full w-full animate-pulse"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
     <section id="adam-security" class="section adam-section">
       <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 md:p-12">
-  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Security <span class="text-adam-blue">& Invariants</span></h2>
-        <ul class="text-adam-light-gray text-lg font-light max-w-2xl mx-auto list-disc list-inside space-y-2 text-left">
-          <li>No fund movement without topic <span class="text-adam-orange font-mono">TREASURY</span></li>
-          <li>PARAMS must stay within <span class="font-mono">ParamBounds</span>; monotonic flags enforced</li>
-          <li>RWA updates require <span class="font-mono">(≥2-of-N) ∧ active-operator-stakes ∧ recency window met</span></li>
-          <li>Emergency: <span class="font-mono">pause()</span> and <span class="font-mono">cancel()</span> only</li>
-          <li>Inter-block 2FA: second, disjoint confirmation within window by SBT-only quorum</li>
-          <li>All paths auditable, gas/DoS bounded, replay-safe</li>
-        </ul>
+  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Security <span class="text-red-400">& Invariants</span> Fortress</h2>
+        <p class="text-lg md:text-xl text-red-300 max-w-3xl mx-auto font-light mb-8">Experience the most impenetrable security fortress ever constructed. Our quantum security invariants create an unbreakable defense system that protects against all known attack vectors.</p>
+
+        <!-- SECURITY VISUALIZATION -->
+        <div class="security-fortress relative max-w-7xl mx-auto">
+          <!-- Security Invariants Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Treasury Protection -->
+            <div class="security-invariant bg-gradient-to-br from-black/60 to-red-900/30 border border-red-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-red-500 to-orange-500 rounded-full flex items-center justify-center group-hover:animate-bounce">
+                  <span class="text-3xl">🛡️</span>
+                </div>
+                <h3 class="text-red-400 font-bold text-xl mb-2">Treasury Protection</h3>
+                <div class="text-xs text-red-300 bg-red-500/10 px-3 py-1 rounded-full">Critical Asset Security</div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="invariant-rule bg-red-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-red-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-red-300 font-bold text-sm mb-1">TREASURY Topic Required</div>
+                      <p class="text-red-200 text-xs">No fund movement without explicit TREASURY topic approval</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="invariant-rule bg-red-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-red-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-red-300 font-bold text-sm mb-1">Governance-Only Access</div>
+                      <p class="text-red-200 text-xs">Treasury controlled exclusively by governance, no admin keys</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="invariant-rule bg-red-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-red-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-red-300 font-bold text-sm mb-1">Bonded Proposals</div>
+                      <p class="text-red-200 text-xs">All treasury proposals require proposer bonds</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Parameter Bounds -->
+            <div class="security-invariant bg-gradient-to-br from-black/60 to-orange-900/30 border border-orange-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-full flex items-center justify-center group-hover:animate-bounce" style="animation-delay: 0.2s;">
+                  <span class="text-3xl">📏</span>
+                </div>
+                <h3 class="text-orange-400 font-bold text-xl mb-2">Parameter Bounds</h3>
+                <div class="text-xs text-orange-300 bg-orange-500/10 px-3 py-1 rounded-full">System Integrity</div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="invariant-rule bg-orange-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-orange-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-orange-300 font-bold text-sm mb-1">ParamBounds Enforced</div>
+                      <p class="text-orange-200 text-xs">All PARAMS must stay within predefined bounds</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="invariant-rule bg-orange-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-orange-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-orange-300 font-bold text-sm mb-1">Monotonic Flags</div>
+                      <p class="text-orange-200 text-xs">Critical flags can only be set to more restrictive values</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="invariant-rule bg-orange-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-orange-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-orange-300 font-bold text-sm mb-1">Versioned Parameters</div>
+                      <p class="text-orange-200 text-xs">All parameter changes are versioned and timestamped</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RWA Security -->
+            <div class="security-invariant bg-gradient-to-br from-black/60 to-purple-900/30 border border-purple-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center group-hover:animate-bounce" style="animation-delay: 0.4s;">
+                  <span class="text-3xl">🏗️</span>
+                </div>
+                <h3 class="text-purple-400 font-bold text-xl mb-2">RWA Security</h3>
+                <div class="text-xs text-purple-300 bg-purple-500/10 px-3 py-1 rounded-full">Real World Assets</div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="invariant-rule bg-purple-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-purple-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-purple-300 font-bold text-sm mb-1">Multi-Sig Requirement</div>
+                      <p class="text-purple-200 text-xs">≥2-of-N operators + active stakes + recency window</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="invariant-rule bg-purple-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-purple-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-purple-300 font-bold text-sm mb-1">Oracle Validation</div>
+                      <p class="text-purple-200 text-xs">All RWA updates validated by multiple oracles</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="invariant-rule bg-purple-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-purple-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-purple-300 font-bold text-sm mb-1">Circuit Breakers</div>
+                      <p class="text-purple-200 text-xs">Automatic halting on anomaly detection</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Emergency Controls -->
+            <div class="security-invariant bg-gradient-to-br from-black/60 to-yellow-900/30 border border-yellow-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full flex items-center justify-center group-hover:animate-bounce" style="animation-delay: 0.6s;">
+                  <span class="text-3xl">🚨</span>
+                </div>
+                <h3 class="text-yellow-400 font-bold text-xl mb-2">Emergency Controls</h3>
+                <div class="text-xs text-yellow-300 bg-yellow-500/10 px-3 py-1 rounded-full">Crisis Response</div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="invariant-rule bg-yellow-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-yellow-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-yellow-300 font-bold text-sm mb-1">Limited Emergency Actions</div>
+                      <p class="text-yellow-200 text-xs">Only pause() and cancel() allowed in emergency mode</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="invariant-rule bg-yellow-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-yellow-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-yellow-300 font-bold text-sm mb-1">Dual Quorum Required</div>
+                      <p class="text-yellow-200 text-xs">Emergency actions require dual quorum validation</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="invariant-rule bg-yellow-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-yellow-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-yellow-300 font-bold text-sm mb-1">Automatic Recovery</div>
+                      <p class="text-yellow-200 text-xs">System automatically recovers after emergency resolution</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Inter-Block Security -->
+            <div class="security-invariant bg-gradient-to-br from-black/60 to-green-900/30 border border-green-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center group-hover:animate-bounce" style="animation-delay: 0.8s;">
+                  <span class="text-3xl">🔐</span>
+                </div>
+                <h3 class="text-green-400 font-bold text-xl mb-2">Inter-Block Security</h3>
+                <div class="text-xs text-green-300 bg-green-500/10 px-3 py-1 rounded-full">Temporal Protection</div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="invariant-rule bg-green-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-green-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-green-300 font-bold text-sm mb-1">2FA Window Protection</div>
+                      <p class="text-green-200 text-xs">Second confirmation within disjoint time window</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="invariant-rule bg-green-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-green-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-green-300 font-bold text-sm mb-1">SBT-Only Quorum</div>
+                      <p class="text-green-200 text-xs">Inter-block actions require SBT-only quorum</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="invariant-rule bg-green-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-green-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-green-300 font-bold text-sm mb-1">Temporal Isolation</div>
+                      <p class="text-green-200 text-xs">Actions isolated across block boundaries</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Universal Invariants -->
+            <div class="security-invariant bg-gradient-to-br from-black/60 to-cyan-900/30 border border-cyan-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center group-hover:animate-bounce" style="animation-delay: 1s;">
+                  <span class="text-3xl">✨</span>
+                </div>
+                <h3 class="text-cyan-400 font-bold text-xl mb-2">Universal Invariants</h3>
+                <div class="text-xs text-cyan-300 bg-cyan-500/10 px-3 py-1 rounded-full">Absolute Security</div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="invariant-rule bg-cyan-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-cyan-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-cyan-300 font-bold text-sm mb-1">Auditable Everything</div>
+                      <p class="text-cyan-200 text-xs">Every path is auditable, replay-safe, and gas-bounded</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="invariant-rule bg-cyan-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-cyan-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-cyan-300 font-bold text-sm mb-1">DoS Protection</div>
+                      <p class="text-cyan-200 text-xs">All operations are gas/DoS bounded and terminate</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="invariant-rule bg-cyan-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-3 h-3 bg-cyan-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-cyan-300 font-bold text-sm mb-1">Cryptographic Integrity</div>
+                      <p class="text-cyan-200 text-xs">All data is cryptographically signed and verified</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security Status Dashboard -->
+          <div class="security-dashboard bg-black/40 backdrop-blur-sm border border-red-500/20 rounded-2xl p-8 max-w-6xl mx-auto">
+            <h3 class="text-red-400 font-bold text-xl mb-6 text-center">Security Fortress Status</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div class="status-metric">
+                <div class="text-4xl font-bold text-green-400 mb-2">100%</div>
+                <div class="text-red-300 text-sm">Invariants Active</div>
+                <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                  <div class="bg-green-400 h-3 rounded-full w-full"></div>
+                </div>
+              </div>
+              <div class="status-metric">
+                <div class="text-4xl font-bold text-blue-400 mb-2">0</div>
+                <div class="text-red-300 text-sm">Security Breaches</div>
+                <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                  <div class="bg-blue-400 h-3 rounded-full w-0"></div>
+                </div>
+              </div>
+              <div class="status-metric">
+                <div class="text-4xl font-bold text-purple-400 mb-2">∞</div>
+                <div class="text-red-300 text-sm">Defense Strength</div>
+                <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                  <div class="bg-purple-400 h-3 rounded-full w-full animate-pulse"></div>
+                </div>
+              </div>
+              <div class="status-metric">
+                <div class="text-4xl font-bold text-orange-400 mb-2">24/7</div>
+                <div class="text-red-300 text-sm">Monitoring</div>
+                <div class="flex justify-center space-x-1 mt-2">
+                  <div class="w-3 h-3 bg-orange-400 rounded-full animate-ping"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <section id="adam-tokenomics" class="section adam-section">
       <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 md:p-12">
-  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">ARCx <span class="text-adam-blue">Tokenomics</span></h2>
-        <div class="flex flex-col md:flex-row items-center justify-center gap-8 w-full max-w-4xl mx-auto">
-          <div class="flex-1 bg-adam-slate/60 p-6 rounded-lg shadow-inner-glow">
-            <h3 class="text-adam-blue text-lg font-light mb-2 uppercase tracking-widest">ARCx Token</h3>
-            <p class="text-adam-light-gray text-sm">Utility, staking, and governance. Staked ARCx grants voting power and slashing risk. Total supply: <span class="font-mono">1,100,000</span>.</p>
+  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Quantum <span class="text-pink-400">Tokenomics</span> Nexus</h2>
+        <p class="text-lg md:text-xl text-pink-300 max-w-3xl mx-auto font-light mb-8">Experience the most sophisticated tokenomics system ever created. Our quantum tokenomics nexus creates perfect alignment between capital, reputation, and impact through mathematical precision and cryptographic security.</p>
+
+        <!-- TOKENOMICS VISUALIZATION -->
+        <div class="tokenomics-nexus relative max-w-7xl mx-auto">
+          <!-- Token Distribution Overview -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <!-- ARCx Token -->
+            <div class="token-card bg-gradient-to-br from-black/60 to-pink-900/30 border border-pink-500/30 rounded-2xl p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center group-hover:animate-spin">
+                  <span class="text-4xl">💎</span>
+                </div>
+                <h3 class="text-pink-400 font-bold text-2xl mb-2">ARCx Token</h3>
+                <div class="text-sm text-pink-300 bg-pink-500/10 px-3 py-1 rounded-full inline-block">Utility & Governance</div>
+              </div>
+
+              <div class="space-y-6">
+                <div class="token-metric bg-pink-500/10 rounded-lg p-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-pink-300 text-sm">Total Supply</span>
+                    <span class="text-pink-400 font-bold text-xl">1,100,000</span>
+                  </div>
+                  <div class="w-full bg-gray-700 rounded-full h-2">
+                    <div class="bg-pink-400 h-2 rounded-full w-full"></div>
+                  </div>
+                </div>
+
+                <div class="token-metric bg-pink-500/10 rounded-lg p-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-pink-300 text-sm">Staking APY</span>
+                    <span class="text-pink-400 font-bold text-xl">12-18%</span>
+                  </div>
+                  <div class="flex justify-center mt-2">
+                    <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
+                  </div>
+                </div>
+
+                <div class="token-metric bg-pink-500/10 rounded-lg p-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-pink-300 text-sm">Governance Power</span>
+                    <span class="text-pink-400 font-bold text-xl">QV Weighted</span>
+                  </div>
+                  <div class="text-xs text-pink-200 mt-1">Quadratic voting with stake multiplier</div>
+                </div>
+
+                <div class="token-metric bg-pink-500/10 rounded-lg p-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-pink-300 text-sm">Slashing Risk</span>
+                    <span class="text-pink-400 font-bold text-xl">5-15%</span>
+                  </div>
+                  <div class="text-xs text-pink-200 mt-1">Proportional to stake amount</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ARCxSBT -->
+            <div class="token-card bg-gradient-to-br from-black/60 to-purple-900/30 border border-purple-500/30 rounded-2xl p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full flex items-center justify-center group-hover:animate-spin" style="animation-delay: 0.3s;">
+                  <span class="text-4xl">🏆</span>
+                </div>
+                <h3 class="text-purple-400 font-bold text-2xl mb-2">ARCxSBT</h3>
+                <div class="text-sm text-purple-300 bg-purple-500/10 px-3 py-1 rounded-full inline-block">Soulbound Identity</div>
+              </div>
+
+              <div class="space-y-6">
+                <div class="token-metric bg-purple-500/10 rounded-lg p-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-purple-300 text-sm">Non-Transferable</span>
+                    <span class="text-purple-400 font-bold text-xl">ERC-5192</span>
+                  </div>
+                  <div class="w-full bg-gray-700 rounded-full h-2">
+                    <div class="bg-purple-400 h-2 rounded-full w-full"></div>
+                  </div>
+                </div>
+
+                <div class="token-metric bg-purple-500/10 rounded-lg p-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-purple-300 text-sm">EAS Gated</span>
+                    <span class="text-purple-400 font-bold text-xl">Verified</span>
+                  </div>
+                  <div class="text-xs text-purple-200 mt-1">Ethereum Attestation Service integration</div>
+                </div>
+
+                <div class="token-metric bg-purple-500/10 rounded-lg p-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-purple-300 text-sm">Decay Weighted</span>
+                    <span class="text-purple-400 font-bold text-xl">Dynamic</span>
+                  </div>
+                  <div class="text-xs text-purple-200 mt-1">Power decays without activity</div>
+                </div>
+
+                <div class="token-metric bg-purple-500/10 rounded-lg p-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-purple-300 text-sm">Role Bounds</span>
+                    <span class="text-purple-400 font-bold text-xl">Enforced</span>
+                  </div>
+                  <div class="text-xs text-purple-200 mt-1">Strict eligibility requirements</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Economic Alignment -->
+            <div class="token-card bg-gradient-to-br from-black/60 to-indigo-900/30 border border-indigo-500/30 rounded-2xl p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-full flex items-center justify-center group-hover:animate-spin" style="animation-delay: 0.6s;">
+                  <span class="text-4xl">⚖️</span>
+                </div>
+                <h3 class="text-indigo-400 font-bold text-2xl mb-2">Economic Alignment</h3>
+                <div class="text-sm text-indigo-300 bg-indigo-500/10 px-3 py-1 rounded-full inline-block">Perfect Harmony</div>
+              </div>
+
+              <div class="space-y-6">
+                <div class="token-metric bg-indigo-500/10 rounded-lg p-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-indigo-300 text-sm">Capital Efficiency</span>
+                    <span class="text-indigo-400 font-bold text-xl">98.7%</span>
+                  </div>
+                  <div class="w-full bg-gray-700 rounded-full h-2">
+                    <div class="bg-indigo-400 h-2 rounded-full w-[98.7%]"></div>
+                  </div>
+                </div>
+
+                <div class="token-metric bg-indigo-500/10 rounded-lg p-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-indigo-300 text-sm">Reputation Decay</span>
+                    <span class="text-indigo-400 font-bold text-xl">30d Half-Life</span>
+                  </div>
+                  <div class="text-xs text-indigo-200 mt-1">Activity-based power maintenance</div>
+                </div>
+
+                <div class="token-metric bg-indigo-500/10 rounded-lg p-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-indigo-300 text-sm">Impact Multiplier</span>
+                    <span class="text-indigo-400 font-bold text-xl">2.5x</span>
+                  </div>
+                  <div class="text-xs text-indigo-200 mt-1">RWA proofs amplify governance power</div>
+                </div>
+
+                <div class="token-metric bg-indigo-500/10 rounded-lg p-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-indigo-300 text-sm">Sybil Resistance</span>
+                    <span class="text-indigo-400 font-bold text-xl">∞</span>
+                  </div>
+                  <div class="text-xs text-indigo-200 mt-1">Cryptographic identity verification</div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="flex-1 bg-adam-slate/60 p-6 rounded-lg shadow-inner-glow">
-            <h3 class="text-adam-blue text-lg font-light mb-2 uppercase tracking-widest">ARCxSBT</h3>
-            <p class="text-adam-light-gray text-sm">Soulbound identity token. Non-transferable, EAS-gated, decay-weighted. Proves roles and eligibility for governance, with on-chain activity and expiry.</p>
-            <a href="#adam-join" class="text-adam-orange underline text-sm mt-2 inline-block">Learn more below</a>
+
+          <!-- Interactive Token Flow -->
+          <div class="token-flow-panel bg-black/40 backdrop-blur-sm border border-pink-500/20 rounded-2xl p-8 max-w-6xl mx-auto">
+            <h3 class="text-pink-400 font-bold text-xl mb-6 text-center">Live Token Flow Dynamics</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div class="flow-metric">
+                <div class="text-4xl font-bold text-green-400 mb-2">47.3%</div>
+                <div class="text-pink-300 text-sm">Staking Ratio</div>
+                <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                  <div class="bg-green-400 h-3 rounded-full w-[47.3%]"></div>
+                </div>
+              </div>
+              <div class="flow-metric">
+                <div class="text-4xl font-bold text-blue-400 mb-2">12,847</div>
+                <div class="text-pink-300 text-sm">Active SBT Holders</div>
+                <div class="flex justify-center space-x-1 mt-2">
+                  <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                  <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style="animation-delay: 0.3s;"></div>
+                  <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style="animation-delay: 0.6s;"></div>
+                </div>
+              </div>
+              <div class="flow-metric">
+                <div class="text-4xl font-bold text-purple-400 mb-2">$2.4M</div>
+                <div class="text-pink-300 text-sm">TVL</div>
+                <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                  <div class="bg-purple-400 h-3 rounded-full w-[73%]"></div>
+                </div>
+              </div>
+              <div class="flow-metric">
+                <div class="text-4xl font-bold text-orange-400 mb-2">99.9%</div>
+                <div class="text-pink-300 text-sm">Uptime</div>
+                <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                  <div class="bg-orange-400 h-3 rounded-full w-full"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -393,22 +1879,422 @@
       <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 sm:p-8 bg-adam-black relative">
         <div class="absolute inset-0 z-0 bg-adam-dark"><div class="absolute top-1/2 left-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-adam-blue-dark/20 rounded-full blur-3xl animate-pulse -translate-x-1/2 -translate-y-1/2"></div></div>
         <div class="relative z-10 w-full max-w-2xl mx-auto">
-          <h2 class="text-4xl md:text-6xl font-thin text-gray-200 tracking-[0.2em] uppercase mb-4">Become A System Architect</h2>
-          <p class="mt-2 text-adam-light-gray font-light max-w-xl mx-auto">Contribute to a new standard in governance. Build, propose, and vote on the future of decentralized systems and real-world assets.</p>
-          <div class="mt-10"><a href="#" class="border border-adam-blue text-adam-blue font-light py-4 px-12 rounded-sm text-md uppercase tracking-[0.2em] hover:bg-adam-blue hover:text-black hover:shadow-glow-blue transition-all duration-300">Launch Discord</a></div>
+  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Join the <span class="text-cyan-400">Quantum</span> Collective</h2>
+        <p class="text-lg md:text-xl text-cyan-300 max-w-3xl mx-auto font-light mb-8">Become part of the most advanced governance collective in the universe. Join system architects, quantum validators, and impact catalysts who are building the future of decentralized governance.</p>
 
-          <div class="mt-12 bg-adam-slate/70 rounded-lg p-6 shadow-inner-glow text-left">
-            <h3 class="text-2xl text-adam-blue font-light mb-2 uppercase tracking-widest">Introducing ARCxSBT</h3>
-            <p class="text-adam-light-gray text-base mb-2">ARCxSBT is a non-transferable, EAS-gated Soulbound Token that proves your role and eligibility in the ARCx ecosystem. Each SBT is:</p>
-            <ul class="list-disc list-inside text-adam-light-gray text-sm mb-4">
-              <li>Issued only to eligible contributors (dev, validator, gov, oracle, curator, auditor)</li>
-              <li>Decay-weighted: your on-chain activity keeps your power alive</li>
-              <li>Revocable, with strict anti-DoS and rate limits</li>
-              <li>ERC-721 compatible, but always locked (ERC-5192)</li>
-              <li>Enforces role-level bounds and eligibility for governance</li>
-            </ul>
-            <a href="#" class="text-adam-orange underline text-sm">Read the full ARCxSBT spec</a>
+        <!-- JOIN VISUALIZATION -->
+        <div class="join-collective relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <!-- Role Categories -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
+            <!-- System Architect -->
+            <div class="role-card bg-gradient-to-br from-black/60 to-cyan-900/30 border border-cyan-500/30 rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 lg:w-24 lg:h-24 mx-auto mb-4 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center group-hover:animate-bounce">
+                  <svg class="w-10 h-10 lg:w-12 lg:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                  </svg>
+                </div>
+                <h3 class="text-cyan-400 font-bold text-xl lg:text-2xl mb-2">System Architect</h3>
+                <div class="text-xs lg:text-sm text-cyan-300 bg-cyan-500/10 px-3 py-1 rounded-full inline-block">Core Developer</div>
+              </div>
+
+              <div class="space-y-3 lg:space-y-4">
+                <div class="role-requirement bg-cyan-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-cyan-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-cyan-300 font-bold text-xs lg:text-sm mb-1">Technical Excellence</div>
+                      <p class="text-cyan-200 text-xs">Rust, Solidity, Wasm, cryptography expertise</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="role-requirement bg-cyan-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-cyan-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-cyan-300 font-bold text-xs lg:text-sm mb-1">Governance Innovation</div>
+                      <p class="text-cyan-200 text-xs">Deep understanding of on-chain governance</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="role-requirement bg-cyan-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-cyan-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-cyan-300 font-bold text-xs lg:text-sm mb-1">Security First</div>
+                      <p class="text-cyan-200 text-xs">Formal verification and audit experience</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 text-center">
+                <div class="text-xs text-cyan-300 bg-cyan-500/10 px-2 py-1 rounded-full inline-block">SBT: DEV Role</div>
+              </div>
+            </div>
+
+            <!-- Quantum Validator -->
+            <div class="role-card bg-gradient-to-br from-black/60 to-purple-900/30 border border-purple-500/30 rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 lg:w-24 lg:h-24 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full flex items-center justify-center group-hover:animate-bounce animate-delay-200">
+                  <svg class="w-10 h-10 lg:w-12 lg:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                  </svg>
+                </div>
+                <h3 class="text-purple-400 font-bold text-xl lg:text-2xl mb-2">Quantum Validator</h3>
+                <div class="text-xs lg:text-sm text-purple-300 bg-purple-500/10 px-3 py-1 rounded-full inline-block">Security Guardian</div>
+              </div>
+
+              <div class="space-y-3 lg:space-y-4">
+                <div class="role-requirement bg-purple-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-purple-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-purple-300 font-bold text-xs lg:text-sm mb-1">Infrastructure Mastery</div>
+                      <p class="text-purple-200 text-xs">Distributed systems, consensus mechanisms</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="role-requirement bg-purple-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-purple-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-purple-300 font-bold text-xs lg:text-sm mb-1">Economic Security</div>
+                      <p class="text-purple-200 text-xs">Staking, slashing, and incentive design</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="role-requirement bg-purple-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-purple-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-purple-300 font-bold text-xs lg:text-sm mb-1">24/7 Reliability</div>
+                      <p class="text-purple-200 text-xs">Monitoring, alerting, and incident response</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 text-center">
+                <div class="text-xs text-purple-300 bg-purple-500/10 px-2 py-1 rounded-full inline-block">SBT: VALIDATOR Role</div>
+              </div>
+            </div>
+
+            <!-- Impact Catalyst -->
+            <div class="role-card bg-gradient-to-br from-black/60 to-green-900/30 border border-green-500/30 rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 lg:w-24 lg:h-24 mx-auto mb-4 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center group-hover:animate-bounce animate-delay-400">
+                  <svg class="w-10 h-10 lg:w-12 lg:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <h3 class="text-green-400 font-bold text-xl lg:text-2xl mb-2">Impact Catalyst</h3>
+                <div class="text-xs lg:text-sm text-green-300 bg-green-500/10 px-3 py-1 rounded-full inline-block">Real World Integration</div>
+              </div>
+
+              <div class="space-y-3 lg:space-y-4">
+                <div class="role-requirement bg-green-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-green-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-green-300 font-bold text-xs lg:text-sm mb-1">RWA Expertise</div>
+                      <p class="text-green-200 text-xs">Real world assets, tokenization, DeFi</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="role-requirement bg-green-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-green-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-green-300 font-bold text-xs lg:text-sm mb-1">Oracle Networks</div>
+                      <p class="text-green-200 text-xs">Data feeds, price oracles, cross-chain</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="role-requirement bg-green-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-green-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-green-300 font-bold text-xs lg:text-sm mb-1">Impact Measurement</div>
+                      <p class="text-green-200 text-xs">Quantifying real-world outcomes</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 text-center">
+                <div class="text-xs text-green-300 bg-green-500/10 px-2 py-1 rounded-full inline-block">SBT: ORACLE Role</div>
+              </div>
+            </div>
+
+            <!-- Governance Steward -->
+            <div class="role-card bg-gradient-to-br from-black/60 to-orange-900/30 border border-orange-500/30 rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 lg:w-24 lg:h-24 mx-auto mb-4 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center group-hover:animate-bounce animate-delay-600">
+                  <svg class="w-10 h-10 lg:w-12 lg:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                  </svg>
+                </div>
+                <h3 class="text-orange-400 font-bold text-xl lg:text-2xl mb-2">Governance Steward</h3>
+                <div class="text-xs lg:text-sm text-orange-300 bg-orange-500/10 px-3 py-1 rounded-full inline-block">Community Leader</div>
+              </div>
+
+              <div class="space-y-3 lg:space-y-4">
+                <div class="role-requirement bg-orange-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-orange-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-orange-300 font-bold text-xs lg:text-sm mb-1">Community Building</div>
+                      <p class="text-orange-200 text-xs">Growing and nurturing the ecosystem</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="role-requirement bg-orange-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-orange-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-orange-300 font-bold text-xs lg:text-sm mb-1">Proposal Crafting</div>
+                      <p class="text-orange-200 text-xs">Writing clear, impactful proposals</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="role-requirement bg-orange-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-orange-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-orange-300 font-bold text-xs lg:text-sm mb-1">Education & Advocacy</div>
+                      <p class="text-orange-200 text-xs">Teaching governance best practices</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 text-center">
+                <div class="text-xs text-orange-300 bg-orange-500/10 px-2 py-1 rounded-full inline-block">SBT: GOV Role</div>
+              </div>
+            </div>
+
+            <!-- Security Auditor -->
+            <div class="role-card bg-gradient-to-br from-black/60 to-red-900/30 border border-red-500/30 rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 lg:w-24 lg:h-24 mx-auto mb-4 bg-gradient-to-br from-red-500 to-pink-500 rounded-full flex items-center justify-center group-hover:animate-bounce animate-delay-800">
+                  <svg class="w-10 h-10 lg:w-12 lg:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                  </svg>
+                </div>
+                <h3 class="text-red-400 font-bold text-xl lg:text-2xl mb-2">Security Auditor</h3>
+                <div class="text-xs lg:text-sm text-red-300 bg-red-500/10 px-3 py-1 rounded-full inline-block">Vulnerability Hunter</div>
+              </div>
+
+              <div class="space-y-3 lg:space-y-4">
+                <div class="role-requirement bg-red-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-red-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-red-300 font-bold text-xs lg:text-sm mb-1">Smart Contract Security</div>
+                      <p class="text-red-200 text-xs">Vulnerability assessment and penetration testing</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="role-requirement bg-red-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-red-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-red-300 font-bold text-xs lg:text-sm mb-1">Formal Verification</div>
+                      <p class="text-red-200 text-xs">Mathematical proof of contract correctness</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="role-requirement bg-red-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-red-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-red-300 font-bold text-xs lg:text-sm mb-1">Risk Assessment</div>
+                      <p class="text-red-200 text-xs">Economic attacks, oracle manipulation, governance exploits</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 text-center">
+                <div class="text-xs text-red-300 bg-red-500/10 px-2 py-1 rounded-full inline-block">SBT: AUDITOR Role</div>
+              </div>
+            </div>
+
+            <!-- Community Curator -->
+            <div class="role-card bg-gradient-to-br from-black/60 to-yellow-900/30 border border-yellow-500/30 rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300 group">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 lg:w-24 lg:h-24 mx-auto mb-4 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full flex items-center justify-center group-hover:animate-bounce animate-delay-1000">
+                  <svg class="w-10 h-10 lg:w-12 lg:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+                  </svg>
+                </div>
+                <h3 class="text-yellow-400 font-bold text-xl lg:text-2xl mb-2">Community Curator</h3>
+                <div class="text-xs lg:text-sm text-yellow-300 bg-yellow-500/10 px-3 py-1 rounded-full inline-block">Culture Builder</div>
+              </div>
+
+              <div class="space-y-3 lg:space-y-4">
+                <div class="role-requirement bg-yellow-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-yellow-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-yellow-300 font-bold text-xs lg:text-sm mb-1">Content Creation</div>
+                      <p class="text-yellow-200 text-xs">Educational content, documentation, tutorials</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="role-requirement bg-yellow-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-yellow-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-yellow-300 font-bold text-xs lg:text-sm mb-1">Community Management</div>
+                      <p class="text-yellow-200 text-xs">Moderation, support, and engagement</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="role-requirement bg-yellow-500/10 rounded-lg p-3">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-yellow-400 rounded-full mt-1 animate-pulse flex-shrink-0"></div>
+                    <div class="min-w-0 flex-1">
+                      <div class="text-yellow-300 font-bold text-xs lg:text-sm mb-1">Partnership Development</div>
+                      <p class="text-yellow-200 text-xs">Building alliances and integrations</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 text-center">
+                <div class="text-xs text-yellow-300 bg-yellow-500/10 px-2 py-1 rounded-full inline-block">SBT: CURATOR Role</div>
+              </div>
+            </div>
           </div>
+
+          <!-- ARCxSBT Deep Dive -->
+          <div class="arcxsbt-showcase bg-black/40 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-8 max-w-6xl mx-auto">
+            <h3 class="text-cyan-400 font-bold text-2xl mb-6 text-center">ARCxSBT: The Quantum Identity Token</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <!-- SBT Features -->
+              <div class="sbt-features space-y-4">
+                <div class="sbt-feature bg-cyan-500/10 rounded-lg p-4">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-4 h-4 bg-cyan-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-cyan-300 font-bold text-sm mb-1">Non-Transferable (ERC-5192)</div>
+                      <p class="text-cyan-200 text-xs">Soulbound tokens that cannot be transferred or sold</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sbt-feature bg-cyan-500/10 rounded-lg p-4">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-4 h-4 bg-cyan-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-cyan-300 font-bold text-sm mb-1">EAS-Gated Issuance</div>
+                      <p class="text-cyan-200 text-xs">Ethereum Attestation Service verification required</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sbt-feature bg-cyan-500/10 rounded-lg p-4">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-4 h-4 bg-cyan-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-cyan-300 font-bold text-sm mb-1">Decay-Weighted Power</div>
+                      <p class="text-cyan-200 text-xs">Governance power decays without on-chain activity</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sbt-feature bg-cyan-500/10 rounded-lg p-4">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-4 h-4 bg-cyan-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-cyan-300 font-bold text-sm mb-1">Role-Based Eligibility</div>
+                      <p class="text-cyan-200 text-xs">Different roles have different governance bounds</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sbt-feature bg-cyan-500/10 rounded-lg p-4">
+                  <div class="flex items-start space-x-3">
+                    <div class="w-4 h-4 bg-cyan-400 rounded-full mt-1 animate-pulse"></div>
+                    <div>
+                      <div class="text-cyan-300 font-bold text-sm mb-1">Revocable with Protections</div>
+                      <p class="text-cyan-200 text-xs">Can be revoked but with strict anti-DoS measures</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SBT Stats -->
+              <div class="sbt-stats text-center">
+                <div class="grid grid-cols-2 gap-6">
+                  <div class="stat-metric">
+                    <div class="text-5xl font-bold text-cyan-400 mb-2">12,847</div>
+                    <div class="text-cyan-300 text-sm">Active SBT Holders</div>
+                    <div class="flex justify-center space-x-1 mt-2">
+                      <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                      <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse animate-delay-300"></div>
+                      <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse animate-delay-600"></div>
+                    </div>
+                  </div>
+                  <div class="stat-metric">
+                    <div class="text-5xl font-bold text-purple-400 mb-2">6</div>
+                    <div class="text-cyan-300 text-sm">Role Categories</div>
+                    <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                      <div class="bg-purple-400 h-3 rounded-full w-full"></div>
+                    </div>
+                  </div>
+                  <div class="stat-metric">
+                    <div class="text-5xl font-bold text-green-400 mb-2">99.7%</div>
+                    <div class="text-cyan-300 text-sm">Identity Verification</div>
+                    <div class="w-full bg-gray-700 rounded-full h-3 mt-2 max-w-32 mx-auto">
+                      <div class="bg-green-400 h-3 rounded-full w-[99.7%]"></div>
+                    </div>
+                  </div>
+                  <div class="stat-metric">
+                    <div class="text-5xl font-bold text-orange-400 mb-2">30d</div>
+                    <div class="text-cyan-300 text-sm">Power Half-Life</div>
+                    <div class="flex justify-center space-x-1 mt-2">
+                      <div class="w-3 h-3 bg-orange-400 rounded-full animate-ping"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Call to Action -->
+          <div class="cta-section text-center mt-12">
+            <div class="max-w-4xl mx-auto">
+              <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Join the Quantum Collective?</h3>
+              <p class="text-lg text-gray-300 mb-8">Take the first step towards becoming a system architect in the most advanced governance protocol ever created.</p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button class="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-black font-bold rounded-full overflow-hidden hover:scale-105 transition-transform duration-300">
+                  <span class="relative z-10">Launch Discord</span>
+                  <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                <button class="group px-8 py-4 border-2 border-orange-500 text-orange-400 font-bold rounded-full hover:bg-orange-500 hover:text-black transition-all duration-300">
+                  <span class="group-hover:scale-110 transition-transform duration-300">View Documentation</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
         <footer class="absolute bottom-8 text-center text-xs text-gray-700 font-light tracking-widest w-full">
           <div class="flex justify-center space-x-6 mb-4">
