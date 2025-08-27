@@ -111,6 +111,13 @@ ARCx serves as the genesis funding mechanism for constitutional intelligence inf
 
 ARCx maintains 100% token accountability with comprehensive audit trails tracking every token from deployment to current state.
 
+## Transparency additions
+
+- StakingVault emits `Deposited` and `Withdrawn` events for deposit/withdraw actions; withdrawals include the penalty amount. Penalty basis points are configurable via `setPenaltyBps()` and guarded by the `PENALTY_MANAGER_ROLE`.
+- PenaltyVault emits `Swept` events when penalties are swept to a beneficiary.
+- TreasuryRewards now supports per-block emissions: `emissionRate` is in ARCx per block and `distribute()` sends accumulated emissions since the last distribution. `Distributed` events are emitted for every distribution.
+
+Governance note: role-managed setters and reward funding still require multisig/Treasury operations and are designed for minimal human intervention post-renouncement.
 #### **Current Token Distribution (1,000,000 ARCx Total)**
 
 | Holder | Amount | Percentage | Purpose |

@@ -8,6 +8,7 @@
 pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
@@ -18,9 +19,15 @@ contract TreasuryRewards is Initializable, UUPSUpgradeable, AccessControlUpgrade
     bytes32 public constant REWARD_MANAGER_ROLE = keccak256("REWARD_MANAGER_ROLE");
 
     IERC20Upgradeable public arcx;
-    uint256 public emissionRate; // ARCx per block
+    // emissionRate is ARCx per block
+    uint256 public emissionRate;
     address public vault;        // StakingVault
     address public lpStaking;    // LPStaking contract
+    using SafeERC20Upgradeable for IERC20Upgradeable;
+    uint256 public lastDistributedBlock;
+
+    /// @notice Emitted when rewards are distributed
+    event Distributed(uint256 blockNumber, uint256 totalAmount, uint256 toVault, uint256 toLP);
 
     constructor() {
         _disableInitializers();
@@ -35,6 +42,7 @@ contract TreasuryRewards is Initializable, UUPSUpgradeable, AccessControlUpgrade
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         _grantRole(UPGRADER_ROLE, admin);
         _grantRole(REWARD_MANAGER_ROLE, admin);
+    lastDistributedBlock = block.number;
     }
 
     function setDestinations(address _vault, address _lpStaking) external onlyRole(REWARD_MANAGER_ROLE) {
@@ -50,15 +58,37 @@ contract TreasuryRewards is Initializable, UUPSUpgradeable, AccessControlUpgrade
     function distribute() external {
         require(emissionRate > 0, "No emission");
 
-        uint256 reward = emissionRate;
+        // Calculate blocks since last distribution
+        uint256 blocks = block.number - lastDistributedBlock;
+        require(blocks > 0, "Already distributed this block");
+
+        uint256 reward = emissionRate * blocks;
         uint256 half = reward / 2;
 
+        // Ensure contract has sufficient balance before transferring
+        uint256 balance = arcx.balanceOf(address(this));
+        uint256 toVault = 0;
+        uint256 toLP = 0;
         if (vault != address(0)) {
-            arcx.transfer(vault, half);
+            toVault = half;
         }
         if (lpStaking != address(0)) {
-            arcx.transfer(lpStaking, reward - half);
+            toLP = reward - half;
         }
+
+        uint256 total = toVault + toLP;
+        require(balance >= total, "Insufficient reward balance");
+
+        if (toVault > 0) {
+            arcx.safeTransfer(vault, toVault);
+        }
+        if (toLP > 0) {
+            arcx.safeTransfer(lpStaking, toLP);
+        }
+
+        lastDistributedBlock = block.number;
+
+        emit Distributed(block.number, reward, toVault, toLP);
     }
 
     function _authorizeUpgrade(address newImplementation) internal override onlyRole(UPGRADER_ROLE) {}

@@ -8,8 +8,8 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 
-/// @title ARCxsToken - Staked ARCx derivative (Upgradeable)
-contract ARCxsToken is Initializable, ERC20Upgradeable, UUPSUpgradeable, AccessControlUpgradeable {
+/// @title ARCsToken - Staked ARCx derivative (Upgradeable)
+contract ARCsToken is Initializable, ERC20Upgradeable, UUPSUpgradeable, AccessControlUpgradeable {
     bytes32 public constant UPGRADER_ROLE = keccak256("UPGRADER_ROLE");
     bytes32 public constant VAULT_ROLE = keccak256("VAULT_ROLE");
 
@@ -19,7 +19,7 @@ contract ARCxsToken is Initializable, ERC20Upgradeable, UUPSUpgradeable, AccessC
     }
 
     function initialize(address admin) public initializer {
-        __ERC20_init("ARCx Staked", "ARCxs");
+    __ERC20_init("ARCx Staked", "ARCs");
         __AccessControl_init();
         __UUPSUpgradeable_init();
 
