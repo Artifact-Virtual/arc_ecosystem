@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap" rel="stylesheet">
-  <link rel="icon" href="logo/av-white-logo-removebg-preview.png" type="image/png">
+  <link rel="icon" href="./assets/logos/av-white-logo-removebg-preview.png" type="image/png">
   <script>
     tailwind.config = {
       theme: {
@@ -156,7 +156,7 @@
   <!-- ADAM Header -->
   <header id="app-header" class="fixed top-0 h-screen w-16 bg-black/50 backdrop-blur-sm z-50 flex-col items-center justify-between py-8 transition-opacity duration-300 ease-in-out left-0 border-r border-white/10 hidden lg:flex opacity-0 pointer-events-none">
     <div class="flex flex-col items-center">
-  <img src="logo/av-black-logo-removebg-preview.png" alt="AV Logo" class="w-10 h-10 mb-2" />
+  <img src="./assets/logos/av-black-logo-removebg-preview.png" alt="AV Logo" class="w-10 h-10 mb-2" />
       <div id="header-title" data-scroll-to="#adam-home" class="text-adam-blue font-light text-2xl tracking-[0.3em] writing-mode-vertical-rl cursor-pointer transform rotate-180">ADAM</div>
     </div>
     <nav id="header-nav" class="flex flex-col items-center space-y-6 relative"></nav>
@@ -184,18 +184,19 @@
         </p>
   <div class="flex items-center space-x-8 mt-8 animate-fade-in-up delay-03s">
       <div class="absolute top-4 left-4 z-20 flex items-center">
-  <img src="logo/base-logo.png" alt="Base Network" class="h-10 w-10" title="Base Network" />
+  <img src="./assets/logos/base-logo.png" alt="Base Network" class="h-10 w-10" title="Base Network" />
       </div>
         </div>
       </div>
   <div class="lg:w-1/2 flex flex-row items-center justify-end gap-8">
         <!-- Card 1 -->
         <!-- ARCx Token Card -->
-        <div id="arcx-hero-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] bg-gradient-to-br from-adam-slate/80 to-adam-black/90 rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate">
+  <div id="arcx-hero-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate"
+  style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('./assets/images/download%20%281%29.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
           <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-adam-blue/40 rounded-full blur-2xl animate-pulse-bright-blue"></div>
           <div class="relative z-10 flex flex-col items-center justify-center h-full p-8">
-            <img src="logo/arcx_logo1-modified.png" alt="ARCx Token Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">ARCx</h2>
+            <img src="./assets/logos/arcx_logo1-modified.png" alt="ARCx Token Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">ARCx|s</h2>
             <p class="text-adam-blue text-lg font-mono mb-4 animate-fade-in-down delay-04s">Smart Coins</p>
             <p class="text-gray-300 text-base font-light animate-fade-in-up delay-05s">
               Secure, extended, and<br>ultra-scarce extended ERC20. The foundational currency for the Arc EcoSystem.
@@ -207,14 +208,15 @@
           </div>
         </div>
         <!-- ARCxSBT Card -->
-        <div id="arcx-sbt-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] bg-gradient-to-br from-adam-slate/80 to-adam-black/90 rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate">
+  <div id="arcx-sbt-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate"
+       style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('./assets/images/download.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
           <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-adam-blue/40 rounded-full blur-2xl animate-pulse-bright-blue"></div>
           <div class="relative z-10 flex flex-col items-center justify-center h-full p-8">
-            <img src="logo/soulbound-ntt.png" alt="ARCxSBT Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">SoulBound</h2>
+            <img src="./assets/logos/soulbound-ntt.png" alt="ARCxSBT Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">SoulBound NFT</h2>
             <p class="text-adam-blue text-lg font-mono mb-4 animate-fade-in-down delay-04s">Onchain Identity & Reputation</p>
             <p class="text-gray-300 text-base font-light animate-fade-in-up delay-05s">
-              Non-transferable, verifiable credentials for onchain reputation, governance, and access.
+              Non-transferable/non-fungible, verifiable credentials for onchain reputation, governance, and access.
             </p>
             <div class="flex items-center space-x-4 mt-8 animate-fade-in-up delay-06s">
               <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/90 hover:bg-adam-blue text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Read Docs</a>

@@ -8,6 +8,7 @@
   <link rel="icon" href="logo/av-white-logo-removebg-preview.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css">
 
   <style>
     :root {
@@ -213,7 +214,10 @@
       }
     };
   </script>
-<script type="importmap">
+
+  <!-- index.css not present in docs/; remove absolute root path so local file view doesn't fail -->
+  <!-- If you later add a stylesheet into docs/, use a relative path like "./index.css" or "./assets/index.css" -->
+  <script type="importmap">
 {
   "imports": {
     "react/": "https://esm.sh/react@^19.1.1/",
@@ -223,10 +227,9 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+  <script type="module" crossorigin src="./assets/index-CXsZFpx3.js"></script>
 </head>
 <body>
   <div id="root"></div>
-<script type="module" src="/index.tsx"></script>
 </body>
 </html>
