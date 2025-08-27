@@ -34,6 +34,7 @@
           backgroundImage: {
             'grid-pattern-orange': "linear-gradient(rgba(255, 69, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 69, 0, 0.05) 1px, transparent 1px)",
             'grid-pattern-blue': "linear-gradient(rgba(0, 82, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 82, 255, 0.07) 1px, transparent 1px)",
+            'neural-bg': "radial-gradient(circle at 20% 50%, rgba(255, 69, 0, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(20, 184, 166, 0.1) 0%, transparent 50%), radial-gradient(circle at 40% 80%, rgba(0, 82, 255, 0.1) 0%, transparent 50%)",
           },
           backgroundSize: {
             'grid-size': '30px 30px',
@@ -44,6 +45,8 @@
             'glow-blue': '0 0 25px 5px rgba(0, 82, 255, 0.4)',
             'blue-hard': '0 0 15px rgba(0, 82, 255, 0.7)',
             'inner-glow': 'inset 0 0 10px rgba(10, 10, 10, 0.5)',
+            'morphing-border': '0 0 0 1px rgba(255, 69, 0, 0.3), inset 0 0 0 1px rgba(255, 69, 0, 0.1)',
+            'card-advanced': '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 69, 0, 0.1)',
           },
           keyframes: {
             'fade-in-down': { '0%': { opacity: '0', transform: 'translateY(-20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
@@ -51,16 +54,21 @@
             'fade-in-left': { '0%': { opacity: '0', transform: 'translateX(-20px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
             'fade-in-right': { '0%': { opacity: '0', transform: 'translateX(20px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
             'background-pan': { '0%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' }, '100%': { backgroundPosition: '0% 50%' } },
-            'path-draw': { 'to': { strokeDashoffset: '0' } },
+            'subtle-float': { '0%, 100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-5px)' } },
+            'gentle-glow': { '0%, 100%': { boxShadow: '0 0 5px rgba(255, 69, 0, 0.2)' }, '50%': { boxShadow: '0 0 15px rgba(255, 69, 0, 0.3)' } },
+            'morphing-glow': { '0%, 100%': { boxShadow: '0 0 0 1px rgba(255, 69, 0, 0.3)' }, '50%': { boxShadow: '0 0 20px 2px rgba(255, 69, 0, 0.4)' } },
+            'floating-particles': { '0%': { transform: 'translateY(0px) rotate(0deg)', opacity: '0.7' }, '50%': { transform: 'translateY(-20px) rotate(180deg)', opacity: '1' }, '100%': { transform: 'translateY(0px) rotate(360deg)', opacity: '0.7' } },
+            'holographic-shine': { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+            'data-flow': { '0%': { transform: 'translateX(-100%)', opacity: '0' }, '50%': { opacity: '1' }, '100%': { transform: 'translateX(100%)', opacity: '0' } },
+            'quantum-particles': { '0%': { transform: 'scale(0) rotate(0deg)', opacity: '0' }, '50%': { transform: 'scale(1) rotate(180deg)', opacity: '0.8' }, '100%': { transform: 'scale(0) rotate(360deg)', opacity: '0' } },
+            'gradient-x': { '0%, 100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+            'fade-in': { 'from': { opacity: '0' }, 'to': { opacity: '1' } },
             'threat-move': { 'from': { transform: 'translateX(-150px) scaleX(0.2)', opacity: 0 }, '70%': { transform: 'translateX(0) scaleX(1)', opacity: 1 }, '100%': { transform: 'translateX(10px) scaleX(1)', opacity: 1 } },
             'shield-activate': { '0%': { opacity: '0', transform: 'scale(0.8)' }, '100%': { opacity: '1', transform: 'scale(1)' } },
             'slide-in-right': { '0%': { transform: 'translateX(100%)', opacity: '0' }, '100%': { transform: 'translateX(0)', opacity: '1' } },
             'flow-step-grow': { 'from': { transform: 'scale(0.9)', opacity: 0.7 }, 'to': { transform: 'scale(1)', opacity: 1 } },
             'fill-bar': { 'from': { width: '0%' }, 'to': { width: 'var(--bar-width, 0%)' } },
-            'float': { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
-            'gentle-glow': { '0%, 100%': { opacity: '0.3' }, '50%': { opacity: '0.6' } },
-            'subtle-float': { '0%, 100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-5px)' } },
-            'soft-pulse': { '0%, 100%': { opacity: '0.8' }, '50%': { opacity: '1' } },
+            'pulse-chevron': { '0%, 100%': { transform: 'translateX(0)', opacity: '0.7' }, '50%': { transform: 'translateX(10px)', opacity: '1' } },
           },
           animation: {
             'fade-in-down': 'fade-in-down 0.8s ease-out forwards',
@@ -68,16 +76,21 @@
             'fade-in-left': 'fade-in-left 0.8s ease-out 0.3s forwards',
             'fade-in-right': 'fade-in-right 0.8s ease-out 0.3s forwards',
             'background-pan': 'background-pan 30s ease-in-out infinite',
-            'path-draw': 'path-draw 1.5s ease-out forwards',
+            'subtle-float': 'subtle-float 6s ease-in-out infinite',
+            'gentle-glow': 'gentle-glow 4s ease-in-out infinite',
+            'morphing-glow': 'morphing-glow 3s ease-in-out infinite',
+            'floating-particles': 'floating-particles 8s ease-in-out infinite',
+            'holographic-shine': 'holographic-shine 3s linear infinite',
+            'data-flow': 'data-flow 4s linear infinite',
+            'quantum-particles': 'quantum-particles 6s ease-in-out infinite',
+            'gradient-x': 'gradient-x 15s ease infinite',
+            'fade-in': 'fade-in 0.5s ease-out forwards',
             'threat-move': 'threat-move 1.2s ease-out forwards',
             'shield-activate': 'shield-activate 0.3s ease-out forwards',
             'slide-in-right': 'slide-in-right 0.5s ease-out forwards',
             'flow-step-grow': 'flow-step-grow 0.3s ease-in-out forwards',
             'fill-bar': 'fill-bar 0.8s ease-out forwards',
-            'float': 'float 8s ease-in-out infinite',
-            'gentle-glow': 'gentle-glow 4s ease-in-out infinite',
-            'subtle-float': 'subtle-float 6s ease-in-out infinite',
-            'soft-pulse': 'soft-pulse 3s ease-in-out infinite',
+            'pulse-chevron': 'pulse-chevron 2s ease-in-out infinite',
           }
         }
       }
@@ -154,13 +167,155 @@
         justify-content: center;
       }
     }
+
+    /* Advanced State-of-the-Art Effects */
+    .custom-cursor { cursor: none; }
+
+    .cursor-dot {
+      transition: transform 0.1s ease;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .cursor-outline {
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    .card-advanced {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-advanced::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .card-advanced:hover::before {
+      left: 100%;
+    }
+
+    .morphing-border {
+      position: relative;
+      background: linear-gradient(45deg, transparent, rgba(255, 69, 0, 0.1), transparent);
+      background-size: 200% 200%;
+      animation: morphing-glow 4s ease-in-out infinite;
+    }
+
+    .holographic-text {
+      background: linear-gradient(45deg, #ff4500, #14b8a6, #0052FF, #39FF14);
+      background-size: 200% 200%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: holographic-shine 4s ease-in-out infinite;
+    }
+
+    .neural-bg {
+      background: radial-gradient(circle at 20% 50%, rgba(255, 69, 0, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(20, 184, 166, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 80%, rgba(0, 82, 255, 0.1) 0%, transparent 50%);
+      background-size: 100% 100%;
+      animation: gradient-x 20s ease infinite;
+    }
+
+    .floating-elements {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floating-elements div {
+      position: absolute;
+      opacity: 0.6;
+      animation: floating-particles 8s ease-in-out infinite;
+    }
+
+    .data-stream {
+      background: linear-gradient(180deg, transparent, rgba(255, 69, 0, 0.3), transparent);
+      animation: data-flow 3s linear infinite;
+    }
+
+    .quantum-particle {
+      animation: quantum-particles 6s ease-in-out infinite;
+    }
+
+    .glass-morphism {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-advanced {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ff4500 0%, #c03300 100%);
+      transition: all 0.3s ease;
+    }
+
+    .btn-advanced::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn-advanced:hover::before {
+      left: 100%;
+    }
+
+    .animate-fade-in-up {
+      animation: fade-in-up 0.8s ease-out forwards;
+    }
   </style>
 </head>
-<body class="bg-adam-black text-gray-200 font-sans font-light">
+<body class="bg-adam-black text-gray-200 font-sans font-light custom-cursor">
+  <!-- Custom Cursor Elements -->
+  <div class="cursor-dot fixed w-2 h-2 bg-adam-orange rounded-full pointer-events-none z-50 transition-transform duration-100"></div>
+  <div class="cursor-outline fixed w-8 h-8 border border-adam-orange/50 rounded-full pointer-events-none z-40 transition-all duration-300"></div>
+
+  <!-- Quantum Particle Background -->
+  <div class="quantum-particle fixed top-1/4 left-1/4 w-1 h-1 bg-teal-primary rounded-full animate-quantum-particles opacity-60"></div>
+  <div class="quantum-particle fixed top-3/4 left-3/4 w-1 h-1 bg-adam-orange rounded-full animate-quantum-particles opacity-60" style="animation-delay: 1s;"></div>
+  <div class="quantum-particle fixed top-1/2 left-1/2 w-1 h-1 bg-adam-blue rounded-full animate-quantum-particles opacity-60" style="animation-delay: 2s;"></div>
+  <div class="quantum-particle fixed top-1/3 left-2/3 w-1 h-1 bg-teal-accent rounded-full animate-quantum-particles opacity-60" style="animation-delay: 0.5s;"></div>
+  <div class="quantum-particle fixed top-2/3 left-1/3 w-1 h-1 bg-arc-green rounded-full animate-quantum-particles opacity-60" style="animation-delay: 1.5s;"></div>
+
   <div class="responsive-margin">
   
-  <div id="background-renderer" class="fixed top-0 left-0 w-full h-full bg-adam-dark -z-10">
+  <div id="background-renderer" class="fixed top-0 left-0 w-full h-full bg-adam-dark -z-10 neural-bg">
     <div class="absolute top-0 left-0 w-full h-full bg-grid-pattern-orange bg-grid-size animate-background-pan opacity-50"></div>
+
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+      <div class="absolute top-20 left-20 w-16 h-16 border border-teal-primary/20 rotate-12 animate-subtle-float"></div>
+      <div class="absolute bottom-32 left-1/4 w-24 h-24 border border-adam-blue/20 -rotate-30 animate-subtle-float" style="animation-delay: 2s;"></div>
+      <div class="absolute top-1/3 right-20 w-20 h-20 border border-adam-orange/20 rotate-60 animate-subtle-float" style="animation-delay: 4s;"></div>
+      <div class="absolute bottom-20 right-10 w-18 h-18 border border-teal-accent/20 -rotate-45 animate-subtle-float" style="animation-delay: 1s;"></div>
+      <div class="absolute top-2/3 left-10 w-14 h-14 border border-arc-green/20 rotate-30 animate-subtle-float" style="animation-delay: 3s;"></div>
+      <div class="absolute top-10 right-1/3 w-22 h-22 border border-adam-orange/20 -rotate-60 animate-subtle-float" style="animation-delay: 5s;"></div>
+      <div class="absolute bottom-1/3 left-1/2 w-16 h-16 border border-teal-primary/20 rotate-45 animate-subtle-float" style="animation-delay: 6s;"></div>
+      <div class="absolute top-1/2 right-1/4 w-20 h-20 border border-adam-blue/20 -rotate-30 animate-subtle-float" style="animation-delay: 7s;"></div>
+    </div>
+
+    <!-- Data Streams -->
+    <div class="data-stream absolute top-1/4 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-teal-primary/50 to-transparent" style="animation-delay: 1s;"></div>
+    <div class="data-stream absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-adam-orange/50 to-transparent" style="animation-delay: 3s;"></div>
+    <div class="data-stream absolute top-3/4 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-adam-blue/50 to-transparent" style="animation-delay: 5s;"></div>
   </div>
 
   <!-- ARCx Header -->
@@ -189,7 +344,7 @@
   <div class="relative z-10 w-full flex flex-col lg:flex-row items-center lg:justify-end justify-center gap-8">
       <div class="lg:w-1/2 flex flex-col items-center lg:items-start lg:text-left mb-8 lg:mb-0">
         <h1 class="text-5xl md:text-8xl font-thin text-gray-200 tracking-[0.2em] uppercase animate-fade-in-down">
-          <span class="text-white">the</span><span class="text-white">ARC</span>
+          <span class="text-white">the</span><span class="holographic-text">ARC</span>
         <div class="mt-4 text-xl md:text-2xl font-light text-gray-300 animate-fade-in-up delay-03s">RWA-Aware,<br>Anti-Sybil, Governance Engine</div>
         </h1>
         <p class="text-md md:text-xl text-gray-400 mt-6 max-w-xl font-light animate-fade-in-up tracking-wider">
@@ -204,35 +359,35 @@
   <div class="lg:w-1/2 flex flex-row items-center justify-end gap-8">
         <!-- Card 1 -->
         <!-- ARCx Token Card -->
-  <div id="arcx-hero-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate"
+  <div id="arcx-hero-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] shadow-2xl overflow-hidden border border-adam-orange/30 card-advanced morphing-border"
   style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('./assets/images/download%20%281%29.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-adam-blue/40 rounded-full blur-2xl animate-pulse-bright-blue"></div>
+          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-adam-orange/40 rounded-full blur-2xl gentle-glow"></div>
           <div class="relative z-10 flex flex-col items-center justify-center h-full p-8">
             <img src="./assets/logos/arcx_logo1-modified.png" alt="ARCx Token Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">ARCx|s</h2>
-            <p class="text-adam-blue text-lg font-mono mb-4 animate-fade-in-down delay-04s">Smart Coins</p>
+            <p class="text-adam-orange text-lg font-mono mb-4 animate-fade-in-down delay-04s">Smart Coins</p>
             <p class="text-gray-300 text-base font-light animate-fade-in-up delay-05s">
               Secure, extended, and<br>ultra-scarce extended ERC20. The foundational currency for the Arc EcoSystem.
             </p>
             <div class="flex items-center space-x-4 mt-8 animate-fade-in-up delay-06s">
-              <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/90 hover:bg-adam-blue text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Read Docs</a>
-              <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="btn-buy-arcx">Buy ARCx</a>
+              <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-orange/90 hover:bg-adam-orange text-white font-semibold py-2 px-4 transition-all duration-300 text-sm shadow-lg">Read Docs</a>
+              <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="btn-advanced">Buy ARCx</a>
             </div>
           </div>
         </div>
         <!-- ARCxSBT Card -->
-  <div id="arcx-sbt-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate"
+  <div id="arcx-sbt-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] shadow-2xl overflow-hidden border border-teal-primary/30 card-advanced morphing-border"
        style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('./assets/images/download.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-adam-blue/40 rounded-full blur-2xl animate-pulse-bright-blue"></div>
+          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-teal-primary/40 rounded-full blur-2xl gentle-glow"></div>
           <div class="relative z-10 flex flex-col items-center justify-center h-full p-8">
             <img src="./assets/logos/soulbound-ntt.png" alt="ARCxSBT Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">SoulBound NFT</h2>
-            <p class="text-adam-blue text-lg font-mono mb-4 animate-fade-in-down delay-04s">Onchain Identity & Reputation</p>
+            <p class="text-teal-primary text-lg font-mono mb-4 animate-fade-in-down delay-04s">Onchain Identity & Reputation</p>
             <p class="text-gray-300 text-base font-light animate-fade-in-up delay-05s">
               Non-transferable/non-fungible, verifiable credentials for onchain reputation, governance, and access.
             </p>
             <div class="flex items-center space-x-4 mt-8 animate-fade-in-up delay-06s">
-              <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/90 hover:bg-adam-blue text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Read Docs</a>
+              <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-teal-primary/90 hover:bg-teal-primary text-white font-semibold py-2 px-4 transition-all duration-300 text-sm shadow-lg">Read Docs</a>
             </div>
           </div>
         </div>
@@ -244,7 +399,7 @@
           <!-- Orange floating SVG removed as requested -->
         </div>
 
-        <button id="explore-adam-btn" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 text-adam-blue hover:text-white transition-all duration-300 group animate-pulse-chevron" aria-label="Explore ADAM Protocol">
+        <button id="explore-adam-btn" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 text-adam-orange hover:text-white transition-all duration-300 group animate-pulse-chevron" aria-label="Explore ADAM Protocol">
           <div class="flex items-center space-x-2">
             <span class="text-xs uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-300 -translate-x-4 group-hover:translate-x-0">Enter ADAM</span>
             <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>
@@ -254,157 +409,206 @@
     </section>
 
     <!-- ADAM Sections Start Here -->
-    <!-- SECOND PAGE ONWARD: Ultra-Modern Visual-First Architecture -->
+    <!-- SECOND PAGE ONWARD: comprehensive visual-first architecture overview -->
 
-    <!-- Hero Ecosystem Overview -->
-    <section id="adam-home" class="section adam-section relative overflow-hidden">
-      <!-- Immersive Background with Subtle Animation -->
-      <div class="absolute inset-0 bg-gradient-to-br from-adam-dark via-black to-adam-dark">
-        <!-- Subtle geometric patterns -->
-        <div class="absolute inset-0 opacity-[0.02]">
-          <svg class="w-full h-full" viewBox="0 0 100 100">
-            <defs>
-              <pattern id="home-grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" stroke-width="0.5"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#home-grid)" class="text-white"/>
-          </svg>
-        </div>
-        <!-- Floating subtle elements -->
-        <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-adam-orange/5 rounded-none animate-subtle-float delay-300"></div>
-        <div class="absolute top-3/4 right-1/4 w-24 h-24 bg-teal-primary/5 rounded-none animate-subtle-float delay-700"></div>
-        <div class="absolute top-1/2 left-3/4 w-20 h-20 bg-adam-orange/5 rounded-none animate-subtle-float delay-1100"></div>
-      </div>
-
-      <div class="w-full h-full flex items-center justify-center p-4 sm:p-6 lg:p-8 relative z-10">
+    <!-- Ecosystem Overview -->
+    <section id="adam-home" class="section adam-section">
+      <div class="w-full h-full flex items-center justify-center p-6 bg-gradient-to-br from-adam-black via-adam-dark to-black">
         <div class="max-w-7xl w-full">
-          <!-- Main Title -->
-          <div class="text-center mb-8 lg:mb-16">
-            <h1 class="text-4xl sm:text-6xl lg:text-8xl font-thin text-white tracking-[0.1em] uppercase mb-4 lg:mb-6">
-              <span class="bg-gradient-to-r from-adam-orange via-adam-orange to-teal-primary bg-clip-text text-transparent">ARC</span>
-              <span class="text-white">ECOSYSTEM</span>
+          <div class="text-center mb-12">
+            <h1 class="text-6xl md:text-8xl font-thin text-white tracking-[0.3em] uppercase mb-4 animate-fade-in-down">
+              <span class="holographic-text">ARC</span> Ecosystem
             </h1>
-            <p class="text-lg sm:text-xl lg:text-2xl text-adam-light-gray font-light max-w-4xl mx-auto px-4">
-              Intelligent Governance Engine for AI & Real World Assets
+            <p class="text-xl md:text-2xl text-adam-light-gray font-light animate-fade-in-up delay-03s">
+              Governance Engine for AI & RWA
             </p>
           </div>
 
-          <!-- Interactive Ecosystem Grid -->
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8 mb-8 lg:mb-16">
-            <!-- ARCx Card - Crimson Orange Theme -->
-            <div class="group relative">
-              <div class="absolute -inset-0.5 bg-gradient-to-r from-adam-orange/10 to-adam-orange/20 opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
-              <div class="relative bg-gradient-to-br from-adam-orange/5 to-adam-orange/10 p-4 sm:p-6 lg:p-8 border border-adam-orange/30 hover:border-adam-orange/60 transition-all duration-500 hover:scale-105 hover:-translate-y-2">
-                <div class="text-center">
-                  <div class="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 mx-auto mb-3 lg:mb-4 bg-adam-orange/20 flex items-center justify-center group-hover:bg-adam-orange/40 transition-all duration-300 group-hover:scale-110">
-                    <span class="text-2xl sm:text-3xl lg:text-4xl font-bold text-adam-orange">₳</span>
-                  </div>
-                  <h3 class="text-lg sm:text-xl lg:text-2xl font-semibold text-adam-orange mb-2">ARCx</h3>
-                  <p class="text-xs sm:text-sm lg:text-base text-adam-light-gray">Currency & Governance</p>
+          <!-- Animated Ecosystem Grid -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <div class="group bg-gradient-to-br from-adam-orange/20 to-adam-orange/5 p-6 border border-adam-orange/30 hover:border-adam-orange/60 transition-all duration-500 hover:scale-105 card-advanced">
+              <div class="text-center">
+                <div class="w-16 h-16 mx-auto mb-4 bg-adam-orange/20 rounded-full flex items-center justify-center group-hover:bg-adam-orange/40 transition-colors">
+                  <span class="text-2xl font-bold text-adam-orange">₳</span>
                 </div>
+                <h3 class="text-adam-orange font-semibold mb-2">ARCx</h3>
+                <p class="text-adam-light-gray text-sm">Currency & Governance</p>
               </div>
             </div>
 
-            <!-- s Card - Crimson Orange Theme -->
-            <div class="group relative">
-              <div class="absolute -inset-0.5 bg-gradient-to-r from-adam-orange/10 to-adam-orange/20 opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
-              <div class="relative bg-gradient-to-br from-adam-orange/5 to-adam-orange/10 p-4 sm:p-6 lg:p-8 border border-adam-orange/30 hover:border-adam-orange/60 transition-all duration-500 hover:scale-105 hover:-translate-y-2">
-                <div class="text-center">
-                  <div class="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 mx-auto mb-3 lg:mb-4 bg-adam-orange/20 flex items-center justify-center group-hover:bg-adam-orange/40 transition-all duration-300 group-hover:scale-110">
-                    <span class="text-2xl sm:text-3xl lg:text-4xl font-bold text-adam-orange">s</span>
-                  </div>
-                  <h3 class="text-lg sm:text-xl lg:text-2xl font-semibold text-adam-orange mb-2">Staked</h3>
-                  <p class="text-xs sm:text-sm lg:text-base text-adam-light-gray">Shares & Liquidity</p>
+            <div class="group bg-gradient-to-br from-arc-green/20 to-arc-green/5 p-6 border border-arc-green/30 hover:border-arc-green/60 transition-all duration-500 hover:scale-105 card-advanced">
+              <div class="text-center">
+                <div class="w-16 h-16 mx-auto mb-4 bg-arc-green/20 rounded-full flex items-center justify-center group-hover:bg-arc-green/40 transition-colors">
+                  <span class="text-2xl font-bold text-arc-green">s</span>
                 </div>
+                <h3 class="text-arc-green font-semibold mb-2">Staked</h3>
+                <p class="text-adam-light-gray text-sm">Shares & Liquidity</p>
               </div>
             </div>
 
-            <!-- SBT Card - Teal Theme -->
-            <div class="group relative">
-              <div class="absolute -inset-0.5 bg-gradient-to-r from-teal-primary/10 to-teal-secondary/20 opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
-              <div class="relative bg-gradient-to-br from-teal-primary/5 to-teal-secondary/10 p-4 sm:p-6 lg:p-8 border border-teal-primary/30 hover:border-teal-primary/60 transition-all duration-500 hover:scale-105 hover:-translate-y-2">
-                <div class="text-center">
-                  <div class="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 mx-auto mb-3 lg:mb-4 bg-teal-primary/20 flex items-center justify-center group-hover:bg-teal-primary/40 transition-all duration-300 group-hover:scale-110">
-                    <span class="text-2xl sm:text-3xl lg:text-4xl font-bold text-teal-primary">🔗</span>
-                  </div>
-                  <h3 class="text-lg sm:text-xl lg:text-2xl font-semibold text-teal-primary mb-2">SBT</h3>
-                  <p class="text-xs sm:text-sm lg:text-base text-adam-light-gray">Identity & Reputation</p>
+            <div class="group bg-gradient-to-br from-teal-primary/20 to-teal-primary/5 p-6 border border-teal-primary/30 hover:border-teal-primary/60 transition-all duration-500 hover:scale-105 card-advanced">
+              <div class="text-center">
+                <div class="w-16 h-16 mx-auto mb-4 bg-teal-primary/20 rounded-full flex items-center justify-center group-hover:bg-teal-primary/40 transition-colors">
+                  <span class="text-2xl font-bold text-teal-primary">🔗</span>
                 </div>
+                <h3 class="text-teal-primary font-semibold mb-2">SBT</h3>
+                <p class="text-adam-light-gray text-sm">Identity & Reputation</p>
               </div>
             </div>
 
-            <!-- Registry Card -->
-            <div class="group relative">
-              <div class="absolute -inset-0.5 bg-gradient-to-r from-red-500/10 to-red-500/20 opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
-              <div class="relative bg-gradient-to-br from-red-500/5 to-red-500/10 p-4 sm:p-6 lg:p-8 border border-red-500/30 hover:border-red-500/60 transition-all duration-500 hover:scale-105 hover:-translate-y-2">
-                <div class="text-center">
-                  <div class="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 mx-auto mb-3 lg:mb-4 bg-red-500/20 flex items-center justify-center group-hover:bg-red-500/40 transition-all duration-300 group-hover:scale-110">
-                    <span class="text-2xl sm:text-3xl lg:text-4xl font-bold text-red-500">⚡</span>
-                  </div>
-                  <h3 class="text-lg sm:text-xl lg:text-2xl font-semibold text-red-500 mb-2">Registry</h3>
-                  <p class="text-xs sm:text-sm lg:text-base text-adam-light-gray">AI Models & Agents</p>
+            <div class="group bg-gradient-to-br from-red-500/20 to-red-500/5 p-6 border border-red-500/30 hover:border-red-500/60 transition-all duration-500 hover:scale-105 card-advanced">
+              <div class="text-center">
+                <div class="w-16 h-16 mx-auto mb-4 bg-red-500/20 rounded-full flex items-center justify-center group-hover:bg-red-500/40 transition-colors">
+                  <span class="text-2xl font-bold text-red-500">⚡</span>
                 </div>
+                <h3 class="text-red-500 font-semibold mb-2">Registry</h3>
+                <p class="text-adam-light-gray text-sm">AI Models & Agents</p>
               </div>
             </div>
           </div>
 
           <!-- System Flow Visualization -->
-          <div class="bg-gradient-to-br from-adam-slate/20 to-adam-slate/5 p-6 sm:p-8 lg:p-12 border border-adam-slate/30 relative overflow-hidden">
-            <!-- Subtle flow background -->
-            <div class="absolute inset-0 opacity-5">
-              <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-adam-orange/20 via-transparent to-teal-primary/20"></div>
+          <div class="bg-adam-slate/30 p-8 border border-adam-slate/50">
+            <h2 class="text-3xl text-white font-thin mb-6 text-center">System Flow</h2>
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+              <div class="flex-1 text-center">
+                <div class="w-20 h-20 mx-auto mb-4 bg-adam-orange/30 rounded-full flex items-center justify-center gentle-glow">
+                  <span class="text-adam-orange font-bold">1</span>
+                </div>
+                <h4 class="text-adam-orange font-semibold mb-2">Stake ARCx</h4>
+                <p class="text-adam-light-gray text-sm">Mint s tokens, gain governance rights</p>
+              </div>
+
+              <div class="hidden md:block text-adam-light-gray text-2xl">→</div>
+
+              <div class="flex-1 text-center">
+                <div class="w-20 h-20 mx-auto mb-4 bg-arc-green/30 rounded-full flex items-center justify-center gentle-glow" style="animation-delay: 1s;">
+                  <span class="text-arc-green font-bold">2</span>
+                </div>
+                <h4 class="text-arc-green font-semibold mb-2">Earn SBT</h4>
+                <p class="text-adam-light-gray text-sm">Attestations for reputation & access</p>
+              </div>
+
+              <div class="hidden md:block text-adam-light-gray text-2xl">→</div>
+
+              <div class="flex-1 text-center">
+                <div class="w-20 h-20 mx-auto mb-4 bg-teal-primary/30 rounded-full flex items-center justify-center gentle-glow" style="animation-delay: 2s;">
+                  <span class="text-teal-primary font-bold">3</span>
+                </div>
+                <h4 class="text-teal-primary font-semibold mb-2">Register</h4>
+                <p class="text-adam-light-gray text-sm">AI models & agents with proofs</p>
+              </div>
+
+              <div class="hidden md:block text-adam-light-gray text-2xl">→</div>
+
+              <div class="flex-1 text-center">
+                <div class="w-20 h-20 mx-auto mb-4 bg-red-500/30 rounded-full flex items-center justify-center gentle-glow" style="animation-delay: 3s;">
+                  <span class="text-red-500 font-bold">4</span>
+                </div>
+                <h4 class="text-red-500 font-semibold mb-2">Govern</h4>
+                <p class="text-adam-light-gray text-sm">Timelock grants & treasury control</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compact components pages: each section is minimal text + visual -->
+    <section id="arc-components" class="section adam-section">
+      <div class="w-full h-full flex items-center justify-center p-8 bg-gradient-to-br from-adam-dark to-black">
+        <div class="max-w-7xl w-full">
+          <h2 class="text-4xl md:text-6xl font-thin text-white text-center mb-12 tracking-[0.2em] uppercase">
+            Core <span class="text-adam-blue">Components</span>
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- ARCx Component -->
+            <div class="group bg-gradient-to-br from-adam-orange/10 to-adam-orange/5 p-8 border border-adam-orange/30 hover:border-adam-orange/60 transition-all duration-500 hover:scale-105 card-advanced">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto mb-4 bg-adam-orange/20 rounded-full flex items-center justify-center group-hover:bg-adam-orange/40 transition-colors">
+                  <span class="text-3xl font-bold text-adam-orange">₳</span>
+                </div>
+                <h3 class="text-2xl font-semibold text-adam-orange mb-2">ARCx</h3>
+                <p class="text-adam-light-gray text-sm font-mono">ERC20 Extended</p>
+              </div>
+
+              <div class="space-y-4 text-sm text-adam-light-gray">
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 bg-adam-orange rounded-full"></div>
+                  <span>Network currency & governance stake</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 bg-adam-orange rounded-full"></div>
+                  <span>Ultra-scarce with controlled supply</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 bg-adam-orange rounded-full"></div>
+                  <span>Stake to mint s tokens & gain rights</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 bg-adam-orange rounded-full"></div>
+                  <span>On-chain governance voting power</span>
+                </div>
+              </div>
             </div>
 
-            <div class="relative z-10">
-              <h2 class="text-2xl sm:text-3xl lg:text-4xl font-thin text-white mb-6 lg:mb-8 text-center">System Flow</h2>
-              <div class="flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
-                <!-- Step 1 -->
-                <div class="flex-1 text-center group">
-                  <div class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto mb-3 lg:mb-4 bg-adam-orange/30 flex items-center justify-center group-hover:bg-adam-orange/50 transition-all duration-300 group-hover:scale-110">
-                    <span class="text-adam-orange font-bold text-lg sm:text-xl lg:text-2xl">1</span>
-                  </div>
-                  <h4 class="text-adam-orange font-semibold mb-2 text-sm sm:text-base lg:text-lg">Stake ARCx</h4>
-                  <p class="text-adam-light-gray text-xs sm:text-sm lg:text-base">Mint s tokens, gain governance rights</p>
+            <!-- s Component -->
+            <div class="group bg-gradient-to-br from-arc-green/10 to-arc-green/5 p-8 border border-arc-green/30 hover:border-arc-green/60 transition-all duration-500 hover:scale-105 card-advanced">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto mb-4 bg-arc-green/20 rounded-full flex items-center justify-center group-hover:bg-arc-green/40 transition-colors">
+                  <span class="text-3xl font-bold text-arc-green">s</span>
                 </div>
+                <h3 class="text-2xl font-semibold text-arc-green mb-2">Staked Shares</h3>
+                <p class="text-adam-light-gray text-sm font-mono">ERC20 Receipt</p>
+              </div>
 
-                <!-- Arrow -->
-                <div class="hidden lg:block text-adam-light-gray text-3xl lg:text-4xl">→</div>
-                <div class="lg:hidden text-adam-light-gray text-xl">↓</div>
-
-                <!-- Step 2 -->
-                <div class="flex-1 text-center group">
-                  <div class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto mb-3 lg:mb-4 bg-teal-primary/30 flex items-center justify-center group-hover:bg-teal-primary/50 transition-all duration-300 group-hover:scale-110">
-                    <span class="text-teal-primary font-bold text-lg sm:text-xl lg:text-2xl">2</span>
-                  </div>
-                  <h4 class="text-teal-primary font-semibold mb-2 text-sm sm:text-base lg:text-lg">Earn SBT</h4>
-                  <p class="text-adam-light-gray text-xs sm:text-sm lg:text-base">Attestations for reputation & access</p>
+              <div class="space-y-4 text-sm text-adam-light-gray">
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 bg-arc-green rounded-full"></div>
+                  <span>Liquidity receipts & governance shares</span>
                 </div>
-
-                <!-- Arrow -->
-                <div class="hidden lg:block text-adam-light-gray text-3xl lg:text-4xl">→</div>
-                <div class="lg:hidden text-adam-light-gray text-xl">↓</div>
-
-                <!-- Step 3 -->
-                <div class="flex-1 text-center group">
-                  <div class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto mb-3 lg:mb-4 bg-red-500/30 flex items-center justify-center group-hover:bg-red-500/50 transition-all duration-300 group-hover:scale-110">
-                    <span class="text-red-500 font-bold text-lg sm:text-xl lg:text-2xl">3</span>
-                  </div>
-                  <h4 class="text-red-500 font-semibold mb-2 text-sm sm:text-base lg:text-lg">Register</h4>
-                  <p class="text-adam-light-gray text-xs sm:text-sm lg:text-base">AI models & agents with proofs</p>
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 bg-arc-green rounded-full"></div>
+                  <span>Early-exit penalties → PenaltyVault</span>
                 </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 bg-arc-green rounded-full"></div>
+                  <span>Staking rewards & fee distribution</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 bg-arc-green rounded-full"></div>
+                  <span>Composability with DeFi protocols</span>
+                </div>
+              </div>
+            </div>
 
-                <!-- Arrow -->
-                <div class="hidden lg:block text-adam-light-gray text-3xl lg:text-4xl">→</div>
-                <div class="lg:hidden text-adam-light-gray text-xl">↓</div>
+            <!-- SBT Component -->
+            <div class="group bg-gradient-to-br from-teal-primary/10 to-teal-primary/5 p-8 border border-teal-primary/30 hover:border-teal-primary/60 transition-all duration-500 hover:scale-105 card-advanced">
+              <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto mb-4 bg-teal-primary/20 rounded-full flex items-center justify-center group-hover:bg-teal-primary/40 transition-colors">
+                  <span class="text-3xl font-bold text-teal-primary">🔗</span>
+                </div>
+                <h3 class="text-2xl font-semibold text-teal-primary mb-2">SoulBound Tokens</h3>
+                <p class="text-adam-light-gray text-sm font-mono">ERC721 Non-Transferable</p>
+              </div>
 
-                <!-- Step 4 -->
-                <div class="flex-1 text-center group">
-                  <div class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto mb-3 lg:mb-4 bg-adam-orange/30 flex items-center justify-center group-hover:bg-adam-orange/50 transition-all duration-300 group-hover:scale-110">
-                    <span class="text-adam-orange font-bold text-lg sm:text-xl lg:text-2xl">4</span>
-                  </div>
-                  <h4 class="text-adam-orange font-semibold mb-2 text-sm sm:text-base lg:text-lg">Govern</h4>
-                  <p class="text-adam-light-gray text-xs sm:text-sm lg:text-base">Timelock grants & treasury control</p>
+              <div class="space-y-4 text-sm text-adam-light-gray">
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 bg-teal-primary rounded-full"></div>
+                  <span>Onchain identity & reputation</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 bg-teal-primary rounded-full"></div>
+                  <span>Non-transferable attestations</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 bg-teal-primary rounded-full"></div>
+                  <span>Role gating & access control</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 bg-teal-primary rounded-full"></div>
+                  <span>2FA for critical operations</span>
                 </div>
               </div>
             </div>
@@ -413,826 +617,346 @@
       </div>
     </section>
 
-    <!-- Crystal Clear Core Components Showcase -->
-    <section id="arc-components" class="section adam-section relative overflow-hidden">
-      <!-- Immersive Background with Subtle Animation -->
-      <div class="absolute inset-0 bg-gradient-to-br from-adam-dark via-black to-adam-dark">
-        <!-- Subtle geometric patterns -->
-        <div class="absolute inset-0 opacity-[0.02]">
-          <svg class="w-full h-full" viewBox="0 0 100 100">
-            <defs>
-              <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" stroke-width="0.5"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" class="text-white"/>
-          </svg>
-        </div>
-        <!-- Floating subtle elements -->
-        <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-adam-orange/5 rounded-full animate-subtle-float delay-300"></div>
-        <div class="absolute top-3/4 right-1/4 w-24 h-24 bg-teal-primary/5 rounded-full animate-subtle-float delay-700"></div>
-        <div class="absolute top-1/2 left-3/4 w-20 h-20 bg-adam-orange/5 rounded-full animate-subtle-float delay-1100"></div>
-      </div>
-
-      <div class="relative z-10 w-full h-full flex items-center justify-center p-4 md:p-8">
+    <section id="registry" class="section adam-section">
+      <div class="w-full h-full flex items-center justify-center p-8 bg-adam-black">
         <div class="max-w-7xl w-full">
-          <!-- Clean Hero Title -->
-          <div class="text-center mb-16 md:mb-20">
-            <div class="inline-block">
-              <h2 class="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-wider mb-4">
-                CORE
-              </h2>
-              <div class="h-1 bg-gradient-to-r from-transparent via-adam-orange to-transparent"></div>
-            </div>
-            <h3 class="text-3xl md:text-5xl lg:text-6xl font-thin text-white/90 tracking-[0.3em] uppercase mt-6">
-              Components
-            </h3>
-            <p class="text-adam-light-gray/70 text-lg md:text-xl mt-6 max-w-2xl mx-auto leading-relaxed">
-              The fundamental building blocks of the Arc ecosystem
-            </p>
+          <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-4">
+              AI <span class="text-red-500">Registry</span>
+            </h2>
+            <p class="text-xl text-adam-light-gray font-light">Authenticity & Compliance for AI Systems</p>
           </div>
 
-          <!-- Clean Component Grid -->
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
-            <!-- ARCx Component - Crimson Orange Theme -->
-            <div class="group relative">
-              <!-- Subtle glow effect -->
-              <div class="absolute -inset-1 bg-gradient-to-r from-adam-orange/10 via-adam-orange/20 to-adam-orange/10 opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
+          <!-- Registry Flow Visualization -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class="space-y-8">
+              <div class="bg-gradient-to-br from-red-500/10 to-red-500/5 p-8 rounded-3xl border border-red-500/30">
+                <h3 class="text-2xl font-semibold text-red-500 mb-6">Registry Process</h3>
 
-              <div class="relative bg-gradient-to-br from-adam-orange/5 via-transparent to-adam-orange/5 backdrop-blur-sm p-8 md:p-10 border-2 border-adam-orange/20 hover:border-adam-orange/40 transition-all duration-500 hover:scale-[1.02]">
-                <!-- Clean Icon Container -->
-                <div class="text-center mb-8">
-                  <div class="relative inline-block">
-                    <div class="w-24 h-24 md:w-28 md:h-28 mx-auto mb-6 bg-gradient-to-br from-adam-orange/10 to-adam-orange/5 border border-adam-orange/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-                      <span class="text-4xl md:text-5xl font-black text-adam-orange">₳</span>
+                <div class="space-y-6">
+                  <div class="flex items-start gap-4">
+                    <div class="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <span class="text-red-500 font-bold text-sm">1</span>
+                    </div>
+                    <div>
+                      <h4 class="text-white font-semibold mb-2">Submit Manifest</h4>
+                      <p class="text-adam-light-gray text-sm">Model/agent metadata, version, owner, schema hash</p>
                     </div>
                   </div>
-                  <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">
-                    ARCx
-                  </h3>
-                  <div class="inline-block px-3 py-1 bg-adam-orange/10 border border-adam-orange/20">
-                    <p class="text-adam-orange text-sm font-mono tracking-wider">ERC20 EXTENDED</p>
-                  </div>
-                </div>
 
-                <!-- Clean Feature List -->
-                <div class="space-y-4">
-                  <div class="group/item flex items-center gap-4 p-3 hover:bg-adam-orange/5 transition-colors duration-300">
-                    <div class="w-3 h-3 bg-adam-orange border-2 border-adam-orange/50 group-hover/item:scale-110 transition-transform"></div>
-                    <span class="text-white/90 text-sm md:text-base group-hover/item:text-adam-orange transition-colors">Network currency & governance stake</span>
-                  </div>
-                  <div class="group/item flex items-center gap-4 p-3 hover:bg-adam-orange/5 transition-colors duration-300">
-                    <div class="w-3 h-3 bg-adam-orange border-2 border-adam-orange/50 group-hover/item:scale-110 transition-transform"></div>
-                    <span class="text-white/90 text-sm md:text-base group-hover/item:text-adam-orange transition-colors">Ultra-scarce with controlled supply</span>
-                  </div>
-                  <div class="group/item flex items-center gap-4 p-3 hover:bg-adam-orange/5 transition-colors duration-300">
-                    <div class="w-3 h-3 bg-adam-orange border-2 border-adam-orange/50 group-hover/item:scale-110 transition-transform"></div>
-                    <span class="text-white/90 text-sm md:text-base group-hover/item:text-adam-orange transition-colors">Stake to mint s tokens & gain rights</span>
-                  </div>
-                  <div class="group/item flex items-center gap-4 p-3 hover:bg-adam-orange/5 transition-colors duration-300">
-                    <div class="w-3 h-3 bg-adam-orange border-2 border-adam-orange/50 group-hover/item:scale-110 transition-transform"></div>
-                    <span class="text-white/90 text-sm md:text-base group-hover/item:text-adam-orange transition-colors">On-chain governance voting power</span>
-                  </div>
-                </div>
-
-                <!-- Clean Footer -->
-                <div class="mt-8 pt-6 border-t border-adam-orange/20">
-                  <div class="flex items-center justify-between">
-                    <span class="text-adam-light-gray text-xs font-mono">CORE TOKEN</span>
-                    <div class="flex gap-2">
-                      <div class="w-2 h-2 bg-adam-orange/40"></div>
-                      <div class="w-2 h-2 bg-adam-orange/60"></div>
-                      <div class="w-2 h-2 bg-adam-orange/80"></div>
+                  <div class="flex items-start gap-4">
+                    <div class="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <span class="text-red-500 font-bold text-sm">2</span>
                     </div>
+                    <div>
+                      <h4 class="text-white font-semibold mb-2">Provide Proofs</h4>
+                      <p class="text-adam-light-gray text-sm">EAS attestations, oracle signatures, countersignatures</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-4">
+                    <div class="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <span class="text-red-500 font-bold text-sm">3</span>
+                    </div>
+                    <div>
+                      <h4 class="text-white font-semibold mb-2">Register Entry</h4>
+                      <p class="text-adam-light-gray text-sm">Immutable reference with governance revocation rights</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-adam-slate/40 p-6 rounded-2xl border border-adam-slate/50">
+                <h4 class="text-white font-semibold mb-4">Entry Structure</h4>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                  <div class="bg-adam-slate/60 p-3 rounded-lg">
+                    <div class="text-adam-blue font-mono">manifest</div>
+                    <div class="text-adam-light-gray">hash, owner, version</div>
+                  </div>
+                  <div class="bg-adam-slate/60 p-3 rounded-lg">
+                    <div class="text-adam-blue font-mono">proofs</div>
+                    <div class="text-adam-light-gray">EAS UID, signatures</div>
+                  </div>
+                  <div class="bg-adam-slate/60 p-3 rounded-lg">
+                    <div class="text-adam-blue font-mono">chain</div>
+                    <div class="text-adam-light-gray">attestation lineage</div>
+                  </div>
+                  <div class="bg-adam-slate/60 p-3 rounded-lg">
+                    <div class="text-adam-blue font-mono">metadata</div>
+                    <div class="text-adam-light-gray">verifier addresses</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- s Component - Crimson Orange Theme -->
-            <div class="group relative">
-              <!-- Subtle glow effect -->
-              <div class="absolute -inset-1 bg-gradient-to-r from-adam-orange/10 via-adam-orange/20 to-adam-orange/10 opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
+            <div class="space-y-8">
+              <div class="bg-gradient-to-br from-adam-slate/30 to-adam-slate/10 p-8 rounded-3xl border border-adam-slate/50">
+                <h3 class="text-2xl font-semibold text-white mb-6">Use Cases</h3>
 
-              <div class="relative bg-gradient-to-br from-adam-orange/5 via-transparent to-adam-orange/5 backdrop-blur-sm p-8 md:p-10 border-2 border-adam-orange/20 hover:border-adam-orange/40 transition-all duration-500 hover:scale-[1.02]">
-                <!-- Clean Icon Container -->
-                <div class="text-center mb-8">
-                  <div class="relative inline-block">
-                    <div class="w-24 h-24 md:w-28 md:h-28 mx-auto mb-6 bg-gradient-to-br from-adam-orange/10 to-adam-orange/5 border border-adam-orange/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-                      <span class="text-4xl md:text-5xl font-black text-adam-orange">s</span>
-                    </div>
-                  </div>
-                  <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">
-                    Staked Shares
-                  </h3>
-                  <div class="inline-block px-3 py-1 bg-adam-orange/10 border border-adam-orange/20">
-                    <p class="text-adam-orange text-sm font-mono tracking-wider">ERC20 RECEIPT</p>
-                  </div>
-                </div>
-
-                <!-- Clean Feature List -->
                 <div class="space-y-4">
-                  <div class="group/item flex items-center gap-4 p-3 hover:bg-adam-orange/5 transition-colors duration-300">
-                    <div class="w-3 h-3 bg-adam-orange border-2 border-adam-orange/50 group-hover/item:scale-110 transition-transform"></div>
-                    <span class="text-white/90 text-sm md:text-base group-hover/item:text-adam-orange transition-colors">Liquidity receipts & governance shares</span>
+                  <div class="flex items-center gap-3 p-4 bg-adam-slate/40 rounded-xl">
+                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <span class="text-adam-light-gray">Model authenticity verification</span>
                   </div>
-                  <div class="group/item flex items-center gap-4 p-3 hover:bg-adam-orange/5 transition-colors duration-300">
-                    <div class="w-3 h-3 bg-adam-orange border-2 border-adam-orange/50 group-hover/item:scale-110 transition-transform"></div>
-                    <span class="text-white/90 text-sm md:text-base group-hover/item:text-adam-orange transition-colors">Early-exit penalties → PenaltyVault</span>
+                  <div class="flex items-center gap-3 p-4 bg-adam-slate/40 rounded-xl">
+                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <span class="text-adam-light-gray">Agent compliance attestation</span>
                   </div>
-                  <div class="group/item flex items-center gap-4 p-3 hover:bg-adam-orange/5 transition-colors duration-300">
-                    <div class="w-3 h-3 bg-adam-orange border-2 border-adam-orange/50 group-hover/item:scale-110 transition-transform"></div>
-                    <span class="text-white/90 text-sm md:text-base group-hover/item:text-adam-orange transition-colors">Staking rewards & fee distribution</span>
+                  <div class="flex items-center gap-3 p-4 bg-adam-slate/40 rounded-xl">
+                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <span class="text-adam-light-gray">RWA integration proofs</span>
                   </div>
-                  <div class="group/item flex items-center gap-4 p-3 hover:bg-adam-orange/5 transition-colors duration-300">
-                    <div class="w-3 h-3 bg-adam-orange border-2 border-adam-orange/50 group-hover/item:scale-110 transition-transform"></div>
-                    <span class="text-white/90 text-sm md:text-base group-hover/item:text-adam-orange transition-colors">Composability with DeFi protocols</span>
-                  </div>
-                </div>
-
-                <!-- Clean Footer -->
-                <div class="mt-8 pt-6 border-t border-adam-orange/20">
-                  <div class="flex items-center justify-between">
-                    <span class="text-adam-light-gray text-xs font-mono">STAKING TOKEN</span>
-                    <div class="flex gap-2">
-                      <div class="w-2 h-2 bg-adam-orange/40"></div>
-                      <div class="w-2 h-2 bg-adam-orange/60"></div>
-                      <div class="w-2 h-2 bg-adam-orange/80"></div>
-                    </div>
+                  <div class="flex items-center gap-3 p-4 bg-adam-slate/40 rounded-xl">
+                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <span class="text-adam-light-gray">Governance voting weights</span>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- SBT Component - Teal Theme -->
-            <div class="group relative">
-              <!-- Subtle glow effect -->
-              <div class="absolute -inset-1 bg-gradient-to-r from-teal-primary/10 via-teal-primary/20 to-teal-primary/10 opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
-
-              <div class="relative bg-gradient-to-br from-teal-primary/5 via-transparent to-teal-primary/5 backdrop-blur-sm p-8 md:p-10 border-2 border-teal-primary/20 hover:border-teal-primary/40 transition-all duration-500 hover:scale-[1.02]">
-                <!-- Clean Icon Container -->
-                <div class="text-center mb-8">
-                  <div class="relative inline-block">
-                    <div class="w-24 h-24 md:w-28 md:h-28 mx-auto mb-6 bg-gradient-to-br from-teal-primary/10 to-teal-primary/5 border border-teal-primary/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-                      <span class="text-4xl md:text-5xl font-black text-teal-primary">🔗</span>
-                    </div>
+              <div class="bg-gradient-to-br from-adam-blue/10 to-adam-blue/5 p-8 rounded-3xl border border-adam-blue/30">
+                <h4 class="text-adam-blue font-semibold mb-4">Security Features</h4>
+                <div class="space-y-3 text-sm text-adam-light-gray">
+                  <div class="flex items-center gap-2">
+                    <span class="text-green-400">✓</span>
+                    <span>Immutable registration entries</span>
                   </div>
-                  <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">
-                    SoulBound Tokens
-                  </h3>
-                  <div class="inline-block px-3 py-1 bg-teal-primary/10 border border-teal-primary/20">
-                    <p class="text-teal-primary text-sm font-mono tracking-wider">ERC721 NON-TRANSFERABLE</p>
+                  <div class="flex items-center gap-2">
+                    <span class="text-green-400">✓</span>
+                    <span>Governance-controlled revocation</span>
                   </div>
-                </div>
-
-                <!-- Clean Feature List -->
-                <div class="space-y-4">
-                  <div class="group/item flex items-center gap-4 p-3 hover:bg-teal-primary/5 transition-colors duration-300">
-                    <div class="w-3 h-3 bg-teal-primary border-2 border-teal-primary/50 group-hover/item:scale-110 transition-transform"></div>
-                    <span class="text-white/90 text-sm md:text-base group-hover/item:text-teal-primary transition-colors">Onchain identity & reputation</span>
+                  <div class="flex items-center gap-2">
+                    <span class="text-green-400">✓</span>
+                    <span>Cryptographic proof verification</span>
                   </div>
-                  <div class="group/item flex items-center gap-4 p-3 hover:bg-teal-primary/5 transition-colors duration-300">
-                    <div class="w-3 h-3 bg-teal-primary border-2 border-teal-primary/50 group-hover/item:scale-110 transition-transform"></div>
-                    <span class="text-white/90 text-sm md:text-base group-hover/item:text-teal-primary transition-colors">Non-transferable attestations</span>
-                  </div>
-                  <div class="group/item flex items-center gap-4 p-3 hover:bg-teal-primary/5 transition-colors duration-300">
-                    <div class="w-3 h-3 bg-teal-primary border-2 border-teal-primary/50 group-hover/item:scale-110 transition-transform"></div>
-                    <span class="text-white/90 text-sm md:text-base group-hover/item:text-teal-primary transition-colors">Role gating & access control</span>
-                  </div>
-                  <div class="group/item flex items-center gap-4 p-3 hover:bg-teal-primary/5 transition-colors duration-300">
-                    <div class="w-3 h-3 bg-teal-primary border-2 border-teal-primary/50 group-hover/item:scale-110 transition-transform"></div>
-                    <span class="text-white/90 text-sm md:text-base group-hover/item:text-teal-primary transition-colors">2FA for critical operations</span>
-                  </div>
-                </div>
-
-                <!-- Clean Footer -->
-                <div class="mt-8 pt-6 border-t border-teal-primary/20">
-                  <div class="flex items-center justify-between">
-                    <span class="text-adam-light-gray text-xs font-mono">IDENTITY TOKEN</span>
-                    <div class="flex gap-2">
-                      <div class="w-2 h-2 bg-teal-primary/40"></div>
-                      <div class="w-2 h-2 bg-teal-primary/60"></div>
-                      <div class="w-2 h-2 bg-teal-primary/80"></div>
-                    </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-green-400">✓</span>
+                    <span>Multi-oracle attestation support</span>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <!-- Clean Bottom Element -->
-          <div class="text-center mt-16 md:mt-20">
-            <div class="inline-flex items-center gap-4 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300 group">
-              <span class="text-white/70 text-sm font-mono">EXPLORE ECOSYSTEM</span>
-              <div class="w-2 h-2 bg-white/40 group-hover:bg-white/60 transition-colors"></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- AI Registry Showcase -->
-    <section id="registry" class="section adam-section relative overflow-hidden">
-      <!-- Immersive Background with Subtle Animation -->
-      <div class="absolute inset-0 bg-gradient-to-br from-adam-dark via-black to-adam-dark">
-        <!-- Subtle geometric patterns -->
-        <div class="absolute inset-0 opacity-[0.02]">
-          <svg class="w-full h-full" viewBox="0 0 100 100">
-            <defs>
-              <pattern id="registry-circuit" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 10 0 L 10 10 L 20 10" stroke="currentColor" stroke-width="0.5" fill="none"/>
-                <path d="M 0 10 L 10 10 L 10 20" stroke="currentColor" stroke-width="0.5" fill="none"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#registry-circuit)" class="text-red-400"/>
-          </svg>
-        </div>
-        <!-- Floating subtle elements -->
-        <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-red-500/5 rounded-none animate-subtle-float delay-300"></div>
-        <div class="absolute top-3/4 right-1/4 w-24 h-24 bg-red-500/5 rounded-none animate-subtle-float delay-700"></div>
-        <div class="absolute top-1/2 left-3/4 w-20 h-20 bg-red-500/5 rounded-none animate-subtle-float delay-1100"></div>
-      </div>
-
-      <div class="relative z-10 w-full h-full flex items-center justify-center p-4 md:p-8">
-        <div class="max-w-7xl w-full">
-          <!-- Hero Title with Tech Theme -->
-          <div class="text-center mb-16 md:mb-20">
-            <div class="inline-block">
-              <h2 class="text-6xl md:text-8xl lg:text-9xl font-black text-white tracking-wider mb-4">
-                AI
-              </h2>
-              <div class="h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent"></div>
-            </div>
-            <h3 class="text-4xl md:text-6xl lg:text-7xl font-thin text-white/90 tracking-[0.3em] uppercase mt-6">
-              Registry
-            </h3>
-            <p class="text-adam-light-gray/70 text-xl md:text-2xl mt-6 max-w-3xl mx-auto leading-relaxed">
-              Authenticity & Compliance for AI Systems
-            </p>
+    <section id="timelock" class="section adam-section">
+      <div class="w-full h-full flex items-center justify-center p-8 bg-gradient-to-br from-adam-dark to-black">
+        <div class="max-w-6xl w-full">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-4">
+              <span class="text-adam-blue">Timelock</span> Flow
+            </h2>
+            <p class="text-xl text-adam-light-gray font-light">Secure Grant Execution System</p>
           </div>
 
-          <!-- Interactive Registry Flow -->
-          <div class="grid grid-cols-1 xl:grid-cols-2 gap-12 md:gap-16">
-            <!-- Process Flow - Crystal Clear -->
-            <div class="space-y-8">
-              <!-- Process Card -->
-              <div class="group relative">
-                <div class="absolute -inset-1 bg-gradient-to-r from-red-500/10 to-red-500/20 opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
-                <div class="relative bg-gradient-to-br from-red-500/5 to-transparent backdrop-blur-sm p-8 md:p-10 border border-red-500/30 hover:border-red-500/60 transition-all duration-500">
-                  <div class="flex items-center gap-4 mb-8">
-                    <div class="w-12 h-12 bg-red-500/20 flex items-center justify-center group-hover:bg-red-500/40 transition-colors">
-                      <span class="text-red-400 font-black text-xl">⚡</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-red-400 to-white bg-clip-text text-transparent">
-                      Registry Process
-                    </h3>
-                  </div>
-
-                  <div class="space-y-6">
-                    <!-- Step 1 -->
-                    <div class="group/step flex items-start gap-6 p-4 hover:bg-red-500/10 transition-colors duration-300">
-                      <div class="relative flex-shrink-0">
-                        <div class="w-10 h-10 bg-red-500/20 flex items-center justify-center group-hover/step:bg-red-500/40 transition-colors">
-                          <span class="text-red-400 font-bold">1</span>
-                        </div>
-                      </div>
-                      <div class="flex-1">
-                        <h4 class="text-white font-semibold mb-2 group-hover/step:text-red-400 transition-colors">Submit Manifest</h4>
-                        <p class="text-adam-light-gray text-sm md:text-base">Model/agent metadata, version, owner, schema hash</p>
-                      </div>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="group/step flex items-start gap-6 p-4 hover:bg-red-500/10 transition-colors duration-300">
-                      <div class="relative flex-shrink-0">
-                        <div class="w-10 h-10 bg-red-500/20 flex items-center justify-center group-hover/step:bg-red-500/40 transition-colors">
-                          <span class="text-red-400 font-bold">2</span>
-                        </div>
-                      </div>
-                      <div class="flex-1">
-                        <h4 class="text-white font-semibold mb-2 group-hover/step:text-red-400 transition-colors">Provide Proofs</h4>
-                        <p class="text-adam-light-gray text-sm md:text-base">EAS attestations, oracle signatures, countersignatures</p>
-                      </div>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="group/step flex items-start gap-6 p-4 hover:bg-red-500/10 transition-colors duration-300">
-                      <div class="relative flex-shrink-0">
-                        <div class="w-10 h-10 bg-red-500/20 flex items-center justify-center group-hover/step:bg-red-500/40 transition-colors">
-                          <span class="text-red-400 font-bold">3</span>
-                        </div>
-                      </div>
-                      <div class="flex-1">
-                        <h4 class="text-white font-semibold mb-2 group-hover/step:text-red-400 transition-colors">Register Entry</h4>
-                        <p class="text-adam-light-gray text-sm md:text-base">Immutable reference with governance revocation rights</p>
-                      </div>
-                    </div>
-                  </div>
+          <!-- Timelock Visualization -->
+          <div class="bg-gradient-to-br from-adam-slate/30 to-adam-slate/10 p-8 rounded-3xl border border-adam-slate/50 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div class="text-center group">
+                <div class="w-16 h-16 mx-auto mb-4 bg-adam-blue/30 rounded-full flex items-center justify-center group-hover:bg-adam-blue/50 transition-colors">
+                  <span class="text-adam-blue font-bold text-xl">1</span>
                 </div>
+                <h4 class="text-adam-blue font-semibold mb-2">Propose</h4>
+                <p class="text-adam-light-gray text-sm">Submit grant proposal with details</p>
               </div>
 
-              <!-- Entry Structure Card -->
-              <div class="group relative">
-                <div class="absolute -inset-1 bg-gradient-to-r from-adam-blue/10 to-adam-blue/20 opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
-                <div class="relative bg-gradient-to-br from-adam-blue/5 to-transparent backdrop-blur-sm p-8 md:p-10 border border-adam-blue/30 hover:border-adam-blue/60 transition-all duration-500">
-                  <div class="flex items-center gap-4 mb-8">
-                    <div class="w-12 h-12 bg-adam-blue/20 flex items-center justify-center group-hover:bg-adam-blue/40 transition-colors">
-                      <span class="text-adam-blue font-black text-xl">📊</span>
-                    </div>
-                    <h4 class="text-adam-blue font-bold text-xl md:text-2xl">Entry Structure</h4>
-                  </div>
-
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="group/item bg-adam-blue/10 p-4 hover:bg-adam-blue/20 transition-colors duration-300 border border-adam-blue/20">
-                      <div class="text-adam-blue font-mono font-semibold mb-1">manifest</div>
-                      <div class="text-adam-light-gray text-sm">hash, owner, version</div>
-                    </div>
-                    <div class="group/item bg-adam-blue/10 p-4 hover:bg-adam-blue/20 transition-colors duration-300 border border-adam-blue/20">
-                      <div class="text-adam-blue font-mono font-semibold mb-1">proofs</div>
-                      <div class="text-adam-light-gray text-sm">EAS UID, signatures</div>
-                    </div>
-                    <div class="group/item bg-adam-blue/10 p-4 hover:bg-adam-blue/20 transition-colors duration-300 border border-adam-blue/20">
-                      <div class="text-adam-blue font-mono font-semibold mb-1">chain</div>
-                      <div class="text-adam-light-gray text-sm">attestation lineage</div>
-                    </div>
-                    <div class="group/item bg-adam-blue/10 p-4 hover:bg-adam-blue/20 transition-colors duration-300 border border-adam-blue/20">
-                      <div class="text-adam-blue font-mono font-semibold mb-1">metadata</div>
-                      <div class="text-adam-light-gray text-sm">verifier addresses</div>
-                    </div>
-                  </div>
+              <div class="text-center group">
+                <div class="w-16 h-16 mx-auto mb-4 bg-adam-orange/30 rounded-full flex items-center justify-center group-hover:bg-adam-orange/50 transition-colors">
+                  <span class="text-adam-orange font-bold text-xl">2</span>
                 </div>
-              </div>
-            </div>
-
-            <!-- Use Cases & Security - Crystal Clear -->
-            <div class="space-y-8">
-              <!-- Use Cases Card -->
-              <div class="group relative">
-                <div class="absolute -inset-1 bg-gradient-to-r from-adam-slate/10 to-adam-slate/20 opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
-                <div class="relative bg-gradient-to-br from-adam-slate/5 to-transparent backdrop-blur-sm p-8 md:p-10 border border-adam-slate/30 hover:border-adam-slate/60 transition-all duration-500">
-                  <div class="flex items-center gap-4 mb-8">
-                    <div class="w-12 h-12 bg-adam-slate/20 flex items-center justify-center group-hover:bg-adam-slate/40 transition-colors">
-                      <span class="text-white font-black text-xl">🎯</span>
-                    </div>
-                    <h3 class="text-white font-bold text-xl md:text-2xl">Use Cases</h3>
-                  </div>
-
-                  <div class="space-y-4">
-                    <div class="group/item flex items-center gap-4 p-4 bg-adam-slate/20 hover:bg-red-500/20 transition-colors duration-300">
-                      <div class="w-3 h-3 bg-red-500 border-2 border-red-500/50 group-hover/item:scale-110 transition-transform"></div>
-                      <span class="text-white/90 text-sm md:text-base group-hover/item:text-red-400 transition-colors">Model authenticity verification</span>
-                    </div>
-                    <div class="group/item flex items-center gap-4 p-4 bg-adam-slate/20 hover:bg-red-500/20 transition-colors duration-300">
-                      <div class="w-3 h-3 bg-red-500 border-2 border-red-500/50 group-hover/item:scale-110 transition-transform"></div>
-                      <span class="text-white/90 text-sm md:text-base group-hover/item:text-red-400 transition-colors">Agent compliance attestation</span>
-                    </div>
-                    <div class="group/item flex items-center gap-4 p-4 bg-adam-slate/20 hover:bg-red-500/20 transition-colors duration-300">
-                      <div class="w-3 h-3 bg-red-500 border-2 border-red-500/50 group-hover/item:scale-110 transition-transform"></div>
-                      <span class="text-white/90 text-sm md:text-base group-hover/item:text-red-400 transition-colors">RWA integration proofs</span>
-                    </div>
-                    <div class="group/item flex items-center gap-4 p-4 bg-adam-slate/20 hover:bg-red-500/20 transition-colors duration-300">
-                      <div class="w-3 h-3 bg-red-500 border-2 border-red-500/50 group-hover/item:scale-110 transition-transform"></div>
-                      <span class="text-white/90 text-sm md:text-base group-hover/item:text-red-400 transition-colors">Governance voting weights</span>
-                    </div>
-                  </div>
-                </div>
+                <h4 class="text-adam-orange font-semibold mb-2">Vote</h4>
+                <p class="text-adam-light-gray text-sm">Community governance voting</p>
               </div>
 
-              <!-- Security Features Card -->
-              <div class="group relative">
-                <div class="absolute -inset-1 bg-gradient-to-r from-green-500/10 to-green-500/20 opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
-                <div class="relative bg-gradient-to-br from-green-500/5 to-transparent backdrop-blur-sm p-8 md:p-10 border border-green-500/30 hover:border-green-500/60 transition-all duration-500">
-                  <div class="flex items-center gap-4 mb-8">
-                    <div class="w-12 h-12 bg-green-500/20 flex items-center justify-center group-hover:bg-green-500/40 transition-colors">
-                      <span class="text-green-400 font-black text-xl">🔒</span>
-                    </div>
-                    <h4 class="text-green-400 font-bold text-xl md:text-2xl">Security Features</h4>
-                  </div>
-
-                  <div class="space-y-4">
-                    <div class="flex items-center gap-3 p-3 hover:bg-green-500/10 transition-colors duration-300 group/feature">
-                      <span class="text-green-400 text-lg group-hover/feature:scale-110 transition-transform">✓</span>
-                      <span class="text-white/90 text-sm md:text-base group-hover/feature:text-green-400 transition-colors">Immutable registration entries</span>
-                    </div>
-                    <div class="flex items-center gap-3 p-3 hover:bg-green-500/10 transition-colors duration-300 group/feature">
-                      <span class="text-green-400 text-lg group-hover/feature:scale-110 transition-transform">✓</span>
-                      <span class="text-white/90 text-sm md:text-base group-hover/feature:text-green-400 transition-colors">Governance-controlled revocation</span>
-                    </div>
-                    <div class="flex items-center gap-3 p-3 hover:bg-green-500/10 transition-colors duration-300 group/feature">
-                      <span class="text-green-400 text-lg group-hover/feature:scale-110 transition-transform">✓</span>
-                      <span class="text-white/90 text-sm md:text-base group-hover/feature:text-green-400 transition-colors">Cryptographic proof verification</span>
-                    </div>
-                    <div class="flex items-center gap-3 p-3 hover:bg-green-500/10 transition-colors duration-300 group/feature">
-                      <span class="text-green-400 text-lg group-hover/feature:scale-110 transition-transform">✓</span>
-                      <span class="text-white/90 text-sm md:text-base group-hover/feature:text-green-400 transition-colors">Multi-oracle attestation support</span>
-                    </div>
-                  </div>
+              <div class="text-center group">
+                <div class="w-16 h-16 mx-auto mb-4 bg-red-500/30 rounded-full flex items-center justify-center group-hover:bg-red-500/50 transition-colors">
+                  <span class="text-red-500 font-bold text-xl">3</span>
                 </div>
+                <h4 class="text-red-500 font-semibold mb-2">Timelock</h4>
+                <p class="text-adam-light-gray text-sm">Configurable delay period</p>
+              </div>
+
+              <div class="text-center group">
+                <div class="w-16 h-16 mx-auto mb-4 bg-arc-green/30 rounded-full flex items-center justify-center group-hover:bg-arc-green/50 transition-colors">
+                  <span class="text-arc-green font-bold text-xl">4</span>
+                </div>
+                <h4 class="text-arc-green font-semibold mb-2">Execute</h4>
+                <p class="text-adam-light-gray text-sm">Treasury releases funds</p>
               </div>
             </div>
           </div>
 
-          <!-- Bottom Interactive Element -->
-          <div class="text-center mt-16 md:mt-20">
-            <div class="inline-flex items-center gap-4 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300 group">
-              <span class="text-white/70 text-sm font-mono">SECURE REGISTRY</span>
-              <div class="w-2 h-2 bg-red-400/40 group-hover:bg-red-400/60 transition-colors"></div>
-              <div class="w-2 h-2 bg-adam-blue/40 group-hover:bg-adam-blue/60 transition-colors"></div>
+          <!-- Timelock Details -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-gradient-to-br from-adam-blue/10 to-adam-blue/5 p-6 rounded-2xl border border-adam-blue/30">
+              <h3 class="text-adam-blue font-semibold mb-4">Security Features</h3>
+              <div class="space-y-3 text-sm text-adam-light-gray">
+                <div class="flex items-center gap-2">
+                  <span class="text-green-400">✓</span>
+                  <span>No automatic self-grants</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-green-400">✓</span>
+                  <span>Explicit role handovers required</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-green-400">✓</span>
+                  <span>Configurable timelock windows</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-green-400">✓</span>
+                  <span>Emergency pause capability</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-adam-orange/10 to-adam-orange/5 p-6 rounded-2xl border border-adam-orange/30">
+              <h3 class="text-adam-orange font-semibold mb-4">Grant Types</h3>
+              <div class="space-y-3 text-sm text-adam-light-gray">
+                <div class="flex items-center gap-2">
+                  <span class="text-adam-orange">●</span>
+                  <span>Development funding</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-adam-orange">●</span>
+                  <span>Security bounties</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-adam-orange">●</span>
+                  <span>Community initiatives</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-adam-orange">●</span>
+                  <span>Partnership programs</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Ultra-Modern Timelock Flow Showcase -->
-    <section id="timelock" class="section adam-section relative overflow-hidden">
-      <!-- Animated Clock Background -->
-      <div class="absolute inset-0 bg-gradient-to-br from-adam-dark via-black to-adam-dark">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)] animate-pulse"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(249,115,22,0.1),transparent_50%)] animate-pulse delay-1000"></div>
-        <!-- Clock-like Particles -->
-        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-adam-blue/40 rounded-full animate-ping delay-300"></div>
-        <div class="absolute top-3/4 right-1/4 w-1 h-1 bg-adam-orange/50 rounded-full animate-bounce delay-700"></div>
-        <div class="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-red-500/40 rounded-full animate-pulse delay-1100"></div>
-        <!-- Clock Hands Animation -->
-        <svg class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 opacity-5" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" class="text-adam-blue"/>
-          <line x1="50" y1="50" x2="50" y2="20" stroke="currentColor" stroke-width="3" class="text-adam-blue origin-center animate-spin duration-60000"/>
-          <line x1="50" y1="50" x2="70" y2="50" stroke="currentColor" stroke-width="2" class="text-adam-orange origin-center animate-spin duration-3600000"/>
-        </svg>
-      </div>
-
-      <div class="relative z-10 w-full h-full flex items-center justify-center p-4 md:p-8">
+    <section id="security" class="section adam-section">
+      <div class="w-full h-full flex items-center justify-center p-8 bg-adam-black">
         <div class="max-w-7xl w-full">
-          <!-- Hero Title with Clock Theme -->
-          <div class="text-center mb-16 md:mb-20">
-            <div class="inline-block">
-              <h2 class="text-6xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-adam-blue via-adam-orange to-red-500 bg-clip-text text-transparent tracking-wider mb-4 animate-pulse">
-                TIMELOCK
-              </h2>
-              <div class="h-1 bg-gradient-to-r from-transparent via-adam-blue to-transparent rounded-full animate-pulse"></div>
-            </div>
-            <h3 class="text-4xl md:text-6xl lg:text-7xl font-thin text-white/90 tracking-[0.3em] uppercase mt-6 animate-fade-in">
-              Flow
-            </h3>
-            <p class="text-adam-light-gray/70 text-xl md:text-2xl mt-6 max-w-3xl mx-auto leading-relaxed">
-              Secure Grant Execution System
-            </p>
+          <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-4">
+              <span class="text-red-500">Security</span> & Cyber
+            </h2>
+            <p class="text-xl text-adam-light-gray font-light">Defense-in-Depth Architecture</p>
           </div>
 
-          <!-- Interactive 4-Step Process Flow -->
-          <div class="mb-16 md:mb-20">
-            <div class="group relative">
-              <div class="absolute -inset-1 bg-gradient-to-r from-adam-blue/20 via-adam-orange/20 to-red-500/20 rounded-3xl blur-lg group-hover:blur-xl transition-all duration-700 animate-pulse"></div>
-              <div class="relative bg-gradient-to-br from-adam-slate/10 via-adam-slate/5 to-transparent backdrop-blur-xl p-8 md:p-12 rounded-3xl border border-adam-slate/30 hover:border-adam-slate/60 transition-all duration-500">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-                  <!-- Step 1 - Propose -->
-                  <div class="text-center group/step">
-                    <div class="relative inline-block mb-6">
-                      <div class="w-20 h-20 md:w-24 md:h-24 mx-auto bg-gradient-to-br from-adam-blue/20 to-adam-blue/10 rounded-full flex items-center justify-center group-hover/step:scale-110 transition-transform duration-500">
-                        <span class="text-adam-blue font-black text-2xl md:text-3xl animate-pulse">1</span>
-                      </div>
-                      <!-- Pulsing Ring -->
-                      <div class="absolute inset-0 rounded-full border-2 border-adam-blue/30 animate-ping"></div>
+          <!-- Security Shields Visualization -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class="space-y-8">
+              <div class="bg-gradient-to-br from-red-500/10 to-red-500/5 p-8 rounded-3xl border border-red-500/30">
+                <h3 class="text-2xl font-semibold text-red-500 mb-6">Defense Layers</h3>
+
+                <div class="space-y-6">
+                  <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span class="text-red-500 font-bold">1</span>
                     </div>
-                    <h4 class="text-adam-blue font-bold text-xl md:text-2xl mb-3 group-hover/step:text-white transition-colors">Propose</h4>
-                    <p class="text-adam-light-gray text-sm md:text-base group-hover/step:text-white/80 transition-colors">Submit grant proposal with details</p>
-                    <!-- Connection Line -->
-                    <div class="hidden lg:block absolute top-10 -right-6 w-12 h-0.5 bg-gradient-to-r from-adam-blue to-adam-orange"></div>
+                    <div>
+                      <h4 class="text-white font-semibold mb-2">Wasm Sandboxing</h4>
+                      <p class="text-adam-light-gray text-sm">Policies execute in isolated environments with no syscalls</p>
+                    </div>
                   </div>
 
-                  <!-- Step 2 - Vote -->
-                  <div class="text-center group/step">
-                    <div class="relative inline-block mb-6">
-                      <div class="w-20 h-20 md:w-24 md:h-24 mx-auto bg-gradient-to-br from-adam-orange/20 to-adam-orange/10 rounded-full flex items-center justify-center group-hover/step:scale-110 transition-transform duration-500">
-                        <span class="text-adam-orange font-black text-2xl md:text-3xl animate-pulse delay-300">2</span>
-                      </div>
-                      <!-- Bouncing Ring -->
-                      <div class="absolute inset-0 rounded-full border-2 border-adam-orange/30 animate-bounce"></div>
+                  <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span class="text-red-500 font-bold">2</span>
                     </div>
-                    <h4 class="text-adam-orange font-bold text-xl md:text-2xl mb-3 group-hover/step:text-white transition-colors">Vote</h4>
-                    <p class="text-adam-light-gray text-sm md:text-base group-hover/step:text-white/80 transition-colors">Community governance voting</p>
-                    <!-- Connection Line -->
-                    <div class="hidden lg:block absolute top-10 -right-6 w-12 h-0.5 bg-gradient-to-r from-adam-orange to-red-500"></div>
+                    <div>
+                      <h4 class="text-white font-semibold mb-2">On-chain Proofs</h4>
+                      <p class="text-adam-light-gray text-sm">Cryptographic verification for all RWA and AI attestations</p>
+                    </div>
                   </div>
 
-                  <!-- Step 3 - Timelock -->
-                  <div class="text-center group/step">
-                    <div class="relative inline-block mb-6">
-                      <div class="w-20 h-20 md:w-24 md:h-24 mx-auto bg-gradient-to-br from-red-500/20 to-red-500/10 rounded-full flex items-center justify-center group-hover/step:scale-110 transition-transform duration-500">
-                        <span class="text-red-500 font-black text-2xl md:text-3xl animate-pulse delay-600">3</span>
-                      </div>
-                      <!-- Rotating Ring -->
-                      <div class="absolute inset-0 rounded-full border-2 border-red-500/30 animate-spin duration-3000"></div>
+                  <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span class="text-red-500 font-bold">3</span>
                     </div>
-                    <h4 class="text-red-500 font-bold text-xl md:text-2xl mb-3 group-hover/step:text-white transition-colors">Timelock</h4>
-                    <p class="text-adam-light-gray text-sm md:text-base group-hover/step:text-white/80 transition-colors">Configurable delay period</p>
-                    <!-- Connection Line -->
-                    <div class="hidden lg:block absolute top-10 -right-6 w-12 h-0.5 bg-gradient-to-r from-red-500 to-arc-green"></div>
+                    <div>
+                      <h4 class="text-white font-semibold mb-2">Timelock + Challenge</h4>
+                      <p class="text-adam-light-gray text-sm">Time-delayed execution with veto periods for sensitive operations</p>
+                    </div>
                   </div>
 
-                  <!-- Step 4 - Execute -->
-                  <div class="text-center group/step">
-                    <div class="relative inline-block mb-6">
-                      <div class="w-20 h-20 md:w-24 md:h-24 mx-auto bg-gradient-to-br from-arc-green/20 to-arc-green/10 rounded-full flex items-center justify-center group-hover/step:scale-110 transition-transform duration-500">
-                        <span class="text-arc-green font-black text-2xl md:text-3xl animate-pulse delay-900">4</span>
-                      </div>
-                      <!-- Pulsing Ring -->
-                      <div class="absolute inset-0 rounded-full border-2 border-arc-green/30 animate-ping"></div>
+                  <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span class="text-red-500 font-bold">4</span>
                     </div>
-                    <h4 class="text-arc-green font-bold text-xl md:text-2xl mb-3 group-hover/step:text-white transition-colors">Execute</h4>
-                    <p class="text-adam-light-gray text-sm md:text-base group-hover/step:text-white/80 transition-colors">Treasury releases funds</p>
+                    <div>
+                      <h4 class="text-white font-semibold mb-2">Event Observability</h4>
+                      <p class="text-adam-light-gray text-sm">All critical actions emit structured events for monitoring</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- Enhanced Details Grid -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-            <!-- Security Features Card -->
-            <div class="group relative">
-              <div class="absolute -inset-1 bg-gradient-to-r from-green-500/20 via-green-500/40 to-green-500/20 rounded-3xl blur-lg group-hover:blur-xl transition-all duration-700 animate-pulse"></div>
-              <div class="relative bg-gradient-to-br from-green-500/10 via-green-500/5 to-transparent backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-green-500/30 hover:border-green-500/60 transition-all duration-500">
-                <div class="flex items-center gap-4 mb-8">
-                  <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center group-hover:bg-green-500/40 transition-colors">
-                    <span class="text-green-400 font-black text-xl">🔒</span>
-                  </div>
-                  <h3 class="text-green-400 font-bold text-xl md:text-2xl">Security Features</h3>
-                </div>
+            <div class="space-y-8">
+              <div class="bg-gradient-to-br from-adam-slate/30 to-adam-slate/10 p-8 rounded-3xl border border-adam-slate/50">
+                <h3 class="text-2xl font-semibold text-white mb-6">Cyber Measures</h3>
 
                 <div class="space-y-4">
-                  <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-green-500/10 transition-colors duration-300 group/feature">
-                    <span class="text-green-400 text-lg group-hover/feature:scale-110 transition-transform">✓</span>
-                    <span class="text-white/90 text-sm md:text-base group-hover/feature:text-green-400 transition-colors">No automatic self-grants</span>
-                  </div>
-                  <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-green-500/10 transition-colors duration-300 group/feature">
-                    <span class="text-green-400 text-lg group-hover/feature:scale-110 transition-transform">✓</span>
-                    <span class="text-white/90 text-sm md:text-base group-hover/feature:text-green-400 transition-colors">Explicit role handovers required</span>
-                  </div>
-                  <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-green-500/10 transition-colors duration-300 group/feature">
-                    <span class="text-green-400 text-lg group-hover/feature:scale-110 transition-transform">✓</span>
-                    <span class="text-white/90 text-sm md:text-base group-hover/feature:text-green-400 transition-colors">Configurable timelock windows</span>
-                  </div>
-                  <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-green-500/10 transition-colors duration-300 group/feature">
-                    <span class="text-green-400 text-lg group-hover/feature:scale-110 transition-transform">✓</span>
-                    <span class="text-white/90 text-sm md:text-base group-hover/feature:text-green-400 transition-colors">Emergency pause capability</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Grant Types Card -->
-            <div class="group relative">
-              <div class="absolute -inset-1 bg-gradient-to-r from-adam-orange/20 via-adam-orange/40 to-adam-orange/20 rounded-3xl blur-lg group-hover:blur-xl transition-all duration-700 animate-pulse delay-1000"></div>
-              <div class="relative bg-gradient-to-br from-adam-orange/10 via-adam-orange/5 to-transparent backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-adam-orange/30 hover:border-adam-orange/60 transition-all duration-500">
-                <div class="flex items-center gap-4 mb-8">
-                  <div class="w-12 h-12 bg-adam-orange/20 rounded-full flex items-center justify-center group-hover:bg-adam-orange/40 transition-colors">
-                    <span class="text-adam-orange font-black text-xl">💰</span>
-                  </div>
-                  <h3 class="text-adam-orange font-bold text-xl md:text-2xl">Grant Types</h3>
-                </div>
-
-                <div class="space-y-4">
-                  <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-adam-orange/10 transition-colors duration-300 group/grant">
-                    <span class="text-adam-orange text-lg group-hover/grant:scale-110 transition-transform">●</span>
-                    <span class="text-white/90 text-sm md:text-base group-hover/grant:text-adam-orange transition-colors">Development funding</span>
-                  </div>
-                  <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-adam-orange/10 transition-colors duration-300 group/grant">
-                    <span class="text-adam-orange text-lg group-hover/grant:scale-110 transition-transform">●</span>
-                    <span class="text-white/90 text-sm md:text-base group-hover/grant:text-adam-orange transition-colors">Security bounties</span>
-                  </div>
-                  <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-adam-orange/10 transition-colors duration-300 group/grant">
-                    <span class="text-adam-orange text-lg group-hover/grant:scale-110 transition-transform">●</span>
-                    <span class="text-white/90 text-sm md:text-base group-hover/grant:text-adam-orange transition-colors">Community initiatives</span>
-                  </div>
-                  <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-adam-orange/10 transition-colors duration-300 group/grant">
-                    <span class="text-adam-orange text-lg group-hover/grant:scale-110 transition-transform">●</span>
-                    <span class="text-white/90 text-sm md:text-base group-hover/grant:text-adam-orange transition-colors">Partnership programs</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom Interactive Element -->
-          <div class="text-center mt-16 md:mt-20">
-            <div class="inline-flex items-center gap-4 px-6 py-3 bg-white/5 backdrop-blur-sm rounded-full border border-white/10 hover:bg-white/10 transition-all duration-300 group">
-              <span class="text-white/70 text-sm font-mono">SECURE EXECUTION</span>
-              <div class="w-2 h-2 bg-adam-blue/40 rounded-full group-hover:bg-adam-blue/60 transition-colors animate-pulse"></div>
-              <div class="w-2 h-2 bg-adam-orange/40 rounded-full group-hover:bg-adam-orange/60 transition-colors animate-pulse delay-300"></div>
-              <div class="w-2 h-2 bg-red-500/40 rounded-full group-hover:bg-red-500/60 transition-colors animate-pulse delay-600"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Ultra-Modern Security & Cyber Showcase -->
-    <section id="security" class="section adam-section relative overflow-hidden">
-      <!-- Shield-Themed Animated Background -->
-      <div class="absolute inset-0 bg-gradient-to-br from-adam-dark via-black to-adam-dark">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(239,68,68,0.1),transparent_50%)] animate-pulse"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.1),transparent_50%)] animate-pulse delay-1000"></div>
-        <!-- Shield Particles -->
-        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-red-400/60 rounded-full animate-ping delay-500"></div>
-        <div class="absolute top-2/3 right-1/3 w-1 h-1 bg-adam-blue/50 rounded-full animate-bounce delay-300"></div>
-        <div class="absolute top-1/2 left-2/3 w-1.5 h-1.5 bg-red-400/40 rounded-full animate-pulse delay-700"></div>
-        <!-- Shield Grid Pattern -->
-        <svg class="absolute inset-0 w-full h-full opacity-5" viewBox="0 0 100 100">
-          <defs>
-            <pattern id="shield" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse">
-              <polygon points="12.5,2.5 22.5,7.5 22.5,17.5 12.5,22.5 2.5,17.5 2.5,7.5" stroke="currentColor" stroke-width="0.5" fill="none"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#shield)" class="text-red-400 animate-pulse"/>
-        </svg>
-      </div>
-
-      <div class="relative z-10 w-full h-full flex items-center justify-center p-4 md:p-8">
-        <div class="max-w-7xl w-full">
-          <!-- Hero Title with Shield Theme -->
-          <div class="text-center mb-16 md:mb-20">
-            <div class="inline-block">
-              <h2 class="text-6xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-red-400 via-red-500 to-red-400 bg-clip-text text-transparent tracking-wider mb-4 animate-pulse">
-                SECURITY
-              </h2>
-              <div class="h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent rounded-full animate-pulse"></div>
-            </div>
-            <h3 class="text-4xl md:text-6xl lg:text-7xl font-thin text-white/90 tracking-[0.3em] uppercase mt-6 animate-fade-in">
-              & Cyber
-            </h3>
-            <p class="text-adam-light-gray/70 text-xl md:text-2xl mt-6 max-w-3xl mx-auto leading-relaxed">
-              Defense-in-Depth Architecture
-            </p>
-          </div>
-
-          <!-- Interactive Security Visualization -->
-          <div class="grid grid-cols-1 xl:grid-cols-2 gap-12 md:gap-16">
-            <!-- Defense Layers - Ultra Modern -->
-            <div class="space-y-8">
-              <!-- Defense Layers Card with Glow -->
-              <div class="group relative">
-                <div class="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-red-500/40 to-red-500/20 rounded-3xl blur-lg group-hover:blur-xl transition-all duration-700 animate-pulse"></div>
-                <div class="relative bg-gradient-to-br from-red-500/10 via-red-500/5 to-transparent backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-red-500/30 hover:border-red-500/60 transition-all duration-500">
-                  <div class="flex items-center gap-4 mb-8">
-                    <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center group-hover:bg-red-500/40 transition-colors">
-                      <span class="text-red-400 font-black text-xl">🛡️</span>
+                  <div class="bg-adam-slate/40 p-4 rounded-xl">
+                    <div class="flex items-center gap-3 mb-2">
+                      <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                      <span class="text-white font-semibold">Registry Signatures</span>
                     </div>
-                    <h3 class="text-red-400 font-bold text-xl md:text-2xl">Defense Layers</h3>
+                    <p class="text-adam-light-gray text-sm">Cryptographic proof requirements for all registrations</p>
                   </div>
 
-                  <div class="space-y-6">
-                    <!-- Layer 1 -->
-                    <div class="group/step flex items-start gap-6 p-4 rounded-xl hover:bg-red-500/10 transition-colors duration-300">
-                      <div class="relative flex-shrink-0">
-                        <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center group-hover/step:bg-red-500/40 transition-colors">
-                          <span class="text-red-400 font-bold">1</span>
-                        </div>
-                        <div class="absolute inset-0 rounded-full border-2 border-red-500/30 animate-ping"></div>
-                      </div>
-                      <div class="flex-1">
-                        <h4 class="text-white font-semibold mb-2 group-hover/step:text-red-400 transition-colors">Wasm Sandboxing</h4>
-                        <p class="text-adam-light-gray text-sm md:text-base">Policies execute in isolated environments with no syscalls</p>
-                      </div>
+                  <div class="bg-adam-slate/40 p-4 rounded-xl">
+                    <div class="flex items-center gap-3 mb-2">
+                      <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                      <span class="text-white font-semibold">Role Bounds</span>
                     </div>
-
-                    <!-- Layer 2 -->
-                    <div class="group/step flex items-start gap-6 p-4 rounded-xl hover:bg-red-500/10 transition-colors duration-300">
-                      <div class="relative flex-shrink-0">
-                        <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center group-hover/step:bg-red-500/40 transition-colors">
-                          <span class="text-red-400 font-bold">2</span>
-                        </div>
-                        <div class="absolute inset-0 rounded-full border-2 border-red-500/30 animate-ping delay-300"></div>
-                      </div>
-                      <div class="flex-1">
-                        <h4 class="text-white font-semibold mb-2 group-hover/step:text-red-400 transition-colors">On-chain Proofs</h4>
-                        <p class="text-adam-light-gray text-sm md:text-base">Cryptographic verification for all RWA and AI attestations</p>
-                      </div>
-                    </div>
-
-                    <!-- Layer 3 -->
-                    <div class="group/step flex items-start gap-6 p-4 rounded-xl hover:bg-red-500/10 transition-colors duration-300">
-                      <div class="relative flex-shrink-0">
-                        <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center group-hover/step:bg-red-500/40 transition-colors">
-                          <span class="text-red-400 font-bold">3</span>
-                        </div>
-                        <div class="absolute inset-0 rounded-full border-2 border-red-500/30 animate-ping delay-600"></div>
-                      </div>
-                      <div class="flex-1">
-                        <h4 class="text-white font-semibold mb-2 group-hover/step:text-red-400 transition-colors">Timelock + Challenge</h4>
-                        <p class="text-adam-light-gray text-sm md:text-base">Time-delayed execution with veto periods for sensitive operations</p>
-                      </div>
-                    </div>
-
-                    <!-- Layer 4 -->
-                    <div class="group/step flex items-start gap-6 p-4 rounded-xl hover:bg-red-500/10 transition-colors duration-300">
-                      <div class="relative flex-shrink-0">
-                        <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center group-hover/step:bg-red-500/40 transition-colors">
-                          <span class="text-red-400 font-bold">4</span>
-                        </div>
-                        <div class="absolute inset-0 rounded-full border-2 border-red-500/30 animate-ping delay-900"></div>
-                      </div>
-                      <div class="flex-1">
-                        <h4 class="text-white font-semibold mb-2 group-hover/step:text-red-400 transition-colors">Event Observability</h4>
-                        <p class="text-adam-light-gray text-sm md:text-base">All critical actions emit structured events for monitoring</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Cyber Measures & Monitoring - Ultra Modern -->
-            <div class="space-y-8">
-              <!-- Cyber Measures Card -->
-              <div class="group relative">
-                <div class="absolute -inset-1 bg-gradient-to-r from-adam-slate/20 via-adam-slate/40 to-adam-slate/20 rounded-3xl blur-lg group-hover:blur-xl transition-all duration-700 animate-pulse delay-1000"></div>
-                <div class="relative bg-gradient-to-br from-adam-slate/10 via-adam-slate/5 to-transparent backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-adam-slate/30 hover:border-adam-slate/60 transition-all duration-500">
-                  <div class="flex items-center gap-4 mb-8">
-                    <div class="w-12 h-12 bg-adam-slate/20 rounded-full flex items-center justify-center group-hover:bg-adam-slate/40 transition-colors">
-                      <span class="text-white font-black text-xl">🔐</span>
-                    </div>
-                    <h3 class="text-white font-bold text-xl md:text-2xl">Cyber Measures</h3>
+                    <p class="text-adam-light-gray text-sm">Strict permission systems with minimal privilege principles</p>
                   </div>
 
-                  <div class="space-y-4">
-                    <div class="group/measure bg-adam-slate/20 p-4 rounded-xl hover:bg-red-500/20 transition-colors duration-300 border border-adam-slate/20">
-                      <div class="flex items-center gap-3 mb-2">
-                        <div class="w-3 h-3 bg-red-500 rounded-full group-hover/measure:scale-125 transition-transform"></div>
-                        <span class="text-white font-semibold group-hover/measure:text-red-400 transition-colors">Registry Signatures</span>
-                      </div>
-                      <p class="text-adam-light-gray text-sm">Cryptographic proof requirements for all registrations</p>
+                  <div class="bg-adam-slate/40 p-4 rounded-xl">
+                    <div class="flex items-center gap-3 mb-2">
+                      <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                      <span class="text-white font-semibold">Rate Limiting</span>
                     </div>
+                    <p class="text-adam-light-gray text-sm">Transaction frequency controls and abuse prevention</p>
+                  </div>
 
-                    <div class="group/measure bg-adam-slate/20 p-4 rounded-xl hover:bg-red-500/20 transition-colors duration-300 border border-adam-slate/20">
-                      <div class="flex items-center gap-3 mb-2">
-                        <div class="w-3 h-3 bg-red-500 rounded-full group-hover/measure:scale-125 transition-transform"></div>
-                        <span class="text-white font-semibold group-hover/measure:text-red-400 transition-colors">Role Bounds</span>
-                      </div>
-                      <p class="text-adam-light-gray text-sm">Strict permission systems with minimal privilege principles</p>
+                  <div class="bg-adam-slate/40 p-4 rounded-xl">
+                    <div class="flex items-center gap-3 mb-2">
+                      <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                      <span class="text-white font-semibold">Restrictable Slashing</span>
                     </div>
-
-                    <div class="group/measure bg-adam-slate/20 p-4 rounded-xl hover:bg-red-500/20 transition-colors duration-300 border border-adam-slate/20">
-                      <div class="flex items-center gap-3 mb-2">
-                        <div class="w-3 h-3 bg-red-500 rounded-full group-hover/measure:scale-125 transition-transform"></div>
-                        <span class="text-white font-semibold group-hover/measure:text-red-400 transition-colors">Rate Limiting</span>
-                      </div>
-                      <p class="text-adam-light-gray text-sm">Transaction frequency controls and abuse prevention</p>
-                    </div>
-
-                    <div class="group/measure bg-adam-slate/20 p-4 rounded-xl hover:bg-red-500/20 transition-colors duration-300 border border-adam-slate/20">
-                      <div class="flex items-center gap-3 mb-2">
-                        <div class="w-3 h-3 bg-red-500 rounded-full group-hover/measure:scale-125 transition-transform"></div>
-                        <span class="text-white font-semibold group-hover/measure:text-red-400 transition-colors">Restrictable Slashing</span>
-                      </div>
-                      <p class="text-adam-light-gray text-sm">Configurable penalty thresholds with governance override</p>
-                    </div>
+                    <p class="text-adam-light-gray text-sm">Configurable penalty thresholds with governance override</p>
                   </div>
                 </div>
               </div>
 
-              <!-- Monitoring & Audit Card -->
-              <div class="group relative">
-                <div class="absolute -inset-1 bg-gradient-to-r from-green-500/20 via-green-500/40 to-green-500/20 rounded-3xl blur-lg group-hover:blur-xl transition-all duration-700 animate-pulse delay-2000"></div>
-                <div class="relative bg-gradient-to-br from-green-500/10 via-green-500/5 to-transparent backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-green-500/30 hover:border-green-500/60 transition-all duration-500">
-                  <div class="flex items-center gap-4 mb-8">
-                    <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center group-hover:bg-green-500/40 transition-colors">
-                      <span class="text-green-400 font-black text-xl">📊</span>
-                    </div>
-                    <h4 class="text-green-400 font-bold text-xl md:text-2xl">Monitoring & Audit</h4>
+              <div class="bg-gradient-to-br from-adam-blue/10 to-adam-blue/5 p-8 rounded-3xl border border-adam-blue/30">
+                <h4 class="text-adam-blue font-semibold mb-4">Monitoring & Audit</h4>
+                <div class="space-y-3 text-sm text-adam-light-gray">
+                  <div class="flex items-center gap-2">
+                    <span class="text-green-400">✓</span>
+                    <span>Continuous on-chain monitoring</span>
                   </div>
-
-                  <div class="space-y-4">
-                    <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-green-500/10 transition-colors duration-300 group/audit">
-                      <span class="text-green-400 text-lg group-hover/audit:scale-110 transition-transform">✓</span>
-                      <span class="text-white/90 text-sm md:text-base group-hover/audit:text-green-400 transition-colors">Continuous on-chain monitoring</span>
-                    </div>
-                    <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-green-500/10 transition-colors duration-300 group/audit">
-                      <span class="text-green-400 text-lg group-hover/audit:scale-110 transition-transform">✓</span>
-                      <span class="text-white/90 text-sm md:text-base group-hover/audit:text-green-400 transition-colors">Regular security audits</span>
-                    </div>
-                    <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-green-500/10 transition-colors duration-300 group/audit">
-                      <span class="text-green-400 text-lg group-hover/audit:scale-110 transition-transform">✓</span>
-                      <span class="text-white/90 text-sm md:text-base group-hover/audit:text-green-400 transition-colors">Event-driven alerting</span>
-                    </div>
-                    <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-green-500/10 transition-colors duration-300 group/audit">
-                      <span class="text-green-400 text-lg group-hover/audit:scale-110 transition-transform">✓</span>
-                      <span class="text-white/90 text-sm md:text-base group-hover/audit:text-green-400 transition-colors">Multi-signature controls</span>
-                    </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-green-400">✓</span>
+                    <span>Regular security audits</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-green-400">✓</span>
+                    <span>Event-driven alerting</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-green-400">✓</span>
+                    <span>Multi-signature controls</span>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <!-- Bottom Interactive Element -->
-          <div class="text-center mt-16 md:mt-20">
-            <div class="inline-flex items-center gap-4 px-6 py-3 bg-white/5 backdrop-blur-sm rounded-full border border-white/10 hover:bg-white/10 transition-all duration-300 group">
-              <span class="text-white/70 text-sm font-mono">DEFENSE ACTIVE</span>
-              <div class="w-2 h-2 bg-red-400/40 rounded-full group-hover:bg-red-400/60 transition-colors animate-pulse"></div>
-              <div class="w-2 h-2 bg-adam-blue/40 rounded-full group-hover:bg-adam-blue/60 transition-colors animate-pulse delay-300"></div>
-              <div class="w-2 h-2 bg-green-400/40 rounded-full group-hover:bg-green-400/60 transition-colors animate-pulse delay-600"></div>
             </div>
           </div>
         </div>
@@ -1267,6 +991,102 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileBuyButton = document.getElementById('mobile-buy-button');
   const backgroundRenderer = document.getElementById('background-renderer')?.firstElementChild;
     
+    // --- CUSTOM CURSOR EFFECT ---
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+
+    if (cursorDot && cursorOutline) {
+      let mouseX = 0;
+      let mouseY = 0;
+      let dotX = 0;
+      let dotY = 0;
+      let outlineX = 0;
+      let outlineY = 0;
+
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function animateCursor() {
+        // Smooth following effect for dot
+        dotX += (mouseX - dotX) * 0.1;
+        dotY += (mouseY - dotY) * 0.1;
+
+        // Slower following effect for outline
+        outlineX += (mouseX - outlineX) * 0.05;
+        outlineY += (mouseY - outlineY) * 0.05;
+
+        cursorDot.style.left = dotX - 4 + 'px';
+        cursorDot.style.top = dotY - 4 + 'px';
+
+        cursorOutline.style.left = outlineX - 20 + 'px';
+        cursorOutline.style.top = outlineY - 20 + 'px';
+
+        requestAnimationFrame(animateCursor);
+      }
+
+      animateCursor();
+
+      // Scale effect on hover
+      document.querySelectorAll('a, button, .card-advanced').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursorDot.style.transform = 'scale(1.5)';
+          cursorOutline.style.transform = 'scale(1.5)';
+        });
+
+        el.addEventListener('mouseleave', () => {
+          cursorDot.style.transform = 'scale(1)';
+          cursorOutline.style.transform = 'scale(1)';
+        });
+      });
+    }
+
+    // --- MAGNETIC EFFECTS ---
+    document.querySelectorAll('.btn-buy-arcx, .btn-advanced').forEach(btn => {
+      btn.addEventListener('mousemove', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        this.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+      });
+
+      btn.addEventListener('mouseleave', function() {
+        this.style.transform = 'translate(0, 0)';
+      });
+    });
+
+    // --- ADVANCED SCROLL EFFECTS ---
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // --- HOLOGRAPHIC TEXT EFFECTS ---
+    const holographicTexts = document.querySelectorAll('.holographic-text');
+    holographicTexts.forEach(text => {
+      text.addEventListener('mouseenter', function() {
+        this.style.animationDuration = '1s';
+      });
+
+      text.addEventListener('mouseleave', function() {
+        this.style.animationDuration = '4s';
+      });
+    });
+
     // --- HEADER AND NAVIGATION ---
     const headerNav = document.getElementById('header-nav');
     const navIndicator = document.createElement('div');
