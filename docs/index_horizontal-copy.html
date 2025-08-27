@@ -27,14 +27,10 @@
             'adam-light-gray': '#a0a0a0',
             'adam-medium-gray': '#4a4a4a',
             'arc-green': '#39FF14',
-            'teal-primary': '#14b8a6',
-            'teal-secondary': '#0d9488',
-            'teal-accent': '#2dd4bf',
           },
           backgroundImage: {
             'grid-pattern-orange': "linear-gradient(rgba(255, 69, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 69, 0, 0.05) 1px, transparent 1px)",
             'grid-pattern-blue': "linear-gradient(rgba(0, 82, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 82, 255, 0.07) 1px, transparent 1px)",
-            'neural-bg': "radial-gradient(circle at 20% 50%, rgba(255, 69, 0, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(20, 184, 166, 0.1) 0%, transparent 50%), radial-gradient(circle at 40% 80%, rgba(0, 82, 255, 0.1) 0%, transparent 50%)",
           },
           backgroundSize: {
             'grid-size': '30px 30px',
@@ -45,8 +41,6 @@
             'glow-blue': '0 0 25px 5px rgba(0, 82, 255, 0.4)',
             'blue-hard': '0 0 15px rgba(0, 82, 255, 0.7)',
             'inner-glow': 'inset 0 0 10px rgba(10, 10, 10, 0.5)',
-            'morphing-border': '0 0 0 1px rgba(255, 69, 0, 0.3), inset 0 0 0 1px rgba(255, 69, 0, 0.1)',
-            'card-advanced': '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 69, 0, 0.1)',
           },
           keyframes: {
             'fade-in-down': { '0%': { opacity: '0', transform: 'translateY(-20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
@@ -54,20 +48,16 @@
             'fade-in-left': { '0%': { opacity: '0', transform: 'translateX(-20px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
             'fade-in-right': { '0%': { opacity: '0', transform: 'translateX(20px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
             'background-pan': { '0%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' }, '100%': { backgroundPosition: '0% 50%' } },
-            'subtle-float': { '0%, 100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-5px)' } },
-            'gentle-glow': { '0%, 100%': { boxShadow: '0 0 5px rgba(255, 69, 0, 0.2)' }, '50%': { boxShadow: '0 0 15px rgba(255, 69, 0, 0.3)' } },
-            'morphing-glow': { '0%, 100%': { boxShadow: '0 0 0 1px rgba(255, 69, 0, 0.3)' }, '50%': { boxShadow: '0 0 20px 2px rgba(255, 69, 0, 0.4)' } },
-            'floating-particles': { '0%': { transform: 'translateY(0px) rotate(0deg)', opacity: '0.7' }, '50%': { transform: 'translateY(-20px) rotate(180deg)', opacity: '1' }, '100%': { transform: 'translateY(0px) rotate(360deg)', opacity: '0.7' } },
-            'holographic-shine': { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
-            'data-flow': { '0%': { transform: 'translateX(-100%)', opacity: '0' }, '50%': { opacity: '1' }, '100%': { transform: 'translateX(100%)', opacity: '0' } },
-            'quantum-particles': { '0%': { transform: 'scale(0) rotate(0deg)', opacity: '0' }, '50%': { transform: 'scale(1) rotate(180deg)', opacity: '0.8' }, '100%': { transform: 'scale(0) rotate(360deg)', opacity: '0' } },
-            'gradient-x': { '0%, 100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+            'pulse-bright-orange': { '0%, 100%': { textShadow: '0 0 10px rgba(255, 69, 0, 0.5)' }, '50%': { textShadow: '0 0 25px rgba(255, 69, 0, 1)' } },
+            'pulse-bright-blue': { '0%, 100%': { textShadow: '0 0 10px rgba(0, 82, 255, 0.5)' }, '50%': { textShadow: '0 0 25px rgba(0, 82, 255, 1)' } },
+            'path-draw': { 'to': { strokeDashoffset: '0' } },
             'fade-in': { 'from': { opacity: '0' }, 'to': { opacity: '1' } },
             'threat-move': { 'from': { transform: 'translateX(-150px) scaleX(0.2)', opacity: 0 }, '70%': { transform: 'translateX(0) scaleX(1)', opacity: 1 }, '100%': { transform: 'translateX(10px) scaleX(1)', opacity: 1 } },
             'shield-activate': { '0%': { opacity: '0', transform: 'scale(0.8)' }, '100%': { opacity: '1', transform: 'scale(1)' } },
             'slide-in-right': { '0%': { transform: 'translateX(100%)', opacity: '0' }, '100%': { transform: 'translateX(0)', opacity: '1' } },
             'flow-step-grow': { 'from': { transform: 'scale(0.9)', opacity: 0.7 }, 'to': { transform: 'scale(1)', opacity: 1 } },
             'fill-bar': { 'from': { width: '0%' }, 'to': { width: 'var(--bar-width, 0%)' } },
+            'float': { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-20px)' } },
             'pulse-chevron': { '0%, 100%': { transform: 'translateX(0)', opacity: '0.7' }, '50%': { transform: 'translateX(10px)', opacity: '1' } },
           },
           animation: {
@@ -76,20 +66,16 @@
             'fade-in-left': 'fade-in-left 0.8s ease-out 0.3s forwards',
             'fade-in-right': 'fade-in-right 0.8s ease-out 0.3s forwards',
             'background-pan': 'background-pan 30s ease-in-out infinite',
-            'subtle-float': 'subtle-float 6s ease-in-out infinite',
-            'gentle-glow': 'gentle-glow 4s ease-in-out infinite',
-            'morphing-glow': 'morphing-glow 3s ease-in-out infinite',
-            'floating-particles': 'floating-particles 8s ease-in-out infinite',
-            'holographic-shine': 'holographic-shine 3s linear infinite',
-            'data-flow': 'data-flow 4s linear infinite',
-            'quantum-particles': 'quantum-particles 6s ease-in-out infinite',
-            'gradient-x': 'gradient-x 15s ease infinite',
+            'pulse-bright-orange': 'pulse-bright-orange 3s ease-in-out infinite',
+            'pulse-bright-blue': 'pulse-bright-blue 3s ease-in-out infinite',
+            'path-draw': 'path-draw 1.5s ease-out forwards',
             'fade-in': 'fade-in 0.5s ease-out forwards',
             'threat-move': 'threat-move 1.2s ease-out forwards',
             'shield-activate': 'shield-activate 0.3s ease-out forwards',
             'slide-in-right': 'slide-in-right 0.5s ease-out forwards',
             'flow-step-grow': 'flow-step-grow 0.3s ease-in-out forwards',
             'fill-bar': 'fill-bar 0.8s ease-out forwards',
+            'float': 'float 6s ease-in-out infinite',
             'pulse-chevron': 'pulse-chevron 2s ease-in-out infinite',
           }
         }
@@ -167,196 +153,13 @@
         justify-content: center;
       }
     }
-
-    /* Advanced State-of-the-Art Effects */
-    .custom-cursor { cursor: none; }
-
-    .cursor-dot {
-      transition: transform 0.1s ease;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    .cursor-outline {
-      transition: all 0.3s ease;
-      pointer-events: none;
-      z-index: 9998;
-    }
-
-    .card-advanced {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card-advanced::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-      transition: left 0.5s;
-    }
-
-    .card-advanced:hover::before {
-      left: 100%;
-    }
-
-    .morphing-border {
-      position: relative;
-      background: linear-gradient(45deg, transparent, rgba(255, 69, 0, 0.1), transparent);
-      background-size: 200% 200%;
-      animation: morphing-glow 4s ease-in-out infinite;
-    }
-
-    .holographic-text {
-      background: linear-gradient(45deg, #ff4500, #14b8a6, #0052FF, #39FF14);
-      background-size: 200% 200%;
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: holographic-shine 4s ease-in-out infinite;
-    }
-
-    .neural-bg {
-      background: radial-gradient(circle at 20% 50%, rgba(255, 69, 0, 0.1) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(20, 184, 166, 0.1) 0%, transparent 50%),
-                  radial-gradient(circle at 40% 80%, rgba(0, 82, 255, 0.1) 0%, transparent 50%);
-      background-size: 100% 100%;
-      animation: gradient-x 20s ease infinite;
-    }
-
-    .floating-elements {
-      position: absolute;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .floating-elements div {
-      position: absolute;
-      opacity: 0.6;
-      animation: floating-particles 8s ease-in-out infinite;
-    }
-
-    .data-stream {
-      background: linear-gradient(180deg, transparent, rgba(255, 69, 0, 0.3), transparent);
-      animation: data-flow 3s linear infinite;
-    }
-
-    .quantum-particle {
-      animation: quantum-particles 6s ease-in-out infinite;
-    }
-
-    .glass-morphism {
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .btn-advanced {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, #ff4500 0%, #c03300 100%);
-      transition: all 0.3s ease;
-    }
-
-    .btn-advanced::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s;
-    }
-
-    .btn-advanced:hover::before {
-      left: 100%;
-    }
-
-    .animate-fade-in-up {
-      animation: fade-in-up 0.8s ease-out forwards;
-    }
   </style>
 </head>
-<body class="bg-adam-black text-gray-200 font-sans font-light custom-cursor">
-  <!-- Custom Cursor Elements -->
-  <div class="cursor-dot fixed w-2 h-2 bg-adam-orange rounded-full pointer-events-none z-50 transition-transform duration-100"></div>
-  <div class="cursor-outline fixed w-8 h-8 border border-adam-orange/50 rounded-full pointer-events-none z-40 transition-all duration-300"></div>
-
-  <!-- Quantum Particle Background -->
-  <div class="quantum-particle fixed top-1/4 left-1/4 w-1 h-1 bg-teal-primary rounded-full animate-quantum-particles opacity-70"></div>
-  <div class="quantum-particle fixed top-3/4 left-3/4 w-1 h-1 bg-adam-orange rounded-full animate-quantum-particles opacity-70" style="animation-delay: 1s;"></div>
-  <div class="quantum-particle fixed top-1/2 left-1/2 w-1 h-1 bg-adam-blue rounded-full animate-quantum-particles opacity-70" style="animation-delay: 2s;"></div>
-  <div class="quantum-particle fixed top-1/3 left-2/3 w-1 h-1 bg-teal-accent rounded-full animate-quantum-particles opacity-70" style="animation-delay: 0.5s;"></div>
-  <div class="quantum-particle fixed top-2/3 left-1/3 w-1 h-1 bg-arc-green rounded-full animate-quantum-particles opacity-70" style="animation-delay: 1.5s;"></div>
-
-  <!-- Additional Enhanced Quantum Particles -->
-  <div class="quantum-particle fixed top-1/6 right-1/4 w-1 h-1 bg-adam-orange rounded-full animate-quantum-particles opacity-60" style="animation-delay: 2.5s;"></div>
-  <div class="quantum-particle fixed bottom-1/6 left-1/4 w-1 h-1 bg-teal-primary rounded-full animate-quantum-particles opacity-60" style="animation-delay: 3.5s;"></div>
-  <div class="quantum-particle fixed top-5/6 right-1/3 w-1 h-1 bg-adam-blue rounded-full animate-quantum-particles opacity-60" style="animation-delay: 1.8s;"></div>
-
+<body class="bg-adam-black text-gray-200 font-sans font-light">
   <div class="responsive-margin">
   
-  <div id="background-renderer" class="fixed top-0 left-0 w-full h-full bg-adam-black -z-10">
-
-    <!-- Enhanced Floating Elements -->
-    <div class="floating-elements">
-      <div class="absolute top-20 left-20 w-16 h-16 border border-teal-primary/20 rotate-12 animate-subtle-float"></div>
-      <div class="absolute bottom-32 left-1/4 w-24 h-24 border border-adam-blue/20 -rotate-30 animate-subtle-float" style="animation-delay: 2s;"></div>
-      <div class="absolute top-1/3 right-20 w-20 h-20 border border-adam-orange/20 rotate-60 animate-subtle-float" style="animation-delay: 4s;"></div>
-      <div class="absolute bottom-20 right-10 w-18 h-18 border border-teal-accent/20 -rotate-45 animate-subtle-float" style="animation-delay: 1s;"></div>
-      <div class="absolute top-2/3 left-10 w-14 h-14 border border-arc-green/20 rotate-30 animate-subtle-float" style="animation-delay: 3s;"></div>
-      <div class="absolute top-10 right-1/3 w-22 h-22 border border-adam-orange/20 -rotate-60 animate-subtle-float" style="animation-delay: 5s;"></div>
-      <div class="absolute bottom-1/3 left-1/2 w-16 h-16 border border-teal-primary/20 rotate-45 animate-subtle-float" style="animation-delay: 6s;"></div>
-      <div class="absolute top-1/2 right-1/4 w-20 h-20 border border-adam-blue/20 -rotate-30 animate-subtle-float" style="animation-delay: 7s;"></div>
-
-      <!-- Additional Floating Geometric Elements -->
-      <div class="absolute top-1/4 right-1/3 w-12 h-12 border border-adam-orange/25 rotate-45 animate-subtle-float" style="animation-delay: 8s;"></div>
-      <div class="absolute bottom-1/4 left-1/3 w-10 h-10 border border-teal-primary/25 -rotate-60 animate-subtle-float" style="animation-delay: 9s;"></div>
-      <div class="absolute top-3/4 right-10 w-15 h-15 border border-adam-blue/25 rotate-30 animate-subtle-float" style="animation-delay: 10s;"></div>
-      <div class="absolute top-1/6 left-1/2 w-8 h-8 border border-arc-green/25 -rotate-45 animate-subtle-float" style="animation-delay: 11s;"></div>
-      <div class="absolute bottom-1/6 right-1/2 w-18 h-18 border border-teal-accent/25 rotate-90 animate-subtle-float" style="animation-delay: 12s;"></div>
-    </div>
-
-    <!-- Enhanced Data Streams -->
-    <div class="data-stream absolute top-1/4 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-teal-primary/60 to-transparent" style="animation-delay: 1s;"></div>
-    <div class="data-stream absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-adam-orange/60 to-transparent" style="animation-delay: 3s;"></div>
-    <div class="data-stream absolute top-3/4 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-adam-blue/60 to-transparent" style="animation-delay: 5s;"></div>
-
-    <!-- Additional Data Streams -->
-    <div class="data-stream absolute top-1/6 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-arc-green/50 to-transparent" style="animation-delay: 7s;"></div>
-    <div class="data-stream absolute top-5/6 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-teal-accent/50 to-transparent" style="animation-delay: 9s;"></div>
-
-    <!-- Neural Network Nodes -->
-    <div class="absolute top-1/3 left-1/4 w-2 h-2 bg-teal-primary/70 rounded-full animate-pulse" style="animation-duration: 3s;"></div>
-    <div class="absolute top-2/3 right-1/3 w-2 h-2 bg-adam-orange/70 rounded-full animate-pulse" style="animation-duration: 4s; animation-delay: 1s;"></div>
-    <div class="absolute bottom-1/3 left-2/3 w-2 h-2 bg-adam-blue/70 rounded-full animate-pulse" style="animation-duration: 3.5s; animation-delay: 2s;"></div>
-    <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-arc-green/70 rounded-full animate-pulse" style="animation-duration: 4.5s; animation-delay: 0.5s;"></div>
-    <div class="absolute bottom-1/4 right-2/3 w-2 h-2 bg-teal-accent/70 rounded-full animate-pulse" style="animation-duration: 3.8s; animation-delay: 1.5s;"></div>
-
-    <!-- Connecting Lines (CSS-only) -->
-    <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100">
-      <defs>
-        <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="transparent" />
-          <stop offset="50%" stop-color="rgba(20, 184, 166, 0.3)" />
-          <stop offset="100%" stop-color="transparent" />
-        </linearGradient>
-        <linearGradient id="lineGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="transparent" />
-          <stop offset="50%" stop-color="rgba(255, 69, 0, 0.3)" />
-          <stop offset="100%" stop-color="transparent" />
-        </linearGradient>
-      </defs>
-      <line x1="25" y1="33" x2="75" y2="67" stroke="url(#lineGradient1)" stroke-width="0.5" class="animate-data-flow" />
-      <line x1="75" y1="25" x2="25" y2="75" stroke="url(#lineGradient2)" stroke-width="0.5" class="animate-data-flow" style="animation-delay: 2s;" />
-      <line x1="33" y1="75" x2="67" y2="25" stroke="url(#lineGradient1)" stroke-width="0.5" class="animate-data-flow" style="animation-delay: 4s;" />
-    </svg>
+  <div id="background-renderer" class="fixed top-0 left-0 w-full h-full bg-adam-dark -z-10">
+    <div class="absolute top-0 left-0 w-full h-full bg-grid-pattern-orange bg-grid-size animate-background-pan opacity-50"></div>
   </div>
 
   <!-- ARCx Header -->
@@ -385,7 +188,7 @@
   <div class="relative z-10 w-full flex flex-col lg:flex-row items-center lg:justify-end justify-center gap-8">
       <div class="lg:w-1/2 flex flex-col items-center lg:items-start lg:text-left mb-8 lg:mb-0">
         <h1 class="text-5xl md:text-8xl font-thin text-gray-200 tracking-[0.2em] uppercase animate-fade-in-down">
-          <span class="text-white">the</span><span class="holographic-text">ARC</span>
+          <span class="text-white">the</span><span class="text-white">ARC</span>
         <div class="mt-4 text-xl md:text-2xl font-light text-gray-300 animate-fade-in-up delay-03s">RWA-Aware,<br>Anti-Sybil, Governance Engine</div>
         </h1>
         <p class="text-md md:text-xl text-gray-400 mt-6 max-w-xl font-light animate-fade-in-up tracking-wider">
@@ -400,35 +203,35 @@
   <div class="lg:w-1/2 flex flex-row items-center justify-end gap-8">
         <!-- Card 1 -->
         <!-- ARCx Token Card -->
-  <div id="arcx-hero-card" class="relative w-[260px] h-[340px] md:w-[320px] md:h-[400px] shadow-2xl overflow-hidden border border-red-900/50 card-advanced morphing-border">
-          <div class="absolute -bottom-10 -right-10 w-28 h-28 bg-red-900/40 rounded-full blur-2xl gentle-glow"></div>
-          <div class="relative z-10 flex flex-col items-center justify-center h-full p-6">
+  <div id="arcx-hero-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate"
+  style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('./assets/images/download%20%281%29.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-adam-blue/40 rounded-full blur-2xl animate-pulse-bright-blue"></div>
+          <div class="relative z-10 flex flex-col items-center justify-center h-full p-8">
             <img src="./assets/logos/arcx_logo1-modified.png" alt="ARCx Token Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 animate-fade-in-down delay-03s">ARCx|s</h2>
-            <p class="text-red-900 text-base font-mono mb-4 animate-fade-in-down delay-04s">Smart Coins</p>
-            <p class="text-gray-300 text-sm font-light animate-fade-in-up delay-05s">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">ARCx|s</h2>
+            <p class="text-adam-blue text-lg font-mono mb-4 animate-fade-in-down delay-04s">Smart Coins</p>
+            <p class="text-gray-300 text-base font-light animate-fade-in-up delay-05s">
               Secure, extended, and<br>ultra-scarce extended ERC20. The foundational currency for the Arc EcoSystem.
             </p>
-            <div class="flex items-center space-x-3 mt-6 animate-fade-in-up delay-06s">
-              <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-red-900/90 hover:bg-red-900 text-white font-semibold py-2 px-3 transition-all duration-300 text-xs shadow-lg">Read Docs</a>
-              <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="bg-red-900/90 hover:bg-red-900 text-white font-semibold py-2 px-3 transition-all duration-300 text-xs shadow-lg">Buy ARCx</a>
+            <div class="flex items-center space-x-4 mt-8 animate-fade-in-up delay-06s">
+              <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/90 hover:bg-adam-blue text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Read Docs</a>
+              <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="btn-buy-arcx">Buy ARCx</a>
             </div>
           </div>
         </div>
         <!-- ARCxSBT Card -->
-  <div id="arcx-sbt-card" class="relative w-[260px] h-[340px] md:w-[320px] md:h-[400px] shadow-2xl overflow-hidden border border-teal-primary/50 card-advanced morphing-border bg-gradient-to-br from-teal-500/20 via-teal-primary/10 to-cyan-500/20">
-          <div class="absolute -bottom-10 -right-10 w-28 h-28 bg-teal-primary/40 rounded-full blur-2xl gentle-glow"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-teal-primary/5 to-transparent"></div>
-          <div class="relative z-10 flex flex-col items-center justify-center h-full p-6">
-            <img src="./assets/logos/soulbound-ntt.png" alt="ARCxSBT Logo" class="w-16 h-16 mb-4 animate-fade-in-down delay-02s" />
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 animate-fade-in-down delay-03s">SoulBound NFT</h2>
-            <p class="text-teal-primary text-base font-mono mb-3 animate-fade-in-down delay-04s">Onchain Identity & Reputation</p>
-            <p class="text-gray-300 text-sm font-light animate-fade-in-up delay-05s">
+  <div id="arcx-sbt-card" class="relative w-[340px] h-[440px] md:w-[400px] md:h-[520px] rounded-3xl shadow-2xl overflow-hidden border border-adam-blue/30 card-animate"
+       style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('./assets/images/download.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-adam-blue/40 rounded-full blur-2xl animate-pulse-bright-blue"></div>
+          <div class="relative z-10 flex flex-col items-center justify-center h-full p-8">
+            <img src="./assets/logos/soulbound-ntt.png" alt="ARCxSBT Logo" class="w-20 h-20 mb-6 animate-fade-in-down delay-02s" />
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-down delay-03s">SoulBound NFT</h2>
+            <p class="text-adam-blue text-lg font-mono mb-4 animate-fade-in-down delay-04s">Onchain Identity & Reputation</p>
+            <p class="text-gray-300 text-base font-light animate-fade-in-up delay-05s">
               Non-transferable/non-fungible, verifiable credentials for onchain reputation, governance, and access.
             </p>
-            <div class="flex items-center space-x-3 mt-6 animate-fade-in-up delay-06s">
-              <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-teal-primary/90 hover:bg-teal-primary text-white font-semibold py-2 px-3 transition-all duration-300 text-xs shadow-lg">Read Docs</a>
-              <a href="#" class="bg-teal-primary/90 hover:bg-teal-primary text-white font-semibold py-2 px-3 transition-all duration-300 text-xs shadow-lg">Learn More</a>
+            <div class="flex items-center space-x-4 mt-8 animate-fade-in-up delay-06s">
+              <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/90 hover:bg-adam-blue text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Read Docs</a>
             </div>
           </div>
         </div>
@@ -440,7 +243,7 @@
           <!-- Orange floating SVG removed as requested -->
         </div>
 
-        <button id="explore-adam-btn" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 text-adam-orange hover:text-white transition-all duration-300 group animate-pulse-chevron" aria-label="Explore ADAM Protocol">
+        <button id="explore-adam-btn" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 text-adam-blue hover:text-white transition-all duration-300 group animate-pulse-chevron" aria-label="Explore ADAM Protocol">
           <div class="flex items-center space-x-2">
             <span class="text-xs uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-300 -translate-x-4 group-hover:translate-x-0">Enter ADAM</span>
             <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>
@@ -450,557 +253,170 @@
     </section>
 
     <!-- ADAM Sections Start Here -->
-    <!-- SECOND PAGE ONWARD: comprehensive visual-first architecture overview -->
-
-    <!-- Ecosystem Overview -->
     <section id="adam-home" class="section adam-section">
-      <div class="w-full h-full flex items-center justify-center p-6 bg-adam-black">
-        <div class="max-w-5xl w-full">
-          <div class="text-center mb-8">
-            <h1 class="text-4xl md:text-6xl font-thin text-white tracking-[0.3em] uppercase mb-4 animate-fade-in-down">
-              <span class="holographic-text">ARC</span> Ecosystem
-            </h1>
-            <p class="text-lg md:text-xl text-adam-light-gray font-light animate-fade-in-up delay-03s">
-              Governance Engine for AI & RWA
-            </p>
+      <div class="w-full h-full flex items-center justify-center text-center p-4 sm:p-8 bg-adam-black relative overflow-hidden">
+        <svg width="100%" height="100%" viewBox="0 0 210 100" class="absolute inset-0 z-0 opacity-20">
+            <defs><linearGradient id="grad-blue" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color: #0052FF; stop-opacity: 0" /><stop offset="50%" style="stop-color: #0052FF; stop-opacity: 1" /><stop offset="100%" style="stop-color: #0052FF; stop-opacity: 0" /></linearGradient></defs>
+            <path d="M 10 90 L 30 10 L 50 90" stroke="url(#grad-blue)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 125; stroke-dashoffset: 125; animation-delay: 0.5s;"></path>
+            <path d="M 20 50 H 40" stroke="url(#grad-blue)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 20; stroke-dashoffset: 20; animation-delay: 0.8s;"></path>
+            <path d="M 60 10 L 60 90" stroke="url(#grad-blue)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 80; stroke-dashoffset: 80; animation-delay: 1.0s;"></path>
+            <path d="M 60 10 C 100 10, 100 90, 60 90" stroke="url(#grad-blue)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 130; stroke-dashoffset: 130; animation-delay: 1.3s;"></path>
+            <path d="M 110 90 L 130 10 L 150 90" stroke="url(#grad-blue)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 125; stroke-dashoffset: 125; animation-delay: 1.6s;"></path>
+            <path d="M 120 50 H 140" stroke="url(#grad-blue)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 20; stroke-dashoffset: 20; animation-delay: 1.9s;"></path>
+            <path d="M 160 90 L 160 10 L 180 50 L 200 10 L 200 90" stroke="url(#grad-blue)" stroke-width="0.5" fill="none" class="animate-path-draw" style="stroke-dasharray: 210; stroke-dashoffset: 210; animation-delay: 2.1s;"></path>
+        </svg>
+        <div class="relative z-10 flex flex-col items-center">
+          <h1 class="text-5xl md:text-8xl font-thin text-gray-200 tracking-[0.2em] uppercase animate-fade-in-down">ADAM Protocol</h1>
+          <p class="text-md md:text-xl text-gray-400 mt-6 max-w-2xl mx-auto font-light animate-fade-in-up tracking-wider">The Constitutional Intelligence system for real-world impact.</p>
+          <a href="#adam-about" data-scroll-to="#adam-about" class="mt-12 border border-adam-blue/50 text-adam-blue font-light py-3 px-10 rounded-sm text-sm uppercase tracking-[0.2em] hover:bg-adam-blue/20 hover:shadow-glow-blue transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.6s;">Explore The Architecture</a>
+        </div>
+      </div>
+    </section>
+    <section id="adam-about" class="section adam-section">
+        <div class="w-full h-full flex items-center justify-center p-4 md:p-16">
+            <div class="max-w-7xl w-full flex flex-col items-center text-center">
+                <div class="animate-fade-in-down">
+                    <h2 class="text-4xl md:text-6xl font-thin text-gray-200 tracking-[0.2em] uppercase leading-tight">The Governance <span class="text-adam-blue">Triad</span></h2>
+                    <p class="mt-6 text-adam-light-gray font-light max-w-3xl mx-auto text-lg leading-relaxed">ADAM Protocol moves beyond simple token voting, composing three distinct layers of power to create a resilient, context-aware, and plutocracy-resistant system.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 w-full relative">
+                    <div class="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-adam-medium-gray to-transparent -translate-y-1/2 hidden md:block"></div>
+                    <div class="absolute left-1/3 top-1/2 w-[33%] h-[1px] bg-adam-blue hidden md:block" style="transform: translateY(-50%)"></div>
+                    <div class="bg-adam-slate/50 backdrop-blur-sm p-6 panel-border group transition-all duration-300 animate-fade-in-up relative overflow-hidden hover:bg-adam-slate" style="animation-delay: 0.2s"><div class="flex items-center space-x-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-adam-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v.01M12 18v-2m0-10V5m0 7h.01M7 12h.01M17 12h.01M7 12a5 5 0 015-5m5 5a5 5 0 00-5-5m0 10a5 5 0 005-5m-5 5a5 5 0 01-5-5"></path></svg><h3 class="text-xl font-light text-gray-200 tracking-widest uppercase">Capital</h3></div><p class="mt-4 text-adam-light-gray font-light text-sm leading-relaxed min-h-[60px]">Economic alignment via staked ARCx. Long-term commitment is rewarded with greater influence, secured by slashing risk.</p><div class="mt-4 pt-4 border-t border-white/10"><p class="text-xs text-gray-500 tracking-widest uppercase">Weight Formula</p><p class="font-mono text-xs text-adam-blue mt-2 bg-black/30 p-2 rounded-sm">f_token = QV(sqrt(stake_days_weight · stake_amount))</p></div></div>
+                    <div class="bg-adam-slate/50 backdrop-blur-sm p-6 panel-border group transition-all duration-300 animate-fade-in-up relative overflow-hidden hover:bg-adam-slate" style="animation-delay: 0.4s"><div class="flex items-center space-x-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-adam-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 012-2h2a2 2 0 012 2v1m-6 0h6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><h3 class="text-xl font-light text-gray-200 tracking-widest uppercase">Reputation</h3></div><p class="mt-4 text-adam-light-gray font-light text-sm leading-relaxed min-h-[60px]">ARCxSBTs (Soulbound Tokens) grant power to verified contributors. A meritocracy of builders and domain experts.</p><div class="mt-4 pt-4 border-t border-white/10"><p class="text-xs text-gray-500 tracking-widest uppercase">Weight Formula</p><p class="font-mono text-xs text-adam-blue mt-2 bg-black/30 p-2 rounded-sm">f_id = Σ(role_weight · activity_decay(Δt))</p></div></div>
+                    <div class="bg-adam-slate/50 backdrop-blur-sm p-6 panel-border group transition-all duration-300 animate-fade-in-up relative overflow-hidden hover:bg-adam-slate" style="animation-delay: 0.6s"><div class="flex items-center space-x-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-adam-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h10a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.737 16.525l-.425.425a2 2 0 01-2.828 0 2 2 0 010-2.828l.425-.425M16.263 16.525l.425.425a2 2 0 002.828 0 2 2 0 000-2.828l-.425-.425"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"></path></svg><h3 class="text-xl font-light text-gray-200 tracking-widest uppercase">Impact</h3></div><p class="mt-4 text-adam-light-gray font-light text-sm leading-relaxed min-h-[60px]">Verifiable Real-World Asset (RWA) proofs give a voice to tangible outcomes, from carbon credits to energy receipts.</p><div class="mt-4 pt-4 border-t border-white/10"><p class="text-xs text-gray-500 tracking-widest uppercase">Weight Formula</p><p class="font-mono text-xs text-adam-blue mt-2 bg-black/30 p-2 rounded-sm">f_rwa,k = impact_score_k · recency_decay_k(Δt)</p></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="adam-architecture" class="section adam-section">
+      <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 md:p-12">
+  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">ADAM Protocol <span class="text-adam-blue">Architecture</span></h2>
+        <p class="text-lg md:text-xl text-adam-light-gray max-w-3xl mx-auto font-light mb-8">A deterministic, Wasm-sandboxed policy engine for on-chain governance. All proposal lifecycles, parameter diffs, and RWA updates are gated by explicit guards, proofs, and bytecode allowlists. Every path is auditable, fuel/memory bounded, and replay-safe.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
+          <div class="bg-adam-slate/60 p-6 rounded-lg shadow-inner-glow">
+            <h3 class="text-xl text-adam-blue font-light mb-2 uppercase tracking-widest">Constitutional Program</h3>
+            <p class="text-adam-light-gray text-sm">Wasm, deterministic, fixed ABI, fuel+memory capped, no syscalls/time/random. Upgrades via governance only.</p>
           </div>
-
-          <!-- Animated Ecosystem Grid -->
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div class="group bg-gradient-to-br from-adam-orange/20 to-adam-orange/5 p-6 border border-adam-orange/30 hover:border-adam-orange/60 transition-all duration-500 hover:scale-105 card-advanced">
-              <div class="text-center">
-                <div class="w-16 h-16 mx-auto mb-4 bg-adam-orange/20 flex items-center justify-center group-hover:bg-adam-orange/40 transition-colors">
-                  <span class="text-2xl font-bold text-adam-orange">₳</span>
-                </div>
-                <h3 class="text-adam-orange font-semibold mb-2">ARCx</h3>
-                <p class="text-adam-light-gray text-sm">Currency & Governance</p>
-              </div>
-            </div>
-
-            <div class="group bg-gradient-to-br from-arc-green/20 to-arc-green/5 p-6 border border-arc-green/30 hover:border-arc-green/60 transition-all duration-500 hover:scale-105 card-advanced">
-              <div class="text-center">
-                <div class="w-16 h-16 mx-auto mb-4 bg-arc-green/20 flex items-center justify-center group-hover:bg-arc-green/40 transition-colors">
-                  <span class="text-2xl font-bold text-arc-green">s</span>
-                </div>
-                <h3 class="text-arc-green font-semibold mb-2">Staked</h3>
-                <p class="text-adam-light-gray text-sm">Shares & Liquidity</p>
-              </div>
-            </div>
-
-            <div class="group bg-gradient-to-br from-teal-primary/20 to-teal-primary/5 p-6 border border-teal-primary/30 hover:border-teal-primary/60 transition-all duration-500 hover:scale-105 card-advanced">
-              <div class="text-center">
-                <div class="w-16 h-16 mx-auto mb-4 bg-teal-primary/20 flex items-center justify-center group-hover:bg-teal-primary/40 transition-colors">
-                  <span class="text-2xl font-bold text-teal-primary">🔗</span>
-                </div>
-                <h3 class="text-teal-primary font-semibold mb-2">SBT</h3>
-                <p class="text-adam-light-gray text-sm">Identity & Reputation</p>
-              </div>
-            </div>
-
-            <div class="group bg-gradient-to-br from-red-500/20 to-red-500/5 p-6 border border-red-500/30 hover:border-red-500/60 transition-all duration-500 hover:scale-105 card-advanced">
-              <div class="text-center">
-                <div class="w-16 h-16 mx-auto mb-4 bg-red-500/20 flex items-center justify-center group-hover:bg-red-500/40 transition-colors">
-                  <span class="text-2xl font-bold text-red-500">⚡</span>
-                </div>
-                <h3 class="text-red-500 font-semibold mb-2">Registry</h3>
-                <p class="text-adam-light-gray text-sm">AI Models & Agents</p>
-              </div>
-            </div>
+          <div class="bg-adam-slate/60 p-6 rounded-lg shadow-inner-glow">
+            <h3 class="text-xl text-adam-blue font-light mb-2 uppercase tracking-widest">Policy Chain</h3>
+            <p class="text-adam-light-gray text-sm">Ordered list per topic. Each returns <span class="text-adam-orange">ALLOW</span>, <span class="text-adam-orange">DENY</span>, <span class="text-adam-orange">AMEND</span>, or <span class="text-adam-orange">REQUIRE_2FA</span>. First terminal verdict wins.</p>
           </div>
-
-          <!-- System Flow Visualization -->
-          <div class="bg-adam-slate/30 p-8 border border-adam-slate/50">
-            <h2 class="text-3xl text-white font-thin mb-6 text-center">System Flow</h2>
-            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-              <div class="flex-1 text-center">
-                <div class="w-20 h-20 mx-auto mb-4 bg-adam-orange/30 rounded-full flex items-center justify-center gentle-glow">
-                  <span class="text-adam-orange font-bold">1</span>
-                </div>
-                <h4 class="text-adam-orange font-semibold mb-2">Stake ARCx</h4>
-                <p class="text-adam-light-gray text-sm">Mint s tokens, gain governance rights</p>
-              </div>
-
-              <div class="hidden md:block text-adam-light-gray text-2xl">→</div>
-
-              <div class="flex-1 text-center">
-                <div class="w-20 h-20 mx-auto mb-4 bg-arc-green/30 rounded-full flex items-center justify-center gentle-glow" style="animation-delay: 1s;">
-                  <span class="text-arc-green font-bold">2</span>
-                </div>
-                <h4 class="text-arc-green font-semibold mb-2">Earn SBT</h4>
-                <p class="text-adam-light-gray text-sm">Attestations for reputation & access</p>
-              </div>
-
-              <div class="hidden md:block text-adam-light-gray text-2xl">→</div>
-
-              <div class="flex-1 text-center">
-                <div class="w-20 h-20 mx-auto mb-4 bg-teal-primary/30 rounded-full flex items-center justify-center gentle-glow" style="animation-delay: 2s;">
-                  <span class="text-teal-primary font-bold">3</span>
-                </div>
-                <h4 class="text-teal-primary font-semibold mb-2">Register</h4>
-                <p class="text-adam-light-gray text-sm">AI models & agents with proofs</p>
-              </div>
-
-              <div class="hidden md:block text-adam-light-gray text-2xl">→</div>
-
-              <div class="flex-1 text-center">
-                <div class="w-20 h-20 mx-auto mb-4 bg-red-500/30 rounded-full flex items-center justify-center gentle-glow" style="animation-delay: 3s;">
-                  <span class="text-red-500 font-bold">4</span>
-                </div>
-                <h4 class="text-red-500 font-semibold mb-2">Govern</h4>
-                <p class="text-adam-light-gray text-sm">Timelock grants & treasury control</p>
-              </div>
-            </div>
+          <div class="bg-adam-slate/60 p-6 rounded-lg shadow-inner-glow">
+            <h3 class="text-xl text-adam-blue font-light mb-2 uppercase tracking-widest">ProofBundle</h3>
+            <p class="text-adam-light-gray text-sm">Deterministic CBOR: EAS UIDs, oracle sigs, countersigns, payload hash, snapshot block. Host keccak256 over CBOR = proofHash.</p>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Compact components pages: each section is minimal text + visual -->
-    <section id="arc-components" class="section adam-section">
-      <div class="w-full h-full flex items-center justify-center p-8 bg-adam-black">
-        <div class="max-w-5xl w-full">
-          <h2 class="text-4xl md:text-6xl font-thin text-white text-center mb-8 tracking-[0.2em] uppercase">
-            Core <span class="text-adam-blue">Components</span>
-          </h2>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- ARCx Component -->
-            <div class="group bg-gradient-to-br from-adam-orange/10 to-adam-orange/5 p-6 border border-adam-orange/30 hover:border-adam-orange/60 transition-all duration-500 hover:scale-105 card-advanced">
-              <div class="text-center mb-4">
-                <div class="w-16 h-16 mx-auto mb-3 bg-adam-orange/20 flex items-center justify-center group-hover:bg-adam-orange/40 transition-colors">
-                  <span class="text-2xl font-bold text-adam-orange">₳</span>
-                </div>
-                <h3 class="text-xl font-semibold text-adam-orange mb-2">ARCx</h3>
-                <p class="text-adam-light-gray text-xs font-mono">ERC20 Extended</p>
-              </div>
-
-              <div class="space-y-4 text-sm text-adam-light-gray">
-                <div class="flex items-center gap-3">
-                  <div class="w-2 h-2 bg-adam-orange rounded-full"></div>
-                  <span>Network currency & governance stake</span>
-                </div>
-                <div class="flex items-center gap-3">
-                  <div class="w-2 h-2 bg-adam-orange rounded-full"></div>
-                  <span>Ultra-scarce with controlled supply</span>
-                </div>
-                <div class="flex items-center gap-3">
-                  <div class="w-2 h-2 bg-adam-orange rounded-full"></div>
-                  <span>Stake to mint s tokens & gain rights</span>
-                </div>
-                <div class="flex items-center gap-3">
-                  <div class="w-2 h-2 bg-adam-orange rounded-full"></div>
-                  <span>On-chain governance voting power</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- s Component -->
-            <div class="group bg-gradient-to-br from-arc-green/10 to-arc-green/5 p-6 border border-arc-green/30 hover:border-arc-green/60 transition-all duration-500 hover:scale-105 card-advanced">
-              <div class="text-center mb-4">
-                <div class="w-16 h-16 mx-auto mb-3 bg-arc-green/20 flex items-center justify-center group-hover:bg-arc-green/40 transition-colors">
-                  <span class="text-2xl font-bold text-arc-green">s</span>
-                </div>
-                <h3 class="text-xl font-semibold text-arc-green mb-2">Staked Shares</h3>
-                <p class="text-adam-light-gray text-xs font-mono">ERC20 Receipt</p>
-              </div>
-
-              <div class="space-y-4 text-sm text-adam-light-gray">
-                <div class="flex items-center gap-3">
-                  <div class="w-2 h-2 bg-arc-green rounded-full"></div>
-                  <span>Liquidity receipts & governance shares</span>
-                </div>
-                <div class="flex items-center gap-3">
-                  <div class="w-2 h-2 bg-arc-green rounded-full"></div>
-                  <span>Early-exit penalties → PenaltyVault</span>
-                </div>
-                <div class="flex items-center gap-3">
-                  <div class="w-2 h-2 bg-arc-green rounded-full"></div>
-                  <span>Staking rewards & fee distribution</span>
-                </div>
-                <div class="flex items-center gap-3">
-                  <div class="w-2 h-2 bg-arc-green rounded-full"></div>
-                  <span>Composability with DeFi protocols</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- SBT Component -->
-            <div class="group bg-gradient-to-br from-teal-primary/10 to-teal-primary/5 p-6 border border-teal-primary/30 hover:border-teal-primary/60 transition-all duration-500 hover:scale-105 card-advanced">
-              <div class="text-center mb-4">
-                <div class="w-16 h-16 mx-auto mb-3 bg-teal-primary/20 flex items-center justify-center group-hover:bg-teal-primary/40 transition-colors">
-                  <span class="text-2xl font-bold text-teal-primary">🔗</span>
-                </div>
-                <h3 class="text-xl font-semibold text-teal-primary mb-2">SoulBound Tokens</h3>
-                <p class="text-adam-light-gray text-xs font-mono">ERC721 Non-Transferable</p>
-              </div>
-
-              <div class="space-y-4 text-sm text-adam-light-gray">
-                <div class="flex items-center gap-3">
-                  <div class="w-2 h-2 bg-teal-primary rounded-full"></div>
-                  <span>Onchain identity & reputation</span>
-                </div>
-                <div class="flex items-center gap-3">
-                  <div class="w-2 h-2 bg-teal-primary rounded-full"></div>
-                  <span>Non-transferable attestations</span>
-                </div>
-                <div class="flex items-center gap-3">
-                  <div class="w-2 h-2 bg-teal-primary rounded-full"></div>
-                  <span>Role gating & access control</span>
-                </div>
-                <div class="flex items-center gap-3">
-                  <div class="w-2 h-2 bg-teal-primary rounded-full"></div>
-                  <span>2FA for critical operations</span>
-                </div>
-              </div>
-            </div>
+    <section id="adam-lifecycle" class="section adam-section">
+      <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 md:p-12">
+  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Proposal <span class="text-adam-blue">Lifecycle</span></h2>
+        <ol class="text-adam-light-gray text-lg font-light max-w-2xl mx-auto list-decimal list-inside space-y-2">
+          <li>Draft → Submit → Review (≤24h)</li>
+          <li>Voting (snapshot, tally at end)</li>
+          <li>Timelock → Challenge Window</li>
+          <li>Execute (if passed, after challenge)</li>
+          <li>Monitor (on-chain events, audits)</li>
+        </ol>
+        <p class="mt-8 text-adam-light-gray text-base max-w-xl mx-auto">Static checks at review (targets, bounds, diffs). Challenge uses bonded dispute; ADAM Host re-checks on queue/execute. Emergency: pause/cancel only, dual-quorum enforced.</p>
+      </div>
+    </section>
+    <section id="adam-parameters" class="section adam-section">
+      <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 md:p-12">
+  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Governance <span class="text-adam-blue">Parameters</span></h2>
+        <div class="overflow-x-auto w-full max-w-4xl mx-auto">
+          <table class="min-w-full text-sm text-left text-adam-light-gray border border-adam-blue/30 rounded-lg">
+            <thead class="bg-adam-blue/10 text-adam-blue uppercase">
+              <tr>
+                <th class="px-4 py-2">Topic</th>
+                <th class="px-4 py-2">Layers</th>
+                <th class="px-4 py-2">qTotal</th>
+                <th class="px-4 py-2">Supermajority</th>
+                <th class="px-4 py-2">Voting</th>
+                <th class="px-4 py-2">Timelock</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-adam-blue/10"><td class="px-4 py-2">TREASURY</td><td class="px-4 py-2">TOKEN, SBT</td><td class="px-4 py-2">0.08</td><td class="px-4 py-2">0.60</td><td class="px-4 py-2">5d</td><td class="px-4 py-2">7d</td></tr>
+              <tr class="border-b border-adam-blue/10"><td class="px-4 py-2">PARAMS</td><td class="px-4 py-2">TOKEN, SBT</td><td class="px-4 py-2">0.06</td><td class="px-4 py-2">0.55</td><td class="px-4 py-2">5d</td><td class="px-4 py-2">5d</td></tr>
+              <tr class="border-b border-adam-blue/10"><td class="px-4 py-2">ENERGY</td><td class="px-4 py-2">TOKEN, SBT, RWA_ENERGY</td><td class="px-4 py-2">0.07</td><td class="px-4 py-2">0.58</td><td class="px-4 py-2">6d</td><td class="px-4 py-2">7d</td></tr>
+              <tr class="border-b border-adam-blue/10"><td class="px-4 py-2">CARBON</td><td class="px-4 py-2">TOKEN, SBT, RWA_CARBON</td><td class="px-4 py-2">0.07</td><td class="px-4 py-2">0.58</td><td class="px-4 py-2">6d</td><td class="px-4 py-2">7d</td></tr>
+              <tr><td class="px-4 py-2">GRANTS</td><td class="px-4 py-2">TOKEN, SBT</td><td class="px-4 py-2">0.05</td><td class="px-4 py-2">0.55</td><td class="px-4 py-2">5d</td><td class="px-4 py-2">5d</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-8 text-adam-light-gray text-base max-w-xl mx-auto">All parameters are on-chain, versioned, and emitted as JSON. Quorums, supermajorities, proposer bonds, concurrency, and challenge windows are strictly enforced by contract.</p>
+      </div>
+    </section>
+    <section id="adam-sandbox" class="section adam-section">
+      <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 md:p-12">
+  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Wasm <span class="text-adam-blue">Sandbox</span></h2>
+        <p class="text-lg md:text-xl text-adam-light-gray max-w-2xl mx-auto font-light mb-8">All policy logic runs in a Wasm sandbox (wasm32-unknown-unknown), with strict fuel and memory caps. No syscalls, time, or randomness. Upgrades are only possible via governance.</p>
+        <div class="bg-adam-slate/60 p-6 rounded-lg shadow-inner-glow max-w-xl mx-auto">
+          <h3 class="text-adam-blue text-lg font-light mb-2 uppercase tracking-widest">Host ↔ CP ABI</h3>
+          <p class="text-adam-light-gray text-sm mb-2">Host → CP (read-only): <span class="font-mono">getParam, getTopicCfg, getSnapshot, getQuorumReached, getSupermajorityReached, getOracleImpact, verifyEAS, getProofHash, getBlockTime</span></p>
+          <p class="text-adam-light-gray text-sm">CP → Host (per hook): <span class="font-mono">onSubmit, onVoteStart, onTally, onQueue, onExecute, onRwaUpdate, onEmergency</span></p>
+        </div>
+      </div>
+    </section>
+    <section id="adam-security" class="section adam-section">
+      <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 md:p-12">
+  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">Security <span class="text-adam-blue">& Invariants</span></h2>
+        <ul class="text-adam-light-gray text-lg font-light max-w-2xl mx-auto list-disc list-inside space-y-2 text-left">
+          <li>No fund movement without topic <span class="text-adam-orange font-mono">TREASURY</span></li>
+          <li>PARAMS must stay within <span class="font-mono">ParamBounds</span>; monotonic flags enforced</li>
+          <li>RWA updates require <span class="font-mono">(≥2-of-N) ∧ active-operator-stakes ∧ recency window met</span></li>
+          <li>Emergency: <span class="font-mono">pause()</span> and <span class="font-mono">cancel()</span> only</li>
+          <li>Inter-block 2FA: second, disjoint confirmation within window by SBT-only quorum</li>
+          <li>All paths auditable, gas/DoS bounded, replay-safe</li>
+        </ul>
+      </div>
+    </section>
+    <section id="adam-tokenomics" class="section adam-section">
+      <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 md:p-12">
+  <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-6">ARCx <span class="text-adam-blue">Tokenomics</span></h2>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8 w-full max-w-4xl mx-auto">
+          <div class="flex-1 bg-adam-slate/60 p-6 rounded-lg shadow-inner-glow">
+            <h3 class="text-adam-blue text-lg font-light mb-2 uppercase tracking-widest">ARCx Token</h3>
+            <p class="text-adam-light-gray text-sm">Utility, staking, and governance. Staked ARCx grants voting power and slashing risk. Total supply: <span class="font-mono">1,100,000</span>.</p>
+          </div>
+          <div class="flex-1 bg-adam-slate/60 p-6 rounded-lg shadow-inner-glow">
+            <h3 class="text-adam-blue text-lg font-light mb-2 uppercase tracking-widest">ARCxSBT</h3>
+            <p class="text-adam-light-gray text-sm">Soulbound identity token. Non-transferable, EAS-gated, decay-weighted. Proves roles and eligibility for governance, with on-chain activity and expiry.</p>
+            <a href="#adam-join" class="text-adam-orange underline text-sm mt-2 inline-block">Learn more below</a>
           </div>
         </div>
       </div>
     </section>
+    <section id="adam-join" class="section adam-section">
+      <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 sm:p-8 bg-adam-black relative">
+        <div class="absolute inset-0 z-0 bg-adam-dark"><div class="absolute top-1/2 left-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-adam-blue-dark/20 rounded-full blur-3xl animate-pulse -translate-x-1/2 -translate-y-1/2"></div></div>
+        <div class="relative z-10 w-full max-w-2xl mx-auto">
+          <h2 class="text-4xl md:text-6xl font-thin text-gray-200 tracking-[0.2em] uppercase mb-4">Become A System Architect</h2>
+          <p class="mt-2 text-adam-light-gray font-light max-w-xl mx-auto">Contribute to a new standard in governance. Build, propose, and vote on the future of decentralized systems and real-world assets.</p>
+          <div class="mt-10"><a href="#" class="border border-adam-blue text-adam-blue font-light py-4 px-12 rounded-sm text-md uppercase tracking-[0.2em] hover:bg-adam-blue hover:text-black hover:shadow-glow-blue transition-all duration-300">Launch Discord</a></div>
 
-    <section id="registry" class="section adam-section">
-      <div class="w-full h-full flex items-center justify-center p-8 bg-adam-black">
-        <div class="max-w-5xl w-full">
-          <div class="text-center mb-12">
-            <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-4">
-              AI <span class="text-red-500">Registry</span>
-            </h2>
-            <p class="text-xl text-adam-light-gray font-light">Authenticity & Compliance for AI Systems</p>
-          </div>
-
-          <!-- Registry Flow Visualization -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div class="space-y-8">
-              <div class="bg-gradient-to-br from-red-500/10 to-red-500/5 p-8 border border-red-500/30 card-advanced">
-                <h3 class="text-2xl font-semibold text-red-500 mb-6">Registry Process</h3>
-
-                <div class="space-y-6">
-                  <div class="flex items-start gap-4">
-                    <div class="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span class="text-red-500 font-bold text-sm">1</span>
-                    </div>
-                    <div>
-                      <h4 class="text-white font-semibold mb-2">Submit Manifest</h4>
-                      <p class="text-adam-light-gray text-sm">Model/agent metadata, version, owner, schema hash</p>
-                    </div>
-                  </div>
-
-                  <div class="flex items-start gap-4">
-                    <div class="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span class="text-red-500 font-bold text-sm">2</span>
-                    </div>
-                    <div>
-                      <h4 class="text-white font-semibold mb-2">Provide Proofs</h4>
-                      <p class="text-adam-light-gray text-sm">EAS attestations, oracle signatures, countersignatures</p>
-                    </div>
-                  </div>
-
-                  <div class="flex items-start gap-4">
-                    <div class="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span class="text-red-500 font-bold text-sm">3</span>
-                    </div>
-                    <div>
-                      <h4 class="text-white font-semibold mb-2">Register Entry</h4>
-                      <p class="text-adam-light-gray text-sm">Immutable reference with governance revocation rights</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="bg-adam-slate/40 p-6 border border-adam-slate/50 card-advanced">
-                <h4 class="text-white font-semibold mb-4">Entry Structure</h4>
-                <div class="grid grid-cols-2 gap-4 text-sm">
-                  <div class="bg-adam-slate/60 p-3">
-                    <div class="text-adam-blue font-mono">manifest</div>
-                    <div class="text-adam-light-gray">hash, owner, version</div>
-                  </div>
-                  <div class="bg-adam-slate/60 p-3">
-                    <div class="text-adam-blue font-mono">proofs</div>
-                    <div class="text-adam-light-gray">EAS UID, signatures</div>
-                  </div>
-                  <div class="bg-adam-slate/60 p-3">
-                    <div class="text-adam-blue font-mono">chain</div>
-                    <div class="text-adam-light-gray">attestation lineage</div>
-                  </div>
-                  <div class="bg-adam-slate/60 p-3">
-                    <div class="text-adam-blue font-mono">metadata</div>
-                    <div class="text-adam-light-gray">verifier addresses</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="space-y-8">
-              <div class="bg-gradient-to-br from-adam-slate/30 to-adam-slate/10 p-8 border border-adam-slate/50 card-advanced">
-                <h3 class="text-2xl font-semibold text-white mb-6">Use Cases</h3>
-
-                <div class="space-y-4">
-                  <div class="flex items-center gap-3 p-4 bg-adam-slate/40">
-                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <span class="text-adam-light-gray">Model authenticity verification</span>
-                  </div>
-                  <div class="flex items-center gap-3 p-4 bg-adam-slate/40">
-                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <span class="text-adam-light-gray">Agent compliance attestation</span>
-                  </div>
-                  <div class="flex items-center gap-3 p-4 bg-adam-slate/40">
-                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <span class="text-adam-light-gray">RWA integration proofs</span>
-                  </div>
-                  <div class="flex items-center gap-3 p-4 bg-adam-slate/40">
-                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <span class="text-adam-light-gray">Governance voting weights</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="bg-gradient-to-br from-adam-blue/10 to-adam-blue/5 p-8 border border-adam-blue/30 card-advanced">
-                <h4 class="text-adam-blue font-semibold mb-4">Security Features</h4>
-                <div class="space-y-3 text-sm text-adam-light-gray">
-                  <div class="flex items-center gap-2">
-                    <span class="text-green-400">✓</span>
-                    <span>Immutable registration entries</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-green-400">✓</span>
-                    <span>Governance-controlled revocation</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-green-400">✓</span>
-                    <span>Cryptographic proof verification</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-green-400">✓</span>
-                    <span>Multi-oracle attestation support</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="mt-12 bg-adam-slate/70 rounded-lg p-6 shadow-inner-glow text-left">
+            <h3 class="text-2xl text-adam-blue font-light mb-2 uppercase tracking-widest">Introducing ARCxSBT</h3>
+            <p class="text-adam-light-gray text-base mb-2">ARCxSBT is a non-transferable, EAS-gated Soulbound Token that proves your role and eligibility in the ARCx ecosystem. Each SBT is:</p>
+            <ul class="list-disc list-inside text-adam-light-gray text-sm mb-4">
+              <li>Issued only to eligible contributors (dev, validator, gov, oracle, curator, auditor)</li>
+              <li>Decay-weighted: your on-chain activity keeps your power alive</li>
+              <li>Revocable, with strict anti-DoS and rate limits</li>
+              <li>ERC-721 compatible, but always locked (ERC-5192)</li>
+              <li>Enforces role-level bounds and eligibility for governance</li>
+            </ul>
+            <a href="#" class="text-adam-orange underline text-sm">Read the full ARCxSBT spec</a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section id="timelock" class="section adam-section">
-      <div class="w-full h-full flex items-center justify-center p-8 bg-adam-black">
-        <div class="max-w-4xl w-full">
-          <div class="text-center mb-12">
-            <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-4">
-              <span class="text-adam-blue">Timelock</span> Flow
-            </h2>
-            <p class="text-xl text-adam-light-gray font-light">Secure Grant Execution System</p>
+        <footer class="absolute bottom-8 text-center text-xs text-gray-700 font-light tracking-widest w-full">
+          <div class="flex justify-center space-x-6 mb-4">
+            <a href="#" class="text-gray-600 hover:text-adam-blue transition-colors duration-300" aria-label="ADAM Protocol Twitter"><span class="sr-only">Twitter</span><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg></a>
+            <a href="#" class="text-gray-600 hover:text-adam-blue transition-colors duration-300" aria-label="ADAM Protocol Discord"><span class="sr-only">Discord</span><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317,4.369a19.789,19.789,0,0,0-4.885-1.515.074.074,0,0,0-.079.037,14.2,14.2,0,0,0-1.127,2.224,19.159,19.159,0,0,0-5.625,0,14.54,14.54,0,0,0-1.127-2.224.077.077,0,0,0-.079-.037A19.787,19.787,0,0,0,3.683,4.369a.076.076,0,0,0-.04.076A16.425,16.425,0,0,0,2.1,14.855a.077.077,0,0,0,.042.083,18.156,18.156,0,0,0,3.985,1.52.073.073,0,0,0,.08-.035,12.3,12.3,0,0,0,.64-2.22,17.65,17.65,0,0,0-2.812-.914.074.074,0,0,0-.08,0,13.255,13.255,0,0,0-.222,4.423.076.076,0,0,0,.066.078,19.2,19.2,0,0,0,6.1,1.77h.042a19.173,19.173,0,0,0,6.1-1.77.076.076,0,0,0,.066-.078,13.21,13.21,0,0,0-.222-4.423.074.074,0,0,0-.08,0,17.691,17.691,0,0,0-2.812.914.075.075,0,0,0,.08.035,12.336,12.336,0,0,0,.64,2.22.076.076,0,0,0,.08.035,18.156,18.156,0,0,0,3.985-1.52.077.077,0,0,0,.042-.083A16.425,16.425,0,0,0,20.357,4.445a.076.076,0,0,0-.04-.076ZM8.02,12.316c-1.049,0-1.9-.96-1.9-2.15s.85-2.15,1.9-2.15,1.9.96,1.9,2.15S9.069,12.316,8.02,12.316Zm7.96,0c-1.049,0-1.9-.96-1.9-2.15s.85-2.15,1.9-2.15,1.9.96,1.9,2.15S17.029,12.316,15.98,12.316Z"></path></svg></a>
           </div>
-
-          <!-- Timelock Visualization -->
-          <div class="bg-gradient-to-br from-adam-slate/30 to-adam-slate/10 p-8 border border-adam-slate/50 mb-8 card-advanced">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <div class="text-center group">
-                <div class="w-16 h-16 mx-auto mb-4 bg-adam-blue/30 flex items-center justify-center group-hover:bg-adam-blue/50 transition-colors">
-                  <span class="text-adam-blue font-bold text-xl">1</span>
-                </div>
-                <h4 class="text-adam-blue font-semibold mb-2">Propose</h4>
-                <p class="text-adam-light-gray text-sm">Submit grant proposal with details</p>
-              </div>
-
-              <div class="text-center group">
-                <div class="w-16 h-16 mx-auto mb-4 bg-adam-orange/30 flex items-center justify-center group-hover:bg-adam-orange/50 transition-colors">
-                  <span class="text-adam-orange font-bold text-xl">2</span>
-                </div>
-                <h4 class="text-adam-orange font-semibold mb-2">Vote</h4>
-                <p class="text-adam-light-gray text-sm">Community governance voting</p>
-              </div>
-
-              <div class="text-center group">
-                <div class="w-16 h-16 mx-auto mb-4 bg-red-500/30 flex items-center justify-center group-hover:bg-red-500/50 transition-colors">
-                  <span class="text-red-500 font-bold text-xl">3</span>
-                </div>
-                <h4 class="text-red-500 font-semibold mb-2">Timelock</h4>
-                <p class="text-adam-light-gray text-sm">Configurable delay period</p>
-              </div>
-
-              <div class="text-center group">
-                <div class="w-16 h-16 mx-auto mb-4 bg-arc-green/30 flex items-center justify-center group-hover:bg-arc-green/50 transition-colors">
-                  <span class="text-arc-green font-bold text-xl">4</span>
-                </div>
-                <h4 class="text-arc-green font-semibold mb-2">Execute</h4>
-                <p class="text-adam-light-gray text-sm">Treasury releases funds</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Timelock Details -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-gradient-to-br from-adam-blue/10 to-adam-blue/5 p-6 border border-adam-blue/30 card-advanced">
-              <h3 class="text-adam-blue font-semibold mb-4">Security Features</h3>
-              <div class="space-y-3 text-sm text-adam-light-gray">
-                <div class="flex items-center gap-2">
-                  <span class="text-green-400">✓</span>
-                  <span>No automatic self-grants</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-green-400">✓</span>
-                  <span>Explicit role handovers required</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-green-400">✓</span>
-                  <span>Configurable timelock windows</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-green-400">✓</span>
-                  <span>Emergency pause capability</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="bg-gradient-to-br from-adam-orange/10 to-adam-orange/5 p-6 border border-adam-orange/30 card-advanced">
-              <h3 class="text-adam-orange font-semibold mb-4">Grant Types</h3>
-              <div class="space-y-3 text-sm text-adam-light-gray">
-                <div class="flex items-center gap-2">
-                  <span class="text-adam-orange">●</span>
-                  <span>Development funding</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-adam-orange">●</span>
-                  <span>Security bounties</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-adam-orange">●</span>
-                  <span>Community initiatives</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-adam-orange">●</span>
-                  <span>Partnership programs</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="security" class="section adam-section">
-      <div class="w-full h-full flex items-center justify-center p-8 bg-adam-black">
-        <div class="max-w-7xl w-full">
-          <div class="text-center mb-12">
-            <h2 class="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] uppercase mb-4">
-              <span class="text-red-500">Security</span> & Cyber
-            </h2>
-            <p class="text-xl text-adam-light-gray font-light">Defense-in-Depth Architecture</p>
-          </div>
-
-          <!-- Security Shields Visualization -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div class="space-y-8">
-              <div class="bg-gradient-to-br from-red-500/10 to-red-500/5 p-8 border border-red-500/30 card-advanced">
-                <h3 class="text-2xl font-semibold text-red-500 mb-6">Defense Layers</h3>
-
-                <div class="space-y-6">
-                  <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 bg-red-500/20 flex items-center justify-center flex-shrink-0">
-                      <span class="text-red-500 font-bold">1</span>
-                    </div>
-                    <div>
-                      <h4 class="text-white font-semibold mb-2">Wasm Sandboxing</h4>
-                      <p class="text-adam-light-gray text-sm">Policies execute in isolated environments with no syscalls</p>
-                    </div>
-                  </div>
-
-                  <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 bg-red-500/20 flex items-center justify-center flex-shrink-0">
-                      <span class="text-red-500 font-bold">2</span>
-                    </div>
-                    <div>
-                      <h4 class="text-white font-semibold mb-2">On-chain Proofs</h4>
-                      <p class="text-adam-light-gray text-sm">Cryptographic verification for all RWA and AI attestations</p>
-                    </div>
-                  </div>
-
-                  <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 bg-red-500/20 flex items-center justify-center flex-shrink-0">
-                      <span class="text-red-500 font-bold">3</span>
-                    </div>
-                    <div>
-                      <h4 class="text-white font-semibold mb-2">Timelock + Challenge</h4>
-                      <p class="text-adam-light-gray text-sm">Time-delayed execution with veto periods for sensitive operations</p>
-                    </div>
-                  </div>
-
-                  <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 bg-red-500/20 flex items-center justify-center flex-shrink-0">
-                      <span class="text-red-500 font-bold">4</span>
-                    </div>
-                    <div>
-                      <h4 class="text-white font-semibold mb-2">Event Observability</h4>
-                      <p class="text-adam-light-gray text-sm">All critical actions emit structured events for monitoring</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="space-y-8">
-              <div class="bg-gradient-to-br from-adam-slate/30 to-adam-slate/10 p-8 border border-adam-slate/50 card-advanced">
-                <h3 class="text-2xl font-semibold text-white mb-6">Cyber Measures</h3>
-
-                <div class="space-y-4">
-                  <div class="bg-adam-slate/40 p-4">
-                    <div class="flex items-center gap-3 mb-2">
-                      <div class="w-3 h-3 bg-red-500"></div>
-                      <span class="text-white font-semibold">Registry Signatures</span>
-                    </div>
-                    <p class="text-adam-light-gray text-sm">Cryptographic proof requirements for all registrations</p>
-                  </div>
-
-                  <div class="bg-adam-slate/40 p-4">
-                    <div class="flex items-center gap-3 mb-2">
-                      <div class="w-3 h-3 bg-red-500"></div>
-                      <span class="text-white font-semibold">Role Bounds</span>
-                    </div>
-                    <p class="text-adam-light-gray text-sm">Strict permission systems with minimal privilege principles</p>
-                  </div>
-
-                  <div class="bg-adam-slate/40 p-4">
-                    <div class="flex items-center gap-3 mb-2">
-                      <div class="w-3 h-3 bg-red-500"></div>
-                      <span class="text-white font-semibold">Rate Limiting</span>
-                    </div>
-                    <p class="text-adam-light-gray text-sm">Transaction frequency controls and abuse prevention</p>
-                  </div>
-
-                  <div class="bg-adam-slate/40 p-4">
-                    <div class="flex items-center gap-3 mb-2">
-                      <div class="w-3 h-3 bg-red-500"></div>
-                      <span class="text-white font-semibold">Restrictable Slashing</span>
-                    </div>
-                    <p class="text-adam-light-gray text-sm">Configurable penalty thresholds with governance override</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="bg-gradient-to-br from-adam-blue/10 to-adam-blue/5 p-8 border border-adam-blue/30 card-advanced">
-                <h4 class="text-adam-blue font-semibold mb-4">Monitoring & Audit</h4>
-                <div class="space-y-3 text-sm text-adam-light-gray">
-                  <div class="flex items-center gap-2">
-                    <span class="text-green-400">✓</span>
-                    <span>Continuous on-chain monitoring</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-green-400">✓</span>
-                    <span>Regular security audits</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-green-400">✓</span>
-                    <span>Event-driven alerting</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-green-400">✓</span>
-                    <span>Multi-signature controls</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          <p>&copy; 2024 ADAM PROTOCOL. ALL RIGHTS RESERVED.</p>
+        </footer>
       </div>
     </section>
   </main>
@@ -1032,109 +448,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileBuyButton = document.getElementById('mobile-buy-button');
   const backgroundRenderer = document.getElementById('background-renderer')?.firstElementChild;
     
-    // --- CUSTOM CURSOR EFFECT ---
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorOutline = document.querySelector('.cursor-outline');
-
-    if (cursorDot && cursorOutline) {
-      let mouseX = 0;
-      let mouseY = 0;
-      let dotX = 0;
-      let dotY = 0;
-      let outlineX = 0;
-      let outlineY = 0;
-
-      document.addEventListener('mousemove', function(e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      });
-
-      function animateCursor() {
-        // Smooth following effect for dot
-        dotX += (mouseX - dotX) * 0.1;
-        dotY += (mouseY - dotY) * 0.1;
-
-        // Slower following effect for outline
-        outlineX += (mouseX - outlineX) * 0.05;
-        outlineY += (mouseY - outlineY) * 0.05;
-
-        cursorDot.style.left = dotX - 4 + 'px';
-        cursorDot.style.top = dotY - 4 + 'px';
-
-        cursorOutline.style.left = outlineX - 20 + 'px';
-        cursorOutline.style.top = outlineY - 20 + 'px';
-
-        requestAnimationFrame(animateCursor);
-      }
-
-      animateCursor();
-
-      // Scale effect on hover
-      document.querySelectorAll('a, button, .card-advanced').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          cursorDot.style.transform = 'scale(1.5)';
-          cursorOutline.style.transform = 'scale(1.5)';
-        });
-
-        el.addEventListener('mouseleave', () => {
-          cursorDot.style.transform = 'scale(1)';
-          cursorOutline.style.transform = 'scale(1)';
-        });
-      });
-    }
-
-    // --- MAGNETIC EFFECTS ---
-    document.querySelectorAll('.btn-buy-arcx, .btn-advanced').forEach(btn => {
-      btn.addEventListener('mousemove', function(e) {
-        const rect = this.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-
-        this.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
-      });
-
-      btn.addEventListener('mouseleave', function() {
-        this.style.transform = 'translate(0, 0)';
-      });
-    });
-
-    // --- ADVANCED SCROLL EFFECTS ---
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in-up');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.section').forEach(section => {
-      observer.observe(section);
-    });
-
-    // --- HOLOGRAPHIC TEXT EFFECTS ---
-    const holographicTexts = document.querySelectorAll('.holographic-text');
-    holographicTexts.forEach(text => {
-      text.addEventListener('mouseenter', function() {
-        this.style.animationDuration = '1s';
-      });
-
-      text.addEventListener('mouseleave', function() {
-        this.style.animationDuration = '4s';
-      });
-    });
-
     // --- HEADER AND NAVIGATION ---
     const headerNav = document.getElementById('header-nav');
     const navIndicator = document.createElement('div');
-  const navLinksData = [
-    { name: 'Home', href: '#adam-home' }, { name: 'Map', href: '#system-map' }, { name: 'Components', href: '#arc-components' },
-    { name: 'Registry', href: '#registry' }, { name: 'Timelock', href: '#timelock' }, { name: 'Security', href: '#security' }
-  ];
+    const navLinksData = [
+        { name: 'Home', href: '#adam-home' }, { name: 'About', href: '#adam-about' }, { name: 'Architecture', href: '#adam-architecture' },
+        { name: 'Lifecycle', href: '#adam-lifecycle' }, { name: 'Parameters', href: '#adam-parameters' }, { name: 'Sandbox', href: '#adam-sandbox' },
+        { name: 'Security', href: '#adam-security' }, { name: 'Tokenomics', href: '#adam-tokenomics' }, { name: 'Join', href: '#adam-join' },
+    ];
 
     if (headerNav) {
         navIndicator.id = "nav-indicator";
@@ -1221,13 +542,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // --- INJECT & INITIALIZE DYNAMIC CONTENT ---
-  const componentInitializers = {
-    'adam-home': initSystemMap,
-    'arc-components': initComponents,
-    'registry': initRegistry,
-    'timelock': initTimelock,
-    'security': initSecurity
-  };
+    const componentInitializers = {
+        'adam-architecture': initArchitecture,
+        'adam-lifecycle': initLifecycle,
+        'adam-parameters': initParameters,
+        'adam-sandbox': initSandbox,
+        'adam-security': initSecurity,
+        'adam-tokenomics': initTokenomics,
+    };
 
     // Use an observer to initialize components only when they are about to be viewed.
     const componentObserver = new IntersectionObserver((entries, observer) => {
@@ -1329,117 +651,6 @@ document.addEventListener('DOMContentLoaded', () => {
            cumulativePercent += percent;
        });
     }
-
-  function initSystemMap() {
-    const map = document.getElementById('system-map');
-    const fact = document.getElementById('map-fact');
-    if(!map || !fact) return;
-
-    const facts = {
-      'node-arcx': 'ARCx — network currency for staking and governance. Mint s tokens to gain rights and participate in protocol governance.',
-      'node-s': 's — staked shares representing liquidity receipts and governance rights. Early exits incur penalties that flow to PenaltyVault.',
-      'node-sbt': 'SBT — soulbound attestations for onchain identity, reputation, and access control. Non-transferable credentials for critical flows.',
-      'node-registry': 'Registry — immutable AI model and agent manifests with cryptographic proofs. Enables authenticity verification and compliance.',
-      'node-treasury': 'Treasury — multi-signature controlled funds for grants and operations. All disbursements require timelock approval.'
-    };
-
-    Object.keys(facts).forEach(id => {
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.style.cursor = 'pointer';
-      el.addEventListener('click', () => {
-        fact.textContent = facts[id];
-        // Add visual feedback
-        el.style.transform = 'scale(1.1)';
-        setTimeout(() => el.style.transform = 'scale(1)', 200);
-      });
-      // Add hover effects
-      el.addEventListener('mouseenter', () => {
-        el.style.filter = 'brightness(1.2) drop-shadow(0 0 8px rgba(255,255,255,0.3))';
-      });
-      el.addEventListener('mouseleave', () => {
-        el.style.filter = 'none';
-      });
-    });
-  }
-
-  function initComponents() {
-    // Enhanced component interactions
-    const components = document.querySelectorAll('#arc-components .group');
-    components.forEach((comp, index) => {
-      comp.addEventListener('mouseenter', () => {
-        comp.style.transform = 'scale(1.02) translateY(-2px)';
-        comp.style.boxShadow = '0 20px 40px rgba(0,0,0,0.3)';
-      });
-      comp.addEventListener('mouseleave', () => {
-        comp.style.transform = 'scale(1) translateY(0)';
-        comp.style.boxShadow = 'none';
-      });
-
-      // Add staggered animation on load
-      comp.style.opacity = '0';
-      comp.style.transform = 'translateY(20px)';
-      setTimeout(() => {
-        comp.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-        comp.style.opacity = '1';
-        comp.style.transform = 'translateY(0)';
-      }, index * 100);
-    });
-  }
-
-  function initRegistry() {
-    // Registry-specific interactions
-    const registryCards = document.querySelectorAll('#registry .bg-adam-slate\\/60, #registry .bg-adam-slate\\/40');
-    registryCards.forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-4px) scale(1.02)';
-        card.style.boxShadow = '0 15px 35px rgba(0,0,0,0.4)';
-        card.style.borderColor = 'rgba(185, 8, 42, 0.4)';
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0) scale(1)';
-        card.style.boxShadow = 'none';
-        card.style.borderColor = '';
-      });
-    });
-
-    // Add pulse animation to security checkmarks
-    const checkmarks = document.querySelectorAll('#registry .text-green-400');
-    checkmarks.forEach((checkmark, index) => {
-      setTimeout(() => {
-        checkmark.style.animation = 'pulse 2s infinite';
-      }, index * 200);
-    });
-  }
-
-  function initTimelock() {
-    // Timelock flow animations
-    const steps = document.querySelectorAll('#timelock .group');
-    steps.forEach((step, index) => {
-      step.style.animationDelay = `${index * 0.2}s`;
-      step.style.opacity = '0';
-      step.style.transform = 'translateY(30px)';
-
-      setTimeout(() => {
-        step.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-        step.style.opacity = '1';
-        step.style.transform = 'translateY(0)';
-      }, index * 200);
-    });
-
-    // Add hover effects for security features
-    const securityItems = document.querySelectorAll('#timelock .flex.items-center.gap-2');
-    securityItems.forEach(item => {
-      item.addEventListener('mouseenter', () => {
-        item.style.transform = 'translateX(5px)';
-        item.style.color = '#0052FF';
-      });
-      item.addEventListener('mouseleave', () => {
-        item.style.transform = 'translateX(0)';
-        item.style.color = '';
-      });
-    });
-  }
 
     // Call initial update for nav
     updateNavIndicator();
