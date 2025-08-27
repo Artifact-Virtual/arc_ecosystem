@@ -138,28 +138,41 @@
   </style>
   <!-- Blue-accent header for embedded horizontal section -->
   <style>
+    /* AMOLED black header with blue CTAs */
     .section-header-blue {
       width: 100%;
       position: sticky;
       top: 0;
       left: 0;
       z-index: 1100;
-      background: linear-gradient(90deg, rgba(0,82,255,0.95), rgba(0,56,191,0.95));
-      color: #fff;
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(0,82,255,0.15);
+      background: #000000; /* pure black for AMOLED */
+      color: #ffffff;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
       display: flex;
       align-items: center;
-      padding: 0.5rem 1.5rem;
+      padding: 0.5rem 1.25rem;
       gap: 1rem;
     }
     .section-header-blue .brand { display: flex; align-items: center; gap: 0.75rem; }
     .section-header-blue .brand img { height: 36px; width: auto; }
-    .section-header-blue .nav { margin-left: auto; display: flex; gap: 1rem; align-items: center; }
-    .section-header-blue .nav a { color: rgba(255,255,255,0.95); text-decoration: none; font-weight: 600; padding: 0.4rem 0.8rem; border-radius: 6px; }
-    .section-header-blue .nav a.cta { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.06); }
-    .section-header-blue .nav a:hover { background: rgba(255,255,255,0.06); }
-    @media (max-width: 768px) { .section-header-blue { padding: 0.5rem 1rem; } .section-header-blue .nav { gap: 0.5rem; } }
+    .section-header-blue .brand .title { font-weight: 700; color: #fff; font-size: 0.98rem; }
+    .section-header-blue .nav { margin-left: auto; display: flex; gap: 0.75rem; align-items: center; }
+    .section-header-blue .nav a { color: rgba(255,255,255,0.92); text-decoration: none; font-weight: 600; padding: 0.35rem 0.75rem; border-radius: 6px; }
+    .section-header-blue .nav a.cta { background: linear-gradient(90deg,#1580ff,#0866f0); color: #fff; border: none; box-shadow: 0 6px 18px rgba(8,102,240,0.16); }
+    .section-header-blue .nav a:hover { filter: brightness(1.05); transform: translateY(-1px); }
+    @media (max-width: 768px) { .section-header-blue { padding: 0.45rem 0.8rem; } .section-header-blue .nav { gap: 0.5rem; } }
+  </style>
+  <style>
+    /* Crimson CTA variant matching blue button style */
+    .cta-crimson { background: linear-gradient(135deg, #b8002a, #ff3300); color: #fff !important; border: none; box-shadow: 0 6px 18px rgba(184,0,42,0.18); padding: 0.35rem 0.75rem; border-radius: 6px; font-weight: 700; }
+    .cta-crimson:hover { filter: brightness(1.04); transform: translateY(-1px); }
+  </style>
+  <style>
+    /* show/hide animations for the second header */
+    .header--hidden { transform: translateY(-110%); opacity: 0; pointer-events: none; transition: transform 420ms cubic-bezier(.2,.9,.2,1), opacity 320ms ease; }
+    .header--visible { transform: translateY(0); opacity: 1; pointer-events: auto; transition: transform 420ms cubic-bezier(.2,.9,.2,1), opacity 320ms ease; }
   </style>
   <script>
     tailwind.config = {
@@ -188,7 +201,7 @@
   <li><a href="#roadmap">Roadmap</a></li>
   <li><a href="https://basescan.org/token/0xA4093669DAFbD123E37d52e0939b3aB3C2272f44" target="_blank" rel="noopener">Contract</a></li>
   <li><a href="www/documentation.html">Docs</a></li>
-  <li><a href="https://app.uniswap.org/#/swap?outputCurrency=0xA4093669DAFbD123E37d52e0939b3aB3C2272f44&chain=base" class="btn btn-primary" target="_blank" rel="noopener">Trade</a></li>
+  <li><a href="https://app.uniswap.org/#/swap?outputCurrency=0xA4093669DAFbD123E37d52e0939b3aB3C2272f44&chain=base" class="btn cta-crimson" target="_blank" rel="noopener">Trade</a></li>
       </ul>
     </nav>
   </header>
@@ -215,7 +228,7 @@
             </div>
             <div class="cta-buttons">
               <a href="https://app.uniswap.org/#/swap?outputCurrency=0xA4093669DAFbD123E37d52e0939b3aB3C2272f44&chain=base" class="btn btn-primary" target="_blank" rel="noopener">Trade Now</a>
-              <a href="www/airdrop_interface.html" class="btn btn-secondary">Claim Airdrop</a>
+              <a href="./airdrop_interface.html" class="btn btn-secondary">Claim Airdrop</a>
             </div>
         </div>
       </div>
@@ -264,10 +277,9 @@
 
       <!-- Iframe Section: Inserted after hero -->
       <!-- Blue header for the embedded horizontal section -->
-      <div class="section-header-blue">
+      <div class="section-header-blue header--hidden">
         <div class="brand">
-          <img src="./assets/logos/av-white-logo-removebg-preview.png" alt="AV logo">
-          <div style="font-weight:700">ARCx Ecosystem</div>
+          <img src="./assets/logos/av-black-logo-removebg-preview.png" alt="AV logo">
         </div>
         <nav class="nav">
           <a href="./index_horizontal.html">Explore</a>
@@ -353,6 +365,29 @@
         }
       }, { threshold: 0.01 });
       observer.observe(hero);
+    });
+  </script>
+
+  <script>
+    // Toggle the embedded section header visibility when the iframe (horizontal demo) is in view.
+    document.addEventListener('DOMContentLoaded', function() {
+      var iframeSection = document.querySelector('.iframe-fullscreen-section');
+      var embeddedHeader = document.querySelector('.section-header-blue');
+      if (!iframeSection || !embeddedHeader) return;
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            embeddedHeader.classList.remove('header--hidden');
+            embeddedHeader.classList.add('header--visible');
+          } else {
+            embeddedHeader.classList.remove('header--visible');
+            embeddedHeader.classList.add('header--hidden');
+          }
+        });
+      }, { threshold: 0.15 });
+
+      observer.observe(iframeSection);
     });
   </script>
 

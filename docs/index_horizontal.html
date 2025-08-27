@@ -97,6 +97,18 @@
     input[type=range]::-moz-range-thumb { background-color: #ff4500; height: 12px; width: 12px; border-radius: 50%; border: 2px solid #0a0a0a; box-shadow: 0 0 5px rgba(255, 69, 0, 0.5); }
     .panel-border { border: 1px solid; border-image-slice: 1; border-image-source: linear-gradient(to bottom right, #4a4a4a, #1a1a1a); }
 
+    /* Crimson Buy ARCx button */
+    .btn-buy-arcx {
+      background: linear-gradient(135deg, #b8002a 0%, #ff3300 100%);
+      color: #fff;
+      font-weight: 700;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 30px rgba(184,0,42,0.18);
+      transition: transform 180ms ease, filter 180ms ease;
+    }
+    .btn-buy-arcx:hover { transform: translateY(-2px); filter: brightness(1.03); }
+
     /* Desktop Horizontal Scroll */
     @media (min-width: 1024px) {
       html, body {
@@ -203,7 +215,7 @@
             </p>
             <div class="flex items-center space-x-4 mt-8 animate-fade-in-up delay-06s">
               <a href="https://docs.arcx.money/" target="_blank" rel="noopener noreferrer" class="bg-adam-blue/90 hover:bg-adam-blue text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Read Docs</a>
-              <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="bg-adam-orange/90 hover:bg-adam-orange text-white font-semibold py-2 px-4 rounded transition-all duration-300 text-sm shadow-lg">Buy ARCx</a>
+              <a href="https://app.uniswap.org/swap?outputCurrency=0x25aB350b5575510B52705657f9552a9263914f44" target="_blank" rel="noopener noreferrer" class="btn-buy-arcx">Buy ARCx</a>
             </div>
           </div>
         </div>
