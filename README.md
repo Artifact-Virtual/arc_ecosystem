@@ -8,11 +8,9 @@ A comprehensive decentralized autonomous organization (DAO) and governance syste
 [![Multichain](https://img.shields.io/badge/Multichain-Ethereum%20%7C%20Solana-6c47ff?style=flat-square&logo=ethereum&logoColor=white)](https://ethereum.org/) [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square&logo=github&logoColor=white)](#license)
 
 
-A comprehensive decentralized autonomous organization (DAO) and  governance system for the ARC ecosystem, featuring multiple voting mechanisms, secure timelock controls, and modular contract architecture.
-
 ## Overview
 
-The ARC Governance System provides a robust framework for decentralized decision-making within the ARC ecosystem. It consists of six core contracts that work together to enable secure, flexible, and transparent governance operations.
+The ARC provides a robust framework for decentralized decision-making within its ecosystem. It consists of six core contracts that work together to enable secure, flexible, and transparent governance operations.
 
 ### Project Scale
 
