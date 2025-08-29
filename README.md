@@ -2,7 +2,7 @@
 
 > Ecosystem Repository
 
-A comprehensive decentralized autonomous organization (DAO) and governance system for the ARC ecosystem, featuring multiple voting mechanisms, secure timelock controls, and modular contract architecture.
+A comprehensive decentralized autonomous organization (DAO) featuring multiple voting mechanisms, secure timelock controls, and modular contract architecture.
 
 [![Node.js](https://img.shields.io/badge/Node.js-16.x-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/) [![Hardhat](https://img.shields.io/badge/Hardhat-2.12.x-ff8c00?style=flat-square&logo=hardhat&logoColor=white)](https://hardhat.org/) [![OpenZeppelin](https://img.shields.io/badge/OpenZeppelin-4.8.x-205081?style=flat-square&logo=openzeppelin&logoColor=white)](https://openzeppelin.com/) [![Ethers.js](https://img.shields.io/badge/Ethers.js-5.x-3C3C3D?style=flat-square&logo=ethersdotjs&logoColor=white)](https://docs.ethers.io/v5/)
 [![Wagmi](https://img.shields.io/badge/Wagmi-2.12.0-FF6F00?style=flat-square&logo=ethereum&logoColor=white)](https://wagmi.sh/) [![Viem](https://img.shields.io/badge/Viem-2.17.3-4B32C3?style=flat-square&logo=ethereum&logoColor=white)](https://viem.sh/) [![Solidity](https://img.shields.io/badge/Solidity-0.8.x-363636?style=flat-square&logo=ethereum&logoColor=white)](https://docs.soliditylang.org/) [![Playwright](https://img.shields.io/badge/Playwright-E2E%20Testing-45ba63?style=flat-square&logo=playwright&logoColor=white)](https://playwright.dev/)
