@@ -54,6 +54,22 @@ async function deployARCsToken(dryRun: boolean) {
   console.log("\n🪙 ARCs TOKEN DEPLOYMENT");
   console.log("========================");
 
+  // Validate critical addresses are valid Ethereum addresses
+  if (!ethers.isAddress(CONTRACTS.TREASURY_SAFE)) {
+    console.log("❌ CRITICAL ERROR: Invalid treasury safe address!");
+    console.log(`   Address: ${CONTRACTS.TREASURY_SAFE}`);
+    return;
+  }
+
+  if (!ethers.isAddress(CONTRACTS.ECOSYSTEM_SAFE)) {
+    console.log("❌ CRITICAL ERROR: Invalid ecosystem safe address!");
+    console.log(`   Address: ${CONTRACTS.ECOSYSTEM_SAFE}`);
+    return;
+  }
+
+  console.log("✅ Treasury Safe:", CONTRACTS.TREASURY_SAFE);
+  console.log("✅ Ecosystem Safe:", CONTRACTS.ECOSYSTEM_SAFE);
+
   const tokenParams = {
     admin: CONTRACTS.TREASURY_SAFE,
   };

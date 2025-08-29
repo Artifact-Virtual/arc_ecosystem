@@ -1,0 +1,168 @@
+```json
+{
+    "title": "ARC Ecosystem Contracts Registry",
+    "overview": "This registry provides a comprehensive index of all smart contracts in the ARC ecosystem, organized by category and functionality.",
+    "core_architecture": {
+        "dao_governance_layer": {
+            "core_dao_contracts": [
+                {"name": "ARCDAO.sol", "description": "Main DAO contract implementing constitutional governance"},
+                {"name": "ARCGovernor.sol", "description": "Custom governor with MACI integration and weighted voting"},
+                {"name": "ARCProposal.sol", "description": "Proposal management and lifecycle"},
+                {"name": "ARCTimelock.sol", "description": "Time-locked execution with per-topic delays"},
+                {"name": "ARCTreasury.sol", "description": "Treasury management and fund allocation"},
+                {"name": "ARCVoting.sol", "description": "Voting mechanics and tallying system"}
+            ],
+            "adam_constitutional_protocol": [
+                {"name": "AdamHost.sol", "description": "Wasm policy engine for constitutional enforcement"},
+                {"name": "AdamRegistry.sol", "description": "Policy chain management and storage"},
+                {"name": "functions.json", "description": "ADAM function definitions and configurations"}
+            ]
+        },
+        "token_system": {
+            "arcx_token": [
+                {"name": "ARCx.sol", "description": "Main governance token with ERC20Votes functionality"},
+                {"name": "interfaces/IERC20.sol", "description": "ERC20 interface for ARCx token"}
+            ],
+            "arcs_token": [
+                {"name": "ARCs.sol", "description": "Utility token for ecosystem interactions"},
+                {"name": "deployment_notes.md", "description": "Deployment configurations and notes"}
+            ],
+            "soulbound_token_system": [
+                {"name": "ARC_IdentitySBT.sol", "description": "Soulbound identity tokens with decay-weighted reputation"},
+                {"name": "ARC_Eligibility.sol", "description": "Topic-based eligibility with component weight calculation"},
+                {"name": "blueprint.md", "description": "SBT system design and specifications"}
+            ]
+        },
+        "defi_financial_infrastructure": {
+            "core_defi_contracts": [
+                {"name": "ARCxDutchAuction.sol", "description": "Dutch auction mechanism for token distribution"},
+                {"name": "ARCxSmartAirdrop.sol", "description": "Smart airdrop system with eligibility checks"},
+                {"name": "ARCx_MVC.sol", "description": "Multi-vesting contract for token distribution"},
+                {"name": "ARCSwap.sol", "description": "DEX integration and swap functionality"}
+            ],
+            "treasury_rewards": [
+                {"name": "TreasuryRewards.sol", "description": "Reward distribution and claiming"},
+                {"name": "PenaltyVault.sol", "description": "Penalty collection and management"},
+                {"name": "StakingVault.sol", "description": "Staking rewards and management"}
+            ],
+            "infrastructure": [
+                {"name": "ARCBridge.sol", "description": "Cross-chain bridge functionality"}
+            ]
+        },
+        "rwa_registry": {
+            "core_rwa_system": [
+                {"name": "ARC_RWARegistry.sol", "description": "Main RWA registration and attestation system"},
+                {"name": "IRWARegistry.sol", "description": "RWA registry interface definitions"},
+                {"name": "SlashingVault.sol", "description": "Operator slashing and recovery management"}
+            ]
+        },
+        "liquidity_pool_management": {
+            "uniswap_v4_integration": [
+                {"name": "NonfungiblePositionManager.sol", "description": "NFT position management for liquidity"},
+                {"name": "PositionManager.sol", "description": "Position management interface"},
+                {"name": "ProtocolFees.sol", "description": "Protocol fee collection and distribution"}
+            ],
+            "pool_interfaces": [
+                {"name": "IPoolManager.sol", "description": "Pool management interface"},
+                {"name": "IPositionManager.sol", "description": "Position management interface"},
+                {"name": "IWETH.sol", "description": "Wrapped Ether interface"}
+            ]
+        },
+        "interface_definitions": {
+            "dao_interfaces": [
+                {"name": "IARCDAO.sol", "description": "DAO contract interface"},
+                {"name": "IARCGovernor.sol", "description": "Governor contract interface"},
+                {"name": "IARCProposal.sol", "description": "Proposal interface"},
+                {"name": "IARCTimelock.sol", "description": "Timelock interface"},
+                {"name": "IARCTreasury.sol", "description": "Treasury interface"},
+                {"name": "IARCVoting.sol", "description": "Voting interface"},
+                {"name": "IEligibility.sol", "description": "Eligibility interface for governance"}
+            ],
+            "adam_interfaces": [
+                {"name": "IAdamHost.sol", "description": "ADAM host interface"},
+                {"name": "IAdamRegistry.sol", "description": "ADAM registry interface"}
+            ]
+        }
+    },
+    "contract_categories_summary": {
+        "governance_dao": {
+            "count": 12,
+            "details": [
+                "6 core DAO contracts",
+                "2 ADAM constitutional contracts",
+                "1 ADAM configuration file",
+                "3 interface definitions"
+            ]
+### **DeFi & Financial (8 contracts)**
+- 4 core DeFi contracts
+- 3 treasury/rewards contracts
+- 1 infrastructure contract
+
+### **RWA System (3 contracts)**
+- 1 main registry contract
+- 1 interface definition
+- 1 slashing vault contract
+
+### **Pool & Liquidity (6 contracts)**
+- 3 Uniswap V4 contracts
+- 3 pool management interfaces
+
+### **Total: 35 contracts and interfaces**
+
+## Integration Points
+
+### **Internal Dependencies**
+- **SBT System** → **Eligibility** → **Governor** (identity and voting weights)
+- **ADAM Protocol** → **Governor** (constitutional enforcement)
+- **RWA Registry** → **Slashing Vault** (operator staking and penalties)
+- **Treasury** → **Rewards** (fund distribution)
+
+### **External Integrations**
+- **Ethereum Attestation Service (EAS)** - Identity attestations
+- **Minimal Anti-Collusion Infrastructure (MACI)** - Private voting
+- **Uniswap V4** - Liquidity management
+- **OpenZeppelin** - Security and upgradeability
+
+## Security & Access Control
+
+### **Role-Based Access**
+- **ADMIN_ROLE** - Administrative functions
+- **CURATOR_ROLE** - Content curation and approval
+- **OPERATOR_ROLE** - RWA operations
+- **SLASHER_ROLE** - Penalty enforcement
+- **TREASURY_ROLE** - Fund management
+
+### **Upgrade Mechanisms**
+- **UUPS Upgradeable** - All major contracts support secure upgrades
+- **Timelock Control** - Time-locked execution for critical changes
+- **Multi-sig Safety** - Gnosis Safe integration for admin functions
+
+## Deployment & Configuration
+
+### **Network Support**
+- **Base (EVM)** - Primary deployment target
+- **Ethereum Mainnet** - Future expansion target
+- **Cross-chain** - Bridge-enabled for multi-chain support
+
+### **Configuration Files**
+- **hardhat.config.ts** - Development and deployment configuration
+- **functions.json** - ADAM protocol configurations
+- **deployment_notes.md** - Token deployment specifications
+
+## Development & Testing
+
+### **Test Coverage**
+- Comprehensive test suites for all major contracts
+- Integration tests for cross-contract interactions
+- Security testing with formal verification
+
+### **Documentation**
+- **README.md** - Project overview and setup
+- **blueprint.md** - System architecture specifications
+- **contracts_registry.md** - This comprehensive contract index
+
+---
+
+*Last updated: August 28, 2025*
+*Total Contracts: 35*
+*Architecture: Constitutional DAO with ADAM Protocol*

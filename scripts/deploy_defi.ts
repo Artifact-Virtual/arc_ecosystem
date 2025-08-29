@@ -4,6 +4,7 @@
 import { ethers } from "hardhat";
 import { CONTRACTS } from "./shared/constants";
 import { displayScriptHeader, validateNetwork, checkEthBalance, printValidationResults } from "./shared/utils";
+import { isContractDeployed } from "./shared/utils";
 
 interface DeploymentOptions {
   component: "staking" | "all";
@@ -58,6 +59,44 @@ async function main() {
 async function deployStakingVault(dryRun: boolean) {
   console.log("\n🏦 STAKING VAULT DEPLOYMENT");
   console.log("============================");
+
+  // CRITICAL: Check if ARCs token is deployed
+  if (CONTRACTS.ARCS_TOKEN === CONTRACTS.NULL_ADDRESS) {
+    console.log("❌ CRITICAL ERROR: ARCs token address not set in constants!");
+    console.log("   Please deploy ARCs token first and update CONTRACTS.ARCS_TOKEN");
+    console.log("   Run: npm run deploy:arcs");
+    return;
+  }
+
+  // Validate ARCx token exists
+  const arcxDeployed = await isContractDeployed(CONTRACTS.ARCX_TOKEN);
+  if (!arcxDeployed) {
+    console.log("❌ CRITICAL ERROR: ARCx token not found at specified address!");
+    console.log(`   Address: ${CONTRACTS.ARCX_TOKEN}`);
+    console.log("   Please verify ARCx token is deployed and address is correct");
+    return;
+  }
+
+  // Validate ARCs token exists
+  const arcsDeployed = await isContractDeployed(CONTRACTS.ARCS_TOKEN);
+  if (!arcsDeployed) {
+    console.log("❌ CRITICAL ERROR: ARCs token not found at specified address!");
+    console.log(`   Address: ${CONTRACTS.ARCS_TOKEN}`);
+    console.log("   Please verify ARCs token is deployed and address is correct");
+    return;
+  }
+
+  console.log("✅ ARCx token validated at:", CONTRACTS.ARCX_TOKEN);
+  console.log("✅ ARCs token validated at:", CONTRACTS.ARCS_TOKEN);
+
+  // Validate critical addresses are valid Ethereum addresses
+  if (!ethers.isAddress(CONTRACTS.TREASURY_SAFE)) {
+    console.log("❌ CRITICAL ERROR: Invalid treasury safe address!");
+    console.log(`   Address: ${CONTRACTS.TREASURY_SAFE}`);
+    return;
+  }
+
+  console.log("✅ Treasury Safe:", CONTRACTS.TREASURY_SAFE);
 
   const vaultParams = {
     arcxToken: CONTRACTS.ARCX_TOKEN,

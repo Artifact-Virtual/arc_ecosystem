@@ -4,6 +4,7 @@
 import { ethers } from "hardhat";
 import { CONTRACTS } from "./shared/constants";
 import { displayScriptHeader, validateNetwork, checkEthBalance, printValidationResults } from "./shared/utils";
+import { isContractDeployed } from "./shared/utils";
 
 interface DeploymentOptions {
   dryRun?: boolean;
@@ -63,6 +64,37 @@ async function deployIdentitySBT(dryRun: boolean) {
     eas: "0x4200000000000000000000000000000000000021", // EAS on Base
     schemaId: ethers.keccak256(ethers.toUtf8Bytes("ARC Identity Role(uint256 roleId,address recipient,uint64 expiresAt,string metadata)")),
   };
+
+  // Validate EAS contract exists
+  const easDeployed = await isContractDeployed(sbtParams.eas);
+  if (!easDeployed) {
+    console.log("❌ CRITICAL ERROR: EAS contract not found at specified address!");
+    console.log(`   Address: ${sbtParams.eas}`);
+    console.log("   Please verify EAS is deployed on Base network");
+    return;
+  }
+
+  // Validate critical addresses are valid Ethereum addresses
+  if (!ethers.isAddress(CONTRACTS.TREASURY_SAFE)) {
+    console.log("❌ CRITICAL ERROR: Invalid treasury safe address!");
+    console.log(`   Address: ${CONTRACTS.TREASURY_SAFE}`);
+    return;
+  }
+
+  if (!ethers.isAddress(CONTRACTS.ECOSYSTEM_SAFE)) {
+    console.log("❌ CRITICAL ERROR: Invalid ecosystem safe address!");
+    console.log(`   Address: ${CONTRACTS.ECOSYSTEM_SAFE}`);
+    return;
+  }
+
+  if (!ethers.isAddress(sbtParams.eas)) {
+    console.log("❌ CRITICAL ERROR: Invalid EAS address!");
+    console.log(`   Address: ${sbtParams.eas}`);
+    return;
+  }
+
+  console.log("✅ Treasury Safe:", CONTRACTS.TREASURY_SAFE);
+  console.log("✅ Ecosystem Safe:", CONTRACTS.ECOSYSTEM_SAFE);
 
   console.log("📋 SBT Configuration:");
   console.log(`- Timelock: ${sbtParams.timelock}`);
