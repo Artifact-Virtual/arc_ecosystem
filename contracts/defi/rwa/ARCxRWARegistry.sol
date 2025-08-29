@@ -76,7 +76,6 @@ contract ARCxRWARegistry is
         uint256 lastUpdated;
         bytes32 metadataHash;
         uint256 impactScore;
-        mapping(address => bool) attestations;
         address[] attesters;
     }
 
@@ -101,6 +100,7 @@ contract ARCxRWARegistry is
     // State variables
     mapping(bytes32 => RWASchema) public rwaSchemas;
     mapping(bytes32 => RWARecord) public rwaRecords;
+    mapping(bytes32 => mapping(address => bool)) public rwaAttestations;
     mapping(address => OperatorStake) public operatorStakes;
     mapping(bytes32 => ImpactFunction) public impactFunctions;
 
@@ -239,9 +239,9 @@ contract ARCxRWARegistry is
     function attestRWA(bytes32 rwaId, bool approved) external onlyRole(OPERATOR_ROLE) {
         RWARecord storage rwa = rwaRecords[rwaId];
         require(rwa.registeredAt != 0, "ARCxRWARegistry: RWA not found");
-        require(!rwa.attestations[msg.sender], "ARCxRWARegistry: Already attested");
+        require(!rwaAttestations[rwaId][msg.sender], "ARCxRWARegistry: Already attested");
 
-        rwa.attestations[msg.sender] = approved;
+        rwaAttestations[rwaId][msg.sender] = approved;
         rwa.attesters.push(msg.sender);
 
         emit RWAAttested(rwaId, msg.sender, approved);
@@ -361,7 +361,7 @@ contract ARCxRWARegistry is
         // In production, this would use the impact function
         uint256 attestations = 0;
         for (uint256 i = 0; i < rwa.attesters.length; i++) {
-            if (rwa.attestations[rwa.attesters[i]]) {
+            if (rwaAttestations[rwaId][rwa.attesters[i]]) {
                 attestations++;
             }
         }
@@ -449,34 +449,55 @@ contract ARCxRWARegistry is
      */
     function _initializeDefaultSchemas() internal {
         // Energy Credits Schema
+        string[] memory energyFields = new string[](5);
+        energyFields[0] = "energyType";
+        energyFields[1] = "quantity";
+        energyFields[2] = "vintage";
+        energyFields[3] = "location";
+        energyFields[4] = "certifier";
+
         rwaSchemas[keccak256("ENERGY_CREDITS")] = RWASchema({
             schemaId: keccak256("ENERGY_CREDITS"),
             rwaType: RWAType.ENERGY_CREDITS,
             name: "Energy Credits",
             description: "Renewable energy credit certificates",
-            requiredFields: ["energyType", "quantity", "vintage", "location", "certifier"],
+            requiredFields: energyFields,
             active: true,
             createdAt: block.timestamp
         });
 
         // Carbon Credits Schema
+        string[] memory carbonFields = new string[](5);
+        carbonFields[0] = "reductionType";
+        carbonFields[1] = "quantity";
+        carbonFields[2] = "vintage";
+        carbonFields[3] = "methodology";
+        carbonFields[4] = "verifier";
+
         rwaSchemas[keccak256("CARBON_CREDITS")] = RWASchema({
             schemaId: keccak256("CARBON_CREDITS"),
             rwaType: RWAType.CARBON_CREDITS,
             name: "Carbon Credits",
             description: "Carbon emission reduction credits",
-            requiredFields: ["reductionType", "quantity", "vintage", "methodology", "verifier"],
+            requiredFields: carbonFields,
             active: true,
             createdAt: block.timestamp
         });
 
         // Real Estate Schema
+        string[] memory realEstateFields = new string[](5);
+        realEstateFields[0] = "propertyType";
+        realEstateFields[1] = "location";
+        realEstateFields[2] = "valuation";
+        realEstateFields[3] = "ownership";
+        realEstateFields[4] = "appraisal";
+
         rwaSchemas[keccak256("REAL_ESTATE")] = RWASchema({
             schemaId: keccak256("REAL_ESTATE"),
             rwaType: RWAType.REAL_ESTATE,
             name: "Real Estate",
             description: "Real property assets",
-            requiredFields: ["propertyType", "location", "valuation", "ownership", "appraisal"],
+            requiredFields: realEstateFields,
             active: true,
             createdAt: block.timestamp
         });

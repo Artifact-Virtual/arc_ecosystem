@@ -1,0 +1,629 @@
+{
+  "name": "ADAM Protocol Manifest",
+  "version": "1.0.0",
+  "description": "Comprehensive manifest for ADAM Constitutional Policy Engine - AI-powered hybrid on/off-chain governance system",
+  "author": "ARC Ecosystem",
+  "created": "2025-08-28",
+  "lastUpdated": "2025-08-28",
+
+  "adam": {
+    "description": "ADAM (Autonomous Decentralized Artificial Mind) - Constitutional Policy Engine",
+    "architecture": "Hybrid On/Off-Chain Intelligence System",
+    "capabilities": [
+      "Deterministic Wasm Policy Evaluation",
+      "Constitutional Program Chaining",
+      "Fuel-Metered Execution",
+      "Multi-Layer Security Validation",
+      "AI-Powered Policy Optimization",
+      "Real-time Governance Monitoring",
+      "Emergency Response Automation"
+    ],
+    "intelligence": {
+      "type": "Hybrid AI",
+      "onChain": "Deterministic Policy Evaluation",
+      "offChain": "AI Optimization & Learning",
+      "integration": "Secure Oracle Network"
+    }
+  },
+
+  "contracts": {
+    "adamHost": {
+      "address": "TBD",
+      "name": "AdamHost",
+      "description": "Core constitutional policy evaluation engine",
+      "functions": {
+        "evaluate": {
+          "signature": "evaluate(bytes4,uint256,uint256,bytes,bytes)",
+          "description": "Evaluate constitutional policies for governance proposals",
+          "parameters": {
+            "hook": "Policy hook (onSubmit, onExecute, etc.)",
+            "topicId": "Governance topic identifier",
+            "proposalId": "Unique proposal identifier",
+            "proofBundle": "CBOR-encoded proof bundle with attestations",
+            "diff": "Proposed parameter changes"
+          },
+          "returns": {
+            "verdict": "Policy verdict (ALLOW, DENY, AMEND, REQUIRE_2FA)",
+            "newDiff": "Amended diff if verdict is AMEND"
+          },
+          "gasLimit": "2M",
+          "criticality": "HIGH"
+        },
+        "satisfy2FA": {
+          "signature": "satisfy2FA(uint256,bytes4,bytes)",
+          "description": "Satisfy 2FA requirement for high-security operations",
+          "parameters": {
+            "proposalId": "Proposal requiring 2FA",
+            "hook": "Policy hook",
+            "signature": "Cryptographic signature"
+          },
+          "criticality": "HIGH"
+        },
+        "is2FASatisfied": {
+          "signature": "is2FASatisfied(uint256,bytes4)",
+          "description": "Check if 2FA requirement is satisfied",
+          "parameters": {
+            "proposalId": "Proposal identifier",
+            "hook": "Policy hook"
+          },
+          "returns": "bool",
+          "criticality": "MEDIUM"
+        },
+        "emergencyPause": {
+          "signature": "emergencyPause()",
+          "description": "Emergency pause of constitutional evaluation",
+          "roleRequired": "EMERGENCY_ROLE",
+          "criticality": "CRITICAL"
+        },
+        "emergencyUnpause": {
+          "signature": "emergencyUnpause()",
+          "description": "Resume constitutional evaluation after emergency",
+          "roleRequired": "ADMIN_ROLE",
+          "criticality": "HIGH"
+        },
+        "updateConfig": {
+          "signature": "updateConfig(uint256,uint256,uint256,uint256)",
+          "description": "Update ADAM configuration parameters",
+          "parameters": {
+            "maxFuelPerPolicy": "Maximum fuel per policy evaluation",
+            "maxChainLength": "Maximum policy chain length",
+            "fuelPrice": "Fuel pricing for metering",
+            "emergencyThreshold": "Emergency pause threshold"
+          },
+          "roleRequired": "ADMIN_ROLE",
+          "criticality": "HIGH"
+        },
+        "getFuelUsed": {
+          "signature": "getFuelUsed(uint256,bytes4)",
+          "description": "Get fuel consumption for policy evaluation",
+          "parameters": {
+            "topicId": "Topic identifier",
+            "hook": "Policy hook"
+          },
+          "returns": "uint256",
+          "criticality": "LOW"
+        },
+        "getPending2FA": {
+          "signature": "getPending2FA(bytes32)",
+          "description": "Get pending 2FA request details",
+          "parameters": {
+            "faHash": "2FA request hash"
+          },
+          "returns": "tuple",
+          "criticality": "MEDIUM"
+        }
+      },
+      "events": {
+        "VerdictEmitted": {
+          "description": "Emitted when policy verdict is determined",
+          "parameters": ["proposalId", "hook", "verdict", "proofHash", "newDiff"]
+        },
+        "Pending2FA": {
+          "description": "Emitted when 2FA is required",
+          "parameters": ["proposalId", "hook", "faHash"]
+        },
+        "Satisfied2FA": {
+          "description": "Emitted when 2FA is satisfied",
+          "parameters": ["proposalId", "hook", "faHash"]
+        }
+      }
+    },
+
+    "adamRegistry": {
+      "address": "TBD",
+      "name": "AdamRegistry",
+      "description": "Policy chain management and Wasm program registry",
+      "functions": {
+        "setPolicy": {
+          "signature": "setPolicy(uint256,bytes4,bytes32,uint256,bytes)",
+          "description": "Set constitutional policy for topic-hook combination",
+          "parameters": {
+            "topicId": "Governance topic",
+            "hook": "Policy hook",
+            "policyId": "Policy identifier",
+            "position": "Position in policy chain",
+            "wasmCode": "Wasm bytecode"
+          },
+          "roleRequired": "ADMIN_ROLE",
+          "criticality": "HIGH"
+        },
+        "removePolicy": {
+          "signature": "removePolicy(uint256,bytes4,bytes32)",
+          "description": "Remove policy from topic-hook chain",
+          "parameters": {
+            "topicId": "Governance topic",
+            "hook": "Policy hook",
+            "policyId": "Policy to remove"
+          },
+          "roleRequired": "ADMIN_ROLE",
+          "criticality": "HIGH"
+        },
+        "approveWasmHash": {
+          "signature": "approveWasmHash(bytes32)",
+          "description": "Approve Wasm hash for policy execution",
+          "parameters": {
+            "wasmHash": "Hash of approved Wasm code"
+          },
+          "roleRequired": "ADMIN_ROLE",
+          "criticality": "HIGH"
+        },
+        "revokeWasmHash": {
+          "signature": "revokeWasmHash(bytes32)",
+          "description": "Revoke Wasm hash approval",
+          "parameters": {
+            "wasmHash": "Hash to revoke"
+          },
+          "roleRequired": "ADMIN_ROLE",
+          "criticality": "HIGH"
+        },
+        "policyChainOf": {
+          "signature": "policyChainOf(uint256,bytes4)",
+          "description": "Get policy chain for topic-hook",
+          "parameters": {
+            "topicId": "Governance topic",
+            "hook": "Policy hook"
+          },
+          "returns": "bytes32[]",
+          "criticality": "LOW"
+        },
+        "getPolicyInfo": {
+          "signature": "getPolicyInfo(bytes32)",
+          "description": "Get detailed policy information",
+          "parameters": {
+            "policyId": "Policy identifier"
+          },
+          "returns": "tuple",
+          "criticality": "LOW"
+        },
+        "isPolicyInChain": {
+          "signature": "isPolicyInChain(uint256,bytes4,bytes32)",
+          "description": "Check if policy is in chain",
+          "parameters": {
+            "topicId": "Topic identifier",
+            "hook": "Policy hook",
+            "policyId": "Policy to check"
+          },
+          "returns": "bool",
+          "criticality": "LOW"
+        },
+        "getChainLength": {
+          "signature": "getChainLength(uint256,bytes4)",
+          "description": "Get length of policy chain",
+          "parameters": {
+            "topicId": "Topic identifier",
+            "hook": "Policy hook"
+          },
+          "returns": "uint256",
+          "criticality": "LOW"
+        },
+        "getAllChains": {
+          "signature": "getAllChains()",
+          "description": "Get all policy chains",
+          "returns": "tuple",
+          "criticality": "LOW"
+        }
+      },
+      "events": {
+        "PolicySet": {
+          "description": "Emitted when policy is set",
+          "parameters": ["topicId", "hook", "policyId", "position"]
+        },
+        "PolicyRemoved": {
+          "description": "Emitted when policy is removed",
+          "parameters": ["topicId", "hook", "policyId"]
+        },
+        "WasmHashApproved": {
+          "description": "Emitted when Wasm hash is approved",
+          "parameters": ["wasmHash"]
+        },
+        "WasmHashRevoked": {
+          "description": "Emitted when Wasm hash is revoked",
+          "parameters": ["wasmHash"]
+        }
+      }
+    }
+  },
+
+  "apis": {
+    "rest": {
+      "baseUrl": "https://api.arc-ecosystem.com/adam",
+      "endpoints": {
+        "evaluate": {
+          "path": "/evaluate",
+          "method": "POST",
+          "description": "Evaluate constitutional policies",
+          "parameters": {
+            "hook": "string",
+            "topicId": "number",
+            "proposalId": "number",
+            "proofBundle": "string (base64)",
+            "diff": "string (base64)"
+          },
+          "response": {
+            "verdict": "number",
+            "newDiff": "string (base64)",
+            "fuelUsed": "number",
+            "executionTime": "number"
+          }
+        },
+        "policyChains": {
+          "path": "/policy-chains",
+          "method": "GET",
+          "description": "Get all policy chains",
+          "response": {
+            "chains": "object",
+            "lastUpdated": "string"
+          }
+        },
+        "analytics": {
+          "path": "/analytics",
+          "method": "GET",
+          "description": "Get ADAM protocol analytics",
+          "response": {
+            "totalEvaluations": "number",
+            "averageFuelUsed": "number",
+            "policyHits": "object",
+            "errorRate": "number"
+          }
+        },
+        "wasmUpload": {
+          "path": "/wasm/upload",
+          "method": "POST",
+          "description": "Upload Wasm constitutional program",
+          "parameters": {
+            "wasmCode": "string (base64)",
+            "metadata": "object"
+          },
+          "response": {
+            "wasmHash": "string",
+            "status": "string"
+          }
+        }
+      }
+    },
+    "websocket": {
+      "url": "wss://ws.arc-ecosystem.com/adam",
+      "events": {
+        "policyEvaluation": {
+          "description": "Real-time policy evaluation events",
+          "data": {
+            "proposalId": "number",
+            "verdict": "number",
+            "fuelUsed": "number",
+            "timestamp": "string"
+          }
+        },
+        "chainUpdate": {
+          "description": "Policy chain modification events",
+          "data": {
+            "topicId": "number",
+            "hook": "string",
+            "action": "string",
+            "timestamp": "string"
+          }
+        }
+      }
+    },
+    "graphql": {
+      "url": "https://graphql.arc-ecosystem.com/adam",
+      "queries": {
+        "policyEvaluationHistory": {
+          "description": "Query policy evaluation history",
+          "parameters": {
+            "proposalId": "ID",
+            "limit": "Int",
+            "offset": "Int"
+          }
+        },
+        "policyChains": {
+          "description": "Query policy chains with metadata",
+          "parameters": {
+            "topicId": "ID",
+            "includeInactive": "Boolean"
+          }
+        }
+      }
+    }
+  },
+
+  "governanceMatrix": {
+    "topics": {
+      "TREASURY": {
+        "id": 0,
+        "description": "Treasury management and fund allocation",
+        "hooks": ["onSubmit", "onExecute", "onCancel"],
+        "requiredPolicies": ["BudgetValidation", "FundSafety", "ImpactAssessment"],
+        "quorum": "66%",
+        "supermajority": "80%"
+      },
+      "PARAMS": {
+        "id": 1,
+        "description": "Protocol parameter modifications",
+        "hooks": ["onSubmit", "onExecute", "onCancel"],
+        "requiredPolicies": ["ParameterValidation", "ImpactAnalysis", "SecurityAudit"],
+        "quorum": "75%",
+        "supermajority": "90%"
+      },
+      "ENERGY": {
+        "id": 2,
+        "description": "Energy credit and sustainability initiatives",
+        "hooks": ["onSubmit", "onExecute", "onCancel"],
+        "requiredPolicies": ["EnvironmentalImpact", "SustainabilityMetrics", "CarbonAccounting"],
+        "quorum": "60%",
+        "supermajority": "75%"
+      },
+      "CARBON": {
+        "id": 3,
+        "description": "Carbon credit trading and verification",
+        "hooks": ["onSubmit", "onExecute", "onCancel"],
+        "requiredPolicies": ["CarbonVerification", "MarketManipulation", "AdditionalityCheck"],
+        "quorum": "70%",
+        "supermajority": "85%"
+      },
+      "GRANTS": {
+        "id": 4,
+        "description": "Grant allocation and milestone tracking",
+        "hooks": ["onSubmit", "onExecute", "onCancel"],
+        "requiredPolicies": ["GrantEligibility", "MilestoneValidation", "ImpactMeasurement"],
+        "quorum": "55%",
+        "supermajority": "70%"
+      }
+    },
+    "hooks": {
+      "onSubmit": {
+        "description": "Proposal submission validation",
+        "fuelLimit": 100000,
+        "timeout": "30s",
+        "required": true
+      },
+      "onExecute": {
+        "description": "Proposal execution validation",
+        "fuelLimit": 200000,
+        "timeout": "60s",
+        "required": true
+      },
+      "onCancel": {
+        "description": "Proposal cancellation validation",
+        "fuelLimit": 50000,
+        "timeout": "15s",
+        "required": false
+      }
+    },
+    "policies": {
+      "BudgetValidation": {
+        "description": "Validates treasury budget allocations",
+        "wasmHash": "TBD",
+        "fuelCost": 25000,
+        "version": "1.0.0"
+      },
+      "FundSafety": {
+        "description": "Ensures fund safety and prevents exploits",
+        "wasmHash": "TBD",
+        "fuelCost": 35000,
+        "version": "1.0.0"
+      },
+      "ParameterValidation": {
+        "description": "Validates protocol parameter changes",
+        "wasmHash": "TBD",
+        "fuelCost": 30000,
+        "version": "1.0.0"
+      },
+      "SecurityAudit": {
+        "description": "Performs security audit on changes",
+        "wasmHash": "TBD",
+        "fuelCost": 50000,
+        "version": "1.0.0"
+      },
+      "EnvironmentalImpact": {
+        "description": "Assesses environmental impact",
+        "wasmHash": "TBD",
+        "fuelCost": 40000,
+        "version": "1.0.0"
+      },
+      "CarbonVerification": {
+        "description": "Verifies carbon credit authenticity",
+        "wasmHash": "TBD",
+        "fuelCost": 45000,
+        "version": "1.0.0"
+      }
+    }
+  },
+
+  "monitoring": {
+    "metrics": {
+      "policyEvaluations": {
+        "description": "Total number of policy evaluations",
+        "type": "counter",
+        "labels": ["topic", "hook", "verdict"]
+      },
+      "fuelConsumption": {
+        "description": "Total fuel consumed",
+        "type": "counter",
+        "labels": ["topic", "hook"]
+      },
+      "evaluationLatency": {
+        "description": "Policy evaluation latency",
+        "type": "histogram",
+        "buckets": ["0.1", "0.5", "1.0", "2.0", "5.0"]
+      },
+      "errorRate": {
+        "description": "Policy evaluation error rate",
+        "type": "gauge",
+        "labels": ["error_type"]
+      },
+      "wasmExecutionTime": {
+        "description": "Wasm program execution time",
+        "type": "histogram",
+        "buckets": ["0.01", "0.05", "0.1", "0.5", "1.0"]
+      }
+    },
+    "alerts": {
+      "highFuelConsumption": {
+        "condition": "fuel_consumption > 1000000",
+        "severity": "warning",
+        "message": "High fuel consumption detected"
+      },
+      "policyEvaluationFailure": {
+        "condition": "error_rate > 0.05",
+        "severity": "error",
+        "message": "Policy evaluation failure rate exceeded threshold"
+      },
+      "wasmTimeout": {
+        "condition": "wasm_execution_time > 5.0",
+        "severity": "critical",
+        "message": "Wasm execution timeout"
+      }
+    },
+    "dashboards": {
+      "main": {
+        "title": "ADAM Protocol Overview",
+        "panels": [
+          "Policy Evaluation Rate",
+          "Fuel Consumption Trends",
+          "Error Rate by Topic",
+          "Average Evaluation Latency",
+          "Policy Chain Performance"
+        ]
+      },
+      "security": {
+        "title": "ADAM Security Monitoring",
+        "panels": [
+          "2FA Satisfaction Rate",
+          "Emergency Pause Events",
+          "Policy Modification Frequency",
+          "Wasm Hash Validation Status"
+        ]
+      }
+    }
+  },
+
+  "aiIntegration": {
+    "description": "AI-powered optimization and learning capabilities",
+    "features": {
+      "policyOptimization": {
+        "description": "AI-optimized policy chains",
+        "input": "Historical evaluation data",
+        "output": "Optimized policy ordering",
+        "frequency": "Daily"
+      },
+      "anomalyDetection": {
+        "description": "Detect anomalous governance proposals",
+        "input": "Proposal patterns and metadata",
+        "output": "Anomaly scores and alerts",
+        "frequency": "Real-time"
+      },
+      "predictiveAnalytics": {
+        "description": "Predict governance outcomes",
+        "input": "Historical voting data",
+        "output": "Success probability predictions",
+        "frequency": "Per proposal"
+      },
+      "adaptiveSecurity": {
+        "description": "Adaptive security thresholds",
+        "input": "Network conditions and threat intelligence",
+        "output": "Dynamic security parameters",
+        "frequency": "Continuous"
+      }
+    },
+    "models": {
+      "constitutionalReasoning": {
+        "type": "Large Language Model",
+        "purpose": "Constitutional interpretation",
+        "trainingData": "Legal texts, governance precedents",
+        "deployment": "Off-chain with on-chain validation"
+      },
+      "policyOptimization": {
+        "type": "Reinforcement Learning",
+        "purpose": "Optimize policy evaluation order",
+        "trainingData": "Historical evaluation metrics",
+        "deployment": "Off-chain optimization engine"
+      }
+    }
+  },
+
+  "emergencyProtocols": {
+    "description": "Emergency response and recovery procedures",
+    "triggers": {
+      "securityBreach": {
+        "condition": "Critical vulnerability detected",
+        "response": "Immediate emergency pause",
+        "recovery": "Multi-sig approval required"
+      },
+      "highErrorRate": {
+        "condition": "Error rate > 10%",
+        "response": "Automatic throttling",
+        "recovery": "Gradual load increase"
+      },
+      "fuelExhaustion": {
+        "condition": "Fuel reserves < 10%",
+        "response": "Emergency fuel allocation",
+        "recovery": "Treasury proposal required"
+      }
+    },
+    "recoveryProcedures": {
+      "systemReset": {
+        "description": "Complete system reset",
+        "steps": [
+          "Emergency pause activation",
+          "State backup creation",
+          "Clean state initialization",
+          "Gradual policy restoration"
+        ],
+        "estimatedTime": "4-6 hours"
+      },
+      "policyRollback": {
+        "description": "Rollback to previous policy state",
+        "steps": [
+          "Identify rollback point",
+          "Policy chain restoration",
+          "State synchronization",
+          "Validation testing"
+        ],
+        "estimatedTime": "2-3 hours"
+      }
+    }
+  },
+
+  "futureEnhancements": {
+    "zkProofs": {
+      "description": "Zero-knowledge proofs for private policy evaluation",
+      "timeline": "Q1 2026",
+      "impact": "Enhanced privacy for sensitive governance"
+    },
+    "multiChain": {
+      "description": "Cross-chain constitutional governance",
+      "timeline": "Q2 2026",
+      "impact": "Unified governance across multiple blockchains"
+    },
+    "aiGovernance": {
+      "description": "Fully autonomous AI governance decisions",
+      "timeline": "Q3 2026",
+      "impact": "AI-assisted constitutional interpretation"
+    },
+    "quantumResistance": {
+      "description": "Quantum-resistant cryptographic primitives",
+      "timeline": "Q4 2026",
+      "impact": "Future-proof security architecture"
+    }
+  }
+}

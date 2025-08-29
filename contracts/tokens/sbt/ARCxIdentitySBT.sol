@@ -9,6 +9,8 @@ import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/ECDSAUpgradeable.sol";
 import "@prb/math/src/UD60x18.sol";
+import { wrap, unwrap } from "@prb/math/src/ud60x18/Casting.sol";
+import { exp } from "@prb/math/src/ud60x18/Math.sol";
 
 /**
  * @title ARCx Identity SBT - Soulbound Identity Tokens
@@ -31,7 +33,7 @@ contract ARCxIdentitySBT is
     PausableUpgradeable,
     ERC721Upgradeable
 {
-    using UD60x18 for uint256;
+    // using UD60x18 for uint256;
     using ECDSAUpgradeable for bytes32;
 
     bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
@@ -438,9 +440,12 @@ contract ARCxIdentitySBT is
         }
 
         // Calculate exponential decay: exp(-Δ/T)
-        uint256 decayFactor = UD60x18.exp(
-            (timeDelta * 1e18 / decay_T_seconds) * (-1e18)
-        );
+        uint256 exponent = (timeDelta * 1e18) / decay_T_seconds;
+        UD60x18 decayFactorUD = exp(wrap(exponent));
+        uint256 decayFactor = unwrap(decayFactorUD);
+
+        // Apply negative exponent by taking reciprocal
+        decayFactor = (1e18 * 1e18) / decayFactor;
 
         uint256 decayedWeight = (roleRec.weightWad * decayFactor) / 1e18;
 
