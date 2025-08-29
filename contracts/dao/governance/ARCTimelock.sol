@@ -185,7 +185,7 @@ contract ARCTimelock is
         bytes32 predecessor,
         bytes32 salt,
         string calldata description
-    ) external nonReentrant onlyRole(PROPOSER_ROLE) returns (bytes32) {
+    ) public nonReentrant onlyRole(PROPOSER_ROLE) returns (bytes32) {
         require(targets.length == values.length && values.length == datas.length, "Invalid operation parameters");
         require(targets.length > 0, "Empty operation");
         require(delay >= config.minDelay && delay <= config.maxDelay, "Invalid delay");
@@ -241,16 +241,25 @@ contract ARCTimelock is
         batchCount++;
         bytes32 batchId = keccak256(abi.encodePacked(msg.sender, block.timestamp, batchCount));
 
-        bytes32[] memory operationIds = new bytes32[](targets.length);
+        bytes32[] memory localOperationIds = new bytes32[](targets.length);
 
         for (uint256 i = 0; i < targets.length; i++) {
-            bytes32 operationId = schedule(targets[i], values[i], datas[i], delay, predecessors[i], salts[i], "");
-            operationIds[i] = operationId;
+            address[] memory singleTarget = new address[](1);
+            singleTarget[0] = targets[i];
+            
+            uint256[] memory singleValue = new uint256[](1);
+            singleValue[0] = values[i];
+            
+            bytes[] memory singleData = new bytes[](1);
+            singleData[0] = datas[i];
+            
+            bytes32 operationId = schedule(singleTarget, singleValue, singleData, delay, predecessors[i], salts[i], "");
+            localOperationIds[i] = operationId;
         }
 
         OperationBatch storage batch = operationBatches[batchId];
         batch.batchId = batchId;
-        batch.operationIds = operationIds;
+        batch.operationIds = localOperationIds;
         batch.proposer = msg.sender;
         batch.timestamp = block.timestamp;
         batch.delay = delay;
@@ -448,7 +457,7 @@ contract ARCTimelock is
      * @dev Get batch details
      */
     function getBatch(bytes32 batchId) external view returns (
-        bytes32[] memory operationIds,
+        bytes32[] memory localOperationIds,
         address proposer,
         uint256 timestamp,
         bool executed,
@@ -521,5 +530,4 @@ contract ARCTimelock is
      * @dev Authorize contract upgrades
      */
     function _authorizeUpgrade(address newImplementation) internal override onlyRole(ADMIN_ROLE) {}
-}</content>
-<parameter name="filePath">L:\devops\_sandbox\Xchange\contracts\dao\governance\ARCTimelock.sol
+}

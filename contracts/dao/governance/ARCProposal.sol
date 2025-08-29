@@ -222,7 +222,7 @@ contract ARCProposal is
         uint256 estimatedCost,
         uint256 estimatedTimeline,
         string[] calldata tags
-    ) external nonReentrant returns (uint256) {
+    ) public nonReentrant returns (uint256) {
         require(bytes(title).length > 0, "Empty title");
         require(bytes(description).length > 0, "Empty description");
         require(targets.length == values.length && values.length == datas.length, "Invalid proposal parameters");
@@ -610,5 +610,4 @@ contract ARCProposal is
      * @dev Authorize contract upgrades
      */
     function _authorizeUpgrade(address newImplementation) internal override onlyRole(ADMIN_ROLE) {}
-}</content>
-<parameter name="filePath">L:\devops\_sandbox\Xchange\contracts\dao\governance\ARCProposal.sol
+}

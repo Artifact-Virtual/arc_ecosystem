@@ -464,5 +464,4 @@ contract ARCDAO is
      * @dev Authorize contract upgrades
      */
     function _authorizeUpgrade(address newImplementation) internal override onlyRole(ADMIN_ROLE) {}
-}</content>
-<parameter name="filePath">L:\devops\_sandbox\Xchange\contracts\dao\governance\ARCDAO.sol
+}

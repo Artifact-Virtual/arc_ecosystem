@@ -232,7 +232,7 @@ contract ARCVoting is
         uint256[] calldata choices,
         uint256[] calldata weights,
         uint256 convictionAmount
-    ) external nonReentrant {
+    ) public nonReentrant {
         VotingSession storage session = votingSessions[sessionId];
         require(block.timestamp >= session.startTime, "Voting not started");
         require(block.timestamp <= session.endTime, "Voting ended");
@@ -335,15 +335,15 @@ contract ARCVoting is
      * @dev Delegate voting power
      */
     function delegate(
-        address delegate,
+        address delegateAddress,
         uint256 amount,
         uint256 conviction,
         uint256 duration,
         string calldata reason
     ) external nonReentrant returns (uint256) {
         require(config.delegationEnabled, "Delegation disabled");
-        require(delegate != address(0), "Cannot delegate to zero address");
-        require(delegate != msg.sender, "Cannot delegate to self");
+        require(delegateAddress != address(0), "Cannot delegate to zero address");
+        require(delegateAddress != msg.sender, "Cannot delegate to self");
         require(amount > 0, "Cannot delegate zero amount");
 
         uint256 balance = governanceToken.balanceOf(msg.sender);
@@ -354,7 +354,7 @@ contract ARCVoting is
 
         Delegation memory newDelegation = Delegation({
             delegator: msg.sender,
-            delegate: delegate,
+            delegate: delegateAddress,
             amount: amount,
             conviction: conviction,
             startTime: block.timestamp,
@@ -370,9 +370,9 @@ contract ARCVoting is
         governanceToken.transferFrom(msg.sender, address(this), amount);
 
         // Update voting power
-        votingPower[delegate] += amount;
+        votingPower[delegateAddress] += amount;
 
-        emit DelegationCreated(msg.sender, delegate, amount, delegationId);
+        emit DelegationCreated(msg.sender, delegateAddress, amount, delegationId);
 
         return delegationId;
     }
@@ -430,11 +430,11 @@ contract ARCVoting is
     function _processRankedChoice(
         VotingSession storage session,
         uint256[] calldata choices,
-        uint256 votingPower
+        uint256 userVotingPower
     ) internal {
         // Simplified ranked choice - in production would implement full IRV
         for (uint256 i = 0; i < choices.length; i++) {
-            session.choiceVotes[choices[i]] += votingPower / (i + 1);
+            session.choiceVotes[choices[i]] += userVotingPower / (i + 1);
         }
     }
 
@@ -555,5 +555,4 @@ contract ARCVoting is
      * @dev Authorize contract upgrades
      */
     function _authorizeUpgrade(address newImplementation) internal override onlyRole(ADMIN_ROLE) {}
-}</content>
-<parameter name="filePath">L:\devops\_sandbox\Xchange\contracts\dao\governance\ARCVoting.sol
+}

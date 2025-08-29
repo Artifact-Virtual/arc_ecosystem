@@ -540,9 +540,9 @@ contract ARCGovernor is
     function getAnalytics() external view returns (
         uint256 totalProposals,
         uint256 activeProposals,
-        uint256 executedProposals,
+        uint256 executedProposalsCount,
         uint256 totalVotesCast,
-        uint256 totalDelegated
+        uint256 totalDelegatedAmount
     ) {
         return (
             analytics.totalProposals,
@@ -571,5 +571,4 @@ contract ARCGovernor is
      * @dev Authorize contract upgrades
      */
     function _authorizeUpgrade(address newImplementation) internal override onlyRole(ADMIN_ROLE) {}
-}</content>
-<parameter name="filePath">L:\devops\_sandbox\Xchange\contracts\dao\governance\ARCGovernor.sol
+}
