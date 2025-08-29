@@ -70,7 +70,9 @@ npm run deploy:defi-dry
 3. Commit changes immediately to avoid confusion
 4. Verify addresses on BaseScan before marking as deployed
 
----
+# ==========================================================================================
 All addresses above are for reference only. No private keys are included.
 For any new contract or wallet, update this file immediately to avoid confusion.
-Last updated: August 29, 2025
+
+
+_Last updated: August 29, 2025_
