@@ -234,17 +234,50 @@ contract ARCVoting is
         uint256 convictionAmount
     ) public nonReentrant {
         VotingSession storage session = votingSessions[sessionId];
-        require(block.timestamp >= session.startTime, "Voting not started");
-        require(block.timestamp <= session.endTime, "Voting ended");
+        require(block.timestamp >= session.startTime && block.timestamp <= session.endTime, "Voting not active");
         require(!session.finalized, "Session finalized");
 
-        Vote storage vote = session.votes[msg.sender];
-        require(!vote.hasVoted, "Already voted");
+        Vote storage existingVote = session.votes[msg.sender];
+        require(!existingVote.hasVoted, "Already voted");
 
         uint256 voterPower = getVotingPower(msg.sender);
         require(voterPower >= config.minVotingPower, "Insufficient voting power");
 
         // Process vote based on type
+        _processVoteByType(session, choices, weights, convictionAmount, voterPower, sessionId);
+
+        // Record vote
+        existingVote.voter = msg.sender;
+        existingVote.proposalId = session.proposalId;
+        existingVote.votingType = session.votingType;
+        existingVote.choices = choices;
+        existingVote.weights = weights;
+        existingVote.conviction = convictionAmount;
+        existingVote.votingPower = voterPower;
+        existingVote.timestamp = block.timestamp;
+        existingVote.hasVoted = true;
+
+        session.totalVotingPower += voterPower;
+
+        // Update reputation and analytics
+        _updateReputation(msg.sender, 1);
+        analytics.totalVotes++;
+        analytics.totalVotingPower += voterPower;
+
+        emit VoteCast(session.proposalId, msg.sender, session.votingType, voterPower, convictionAmount);
+    }
+
+    /**
+     * @dev Process vote based on voting type
+     */
+    function _processVoteByType(
+        VotingSession storage session,
+        uint256[] calldata choices,
+        uint256[] calldata weights,
+        uint256 convictionAmount,
+        uint256 voterPower,
+        uint256 sessionId
+    ) internal {
         if (session.votingType == VotingType.SingleChoice) {
             require(choices.length == 1, "Single choice required");
             session.choiceWeights[choices[0]] += voterPower;
@@ -262,28 +295,6 @@ contract ARCVoting is
             require(choices.length == weights.length, "Choices and weights mismatch");
             _processWeightedVote(session, choices, weights, voterPower);
         }
-
-        // Record vote
-        vote.voter = msg.sender;
-        vote.proposalId = session.proposalId;
-        vote.votingType = session.votingType;
-        vote.choices = choices;
-        vote.weights = weights;
-        vote.conviction = convictionAmount;
-        vote.votingPower = voterPower;
-        vote.timestamp = block.timestamp;
-        vote.hasVoted = true;
-
-        session.totalVotingPower += voterPower;
-
-        // Update reputation
-        _updateReputation(msg.sender, 1);
-
-        // Update analytics
-        analytics.totalVotes++;
-        analytics.totalVotingPower += voterPower;
-
-        emit VoteCast(session.proposalId, msg.sender, session.votingType, voterPower, convictionAmount);
     }
 
     /**

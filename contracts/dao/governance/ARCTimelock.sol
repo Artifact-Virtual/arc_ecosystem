@@ -178,13 +178,13 @@ contract ARCTimelock is
      * @dev Schedule a new operation
      */
     function schedule(
-        address[] calldata targets,
-        uint256[] calldata values,
-        bytes[] calldata datas,
+        address[] memory targets,
+        uint256[] memory values,
+        bytes[] memory datas,
         uint256 delay,
         bytes32 predecessor,
         bytes32 salt,
-        string calldata description
+        string memory description
     ) public nonReentrant onlyRole(PROPOSER_ROLE) returns (bytes32) {
         require(targets.length == values.length && values.length == datas.length, "Invalid operation parameters");
         require(targets.length > 0, "Empty operation");
@@ -226,13 +226,13 @@ contract ARCTimelock is
      * @dev Schedule a batch of operations
      */
     function scheduleBatch(
-        address[][] calldata targets,
-        uint256[][] calldata values,
-        bytes[][] calldata datas,
+        address[] memory targets,
+        uint256[] memory values,
+        bytes[] memory datas,
         uint256 delay,
-        bytes32[] calldata predecessors,
-        bytes32[] calldata salts,
-        string calldata description
+        bytes32[] memory predecessors,
+        bytes32[] memory salts,
+        string memory description
     ) external nonReentrant onlyRole(PROPOSER_ROLE) returns (bytes32) {
         require(targets.length <= config.maxOperationsPerBatch, "Too many operations in batch");
         require(targets.length == values.length && values.length == datas.length, "Invalid batch parameters");
@@ -246,13 +246,13 @@ contract ARCTimelock is
         for (uint256 i = 0; i < targets.length; i++) {
             address[] memory singleTarget = new address[](1);
             singleTarget[0] = targets[i];
-            
+
             uint256[] memory singleValue = new uint256[](1);
             singleValue[0] = values[i];
-            
+
             bytes[] memory singleData = new bytes[](1);
             singleData[0] = datas[i];
-            
+
             bytes32 operationId = schedule(singleTarget, singleValue, singleData, delay, predecessors[i], salts[i], "");
             localOperationIds[i] = operationId;
         }
@@ -496,9 +496,9 @@ contract ARCTimelock is
      * @dev Get operation ID
      */
     function getOperationId(
-        address[] calldata targets,
-        uint256[] calldata values,
-        bytes[] calldata datas,
+        address[] memory targets,
+        uint256[] memory values,
+        bytes[] memory datas,
         bytes32 predecessor,
         bytes32 salt
     ) public pure returns (bytes32) {

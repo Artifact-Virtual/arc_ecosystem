@@ -212,16 +212,16 @@ contract ARCProposal is
      */
     function createProposal(
         ProposalCategory category,
-        string calldata title,
-        string calldata description,
-        string calldata metadataURI,
-        address[] calldata targets,
-        uint256[] calldata values,
-        bytes[] calldata datas,
+        string memory title,
+        string memory description,
+        string memory metadataURI,
+        address[] memory targets,
+        uint256[] memory values,
+        bytes[] memory datas,
         ImpactLevel impactLevel,
         uint256 estimatedCost,
         uint256 estimatedTimeline,
-        string[] calldata tags
+        string[] memory tags
     ) public nonReentrant returns (uint256) {
         require(bytes(title).length > 0, "Empty title");
         require(bytes(description).length > 0, "Empty description");
@@ -287,13 +287,19 @@ contract ARCProposal is
         ProposalTemplate storage template = templates[templateId];
         require(template.active, "Template not active");
 
+        // Create memory copies of storage arrays
+        address[] memory defaultTargets = new address[](template.defaultTargets.length);
+        for (uint256 i = 0; i < template.defaultTargets.length; i++) {
+            defaultTargets[i] = template.defaultTargets[i];
+        }
+
         // Use template defaults
         uint256 proposalId = createProposal(
             template.category,
             title,
             description,
             metadataURI,
-            template.defaultTargets,
+            defaultTargets,
             new uint256[](template.defaultTargets.length), // Empty values
             new bytes[](template.defaultTargets.length),   // Empty datas
             impactLevel,
@@ -474,18 +480,34 @@ contract ARCProposal is
         Proposal storage parentProposal = proposals[parentProposalId];
         require(parentProposal.stage == ProposalStage.Governance, "Can only amend governance proposals");
 
+        // Create memory copies of parent proposal arrays
+        address[] memory targets = new address[](parentProposal.targets.length);
+        uint256[] memory values = new uint256[](parentProposal.values.length);
+        bytes[] memory calldatas = new bytes[](parentProposal.calldatas.length);
+        string[] memory tags = new string[](parentProposal.tags.length);
+
+        for (uint256 i = 0; i < parentProposal.targets.length; i++) {
+            targets[i] = parentProposal.targets[i];
+            values[i] = parentProposal.values[i];
+            calldatas[i] = parentProposal.calldatas[i];
+        }
+
+        for (uint256 i = 0; i < parentProposal.tags.length; i++) {
+            tags[i] = parentProposal.tags[i];
+        }
+
         uint256 amendmentId = createProposal(
             parentProposal.category,
             title,
             description,
             "",
-            parentProposal.targets,
-            parentProposal.values,
-            parentProposal.calldatas,
+            targets,
+            values,
+            calldatas,
             parentProposal.impactLevel,
             parentProposal.estimatedCost,
             parentProposal.estimatedTimeline,
-            parentProposal.tags
+            tags
         );
 
         Proposal storage amendment = proposals[amendmentId];
@@ -610,4 +632,22 @@ contract ARCProposal is
      * @dev Authorize contract upgrades
      */
     function _authorizeUpgrade(address newImplementation) internal override onlyRole(ADMIN_ROLE) {}
+
+    /**
+     * @dev Advance proposal to next stage (for DAO integration)
+     */
+    function advanceStage(uint256 proposalId) external {
+        Proposal storage proposal = proposals[proposalId];
+        require(proposal.id != 0, "Proposal does not exist");
+
+        // Simple stage advancement logic
+        if (proposal.stage == ProposalStage.Draft) {
+            proposal.stage = ProposalStage.Review;
+        } else if (proposal.stage == ProposalStage.Review) {
+            proposal.stage = ProposalStage.Submitted;
+        } else if (proposal.stage == ProposalStage.Submitted) {
+            proposal.stage = ProposalStage.Governance;
+        }
+        // Other stages are managed by external contracts
+    }
 }

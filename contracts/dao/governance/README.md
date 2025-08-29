@@ -1,8 +1,8 @@
-# ARC DECENTRAL ORGANIZATION
+# ARC DECENTRAL AUTONOMOUS ORGANIZATION
 
-## DEX DAO Governance
+## DAO Governance
 
-This repository contains a comprehensive, enterprise-grade governance system for the ARC DEX DAO, featuring advanced voting mechanisms, secure timelock controls, collaborative proposal management, sophisticated treasury operations, and seamless integration with the existing ARC ecosystem.
+This repository contains a comprehensive, enterprise-grade governance system for the ARC DAO, featuring advanced voting mechanisms, secure timelock controls, collaborative proposal management, sophisticated treasury operations, and seamless integration with the existing ARC ecosystem.
 
 ## Architecture Overview
 

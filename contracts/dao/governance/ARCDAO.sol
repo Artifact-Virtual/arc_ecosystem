@@ -176,8 +176,20 @@ contract ARCDAO is
         proposalCount++;
         uint256 proposalId = proposalCount;
 
-        // Create proposal in governor
-        uint256 governorProposalId = governor.propose(targets, values, calldatas, description);
+        // Create proposal in governor with default parameters
+        uint256 governorProposalId = governor.propose(
+            ARCGovernor.ProposalCategory.Treasury,
+            ARCGovernor.VotingType.SingleChoice,
+            "DAO Proposal", // Default title
+            description,
+            "", // Empty metadataURI
+            targets,
+            values,
+            calldatas,
+            config.proposalThreshold,
+            config.quorumPercentage,
+            config.timelockDelay
+        );
 
         // Track proposal status
         ProposalStatus storage status = proposalStatuses[proposalId];
@@ -190,8 +202,20 @@ contract ARCDAO is
         status.proposalData = calldatas;
         status.description = description;
 
-        // Create proposal in proposal manager
-        proposalManager.createProposal(description, targets, values, calldatas);
+        // Create proposal in proposal manager with default parameters
+        proposalManager.createProposal(
+            ARCProposal.ProposalCategory.Treasury,
+            "DAO Proposal", // Default title
+            description,
+            "", // Empty metadataURI
+            targets,
+            values,
+            calldatas,
+            ARCProposal.ImpactLevel.Moderate,
+            0, // Default estimated cost
+            30 days, // Default timeline
+            new string[](0) // Empty tags
+        );
 
         analytics.totalProposals++;
 
@@ -221,19 +245,15 @@ contract ARCDAO is
             );
             status.stage = 2;
         } else if (status.stage == 2) {
-            // Voting -> Queued (if passed)
+            // Voting -> Executed (if passed)
             // Check voting results
             (uint256 totalPower, , , ) = voting.getSessionResults(proposalId);
             if (totalPower > 0) {
-                // Queue for execution
-                governor.queue(status.targets, status.values, status.proposalData, keccak256(bytes(status.description)));
+                // Execute directly (skip queue stage)
+                governor.execute(proposalId);
+                status.executed = true;
                 status.stage = 3;
             }
-        } else if (status.stage == 3) {
-            // Queued -> Executed
-            governor.execute(status.targets, status.values, status.proposalData, keccak256(bytes(status.description)));
-            status.executed = true;
-            status.stage = 4;
             analytics.executedProposals++;
         }
 
@@ -249,7 +269,11 @@ contract ARCDAO is
         ProposalStatus storage status = proposalStatuses[proposalId];
         require(status.stage == 2, "Proposal not in voting stage");
 
-        governor.castVote(proposalId, support);
+        uint256[] memory choices = new uint256[](1);
+        uint256[] memory weights = new uint256[](1);
+        choices[0] = support;
+        weights[0] = 1;
+        voting.castVote(proposalId, choices, weights, 0);
     }
 
     /**
@@ -260,7 +284,7 @@ contract ARCDAO is
         require(!status.executed, "Proposal already executed");
         require(status.stage == 3, "Proposal not queued");
 
-        timelock.executeBatch(
+        timelock.execute(
             status.targets,
             status.values,
             status.proposalData,
@@ -287,7 +311,14 @@ contract ARCDAO is
             "Not authorized to cancel"
         );
 
-        governor.cancel(status.targets, status.values, status.proposalData, keccak256(bytes(status.description)));
+        bytes32 operationId = timelock.getOperationId(
+            status.targets,
+            status.values,
+            status.proposalData,
+            0,
+            keccak256(bytes(status.description))
+        );
+        timelock.cancel(operationId);
         status.cancelled = true;
     }
 
@@ -323,9 +354,8 @@ contract ARCDAO is
         emergencyActivationTime = block.timestamp;
         config.emergencyMode = true;
 
-        // Pause all contracts
+        // Pause treasury (voting doesn't have pause functionality)
         treasury.pause();
-        voting.pause();
 
         emit EmergencyActivated(msg.sender, block.timestamp);
     }
@@ -343,9 +373,8 @@ contract ARCDAO is
         emergencyActivationTime = 0;
         config.emergencyMode = false;
 
-        // Unpause contracts
+        // Unpause treasury (voting doesn't have pause functionality)
         treasury.unpause();
-        voting.unpause();
 
         emit EmergencyDeactivated(msg.sender, block.timestamp);
     }
