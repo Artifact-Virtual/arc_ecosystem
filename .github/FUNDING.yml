@@ -7,9 +7,9 @@
 # Custom funding links (max 4)
 custom:
   # ARC Treasury Safe (ETH) - Main Treasury
-  - TreasurySafe:'https://app.safe.global/home?safe=eth:0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38'
+  - https://app.safe.global/home?safe=eth:0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38'
   # ARC Deployer Wallet (ETH) - Development
-  - DeployerWallet:'https://app.safe.global/home?safe=eth:0x21E914dFBB137F7fEC896F11bC8BAd6BCCDB147B'
+  - '0x21E914dFBB137F7fEC896F11bC8BAd6BCCDB147B'
 
 # Patreon
 patreon: ali.shakil@artifactvirtual.com
