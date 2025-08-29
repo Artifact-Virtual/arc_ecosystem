@@ -1,23 +1,76 @@
-# ARCx Token Project — Address Book (as of August 15, 2025)
+# ARCx Token Project — Address Book (as of August 29, 2025)
 
-## Core Contracts
+## Core Contracts (Deployed)
 - ARCx Token: 0xA4093669DAFbD123E37d52e0939b3aB3C2272f44
 - Dutch Auction: 0x5Da5F567553C8D4F12542Ba608F41626f77Aa836
 - Smart Airdrop: 0x79166AbC8c17017436263BcE5f76DaB1c3dEa195
 - Vesting Contract: 0xEEc0298bE76C9C3224eA05a34687C1a1134d550B
+
+## New Contracts (To Be Deployed)
+- ARC Identity SBT: 0x0000000000000000000000000000000000000000 [PLACEHOLDER - Deploy Citizenship SBT]
+- ARCs Token: 0x0000000000000000000000000000000000000000 [PLACEHOLDER - Deploy Staking Token]
+- ARCx Staking Vault: 0x0000000000000000000000000000000000000000 [PLACEHOLDER - Deploy DeFi Vault]
+
+## Governance & Security
 - Treasury Safe: 0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38
+- Ecosystem Safe: 0x2ebCb38562051b02dae9cAca5ed8Ddb353d225eb
 
 ## Key Wallets
 - Deployer Wallet: 0x21E914dFBB137F7fEC896F11bC8BAd6BCCDB147B
+- Deployer EOA: 0x21E914dFBB137F7fEC896F11bC8BAd6BCCDB147B
 
-## Uniswap V4
+## External Services (Base Network)
+- EAS (Ethereum Attestation Service): 0x4200000000000000000000000000000000000021
+- BaseScan: https://basescan.org
+
+## Uniswap V4 Infrastructure
 - Position Manager: 0x7C5f5A4bBd8fD63184577525326123B519429bDc
 - Pool Manager: 0x498581ff718922c3f8e6a244956af099b2652b2b
 - Universal Router: 0x6ff5693b99212da76ad316178a184ab56d299b43
-- WETH (Base): 0x4200000000000000000000000000000000000006
 
-## Other
-- Smart Airdrop: 0x79166AbC8c17017436263BcE5f76DaB1c3dEa195
+## Base Network Tokens
+- WETH (Base): 0x4200000000000000000000000000000000000006
+- USDC (Base): 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+
+## Deployment Status
+- ✅ ARCx Token: DEPLOYED
+- ✅ Dutch Auction: DEPLOYED
+- ✅ Smart Airdrop: DEPLOYED
+- ✅ Vesting Contract: DEPLOYED
+- ⏳ ARC Identity SBT: PENDING DEPLOYMENT
+- ⏳ ARCs Token: PENDING DEPLOYMENT
+- ⏳ ARCx Staking Vault: PENDING DEPLOYMENT
+
+## Deployment Commands
+```bash
+# Deploy SBT (Citizenship)
+npm run deploy:sbt
+
+# Deploy ARCs Token (Staking)
+npm run deploy:arcs
+
+# Deploy DeFi Infrastructure
+npm run deploy:defi
+
+# Dry run (recommended first)
+npm run deploy:sbt-dry
+npm run deploy:arcs-dry
+npm run deploy:defi-dry
+```
+
+## Security Notes
+- All Safe wallets are Gnosis Safe multi-sig wallets
+- Deployer wallet should be funded with sufficient ETH for gas
+- Private keys are NEVER stored in this repository
+- All contract deployments require multi-sig approval for critical functions
+
+## Update Instructions
+1. After each deployment, update the corresponding placeholder with the deployed address
+2. Update both this file and `scripts/shared/constants.ts`
+3. Commit changes immediately to avoid confusion
+4. Verify addresses on BaseScan before marking as deployed
 
 ---
-All addresses above are for reference only. No private keys are included. For any new contract or wallet, update this file immediately to avoid confusion.
+All addresses above are for reference only. No private keys are included.
+For any new contract or wallet, update this file immediately to avoid confusion.
+Last updated: August 29, 2025

@@ -1,6 +1,4 @@
-# A Message from the Developer: Join the Revolution
-
-*Dear ARC Community,*
+# *Dear ARC Community,*
 
 ## The Moment We've Been Building Toward
 
@@ -70,11 +68,13 @@ I've poured my heart, soul, and countless hours into building this system. But h
 
 ## The Support I Need (And Why It Matters)
 
-**Small Donations**: If you get free coffee, share the link. If you can spare $5-10/month, it makes a real difference. Every dollar goes directly to development and community building.
-
 **Your Time and Skills**: This is where the real value lies. Your expertise, your network, your creativity - these are irreplaceable.
 
 **Your Belief**: Tell others about ARC. Explain why constitutional technology matters. Help people see that this isn't just another crypto project - it's a solution to problems that affect everyone.
+
+And sure,
+
+**Small Donations**: If you get free coffee, share the link. If you can spare $5-10/month, it makes a real difference. Every dollar goes directly to development and community building.
 
 ## Why Now Is The Critical Moment
 
@@ -112,12 +112,10 @@ If you join this community, I promise:
 
 The ARC Constitutional DAO isn't just a technical achievement - it's a **movement for better governance**. It needs champions, builders, and believers.
 
-**Will you be one of them?**
-
 The world needs ARC. And ARC needs you.
 
 *With gratitude and hope,*  
-**The ARC Developer**  
+**Dev**  
 *Building the future of governance, one line of code at a time*
 
 ---
