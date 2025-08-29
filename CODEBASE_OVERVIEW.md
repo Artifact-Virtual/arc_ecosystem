@@ -1,11 +1,11 @@
 # Codebase overview — Devs & Contributors
 
-*Generated: 2025-08-29T06:25:11.682743 UTC*
+*Generated: 2025-08-29T06:30:43.222962 UTC*
 
 ## Quick stats
 
 - Root: `arc_ecosystem`
-- Files indexed: **163**
+- Files indexed: **160**
 - Total size: **20.5MB**
 
 ## Top-level directories
@@ -17,12 +17,12 @@
 - **address.book** — 1 files, 947.0B
 - **audits** — 1 files, 15.2KB
 - **code_indexer.ps1** — 1 files, 941.0B
-- **CODEBASE_OVERVIEW.md** — 1 files, 18.5KB
+- **CODEBASE_OVERVIEW.md** — 1 files, 19.1KB
 - **community_message.md** — 1 files, 5.9KB
-- **contracts** — 57 files, 407.7KB
+- **contracts** — 54 files, 385.8KB
 - **css** — 2 files, 14.7KB
 - **deploy_auction.ps1** — 1 files, 5.2KB
-- **docs** — 46 files, 19.7MB
+- **docs** — 48 files, 19.7MB
 - **functions.json** — 1 files, 19.8KB
 - **gas-report.txt** — 1 files, 2.8KB
 - **hardhat.config.ts** — 1 files, 2.6KB
@@ -31,7 +31,7 @@
 - **package.json** — 1 files, 4.1KB
 - **README.md** — 1 files, 12.2KB
 - **real_world_assets.md** — 1 files, 12.7KB
-- **scripts** — 24 files, 174.9KB
+- **scripts** — 22 files, 167.3KB
 - **src** — 3 files, 58.4KB
 - **status_report.md.md** — 1 files, 29.9KB
 - **tests** — 6 files, 44.5KB
@@ -42,221 +42,218 @@
 
 ### .githooks
 
-- [.githooks/pre-commit](.githooks/pre-commit) — 1001.0B / 2025-08-29T06:25:10.856670
-- [.githooks/pre-push](.githooks/pre-push) — 904.0B / 2025-08-29T06:25:10.856670
+- [.githooks/pre-commit](.githooks/pre-commit) — 1001.0B / 2025-08-29T06:30:42.310415
+- [.githooks/pre-push](.githooks/pre-push) — 904.0B / 2025-08-29T06:30:42.310415
 ### .github
 
-- [.github/workflows/code_indexer.yml](.github/workflows/code_indexer.yml) — 1.3KB / 2025-08-29T06:25:10.856670
+- [.github/workflows/code_indexer.yml](.github/workflows/code_indexer.yml) — 1.3KB / 2025-08-29T06:30:42.310415
 ### .gitignore
 
-- [.gitignore](.gitignore) — 445.0B / 2025-08-29T06:25:10.856670
+- [.gitignore](.gitignore) — 445.0B / 2025-08-29T06:30:42.310415
 ### .npmrc
 
-- [.npmrc](.npmrc) — 237.0B / 2025-08-29T06:25:10.856670
+- [.npmrc](.npmrc) — 237.0B / 2025-08-29T06:30:42.310415
 ### address.book
 
-- [address.book](address.book) — 947.0B / 2025-08-29T06:25:10.857670
+- [address.book](address.book) — 947.0B / 2025-08-29T06:30:42.310415
 ### audits
 
-- [audits/security-report.md](audits/security-report.md) — 15.2KB / 2025-08-29T06:25:10.857670
+- [audits/security-report.md](audits/security-report.md) — 15.2KB / 2025-08-29T06:30:42.310415
 ### code_indexer.ps1
 
-- [code_indexer.ps1](code_indexer.ps1) — 941.0B / 2025-08-29T06:25:10.857670
+- [code_indexer.ps1](code_indexer.ps1) — 941.0B / 2025-08-29T06:30:42.310415
 ### CODEBASE_OVERVIEW.md
 
-- [CODEBASE_OVERVIEW.md](CODEBASE_OVERVIEW.md) — 18.5KB / 2025-08-29T06:25:10.856670
+- [CODEBASE_OVERVIEW.md](CODEBASE_OVERVIEW.md) — 19.1KB / 2025-08-29T06:30:42.310415
 ### community_message.md
 
-- [community_message.md](community_message.md) — 5.9KB / 2025-08-29T06:25:10.857670
+- [community_message.md](community_message.md) — 5.9KB / 2025-08-29T06:30:42.310415
 ### contracts
 
-- [contracts/blueprint.md](contracts/blueprint.md) — 9.9KB / 2025-08-29T06:25:10.857670
-- [contracts/contint_list.md](contracts/contint_list.md) — 2.0KB / 2025-08-29T06:25:10.857670
-- [contracts/contracts_registry.md](contracts/contracts_registry.md) — 5.9KB / 2025-08-29T06:25:10.857670
-- [contracts/dao/adam/AdamHost.sol](contracts/dao/adam/AdamHost.sol) — 13.9KB / 2025-08-29T06:25:10.857670
-- [contracts/dao/adam/AdamRegistry.sol](contracts/dao/adam/AdamRegistry.sol) — 10.9KB / 2025-08-29T06:25:10.857670
-- [contracts/dao/adam/functions.json](contracts/dao/adam/functions.json) — 19.8KB / 2025-08-29T06:25:10.857670
-- [contracts/dao/adam/interfaces/IAdamHost.sol](contracts/dao/adam/interfaces/IAdamHost.sol) — 3.4KB / 2025-08-29T06:25:10.857670
-- [contracts/dao/adam/interfaces/IAdamRegistry.sol](contracts/dao/adam/interfaces/IAdamRegistry.sol) — 3.1KB / 2025-08-29T06:25:10.857670
-- [contracts/dao/governance/ARCDAO.sol](contracts/dao/governance/ARCDAO.sol) — 15.1KB / 2025-08-29T06:25:10.858670
-- [contracts/dao/governance/ARCGovernor.sol](contracts/dao/governance/ARCGovernor.sol) — 18.8KB / 2025-08-29T06:25:10.858670
-- [contracts/dao/governance/ARCProposal.sol](contracts/dao/governance/ARCProposal.sol) — 21.1KB / 2025-08-29T06:25:10.858670
-- [contracts/dao/governance/ARCTimelock.sol](contracts/dao/governance/ARCTimelock.sol) — 16.9KB / 2025-08-29T06:25:10.858670
-- [contracts/dao/governance/ARCTreasury.sol](contracts/dao/governance/ARCTreasury.sol) — 17.5KB / 2025-08-29T06:25:10.858670
-- [contracts/dao/governance/ARCVoting.sol](contracts/dao/governance/ARCVoting.sol) — 18.0KB / 2025-08-29T06:25:10.858670
-- [contracts/dao/governance/interfaces/IEligibility.sol](contracts/dao/governance/interfaces/IEligibility.sol) — 2.5KB / 2025-08-29T06:25:10.858670
-- [contracts/dao/governance/README.md](contracts/dao/governance/README.md) — 10.9KB / 2025-08-29T06:25:10.858670
-- [contracts/dao/interfaces/IARCDAO.sol](contracts/dao/interfaces/IARCDAO.sol) — 2.6KB / 2025-08-29T06:25:10.858670
-- [contracts/dao/interfaces/IARCGovernor.sol](contracts/dao/interfaces/IARCGovernor.sol) — 2.5KB / 2025-08-29T06:25:10.858670
-- [contracts/dao/interfaces/IARCProposal.sol](contracts/dao/interfaces/IARCProposal.sol) — 2.7KB / 2025-08-29T06:25:10.858670
-- [contracts/dao/interfaces/IARCTimelock.sol](contracts/dao/interfaces/IARCTimelock.sol) — 2.3KB / 2025-08-29T06:25:10.858670
-- [contracts/dao/interfaces/IARCTreasury.sol](contracts/dao/interfaces/IARCTreasury.sol) — 2.7KB / 2025-08-29T06:25:10.858670
-- [contracts/dao/interfaces/IARCVoting.sol](contracts/dao/interfaces/IARCVoting.sol) — 2.7KB / 2025-08-29T06:25:10.858670
-- [contracts/defi/ARCSwap.sol](contracts/defi/ARCSwap.sol) — 15.0KB / 2025-08-29T06:25:10.859670
-- [contracts/defi/ARCx_MVC.sol](contracts/defi/ARCx_MVC.sol) — 13.4KB / 2025-08-29T06:25:10.859670
-- [contracts/defi/ARCxDutchAuction.sol](contracts/defi/ARCxDutchAuction.sol) — 12.1KB / 2025-08-29T06:25:10.859670
-- [contracts/defi/ARCxSmartAirdrop.sol](contracts/defi/ARCxSmartAirdrop.sol) — 11.3KB / 2025-08-29T06:25:10.859670
-- [contracts/defi/ARCxStakingVault.sol](contracts/defi/ARCxStakingVault.sol) — 7.4KB / 2025-08-29T06:25:10.859670
-- [contracts/defi/infrastructure/ARCBridge.sol](contracts/defi/infrastructure/ARCBridge.sol) — 19.0KB / 2025-08-29T06:25:10.859670
-- [contracts/defi/PenaltyVault.sol](contracts/defi/PenaltyVault.sol) — 1.1KB / 2025-08-29T06:25:10.859670
-- [contracts/defi/rwa/ARC_RWARegistry.sol](contracts/defi/rwa/ARC_RWARegistry.sol) — 16.7KB / 2025-08-29T06:25:10.859670
-- [contracts/defi/rwa/IRWARegistry.sol](contracts/defi/rwa/IRWARegistry.sol) — 8.0KB / 2025-08-29T06:25:10.859670
-- [contracts/defi/rwa/SlashingVault.sol](contracts/defi/rwa/SlashingVault.sol) — 14.0KB / 2025-08-29T06:25:10.859670
-- [contracts/defi/StakingVault.sol](contracts/defi/StakingVault.sol) — 4.1KB / 2025-08-29T06:25:10.859670
-- [contracts/defi/TreasuryRewards.sol](contracts/defi/TreasuryRewards.sol) — 3.3KB / 2025-08-29T06:25:10.859670
-- [contracts/pool/IPoolManager.sol](contracts/pool/IPoolManager.sol) — 540.0B / 2025-08-29T06:25:10.859670
-- [contracts/pool/IPositionManager.sol](contracts/pool/IPositionManager.sol) — 715.0B / 2025-08-29T06:25:10.860670
-- [contracts/pool/IWETH.sol](contracts/pool/IWETH.sol) — 234.0B / 2025-08-29T06:25:10.860670
-- [contracts/thirdparty/uniswap-v4-core/ProtocolFees.sol](contracts/thirdparty/uniswap-v4-core/ProtocolFees.sol) — 0.0B / 2025-08-29T06:25:10.860670
-- [contracts/thirdparty/uniswap-v4/base/ERC721Permit_v4.sol](contracts/thirdparty/uniswap-v4/base/ERC721Permit_v4.sol) — 0.0B / 2025-08-29T06:25:10.860670
-- [contracts/thirdparty/uniswap-v4/hooks/WETHHook.sol](contracts/thirdparty/uniswap-v4/hooks/WETHHook.sol) — 0.0B / 2025-08-29T06:25:10.860670
-- [contracts/thirdparty/uniswap-v4/hooks/WstETHHook.sol](contracts/thirdparty/uniswap-v4/hooks/WstETHHook.sol) — 0.0B / 2025-08-29T06:25:10.860670
-- [contracts/thirdparty/uniswap-v4/interfaces/IPermit2Forwarder.sol](contracts/thirdparty/uniswap-v4/interfaces/IPermit2Forwarder.sol) — 0.0B / 2025-08-29T06:25:10.860670
-- [contracts/thirdparty/uniswap-v4/libraries/Descriptor.sol](contracts/thirdparty/uniswap-v4/libraries/Descriptor.sol) — 0.0B / 2025-08-29T06:25:10.860670
-- [contracts/thirdparty/uniswap-v4/libraries/SafeCurrencyMetadata.sol](contracts/thirdparty/uniswap-v4/libraries/SafeCurrencyMetadata.sol) — 0.0B / 2025-08-29T06:25:10.860670
-- [contracts/thirdparty/uniswap-v4/libraries/SVG.sol](contracts/thirdparty/uniswap-v4/libraries/SVG.sol) — 0.0B / 2025-08-29T06:25:10.860670
-- [contracts/thirdparty/uniswap-v4/NonfungiblePositionManager.sol](contracts/thirdparty/uniswap-v4/NonfungiblePositionManager.sol) — 0.0B / 2025-08-29T06:25:10.860670
-- [contracts/thirdparty/uniswap-v4/permit2/src/interfaces/IAllowanceTransfer.sol](contracts/thirdparty/uniswap-v4/permit2/src/interfaces/IAllowanceTransfer.sol) — 0.0B / 2025-08-29T06:25:10.860670
-- [contracts/thirdparty/uniswap-v4/permit2/src/libraries/SignatureVerification.sol](contracts/thirdparty/uniswap-v4/permit2/src/libraries/SignatureVerification.sol) — 0.0B / 2025-08-29T06:25:10.860670
-- [contracts/thirdparty/uniswap-v4/PositionManager.sol](contracts/thirdparty/uniswap-v4/PositionManager.sol) — 0.0B / 2025-08-29T06:25:10.860670
-- [contracts/tokens/arc-s/ARCs.sol](contracts/tokens/arc-s/ARCs.sol) — 1.4KB / 2025-08-29T06:25:10.860670
-- [contracts/tokens/arc-s/deployment_notes.md](contracts/tokens/arc-s/deployment_notes.md) — 560.0B / 2025-08-29T06:25:10.860670
-- [contracts/tokens/arc-x/ARCx.sol](contracts/tokens/arc-x/ARCx.sol) — 5.7KB / 2025-08-29T06:25:10.860670
-- [contracts/tokens/arc-x/interfaces/IERC20.sol](contracts/tokens/arc-x/interfaces/IERC20.sol) — 712.0B / 2025-08-29T06:25:10.861670
-- [contracts/tokens/arc-x/README.md](contracts/tokens/arc-x/README.md) — 24.9KB / 2025-08-29T06:25:10.861670
-- [contracts/tokens/sbt/ARC_Eligibility.sol](contracts/tokens/sbt/ARC_Eligibility.sol) — 13.2KB / 2025-08-29T06:25:10.861670
-- [contracts/tokens/sbt/ARC_IdentitySBT.sol](contracts/tokens/sbt/ARC_IdentitySBT.sol) — 17.5KB / 2025-08-29T06:25:10.861670
-- [contracts/tokens/sbt/blueprint.md](contracts/tokens/sbt/blueprint.md) — 11.9KB / 2025-08-29T06:25:10.861670
+- [contracts/contracts_registry.json](contracts/contracts_registry.json) — 7.8KB / 2025-08-29T06:30:42.310415
+- [contracts/dao/adam/AdamHost.sol](contracts/dao/adam/AdamHost.sol) — 13.9KB / 2025-08-29T06:30:42.311415
+- [contracts/dao/adam/AdamRegistry.sol](contracts/dao/adam/AdamRegistry.sol) — 10.9KB / 2025-08-29T06:30:42.311415
+- [contracts/dao/adam/functions.json](contracts/dao/adam/functions.json) — 19.8KB / 2025-08-29T06:30:42.311415
+- [contracts/dao/adam/interfaces/IAdamHost.sol](contracts/dao/adam/interfaces/IAdamHost.sol) — 3.4KB / 2025-08-29T06:30:42.311415
+- [contracts/dao/adam/interfaces/IAdamRegistry.sol](contracts/dao/adam/interfaces/IAdamRegistry.sol) — 3.1KB / 2025-08-29T06:30:42.311415
+- [contracts/dao/governance/ARCDAO.sol](contracts/dao/governance/ARCDAO.sol) — 15.1KB / 2025-08-29T06:30:42.311415
+- [contracts/dao/governance/ARCGovernor.sol](contracts/dao/governance/ARCGovernor.sol) — 18.8KB / 2025-08-29T06:30:42.311415
+- [contracts/dao/governance/ARCProposal.sol](contracts/dao/governance/ARCProposal.sol) — 21.1KB / 2025-08-29T06:30:42.311415
+- [contracts/dao/governance/ARCTimelock.sol](contracts/dao/governance/ARCTimelock.sol) — 16.9KB / 2025-08-29T06:30:42.311415
+- [contracts/dao/governance/ARCTreasury.sol](contracts/dao/governance/ARCTreasury.sol) — 17.5KB / 2025-08-29T06:30:42.311415
+- [contracts/dao/governance/ARCVoting.sol](contracts/dao/governance/ARCVoting.sol) — 18.0KB / 2025-08-29T06:30:42.312415
+- [contracts/dao/governance/interfaces/IEligibility.sol](contracts/dao/governance/interfaces/IEligibility.sol) — 2.5KB / 2025-08-29T06:30:42.312415
+- [contracts/dao/governance/README.md](contracts/dao/governance/README.md) — 10.9KB / 2025-08-29T06:30:42.312415
+- [contracts/dao/interfaces/IARCDAO.sol](contracts/dao/interfaces/IARCDAO.sol) — 2.6KB / 2025-08-29T06:30:42.312415
+- [contracts/dao/interfaces/IARCGovernor.sol](contracts/dao/interfaces/IARCGovernor.sol) — 2.5KB / 2025-08-29T06:30:42.312415
+- [contracts/dao/interfaces/IARCProposal.sol](contracts/dao/interfaces/IARCProposal.sol) — 2.7KB / 2025-08-29T06:30:42.312415
+- [contracts/dao/interfaces/IARCTimelock.sol](contracts/dao/interfaces/IARCTimelock.sol) — 2.3KB / 2025-08-29T06:30:42.312415
+- [contracts/dao/interfaces/IARCTreasury.sol](contracts/dao/interfaces/IARCTreasury.sol) — 2.7KB / 2025-08-29T06:30:42.312415
+- [contracts/dao/interfaces/IARCVoting.sol](contracts/dao/interfaces/IARCVoting.sol) — 2.7KB / 2025-08-29T06:30:42.312415
+- [contracts/defi/ARCSwap.sol](contracts/defi/ARCSwap.sol) — 15.0KB / 2025-08-29T06:30:42.312415
+- [contracts/defi/ARCx_MVC.sol](contracts/defi/ARCx_MVC.sol) — 13.4KB / 2025-08-29T06:30:42.312415
+- [contracts/defi/ARCxDutchAuction.sol](contracts/defi/ARCxDutchAuction.sol) — 12.1KB / 2025-08-29T06:30:42.312415
+- [contracts/defi/ARCxSmartAirdrop.sol](contracts/defi/ARCxSmartAirdrop.sol) — 11.3KB / 2025-08-29T06:30:42.312415
+- [contracts/defi/ARCxStakingVault.sol](contracts/defi/ARCxStakingVault.sol) — 7.4KB / 2025-08-29T06:30:42.312415
+- [contracts/defi/infrastructure/ARCBridge.sol](contracts/defi/infrastructure/ARCBridge.sol) — 19.0KB / 2025-08-29T06:30:42.313415
+- [contracts/defi/PenaltyVault.sol](contracts/defi/PenaltyVault.sol) — 1.1KB / 2025-08-29T06:30:42.312415
+- [contracts/defi/rwa/ARC_RWARegistry.sol](contracts/defi/rwa/ARC_RWARegistry.sol) — 16.7KB / 2025-08-29T06:30:42.313415
+- [contracts/defi/rwa/IRWARegistry.sol](contracts/defi/rwa/IRWARegistry.sol) — 8.0KB / 2025-08-29T06:30:42.313415
+- [contracts/defi/rwa/SlashingVault.sol](contracts/defi/rwa/SlashingVault.sol) — 14.0KB / 2025-08-29T06:30:42.313415
+- [contracts/defi/StakingVault.sol](contracts/defi/StakingVault.sol) — 4.1KB / 2025-08-29T06:30:42.312415
+- [contracts/defi/TreasuryRewards.sol](contracts/defi/TreasuryRewards.sol) — 3.3KB / 2025-08-29T06:30:42.313415
+- [contracts/pool/IPoolManager.sol](contracts/pool/IPoolManager.sol) — 540.0B / 2025-08-29T06:30:42.313415
+- [contracts/pool/IPositionManager.sol](contracts/pool/IPositionManager.sol) — 715.0B / 2025-08-29T06:30:42.313415
+- [contracts/pool/IWETH.sol](contracts/pool/IWETH.sol) — 234.0B / 2025-08-29T06:30:42.313415
+- [contracts/thirdparty/uniswap-v4-core/ProtocolFees.sol](contracts/thirdparty/uniswap-v4-core/ProtocolFees.sol) — 0.0B / 2025-08-29T06:30:42.313415
+- [contracts/thirdparty/uniswap-v4/base/ERC721Permit_v4.sol](contracts/thirdparty/uniswap-v4/base/ERC721Permit_v4.sol) — 0.0B / 2025-08-29T06:30:42.313415
+- [contracts/thirdparty/uniswap-v4/hooks/WETHHook.sol](contracts/thirdparty/uniswap-v4/hooks/WETHHook.sol) — 0.0B / 2025-08-29T06:30:42.313415
+- [contracts/thirdparty/uniswap-v4/hooks/WstETHHook.sol](contracts/thirdparty/uniswap-v4/hooks/WstETHHook.sol) — 0.0B / 2025-08-29T06:30:42.313415
+- [contracts/thirdparty/uniswap-v4/interfaces/IPermit2Forwarder.sol](contracts/thirdparty/uniswap-v4/interfaces/IPermit2Forwarder.sol) — 0.0B / 2025-08-29T06:30:42.313415
+- [contracts/thirdparty/uniswap-v4/libraries/Descriptor.sol](contracts/thirdparty/uniswap-v4/libraries/Descriptor.sol) — 0.0B / 2025-08-29T06:30:42.313415
+- [contracts/thirdparty/uniswap-v4/libraries/SafeCurrencyMetadata.sol](contracts/thirdparty/uniswap-v4/libraries/SafeCurrencyMetadata.sol) — 0.0B / 2025-08-29T06:30:42.313415
+- [contracts/thirdparty/uniswap-v4/libraries/SVG.sol](contracts/thirdparty/uniswap-v4/libraries/SVG.sol) — 0.0B / 2025-08-29T06:30:42.313415
+- [contracts/thirdparty/uniswap-v4/NonfungiblePositionManager.sol](contracts/thirdparty/uniswap-v4/NonfungiblePositionManager.sol) — 0.0B / 2025-08-29T06:30:42.313415
+- [contracts/thirdparty/uniswap-v4/permit2/src/interfaces/IAllowanceTransfer.sol](contracts/thirdparty/uniswap-v4/permit2/src/interfaces/IAllowanceTransfer.sol) — 0.0B / 2025-08-29T06:30:42.314415
+- [contracts/thirdparty/uniswap-v4/permit2/src/libraries/SignatureVerification.sol](contracts/thirdparty/uniswap-v4/permit2/src/libraries/SignatureVerification.sol) — 0.0B / 2025-08-29T06:30:42.314415
+- [contracts/thirdparty/uniswap-v4/PositionManager.sol](contracts/thirdparty/uniswap-v4/PositionManager.sol) — 0.0B / 2025-08-29T06:30:42.313415
+- [contracts/tokens/arc-s/ARCs.sol](contracts/tokens/arc-s/ARCs.sol) — 1.4KB / 2025-08-29T06:30:42.314415
+- [contracts/tokens/arc-s/deployment_notes.md](contracts/tokens/arc-s/deployment_notes.md) — 560.0B / 2025-08-29T06:30:42.314415
+- [contracts/tokens/arc-x/ARCx.sol](contracts/tokens/arc-x/ARCx.sol) — 5.7KB / 2025-08-29T06:30:42.314415
+- [contracts/tokens/arc-x/interfaces/IERC20.sol](contracts/tokens/arc-x/interfaces/IERC20.sol) — 712.0B / 2025-08-29T06:30:42.314415
+- [contracts/tokens/arc-x/README.md](contracts/tokens/arc-x/README.md) — 24.9KB / 2025-08-29T06:30:42.314415
+- [contracts/tokens/sbt/ARC_Eligibility.sol](contracts/tokens/sbt/ARC_Eligibility.sol) — 13.2KB / 2025-08-29T06:30:42.314415
+- [contracts/tokens/sbt/ARC_IdentitySBT.sol](contracts/tokens/sbt/ARC_IdentitySBT.sol) — 17.5KB / 2025-08-29T06:30:42.314415
 ### css
 
-- [css/lines.svg](css/lines.svg) — 413.0B / 2025-08-29T06:25:10.861670
-- [css/style.css](css/style.css) — 14.3KB / 2025-08-29T06:25:10.861670
+- [css/lines.svg](css/lines.svg) — 413.0B / 2025-08-29T06:30:42.314415
+- [css/style.css](css/style.css) — 14.3KB / 2025-08-29T06:30:42.315415
 ### deploy_auction.ps1
 
-- [deploy_auction.ps1](deploy_auction.ps1) — 5.2KB / 2025-08-29T06:25:10.861670
+- [deploy_auction.ps1](deploy_auction.ps1) — 5.2KB / 2025-08-29T06:30:42.315415
 ### docs
 
-- [docs/airdrop_interface.html](docs/airdrop_interface.html) — 10.1KB / 2025-08-29T06:25:10.861670
-- [docs/archive/README.md](docs/archive/README.md) — 398.0B / 2025-08-29T06:25:10.861670
-- [docs/assets/images/download (1).jpeg](docs/assets/images/download (1).jpeg) — 34.9KB / 2025-08-29T06:25:10.862670
-- [docs/assets/images/download (2).jpeg](docs/assets/images/download (2).jpeg) — 61.4KB / 2025-08-29T06:25:10.862670
-- [docs/assets/images/download (3).jpeg](docs/assets/images/download (3).jpeg) — 56.7KB / 2025-08-29T06:25:10.862670
-- [docs/assets/images/download.jpeg](docs/assets/images/download.jpeg) — 85.9KB / 2025-08-29T06:25:10.863670
-- [docs/assets/index-CXsZFpx3.js](docs/assets/index-CXsZFpx3.js) — 549.2KB / 2025-08-29T06:25:10.865670
-- [docs/assets/lod (1).fbx](docs/assets/lod (1).fbx) — 2.1MB / 2025-08-29T06:25:10.877670
-- [docs/assets/lod (2).fbx](docs/assets/lod (2).fbx) — 2.1MB / 2025-08-29T06:25:10.879670
-- [docs/assets/lod (3).fbx](docs/assets/lod (3).fbx) — 2.1MB / 2025-08-29T06:25:10.881670
-- [docs/assets/lod.fbx](docs/assets/lod.fbx) — 2.1MB / 2025-08-29T06:25:10.883670
-- [docs/assets/logos/arcx_logo1-modified.png](docs/assets/logos/arcx_logo1-modified.png) — 1.4MB / 2025-08-29T06:25:10.885670
-- [docs/assets/logos/av-black-logo-removebg-preview.png](docs/assets/logos/av-black-logo-removebg-preview.png) — 28.0KB / 2025-08-29T06:25:10.885670
-- [docs/assets/logos/av-white-logo-removebg-preview.png](docs/assets/logos/av-white-logo-removebg-preview.png) — 33.1KB / 2025-08-29T06:25:10.885670
-- [docs/assets/logos/base-logo.png](docs/assets/logos/base-logo.png) — 2.2KB / 2025-08-29T06:25:10.885670
-- [docs/auction_interface.html](docs/auction_interface.html) — 8.0KB / 2025-08-29T06:25:10.885670
-- [docs/bridge.html](docs/bridge.html) — 31.1KB / 2025-08-29T06:25:10.886670
-- [docs/documentation.html](docs/documentation.html) — 24.1KB / 2025-08-29T06:25:10.886670
-- [docs/draft.html](docs/draft.html) — 155.9KB / 2025-08-29T06:25:10.886670
-- [docs/environment/CODE_OF_CONDUCT.md](docs/environment/CODE_OF_CONDUCT.md) — 6.2KB / 2025-08-29T06:25:10.886670
-- [docs/environment/CONTRIBUTING.md](docs/environment/CONTRIBUTING.md) — 11.9KB / 2025-08-29T06:25:10.886670
-- [docs/environment/ENVIRONMENT_SETUP.md](docs/environment/ENVIRONMENT_SETUP.md) — 5.4KB / 2025-08-29T06:25:10.886670
-- [docs/environment/README.md](docs/environment/README.md) — 1.1KB / 2025-08-29T06:25:10.886670
-- [docs/environment/V4_LP_DEPLOYMENT_SUMMARY.md](docs/environment/V4_LP_DEPLOYMENT_SUMMARY.md) — 2.5KB / 2025-08-29T06:25:10.887670
-- [docs/governance/assets/arcx_lp_nft.mp4](docs/governance/assets/arcx_lp_nft.mp4) — 353.2KB / 2025-08-29T06:25:10.888670
-- [docs/governance/assets/lod (1).fbx](docs/governance/assets/lod (1).fbx) — 2.1MB / 2025-08-29T06:25:10.890670
-- [docs/governance/assets/lod (2).fbx](docs/governance/assets/lod (2).fbx) — 2.1MB / 2025-08-29T06:25:10.891670
-- [docs/governance/assets/lod (3).fbx](docs/governance/assets/lod (3).fbx) — 2.1MB / 2025-08-29T06:25:10.893670
-- [docs/governance/assets/lod.fbx](docs/governance/assets/lod.fbx) — 2.1MB / 2025-08-29T06:25:10.895670
-- [docs/governance/deployment_plan.md](docs/governance/deployment_plan.md) — 828.0B / 2025-08-29T06:25:10.895670
-- [docs/governance/diagrams/arc.png](docs/governance/diagrams/arc.png) — 198.8KB / 2025-08-29T06:25:10.896670
-- [docs/governance/diagrams/arc_map.md](docs/governance/diagrams/arc_map.md) — 7.1KB / 2025-08-29T06:25:10.896670
-- [docs/governance/diagrams/enerygy_cap.md](docs/governance/diagrams/enerygy_cap.md) — 3.9KB / 2025-08-29T06:25:10.896670
-- [docs/governance/diagrams/layers.md](docs/governance/diagrams/layers.md) — 2.1KB / 2025-08-29T06:25:10.896670
-- [docs/governance/diagrams/lifecycle.md](docs/governance/diagrams/lifecycle.md) — 1.9KB / 2025-08-29T06:25:10.896670
-- [docs/governance/docs_checklist.md](docs/governance/docs_checklist.md) — 5.8KB / 2025-08-29T06:25:10.896670
-- [docs/governance/energy_cap.md](docs/governance/energy_cap.md) — 2.3KB / 2025-08-29T06:25:10.896670
-- [docs/governance/governance_model.md](docs/governance/governance_model.md) — 10.1KB / 2025-08-29T06:25:10.896670
-- [docs/governance/whitepaper-adam.md](docs/governance/whitepaper-adam.md) — 12.0KB / 2025-08-29T06:25:10.896670
-- [docs/governance/whitepaper-SBT.md](docs/governance/whitepaper-SBT.md) — 12.5KB / 2025-08-29T06:25:10.896670
-- [docs/index-broken.html](docs/index-broken.html) — 10.2KB / 2025-08-29T06:25:10.896670
-- [docs/index.html](docs/index.html) — 21.4KB / 2025-08-29T06:25:10.896670
-- [docs/index_horizontal-copy.html](docs/index_horizontal-copy.html) — 46.8KB / 2025-08-29T06:25:10.897670
-- [docs/index_horizontal.html](docs/index_horizontal.html) — 72.5KB / 2025-08-29T06:25:10.897670
-- [docs/transparency.html](docs/transparency.html) — 24.5KB / 2025-08-29T06:25:10.897670
-- [docs/whitepaper.html](docs/whitepaper.html) — 7.8KB / 2025-08-29T06:25:10.897670
+- [docs/airdrop_interface.html](docs/airdrop_interface.html) — 10.1KB / 2025-08-29T06:30:42.315415
+- [docs/archive/README.md](docs/archive/README.md) — 398.0B / 2025-08-29T06:30:42.315415
+- [docs/assets/images/download (1).jpeg](docs/assets/images/download (1).jpeg) — 34.9KB / 2025-08-29T06:30:42.315415
+- [docs/assets/images/download (2).jpeg](docs/assets/images/download (2).jpeg) — 61.4KB / 2025-08-29T06:30:42.315415
+- [docs/assets/images/download (3).jpeg](docs/assets/images/download (3).jpeg) — 56.7KB / 2025-08-29T06:30:42.316415
+- [docs/assets/images/download.jpeg](docs/assets/images/download.jpeg) — 85.9KB / 2025-08-29T06:30:42.316415
+- [docs/assets/index-CXsZFpx3.js](docs/assets/index-CXsZFpx3.js) — 549.2KB / 2025-08-29T06:30:42.319415
+- [docs/assets/lod (1).fbx](docs/assets/lod (1).fbx) — 2.1MB / 2025-08-29T06:30:42.330415
+- [docs/assets/lod (2).fbx](docs/assets/lod (2).fbx) — 2.1MB / 2025-08-29T06:30:42.333415
+- [docs/assets/lod (3).fbx](docs/assets/lod (3).fbx) — 2.1MB / 2025-08-29T06:30:42.335415
+- [docs/assets/lod.fbx](docs/assets/lod.fbx) — 2.1MB / 2025-08-29T06:30:42.336415
+- [docs/assets/logos/arcx_logo1-modified.png](docs/assets/logos/arcx_logo1-modified.png) — 1.4MB / 2025-08-29T06:30:42.339415
+- [docs/assets/logos/av-black-logo-removebg-preview.png](docs/assets/logos/av-black-logo-removebg-preview.png) — 28.0KB / 2025-08-29T06:30:42.339415
+- [docs/assets/logos/av-white-logo-removebg-preview.png](docs/assets/logos/av-white-logo-removebg-preview.png) — 33.1KB / 2025-08-29T06:30:42.339415
+- [docs/assets/logos/base-logo.png](docs/assets/logos/base-logo.png) — 2.2KB / 2025-08-29T06:30:42.339415
+- [docs/auction_interface.html](docs/auction_interface.html) — 8.0KB / 2025-08-29T06:30:42.339415
+- [docs/bridge.html](docs/bridge.html) — 31.1KB / 2025-08-29T06:30:42.339415
+- [docs/documentation.html](docs/documentation.html) — 24.1KB / 2025-08-29T06:30:42.340415
+- [docs/draft.html](docs/draft.html) — 155.9KB / 2025-08-29T06:30:42.340415
+- [docs/environment/CODE_OF_CONDUCT.md](docs/environment/CODE_OF_CONDUCT.md) — 6.2KB / 2025-08-29T06:30:42.340415
+- [docs/environment/CONTRIBUTING.md](docs/environment/CONTRIBUTING.md) — 11.9KB / 2025-08-29T06:30:42.340415
+- [docs/environment/DEPLOYMENT_README.md](docs/environment/DEPLOYMENT_README.md) — 5.8KB / 2025-08-29T06:30:42.340415
+- [docs/environment/ENVIRONMENT_SETUP.md](docs/environment/ENVIRONMENT_SETUP.md) — 5.4KB / 2025-08-29T06:30:42.340415
+- [docs/environment/README.md](docs/environment/README.md) — 1.1KB / 2025-08-29T06:30:42.340415
+- [docs/environment/SBT_TOKENS_DEPLOYMENT_README.md](docs/environment/SBT_TOKENS_DEPLOYMENT_README.md) — 4.9KB / 2025-08-29T06:30:42.340415
+- [docs/environment/V4_LP_DEPLOYMENT_SUMMARY.md](docs/environment/V4_LP_DEPLOYMENT_SUMMARY.md) — 2.5KB / 2025-08-29T06:30:42.341415
+- [docs/governance/assets/arcx_lp_nft.mp4](docs/governance/assets/arcx_lp_nft.mp4) — 353.2KB / 2025-08-29T06:30:42.342415
+- [docs/governance/assets/lod (1).fbx](docs/governance/assets/lod (1).fbx) — 2.1MB / 2025-08-29T06:30:42.344415
+- [docs/governance/assets/lod (2).fbx](docs/governance/assets/lod (2).fbx) — 2.1MB / 2025-08-29T06:30:42.346415
+- [docs/governance/assets/lod (3).fbx](docs/governance/assets/lod (3).fbx) — 2.1MB / 2025-08-29T06:30:42.347415
+- [docs/governance/assets/lod.fbx](docs/governance/assets/lod.fbx) — 2.1MB / 2025-08-29T06:30:42.349415
+- [docs/governance/deployment_plan.md](docs/governance/deployment_plan.md) — 828.0B / 2025-08-29T06:30:42.349415
+- [docs/governance/diagrams/arc.png](docs/governance/diagrams/arc.png) — 198.8KB / 2025-08-29T06:30:42.350415
+- [docs/governance/diagrams/arc_map.md](docs/governance/diagrams/arc_map.md) — 7.1KB / 2025-08-29T06:30:42.350415
+- [docs/governance/diagrams/enerygy_cap.md](docs/governance/diagrams/enerygy_cap.md) — 3.9KB / 2025-08-29T06:30:42.350415
+- [docs/governance/diagrams/layers.md](docs/governance/diagrams/layers.md) — 2.1KB / 2025-08-29T06:30:42.350415
+- [docs/governance/diagrams/lifecycle.md](docs/governance/diagrams/lifecycle.md) — 1.9KB / 2025-08-29T06:30:42.350415
+- [docs/governance/docs_checklist.md](docs/governance/docs_checklist.md) — 5.8KB / 2025-08-29T06:30:42.350415
+- [docs/governance/energy_cap.md](docs/governance/energy_cap.md) — 2.3KB / 2025-08-29T06:30:42.350415
+- [docs/governance/governance_model.md](docs/governance/governance_model.md) — 10.1KB / 2025-08-29T06:30:42.350415
+- [docs/governance/whitepaper-adam.md](docs/governance/whitepaper-adam.md) — 12.0KB / 2025-08-29T06:30:42.350415
+- [docs/governance/whitepaper-SBT.md](docs/governance/whitepaper-SBT.md) — 12.5KB / 2025-08-29T06:30:42.350415
+- [docs/index-broken.html](docs/index-broken.html) — 10.2KB / 2025-08-29T06:30:42.350415
+- [docs/index.html](docs/index.html) — 21.4KB / 2025-08-29T06:30:42.351415
+- [docs/index_horizontal-copy.html](docs/index_horizontal-copy.html) — 46.8KB / 2025-08-29T06:30:42.351415
+- [docs/index_horizontal.html](docs/index_horizontal.html) — 72.5KB / 2025-08-29T06:30:42.351415
+- [docs/transparency.html](docs/transparency.html) — 24.5KB / 2025-08-29T06:30:42.351415
+- [docs/whitepaper.html](docs/whitepaper.html) — 7.8KB / 2025-08-29T06:30:42.351415
 ### functions.json
 
-- [functions.json](functions.json) — 19.8KB / 2025-08-29T06:25:10.897670
+- [functions.json](functions.json) — 19.8KB / 2025-08-29T06:30:42.351415
 ### gas-report.txt
 
-- [gas-report.txt](gas-report.txt) — 2.8KB / 2025-08-29T06:25:10.897670
+- [gas-report.txt](gas-report.txt) — 2.8KB / 2025-08-29T06:30:42.351415
 ### hardhat.config.ts
 
-- [hardhat.config.ts](hardhat.config.ts) — 2.6KB / 2025-08-29T06:25:10.897670
+- [hardhat.config.ts](hardhat.config.ts) — 2.6KB / 2025-08-29T06:30:42.352415
 ### js
 
-- [js/airdrop.js](js/airdrop.js) — 7.6KB / 2025-08-29T06:25:10.898670
-- [js/auction-gh-pages.js](js/auction-gh-pages.js) — 17.3KB / 2025-08-29T06:25:10.898670
-- [js/auction.js](js/auction.js) — 14.0KB / 2025-08-29T06:25:10.898670
+- [js/airdrop.js](js/airdrop.js) — 7.6KB / 2025-08-29T06:30:42.352415
+- [js/auction-gh-pages.js](js/auction-gh-pages.js) — 17.3KB / 2025-08-29T06:30:42.352415
+- [js/auction.js](js/auction.js) — 14.0KB / 2025-08-29T06:30:42.352415
 ### LICENSE
 
-- [LICENSE](LICENSE) — 2.9KB / 2025-08-29T06:25:10.856670
+- [LICENSE](LICENSE) — 2.9KB / 2025-08-29T06:30:42.310415
 ### package.json
 
-- [package.json](package.json) — 4.1KB / 2025-08-29T06:25:10.898670
+- [package.json](package.json) — 4.1KB / 2025-08-29T06:30:42.352415
 ### README.md
 
-- [README.md](README.md) — 12.2KB / 2025-08-29T06:25:10.856670
+- [README.md](README.md) — 12.2KB / 2025-08-29T06:30:42.310415
 ### real_world_assets.md
 
-- [real_world_assets.md](real_world_assets.md) — 12.7KB / 2025-08-29T06:25:10.898670
+- [real_world_assets.md](real_world_assets.md) — 12.7KB / 2025-08-29T06:30:42.352415
 ### scripts
 
-- [scripts/allocation-summary.ts](scripts/allocation-summary.ts) — 7.2KB / 2025-08-29T06:25:10.898670
-- [scripts/auction-monitor.ts](scripts/auction-monitor.ts) — 13.4KB / 2025-08-29T06:25:10.898670
-- [scripts/audit-trail.ts](scripts/audit-trail.ts) — 14.3KB / 2025-08-29T06:25:10.899670
-- [scripts/deploy.ts](scripts/deploy.ts) — 8.8KB / 2025-08-29T06:25:10.899670
-- [scripts/deploy_arcs_token.ts](scripts/deploy_arcs_token.ts) — 4.5KB / 2025-08-29T06:25:10.899670
-- [scripts/deploy_defi.ts](scripts/deploy_defi.ts) — 5.9KB / 2025-08-29T06:25:10.899670
-- [scripts/deploy_sbt.ts](scripts/deploy_sbt.ts) — 6.9KB / 2025-08-29T06:25:10.899670
-- [scripts/DEPLOYMENT_README.md](scripts/DEPLOYMENT_README.md) — 5.8KB / 2025-08-29T06:25:10.898670
-- [scripts/final-cleanup-audit.ts](scripts/final-cleanup-audit.ts) — 5.6KB / 2025-08-29T06:25:10.899670
-- [scripts/finalize-auction.ts](scripts/finalize-auction.ts) — 4.6KB / 2025-08-29T06:25:10.899670
-- [scripts/grant-auction-admin.ts](scripts/grant-auction-admin.ts) — 1.9KB / 2025-08-29T06:25:10.899670
-- [scripts/health-check.ts](scripts/health-check.ts) — 25.3KB / 2025-08-29T06:25:10.899670
-- [scripts/inspect-tx.js](scripts/inspect-tx.js) — 3.1KB / 2025-08-29T06:25:10.899670
-- [scripts/liquidity.ts](scripts/liquidity.ts) — 9.0KB / 2025-08-29T06:25:10.899670
-- [scripts/live-monitor.ts](scripts/live-monitor.ts) — 10.7KB / 2025-08-29T06:25:10.899670
-- [scripts/lp-history.ts](scripts/lp-history.ts) — 7.4KB / 2025-08-29T06:25:10.899670
-- [scripts/query-position.ts](scripts/query-position.ts) — 1.9KB / 2025-08-29T06:25:10.899670
-- [scripts/quick-audit.ts](scripts/quick-audit.ts) — 4.1KB / 2025-08-29T06:25:10.899670
-- [scripts/README.md](scripts/README.md) — 6.2KB / 2025-08-29T06:25:10.898670
-- [scripts/revoke-excess-roles.ts](scripts/revoke-excess-roles.ts) — 2.5KB / 2025-08-29T06:25:10.899670
-- [scripts/SBT_TOKENS_DEPLOYMENT_README.md](scripts/SBT_TOKENS_DEPLOYMENT_README.md) — 4.9KB / 2025-08-29T06:25:10.898670
-- [scripts/shared/constants.ts](scripts/shared/constants.ts) — 3.4KB / 2025-08-29T06:25:10.899670
-- [scripts/shared/utils.ts](scripts/shared/utils.ts) — 7.8KB / 2025-08-29T06:25:10.900670
-- [scripts/status.ts](scripts/status.ts) — 9.4KB / 2025-08-29T06:25:10.900670
+- [scripts/allocation-summary.ts](scripts/allocation-summary.ts) — 7.2KB / 2025-08-29T06:30:42.352415
+- [scripts/auction-monitor.ts](scripts/auction-monitor.ts) — 13.4KB / 2025-08-29T06:30:42.352415
+- [scripts/audit-trail.ts](scripts/audit-trail.ts) — 14.3KB / 2025-08-29T06:30:42.353415
+- [scripts/deploy.ts](scripts/deploy.ts) — 8.8KB / 2025-08-29T06:30:42.353415
+- [scripts/deploy_arcs_token.ts](scripts/deploy_arcs_token.ts) — 5.1KB / 2025-08-29T06:30:42.353415
+- [scripts/deploy_defi.ts](scripts/deploy_defi.ts) — 7.5KB / 2025-08-29T06:30:42.353415
+- [scripts/deploy_sbt.ts](scripts/deploy_sbt.ts) — 8.1KB / 2025-08-29T06:30:42.353415
+- [scripts/final-cleanup-audit.ts](scripts/final-cleanup-audit.ts) — 5.6KB / 2025-08-29T06:30:42.353415
+- [scripts/finalize-auction.ts](scripts/finalize-auction.ts) — 4.6KB / 2025-08-29T06:30:42.353415
+- [scripts/grant-auction-admin.ts](scripts/grant-auction-admin.ts) — 1.9KB / 2025-08-29T06:30:42.353415
+- [scripts/health-check.ts](scripts/health-check.ts) — 25.3KB / 2025-08-29T06:30:42.353415
+- [scripts/inspect-tx.js](scripts/inspect-tx.js) — 3.1KB / 2025-08-29T06:30:42.353415
+- [scripts/liquidity.ts](scripts/liquidity.ts) — 9.0KB / 2025-08-29T06:30:42.353415
+- [scripts/live-monitor.ts](scripts/live-monitor.ts) — 10.7KB / 2025-08-29T06:30:42.353415
+- [scripts/lp-history.ts](scripts/lp-history.ts) — 7.4KB / 2025-08-29T06:30:42.353415
+- [scripts/query-position.ts](scripts/query-position.ts) — 1.9KB / 2025-08-29T06:30:42.353415
+- [scripts/quick-audit.ts](scripts/quick-audit.ts) — 4.1KB / 2025-08-29T06:30:42.353415
+- [scripts/README.md](scripts/README.md) — 6.2KB / 2025-08-29T06:30:42.352415
+- [scripts/revoke-excess-roles.ts](scripts/revoke-excess-roles.ts) — 2.5KB / 2025-08-29T06:30:42.353415
+- [scripts/shared/constants.ts](scripts/shared/constants.ts) — 3.4KB / 2025-08-29T06:30:42.354415
+- [scripts/shared/utils.ts](scripts/shared/utils.ts) — 7.8KB / 2025-08-29T06:30:42.354415
+- [scripts/status.ts](scripts/status.ts) — 9.4KB / 2025-08-29T06:30:42.354415
 ### src
 
-- [src/components/arc_roadmap.html](src/components/arc_roadmap.html) — 9.0KB / 2025-08-29T06:25:10.900670
-- [src/components/roadmap.tsx](src/components/roadmap.tsx) — 22.6KB / 2025-08-29T06:25:10.900670
-- [src/components/votingsystem.tsx](src/components/votingsystem.tsx) — 26.8KB / 2025-08-29T06:25:10.900670
+- [src/components/arc_roadmap.html](src/components/arc_roadmap.html) — 9.0KB / 2025-08-29T06:30:42.354415
+- [src/components/roadmap.tsx](src/components/roadmap.tsx) — 22.6KB / 2025-08-29T06:30:42.354415
+- [src/components/votingsystem.tsx](src/components/votingsystem.tsx) — 26.8KB / 2025-08-29T06:30:42.354415
 ### status_report.md.md
 
-- [status_report.md.md](status_report.md.md) — 29.9KB / 2025-08-29T06:25:10.900670
+- [status_report.md.md](status_report.md.md) — 29.9KB / 2025-08-29T06:30:42.354415
 ### tests
 
-- [tests/ARCx.test.ts](tests/ARCx.test.ts) — 2.8KB / 2025-08-29T06:25:10.900670
-- [tests/ARCxDutchAuction.test.ts](tests/ARCxDutchAuction.test.ts) — 2.3KB / 2025-08-29T06:25:10.900670
-- [tests/ARCxMasterVesting.test.ts](tests/ARCxMasterVesting.test.ts) — 17.8KB / 2025-08-29T06:25:10.900670
-- [tests/ARCxSmartAirdrop.test.ts](tests/ARCxSmartAirdrop.test.ts) — 8.1KB / 2025-08-29T06:25:10.900670
-- [tests/ARCxToken.test.ts](tests/ARCxToken.test.ts) — 11.6KB / 2025-08-29T06:25:10.900670
-- [tests/test_results.md](tests/test_results.md) — 1.9KB / 2025-08-29T06:25:10.900670
+- [tests/ARCx.test.ts](tests/ARCx.test.ts) — 2.8KB / 2025-08-29T06:30:42.354415
+- [tests/ARCxDutchAuction.test.ts](tests/ARCxDutchAuction.test.ts) — 2.3KB / 2025-08-29T06:30:42.354415
+- [tests/ARCxMasterVesting.test.ts](tests/ARCxMasterVesting.test.ts) — 17.8KB / 2025-08-29T06:30:42.354415
+- [tests/ARCxSmartAirdrop.test.ts](tests/ARCxSmartAirdrop.test.ts) — 8.1KB / 2025-08-29T06:30:42.354415
+- [tests/ARCxToken.test.ts](tests/ARCxToken.test.ts) — 11.6KB / 2025-08-29T06:30:42.354415
+- [tests/test_results.md](tests/test_results.md) — 1.9KB / 2025-08-29T06:30:42.355415
 ### tools
 
-- [tools/code_indexer.py](tools/code_indexer.py) — 7.2KB / 2025-08-29T06:25:10.901670
-- [tools/install_git_hooks.ps1](tools/install_git_hooks.ps1) — 851.0B / 2025-08-29T06:25:10.901670
+- [tools/code_indexer.py](tools/code_indexer.py) — 7.2KB / 2025-08-29T06:30:42.355415
+- [tools/install_git_hooks.ps1](tools/install_git_hooks.ps1) — 851.0B / 2025-08-29T06:30:42.355415
 ### tsconfig.json
 
-- [tsconfig.json](tsconfig.json) — 589.0B / 2025-08-29T06:25:10.901670
+- [tsconfig.json](tsconfig.json) — 589.0B / 2025-08-29T06:30:42.355415
 
 ---
 
