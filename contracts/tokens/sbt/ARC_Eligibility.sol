@@ -19,7 +19,7 @@ import "./ARC_IdentitySBT.sol";
  * - Integration with Identity SBT
  * - Configurable topic parameters
  */
-contract ARCxEligibility is
+contract ARC_Eligibility is
     Initializable,
     UUPSUpgradeable,
     AccessControlUpgradeable,
