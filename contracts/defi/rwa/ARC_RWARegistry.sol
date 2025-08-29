@@ -22,7 +22,7 @@ import "@openzeppelin/contracts-upgradeable/utils/cryptography/ECDSAUpgradeable.
  * - Slashing mechanism
  * - Emergency controls
  */
-contract ARCxRWARegistry is
+contract ARC_RWARegistry is
     Initializable,
     UUPSUpgradeable,
     AccessControlUpgradeable,
@@ -169,8 +169,8 @@ contract ARCxRWARegistry is
         bytes32 rwaId,
         bytes32 metadataHash
     ) external nonReentrant whenNotPaused {
-        require(rwaSchemas[schemaId].active, "ARCxRWARegistry: Invalid schema");
-        require(rwaRecords[rwaId].registeredAt == 0, "ARCxRWARegistry: RWA already exists");
+        require(rwaSchemas[schemaId].active, "ARC_RWARegistry: Invalid schema");
+        require(rwaRecords[rwaId].registeredAt == 0, "ARC_RWARegistry: RWA already exists");
 
         rwaRecords[rwaId] = RWARecord({
             schemaId: schemaId,
@@ -193,8 +193,8 @@ contract ARCxRWARegistry is
      */
     function approveRWA(bytes32 rwaId) external onlyRole(CURATOR_ROLE) {
         RWARecord storage rwa = rwaRecords[rwaId];
-        require(rwa.registeredAt != 0, "ARCxRWARegistry: RWA not found");
-        require(rwa.status == RWAStatus.PROPOSED, "ARCxRWARegistry: Invalid status");
+        require(rwa.registeredAt != 0, "ARC_RWARegistry: RWA not found");
+        require(rwa.status == RWAStatus.PROPOSED, "ARC_RWARegistry: Invalid status");
 
         rwa.status = RWAStatus.APPROVED;
         rwa.lastUpdated = block.timestamp;
@@ -207,7 +207,7 @@ contract ARCxRWARegistry is
      */
     function activateRWA(bytes32 rwaId) external onlyRole(CURATOR_ROLE) {
         RWARecord storage rwa = rwaRecords[rwaId];
-        require(rwa.status == RWAStatus.APPROVED, "ARCxRWARegistry: Not approved");
+        require(rwa.status == RWAStatus.APPROVED, "ARC_RWARegistry: Not approved");
 
         rwa.status = RWAStatus.ACTIVE;
         rwa.lastUpdated = block.timestamp;
@@ -224,8 +224,8 @@ contract ARCxRWARegistry is
         bytes32 newMetadataHash
     ) external {
         RWARecord storage rwa = rwaRecords[rwaId];
-        require(rwa.registrant == msg.sender, "ARCxRWARegistry: Not registrant");
-        require(rwa.status == RWAStatus.ACTIVE, "ARCxRWARegistry: Not active");
+        require(rwa.registrant == msg.sender, "ARC_RWARegistry: Not registrant");
+        require(rwa.status == RWAStatus.ACTIVE, "ARC_RWARegistry: Not active");
 
         rwa.metadataHash = newMetadataHash;
         rwa.lastUpdated = block.timestamp;
@@ -238,8 +238,8 @@ contract ARCxRWARegistry is
      */
     function attestRWA(bytes32 rwaId, bool approved) external onlyRole(OPERATOR_ROLE) {
         RWARecord storage rwa = rwaRecords[rwaId];
-        require(rwa.registeredAt != 0, "ARCxRWARegistry: RWA not found");
-        require(!rwaAttestations[rwaId][msg.sender], "ARCxRWARegistry: Already attested");
+        require(rwa.registeredAt != 0, "ARC_RWARegistry: RWA not found");
+        require(!rwaAttestations[rwaId][msg.sender], "ARC_RWARegistry: Already attested");
 
         rwaAttestations[rwaId][msg.sender] = approved;
         rwa.attesters.push(msg.sender);
@@ -251,13 +251,13 @@ contract ARCxRWARegistry is
      * @dev Stake as an operator
      */
     function stakeAsOperator(uint256 amount) external nonReentrant whenNotPaused {
-        require(amount >= minStakeAmount, "ARCxRWARegistry: Stake too low");
-        require(operatorStakes[msg.sender].amount == 0, "ARCxRWARegistry: Already staked");
+        require(amount >= minStakeAmount, "ARC_RWARegistry: Stake too low");
+        require(operatorStakes[msg.sender].amount == 0, "ARC_RWARegistry: Already staked");
 
         // Transfer tokens
         require(
             stakingToken.transferFrom(msg.sender, address(this), amount),
-            "ARCxRWARegistry: Transfer failed"
+            "ARC_RWARegistry: Transfer failed"
         );
 
         operatorStakes[msg.sender] = OperatorStake({
@@ -280,9 +280,9 @@ contract ARCxRWARegistry is
      */
     function unstakeAsOperator() external nonReentrant {
         OperatorStake storage stake = operatorStakes[msg.sender];
-        require(stake.amount > 0, "ARCxRWARegistry: Not staked");
-        require(block.timestamp >= stake.lockedUntil, "ARCxRWARegistry: Still locked");
-        require(!stake.slashed, "ARCxRWARegistry: Stake slashed");
+        require(stake.amount > 0, "ARC_RWARegistry: Not staked");
+        require(block.timestamp >= stake.lockedUntil, "ARC_RWARegistry: Still locked");
+        require(!stake.slashed, "ARC_RWARegistry: Stake slashed");
 
         uint256 amount = stake.amount;
         stake.amount = 0;
@@ -290,7 +290,7 @@ contract ARCxRWARegistry is
         // Return tokens
         require(
             stakingToken.transfer(msg.sender, amount),
-            "ARCxRWARegistry: Transfer failed"
+            "ARC_RWARegistry: Transfer failed"
         );
 
         _revokeRole(OPERATOR_ROLE, msg.sender);
@@ -305,8 +305,8 @@ contract ARCxRWARegistry is
      */
     function slashOperator(address operator, string calldata reason) external onlyRole(SLASHER_ROLE) {
         OperatorStake storage stake = operatorStakes[operator];
-        require(stake.amount > 0, "ARCxRWARegistry: Not staked");
-        require(!stake.slashed, "ARCxRWARegistry: Already slashed");
+        require(stake.amount > 0, "ARC_RWARegistry: Not staked");
+        require(!stake.slashed, "ARC_RWARegistry: Already slashed");
 
         uint256 slashAmount = (stake.amount * slashPercentage) / 1e18;
         stake.slashed = true;
@@ -315,7 +315,7 @@ contract ARCxRWARegistry is
         // Transfer slashed amount to vault
         require(
             stakingToken.transfer(slashingVault, slashAmount),
-            "ARCxRWARegistry: Slash transfer failed"
+            "ARC_RWARegistry: Slash transfer failed"
         );
 
         // Return remaining amount
@@ -323,7 +323,7 @@ contract ARCxRWARegistry is
         if (remainingAmount > 0) {
             require(
                 stakingToken.transfer(operator, remainingAmount),
-                "ARCxRWARegistry: Return transfer failed"
+                "ARC_RWARegistry: Return transfer failed"
             );
         }
 
@@ -335,13 +335,13 @@ contract ARCxRWARegistry is
      * @dev Assign operator to RWA
      */
     function assignOperatorToRWA(bytes32 rwaId, address operator) external onlyRole(CURATOR_ROLE) {
-        require(rwaRecords[rwaId].registeredAt != 0, "ARCxRWARegistry: RWA not found");
-        require(operatorStakes[operator].amount > 0, "ARCxRWARegistry: Not an operator");
-        require(rwaOperators[rwaId].length < maxOperatorsPerRWA, "ARCxRWARegistry: Too many operators");
+        require(rwaRecords[rwaId].registeredAt != 0, "ARC_RWARegistry: RWA not found");
+        require(operatorStakes[operator].amount > 0, "ARC_RWARegistry: Not an operator");
+        require(rwaOperators[rwaId].length < maxOperatorsPerRWA, "ARC_RWARegistry: Too many operators");
 
         // Check if already assigned
         for (uint256 i = 0; i < rwaOperators[rwaId].length; i++) {
-            require(rwaOperators[rwaId][i] != operator, "ARCxRWARegistry: Already assigned");
+            require(rwaOperators[rwaId][i] != operator, "ARC_RWARegistry: Already assigned");
         }
 
         rwaOperators[rwaId].push(operator);
@@ -355,7 +355,7 @@ contract ARCxRWARegistry is
      */
     function calculateImpact(bytes32 rwaId) external returns (uint256) {
         RWARecord storage rwa = rwaRecords[rwaId];
-        require(rwa.registeredAt != 0, "ARCxRWARegistry: RWA not found");
+        require(rwa.registeredAt != 0, "ARC_RWARegistry: RWA not found");
 
         // Simplified impact calculation
         // In production, this would use the impact function

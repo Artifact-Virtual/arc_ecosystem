@@ -96,14 +96,14 @@ The ARC ecosystem implements a revolutionary **ADAM Protocol** - a deterministic
 #### **2. Identity & SBT System**
 ```solidity
 /contracts/tokens/sbt/
-├── ARCxIdentitySBT.sol    ❌ Soulbound identity tokens - MISSING
-└── ARCxEligibility.sol    ❌ Topic-based eligibility - MISSING
+├── ARC_IdentitySBT.sol    ✅ Soulbound identity tokens - IMPLEMENTED
+└── ARC_Eligibility.sol    ✅ Topic-based eligibility - IMPLEMENTED
 ```
 
 #### **3. RWA Integration**
 ```solidity
 /contracts/defi/rwa/
-├── ARCxRWARegistry.sol    ✅ RWA registration & attestation - COMPLETED
+├── ARC_RWARegistry.sol    ✅ RWA registration & attestation - COMPLETED
 ├── SlashingVault.sol      ✅ Operator stake slashing & recovery - COMPLETED
 ├── IRWARegistry.sol       ✅ Complete interface definitions - COMPLETED
 └── ARCxRWAOnboarder.sol   ❌ RWA onboarding system - MISSING
@@ -153,7 +153,7 @@ The ARC ecosystem implements a revolutionary **ADAM Protocol** - a deterministic
 
 ### **🚨 HIGH PRIORITY - Identity SBT ✅ COMPLETED**
 **Impact**: Core governance identity and eligibility system - **FULLY IMPLEMENTED**
-**Status**: ARCxIdentitySBT.sol and ARCxEligibility.sol with decay-weighted reputation
+**Status**: ARC_IdentitySBT.sol and ARC_Eligibility.sol with decay-weighted reputation
 **Remaining**: Integration testing and EAS attestation validation
 
 ### **⚠️ MEDIUM PRIORITY - RWA Registry ✅ COMPLETED**
@@ -183,13 +183,13 @@ The ARC ecosystem implements a revolutionary **ADAM Protocol** - a deterministic
 - [x] Integrate policy evaluation pipeline
 
 ### **Phase 3: Identity & SBT System ✅**
-- [x] Implement ARCxIdentitySBT.sol
-- [x] Create ARCxEligibility.sol
+- [x] Implement ARC_IdentitySBT.sol
+- [x] Create ARC_Eligibility.sol
 - [x] Integrate EAS attestations
 - [x] Add decay-weighted voting power
 
 ### **Phase 4: RWA Integration ✅**
-- [x] Build ARCxRWARegistry.sol (RWA registration & attestation)
+- [x] Build ARC_RWARegistry.sol (RWA registration & attestation)
 - [x] Implement SlashingVault.sol (Operator stake management)
 - [x] Create IRWARegistry.sol (Complete interface definitions)
 - [ ] Implement ARCxRWAOnboarder.sol (Advanced onboarding system)

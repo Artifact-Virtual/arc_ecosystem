@@ -49,7 +49,7 @@ Decay: `decay(Δ)=max(floorWad, expWad(−Δ/T))`; defaults `T=90d`, `floorWad=0
 
 `f_id(addr)=Σ roleWeight[role] * decay(addr,role)` across active, unexpired roles.
 `weightOfForTopic(addr,mask)` sums only roles where `(roleTopicMask & mask)!=0`.
-Component caps/normalization enforced in `ARCxEligibility`; SBT enforces role-level bounds only.
+Component caps/normalization enforced in `ARC_Eligibility`; SBT enforces role-level bounds only.
 
 
 ## 6. Issuers, Limits, Anti-DoS
@@ -138,7 +138,7 @@ Strict EAS schema binding; UID single-use; issuer allowlist + epoch rate-limit; 
 ## 13) Interfaces
 
 ```solidity
-interface IARCxIdentitySBT{
+interface IARC_IdentitySBT{
   event IssuerAdded(address issuer,uint256 version);
   event IssuerRemoved(address issuer,uint256 version);
   event RoleIssued(address indexed to,bytes32 indexed role,uint256 tokenId,uint256 expiresAt,string uri,bytes32 evidenceHash);
@@ -175,7 +175,7 @@ import {Pausable} from "openzeppelin/contracts/utils/Pausable.sol";
 import {ERC721} from "solady/tokens/ERC721.sol";
 import {PRBMathUD60x18} from "prb-math/PRBMathUD60x18.sol";
 interface IEAS{function getAttestation(bytes32 uid) external view returns(bytes32,address,address,uint64,uint64,bool,bytes32,bytes memory,uint256);}
-contract ARCxIdentitySBT is ERC721,AccessControl,Pausable{
+contract ARC_IdentitySBT is ERC721,AccessControl,Pausable{
   using PRBMathUD60x18 for uint256;
   bytes32 public constant ROLE_ADMIN=keccak256("ROLE_ADMIN");
   bytes32 public constant ROLE_ISSUER=keccak256("ROLE_ISSUER");

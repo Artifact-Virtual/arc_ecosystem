@@ -70,7 +70,7 @@ Static checks at Review (targets, bounds, diffs). Tally only at period end. Chal
 
 * TREASURY → `ARCxTreasury.{transfer,stream,swap,lpAdd,lpRemove}`
 * PARAMS   → `ARCxParamManager.{setUint,setAddr,setBool}` (bounds enforced)
-* ENERGY/CARBON → `ARCxRWARegistry.{attest,update}` (+ allowed `ParamManager` keys)
+* ENERGY/CARBON → `ARC_RWARegistry.{attest,update}` (+ allowed `ParamManager` keys)
 * GRANTS   → `ARCxGrants.{create,release,clawback}`
 
 ## 7. MACI Integration

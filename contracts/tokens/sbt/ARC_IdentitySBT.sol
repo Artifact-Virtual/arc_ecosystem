@@ -25,7 +25,7 @@ import { exp } from "@prb/math/src/ud60x18/Math.sol";
  * - Rate-limited issuance
  * - Comprehensive event emission
  */
-contract ARCxIdentitySBT is
+contract ARC_IdentitySBT is
     Initializable,
     UUPSUpgradeable,
     AccessControlUpgradeable,
@@ -145,12 +145,12 @@ contract ARCxIdentitySBT is
         bytes32 role,
         bytes32 uid
     ) external nonReentrant whenNotPaused {
-        require(to != address(0), "ARCxIdentitySBT: Zero address");
-        require(!consumedUID[uid], "ARCxIdentitySBT: UID already used");
-        require(hasRole(ISSUER_ROLE, msg.sender) || hasRole(ADMIN_ROLE, msg.sender), "ARCxIdentitySBT: Not issuer");
-        require(_validateEASAttestation(to, role, uid), "ARCxIdentitySBT: Invalid EAS attestation");
-        require(_checkRateLimit(), "ARCxIdentitySBT: Rate limited");
-        require(rolesList[to].length < maxRolesPerAddress, "ARCxIdentitySBT: Too many roles");
+        require(to != address(0), "ARC_IdentitySBT: Zero address");
+        require(!consumedUID[uid], "ARC_IdentitySBT: UID already used");
+        require(hasRole(ISSUER_ROLE, msg.sender) || hasRole(ADMIN_ROLE, msg.sender), "ARC_IdentitySBT: Not issuer");
+        require(_validateEASAttestation(to, role, uid), "ARC_IdentitySBT: Invalid EAS attestation");
+        require(_checkRateLimit(), "ARC_IdentitySBT: Rate limited");
+        require(rolesList[to].length < maxRolesPerAddress, "ARC_IdentitySBT: Too many roles");
 
         // Check if role already exists (handle re-issuance)
         RoleRec storage existingRole = roles[to][role];
@@ -205,10 +205,10 @@ contract ARCxIdentitySBT is
             hasRole(ADMIN_ROLE, msg.sender) ||
             hasRole(ISSUER_ROLE, msg.sender) ||
             msg.sender == owner,
-            "ARCxIdentitySBT: Not authorized"
+            "ARC_IdentitySBT: Not authorized"
         );
 
-        require(roles[owner][role].active, "ARCxIdentitySBT: Role not active");
+        require(roles[owner][role].active, "ARC_IdentitySBT: Role not active");
 
         // Mark role as inactive
         roles[owner][role].active = false;
@@ -230,8 +230,8 @@ contract ARCxIdentitySBT is
      * @dev Update heartbeat for a role
      */
     function heartbeat(bytes32 role) external {
-        require(roles[msg.sender][role].active, "ARCxIdentitySBT: Role not active");
-        require(block.timestamp <= roles[msg.sender][role].expiresAt, "ARCxIdentitySBT: Role expired");
+        require(roles[msg.sender][role].active, "ARC_IdentitySBT: Role not active");
+        require(block.timestamp <= roles[msg.sender][role].expiresAt, "ARC_IdentitySBT: Role expired");
 
         roles[msg.sender][role].lastBeat = uint64(block.timestamp);
 
@@ -295,7 +295,7 @@ contract ARCxIdentitySBT is
     function roleOf(uint256 tokenId) public view returns (bytes32) {
         // This is a simplified implementation
         // In production, you'd maintain a reverse mapping
-        revert("ARCxIdentitySBT: Not implemented - requires reverse mapping");
+        revert("ARC_IdentitySBT: Not implemented - requires reverse mapping");
     }
 
     /**
@@ -309,7 +309,7 @@ contract ARCxIdentitySBT is
      * @dev Set role weight
      */
     function setRoleWeight(bytes32 role, uint256 weightWad) external onlyRole(ADMIN_ROLE) {
-        require(weightWad <= 1e18, "ARCxIdentitySBT: Weight too high");
+        require(weightWad <= 1e18, "ARC_IdentitySBT: Weight too high");
         roleDefaultWeightWad[role] = weightWad;
 
         emit RoleWeightSet(role, weightWad);
@@ -319,7 +319,7 @@ contract ARCxIdentitySBT is
      * @dev Set topic mask for role
      */
     function setTopicMask(bytes32 role, uint256 topicMask) external onlyRole(ADMIN_ROLE) {
-        require(topicMask <= LAYER_MASK_ALL, "ARCxIdentitySBT: Invalid topic mask");
+        require(topicMask <= LAYER_MASK_ALL, "ARC_IdentitySBT: Invalid topic mask");
         roleTopicMask[role] = topicMask;
 
         emit TopicMaskSet(role, topicMask);
@@ -329,7 +329,7 @@ contract ARCxIdentitySBT is
      * @dev Add issuer
      */
     function addIssuer(address issuer) external onlyRole(ADMIN_ROLE) {
-        require(issuer != address(0), "ARCxIdentitySBT: Zero address");
+        require(issuer != address(0), "ARC_IdentitySBT: Zero address");
         isIssuer[issuer] = true;
 
         emit IssuerAdded(issuer, block.timestamp);
@@ -357,7 +357,7 @@ contract ARCxIdentitySBT is
         } else if (key == keccak256("decay_T_seconds")) {
             decay_T_seconds = value;
         } else if (key == keccak256("decay_floorWad")) {
-            require(value <= 1e18, "ARCxIdentitySBT: Invalid floor");
+            require(value <= 1e18, "ARC_IdentitySBT: Invalid floor");
             decay_floorWad = value;
         }
 

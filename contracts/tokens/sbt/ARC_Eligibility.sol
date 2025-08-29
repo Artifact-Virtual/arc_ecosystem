@@ -5,7 +5,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
-import "./ARCxIdentitySBT.sol";
+import "./ARC_IdentitySBT.sol";
 
 /**
  * @title ARCx Eligibility - Topic-Based Governance Eligibility
@@ -53,7 +53,7 @@ contract ARCxEligibility is
     }
 
     // State variables
-    ARCxIdentitySBT public identitySBT;
+    ARC_IdentitySBT public identitySBT;
     mapping(uint256 => TopicConfig) public topicConfigs;
     mapping(address => EligibilityComponents) public eligibilityComponents;
 
@@ -90,7 +90,7 @@ contract ARCxEligibility is
         _grantRole(ADMIN_ROLE, msg.sender);
         _grantRole(CONFIG_ROLE, msg.sender);
 
-        identitySBT = ARCxIdentitySBT(_identitySBT);
+        identitySBT = ARC_IdentitySBT(_identitySBT);
 
         // Initialize default topic configurations
         _initializeDefaultTopics();
@@ -205,9 +205,9 @@ contract ARCxEligibility is
         uint256 votingDays,
         uint256 timelockDays
     ) external onlyRole(CONFIG_ROLE) {
-        require(quorumWad <= 1e18, "ARCxEligibility: Invalid quorum");
-        require(supermajorityWad <= 1e18, "ARCxEligibility: Invalid supermajority");
-        require(supermajorityWad >= quorumWad, "ARCxEligibility: Supermajority < quorum");
+        require(quorumWad <= 1e18, "ARC_Eligibility: Invalid quorum");
+        require(supermajorityWad <= 1e18, "ARC_Eligibility: Invalid supermajority");
+        require(supermajorityWad >= quorumWad, "ARC_Eligibility: Supermajority < quorum");
 
         topicConfigs[topicId] = TopicConfig({
             quorumWad: quorumWad,

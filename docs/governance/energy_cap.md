@@ -9,7 +9,7 @@ flowchart TD
     D -->|validated diff| E[ARCxGovernor]
     E -->|vote + tally| F[Timelock & Challenge Window]
     F -->|passed + delay| G[ARCxExecutor]
-    G -->|safe module call| H[ARCxRWARegistry]
+    G -->|safe module call| H[ARC_RWARegistry]
     H -->|attest energy data + enforce bounds| I[Protocol Params Updated]
 ````
 
