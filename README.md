@@ -1,5 +1,7 @@
 ## THE**ARC**
 
+> Ecosystem Repository
+
 A comprehensive decentralized autonomous organization (DAO) and governance system for the ARC ecosystem, featuring multiple voting mechanisms, secure timelock controls, and modular contract architecture.
 
 [![Node.js](https://img.shields.io/badge/Node.js-16.x-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/) [![Hardhat](https://img.shields.io/badge/Hardhat-2.12.x-ff8c00?style=flat-square&logo=hardhat&logoColor=white)](https://hardhat.org/) [![OpenZeppelin](https://img.shields.io/badge/OpenZeppelin-4.8.x-205081?style=flat-square&logo=openzeppelin&logoColor=white)](https://openzeppelin.com/) [![Ethers.js](https://img.shields.io/badge/Ethers.js-5.x-3C3C3D?style=flat-square&logo=ethersdotjs&logoColor=white)](https://docs.ethers.io/v5/)
