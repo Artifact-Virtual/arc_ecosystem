@@ -1,16 +1,18 @@
 # FUNDING CONFIGURATION
 
 github: [] # Add up to 4 GitHub Sponsors usernames here
-patreon: ali.shakil@artifactvirtual.com
-buy_me_a_coffee: amuzetnoM
+
 custom:
     # ARC TreasurySafe (ETH) - Capital
-    - '0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38'
+    - 'ETHTreasury-0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38'
     # ARC Deployer Wallet (ETH) - Development
-    - '0x21E914dFBB137F7fEC896F11bC8BAd6BCCDB147B'
+    - 'ETHDeployer-0x21E914dFBB137F7fEC896F11bC8BAd6BCCDB147B'
     # ARC SOL (SOL) - Testing
-    - '78KUr1C6WzWGzDZvVaMpzqcqdQo3keMxeGYkouXd5ki1'
+    - 'SOLTesting-78KUr1C6WzWGzDZvVaMpzqcqdQo3keMxeGYkouXd5ki1'
     # SUPPORT THE DEVELOPER
-    - 'amuzetnom.cb.id' 
-    - '0x2b446CcB4c758c01C7D04a16E43758551F629102' # ETH
-    - 'bc1pq2jkahm0jjrlp2tkzv86pjes3yjm2ggejm7ksuatc76rer2egtzsgzhf5m' # BTC
+    - 'base:amuzetnom.cb.id' 
+    - 'ETH-0x2b446CcB4c758c01C7D04a16E43758551F629102' 
+    - 'BTC-bc1pq2jkahm0jjrlp2tkzv86pjes3yjm2ggejm7ksuatc76rer2egtzsgzhf5m'
+
+patreon: ali.shakil@artifactvirtual.com
+buy_me_a_coffee: amuzetnoM
