@@ -7,14 +7,9 @@
 # Custom funding links (max 4)
 custom:
   # ARC Treasury Safe (ETH) - Main Treasury
-  - '0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38'
+  - TreasurySafe:'https://app.safe.global/home?safe=eth:0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38'
   # ARC Deployer Wallet (ETH) - Development
-  - '0x21E914dFBB137F7fEC896F11bC8BAd6BCCDB147B'
-  # Developer Support (ETH)
-  - '0x2b446CcB4c758c01C7D04a16E43758551F629102'
-  # Buy Me a Coffee
-  - 'https://www.buymeacoffee.com/amuzetnoM'
-
+  - DeployerWallet:'https://app.safe.global/home?safe=eth:0x21E914dFBB137F7fEC896F11bC8BAd6BCCDB147B'
 
 # Patreon
 patreon: ali.shakil@artifactvirtual.com
