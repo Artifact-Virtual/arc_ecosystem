@@ -1,0 +1,152 @@
+graph TD
+
+    33["User<br>External Actor"]
+    subgraph 1["Build &amp; Configuration System<br>Node.js/TypeScript/YAML"]
+        subgraph 2["Version Control &amp; CI/CD<br>Git/YAML"]
+            109[".gitignore<br>Git"]
+            110["Git Hooks<br>Bash"]
+            111["GitHub Workflows<br>YAML"]
+        end
+        subgraph 3["Code Quality &amp; Style<br>JSON/JavaScript"]
+            106["ESLint Config<br>JSON"]
+            107["Prettier Config<br>JSON"]
+            108["ESLint Config JS<br>JavaScript"]
+        end
+        subgraph 4["Project Configuration<br>Node.js/TypeScript"]
+            103["package.json<br>Node.js"]
+            104["Hardhat Config<br>TypeScript"]
+            105["tsconfig.json<br>TypeScript"]
+        end
+    end
+    subgraph 12["Frontend/UI System<br>React/JavaScript/CSS"]
+        83["Styling<br>CSS"]
+        subgraph 13["JavaScript Interfaces<br>JavaScript"]
+            81["Airdrop JS<br>JavaScript"]
+            82["Auction JS<br>JavaScript"]
+        end
+        subgraph 14["React Components<br>React/TypeScript"]
+            79["Roadmap<br>React/TypeScript"]
+            80["Voting System<br>React/TypeScript"]
+        end
+    end
+    subgraph 15["Off-Chain Scripting &amp; Management<br>TypeScript/JavaScript"]
+        subgraph 16["Shared Utilities<br>TypeScript"]
+            77["Constants<br>TypeScript"]
+            78["Utils<br>TypeScript"]
+        end
+        subgraph 17["Governance Interaction Scripts<br>TypeScript"]
+            74["Check Governance<br>TypeScript"]
+            75["Governance Test: TimelockRoles<br>TypeScript/Mocha"]
+            76["Grant Auction Admin<br>TypeScript"]
+        end
+        subgraph 18["Monitoring &amp; Auditing Scripts<br>TypeScript"]
+            70["Auction Monitor<br>TypeScript"]
+            71["Audit Trail<br>TypeScript"]
+            72["Health Check<br>TypeScript"]
+            73["Quick Audit<br>TypeScript"]
+        end
+        subgraph 19["Deployment Scripts<br>TypeScript"]
+            66["General Deploy<br>TypeScript"]
+            67["Deploy ARCs Token<br>TypeScript"]
+            68["Deploy DeFi<br>TypeScript"]
+            69["Deploy SBT<br>TypeScript"]
+        end
+    end
+    subgraph 20["Smart Contract System<br>Solidity"]
+        subgraph 21["Third-Party Integrations<br>Solidity"]
+            subgraph 22["Uniswap V4<br>Solidity"]
+                62["NonfungiblePositionManager<br>Solidity"]
+                63["PositionManager<br>Solidity"]
+                64["WETHHook<br>Solidity"]
+                65["ProtocolFees<br>Solidity"]
+            end
+        end
+        subgraph 23["Token Contracts<br>Solidity"]
+            57["ARCs Token<br>Solidity"]
+            subgraph 24["Soulbound Tokens (SBT)<br>Solidity"]
+                60["ARC_Eligibility<br>Solidity"]
+                61["ARC_IdentitySBT<br>Solidity"]
+            end
+            subgraph 25["ARCx Token<br>Solidity"]
+                58["ARCx<br>Solidity"]
+                59["IERC20<br>Solidity"]
+            end
+        end
+        subgraph 26["Pool Contracts<br>Solidity"]
+            54["IPoolManager<br>Solidity"]
+            55["IPositionManager<br>Solidity"]
+            56["IWETH<br>Solidity"]
+        end
+        subgraph 27["DeFi Contracts<br>Solidity"]
+            51["Infrastructure: ARCBridge<br>Solidity"]
+            subgraph 28["Real World Assets (RWA)<br>Solidity"]
+                52["ARC_RWARegistry<br>Solidity"]
+                53["SlashingVault<br>Solidity"]
+            end
+            subgraph 29["Core DeFi Components<br>Solidity"]
+                44["ARCSwap<br>Solidity"]
+                45["ARCxDutchAuction<br>Solidity"]
+                46["ARCxSmartAirdrop<br>Solidity"]
+                47["ARCxStakingVault<br>Solidity"]
+                48["PenaltyVault<br>Solidity"]
+                49["StakingVault<br>Solidity"]
+                50["TreasuryRewards<br>Solidity"]
+            end
+        end
+        subgraph 30["DAO Contracts<br>Solidity"]
+            subgraph 31["Governance Contracts<br>Solidity"]
+                37["ARCDAO<br>Solidity"]
+                38["ARCGovernor<br>Solidity"]
+                39["ARCProposal<br>Solidity"]
+                40["ARCTimelock<br>Solidity"]
+                41["ARCTreasury<br>Solidity"]
+                42["ARCVoting<br>Solidity"]
+                43["Governance Interfaces<br>Solidity"]
+            end
+            subgraph 32["Adam Protocol<br>Solidity"]
+                34["AdamHost<br>Solidity"]
+                35["AdamRegistry<br>Solidity"]
+                36["Adam Interfaces<br>Solidity"]
+            end
+        end
+    end
+    subgraph 5["Documentation System<br>HTML/Markdown"]
+        subgraph 6["Documentation Assets<br>Various"]
+            100["Images<br>Various"]
+            101["Logos<br>Various"]
+            102["3D Model Assets<br>FBX"]
+        end
+        subgraph 7["Markdown Documentation<br>Markdown"]
+            96["Env README<br>Markdown"]
+            97["Deployment README<br>Markdown"]
+            98["Governance Model<br>Markdown"]
+            99["Adam Whitepaper<br>Markdown"]
+        end
+        subgraph 8["HTML Documentation<br>HTML"]
+            92["Index HTML<br>HTML"]
+            93["Airdrop Interface HTML<br>HTML"]
+            94["Auction Interface HTML<br>HTML"]
+            95["Whitepaper HTML<br>HTML"]
+        end
+    end
+    subgraph 9["Testing System<br>TypeScript/Mocha"]
+        91["Test Helpers<br>TypeScript"]
+        subgraph 10["Security Tests<br>TypeScript/Mocha"]
+            88["Bridge Security Test<br>TypeScript"]
+            89["General Security Test<br>TypeScript"]
+            90["Token Security Test<br>TypeScript"]
+        end
+        subgraph 11["Unit/Integration Tests<br>TypeScript/Mocha"]
+            84["ARCx Test<br>TypeScript"]
+            85["ARCxDutchAuction Test<br>TypeScript"]
+            86["ARCxSmartAirdrop Test<br>TypeScript"]
+            87["Integration Test<br>TypeScript"]
+        end
+    end
+    %% Edges at this level (grouped by source)
+    1["Build &amp; Configuration System<br>Node.js/TypeScript/YAML"] -->|Automates Builds & Tests| 9["Testing System<br>TypeScript/Mocha"]
+    1["Build &amp; Configuration System<br>Node.js/TypeScript/YAML"] -->|Automates Builds & Tests| 15["Off-Chain Scripting &amp; Management<br>TypeScript/JavaScript"]
+    33["User<br>External Actor"] -->|Interacts with| 12["Frontend/UI System<br>React/JavaScript/CSS"]
+    9["Testing System<br>TypeScript/Mocha"] -->|Tests| 20["Smart Contract System<br>Solidity"]
+    12["Frontend/UI System<br>React/JavaScript/CSS"] -->|Calls Smart Contracts| 20["Smart Contract System<br>Solidity"]
+    15["Off-Chain Scripting &amp; Management<br>TypeScript/JavaScript"] -->|Deploys & Manages| 20["Smart Contract System<br>Solidity"]

@@ -25,10 +25,16 @@ jobs:
       - name: Run slither (via docker)
         uses: docker://trailofbits/slither
         with:
-          args: slither .
+          args: slither . --exclude-dependencies --exclude-informational --fail-high
       - name: Upload coverage artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: coverage
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results/

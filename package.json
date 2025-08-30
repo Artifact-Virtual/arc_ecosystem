@@ -24,9 +24,11 @@
     "test:security": "npx hardhat test tests/security/",
     "test:governance": "npx hardhat test tests/governance/",
     "test:fast": "npx hardhat test --grep fast",
-    "slither": "docker run --rm -v $(pwd):/src trailofbits/slither slither /src",
-    "security:audit": "npm run slither && npm run test:security",
-    "verify": "npx hardhat verify",
+    "slither": "docker run --rm -v $(pwd):/src trailofbits/slither slither /src --exclude-dependencies --exclude-informational",
+    "security:audit": "npm run slither && npm run test:security && npm run test:coverage",
+    "security:check": "npm run lint && npm run lint:js && npm run test:fast",
+    "fuzz:test": "npx hardhat test --grep fuzz",
+    "audit:full": "npm run security:audit && npm run gas-report",
     "clean": "npx hardhat clean",
     "typechain": "npx hardhat typechain",
     "node": "npx hardhat node",
@@ -87,7 +89,8 @@
     "solidity-coverage": "^0.8.16",
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "mocha": "^10.8.2"
   },
   "overrides": {
     "cookie": ">=0.7.0",

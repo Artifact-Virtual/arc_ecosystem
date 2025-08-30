@@ -1,0 +1,6 @@
+// tests/mocha.opts - Test configuration for audit compliance
+--timeout 40000
+--slow 1000
+--reporter spec
+--require hardhat/register
+--exit

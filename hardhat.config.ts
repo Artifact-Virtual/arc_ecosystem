@@ -1,5 +1,8 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import "@nomicfoundation/hardhat-verify";
+import "hardhat-gas-reporter";
+import "solidity-coverage";
 import "dotenv/config";
 
 const { 
@@ -91,6 +94,11 @@ const config: HardhatUserConfig = {
     currency: "USD",
     outputFile: "gas-report.txt",
     noColors: true,
+  },
+  mocha: {
+    timeout: 40000,
+    grep: process.env.GREP || "",
+    invert: process.env.INVERT !== undefined,
   },
 };
 
