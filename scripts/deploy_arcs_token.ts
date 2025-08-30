@@ -6,7 +6,6 @@ import { CONTRACTS } from "./shared/constants";
 import { displayScriptHeader, validateNetwork, checkEthBalance, printValidationResults } from "./shared/utils";
 
 interface DeploymentOptions {
-  dryRun?: boolean;
   confirm?: boolean;
 }
 
@@ -18,10 +17,8 @@ async function main() {
 
   // Parse command line arguments
   const args = process.argv.slice(2);
-  const dryRun = args.includes("--dry-run");
   const confirm = args.includes("--confirm");
 
-  console.log(`🧪 Dry Run: ${dryRun ? "ENABLED" : "DISABLED"}`);
   console.log(`✅ Auto Confirm: ${confirm ? "ENABLED" : "DISABLED"}`);
 
   // Validation
@@ -34,23 +31,28 @@ async function main() {
   const [deployer] = await ethers.getSigners();
   console.log(`\n🔐 Deployer: ${deployer.address}`);
 
-  validationResults.push(await checkEthBalance(deployer.address, "0.05"));
+  // Check network to determine required balance
+  const network = await ethers.provider.getNetwork();
+  const isTestnet = network.chainId === 84532n; // Base Sepolia
+  const requiredBalance = isTestnet ? "0.001" : "0.05"; // Lower requirement for testnet
+
+  validationResults.push(await checkEthBalance(deployer.address, requiredBalance));
 
   const { criticalIssues } = printValidationResults(validationResults);
 
-  if (criticalIssues > 0 && !dryRun) {
-    console.log("❌ Cannot proceed with critical issues. Use --dry-run to test.");
+  if (criticalIssues > 0) {
+    console.log("❌ Cannot proceed with critical issues.");
     return;
   }
 
   // Deploy ARCs Token
-  await deployARCsToken(dryRun);
+  await deployARCsToken();
 
   console.log("\n🎉 ARCs TOKEN DEPLOYMENT COMPLETE");
   console.log("==================================");
 }
 
-async function deployARCsToken(dryRun: boolean) {
+async function deployARCsToken() {
   console.log("\n🪙 ARCs TOKEN DEPLOYMENT");
   console.log("========================");
 
@@ -78,11 +80,6 @@ async function deployARCsToken(dryRun: boolean) {
   console.log(`- Admin: ${tokenParams.admin}`);
   console.log("- Name: ARCx Staked");
   console.log("- Symbol: ARCs");
-
-  if (dryRun) {
-    console.log("🧪 DRY RUN: Would deploy ARCs Token with above parameters");
-    return;
-  }
 
   try {
     console.log("\n🚀 Deploying ARCs Token...");
@@ -137,8 +134,8 @@ async function deployARCsToken(dryRun: boolean) {
     console.log("- ARCs tokens are burned when users unstake ARCx");
     console.log("- Treasury can mint/burn for rewards and penalties");
 
-  } catch (error: any) {
-    console.log(`❌ ARCs Token deployment failed: ${error.message}`);
+  } catch (error: unknown) {
+    console.log(`❌ ARCs Token deployment failed: ${error}`);
   }
 }
 

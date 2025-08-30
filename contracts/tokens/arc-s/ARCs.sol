@@ -18,13 +18,19 @@ contract ARCsToken is Initializable, ERC20Upgradeable, UUPSUpgradeable, AccessCo
         _disableInitializers();
     }
 
+    /// @notice Initialize the ARCs token
+    /// @param admin the account to receive DEFAULT_ADMIN_ROLE and UPGRADER_ROLE
     function initialize(address admin) public initializer {
-    __ERC20_init("ARCx Staked", "ARCs");
+        require(admin != address(0), "ARCs: admin is zero address");
+        __ERC20_init("ARCx Staked", "ARCs");
         __AccessControl_init();
         __UUPSUpgradeable_init();
 
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         _grantRole(UPGRADER_ROLE, admin);
+        // NOTE: VAULT_ROLE is intentionally NOT granted here.
+        // Grant VAULT_ROLE to the vault contract via deployment script:
+        // await token.grantRole(VAULT_ROLE, vaultAddress);
     }
 
     function mint(address to, uint256 amount) external onlyRole(VAULT_ROLE) {
@@ -36,4 +42,7 @@ contract ARCsToken is Initializable, ERC20Upgradeable, UUPSUpgradeable, AccessCo
     }
 
     function _authorizeUpgrade(address newImplementation) internal override onlyRole(UPGRADER_ROLE) {}
+
+    // Storage gap for future variable additions (upgrade safety)
+    uint256[50] private __gap;
 }

@@ -70,6 +70,15 @@ const config: HardhatUserConfig = {
         timeout: 60000,
       }
     } : {}),
+    // Base Sepolia Testnet
+    ...(INFURA_PROJECT_ID && DEPLOYER_PRIVATE_KEY && DEPLOYER_PRIVATE_KEY.length === 64 ? {
+      "base-sepolia": {
+        url: `https://base-sepolia.infura.io/v3/${INFURA_PROJECT_ID}`,
+        accounts: [`0x${DEPLOYER_PRIVATE_KEY}`],
+        gasPrice: parseInt(GAS_PRICE_TESTNET) * 1000000000,
+        timeout: 60000,
+      }
+    } : {}),
     // Polygon
     ...(ALCHEMY_API_KEY && DEPLOYER_PRIVATE_KEY && DEPLOYER_PRIVATE_KEY.length === 64 ? {
       polygon: {
@@ -90,6 +99,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api.basescan.org/api",
           browserURL: "https://basescan.org"
+        }
+      },
+      {
+        network: "base-sepolia",
+        chainId: 84532,
+        urls: {
+          apiURL: "https://api-sepolia.basescan.org/api",
+          browserURL: "https://sepolia.basescan.org"
         }
       }
     ]

@@ -63,11 +63,13 @@ export async function getContractStatus(address: string, name: string): Promise<
 export async function validateNetwork(): Promise<ValidationResult> {
   const network = await ethers.provider.getNetwork();
   
-  if (network.chainId === NETWORK.CHAIN_ID) {
+  // Accept both Base mainnet (8453) and Base Sepolia testnet (84532)
+  if (network.chainId === NETWORK.CHAIN_ID || network.chainId === 84532n) {
+    const networkName = network.chainId === NETWORK.CHAIN_ID ? "Base Mainnet" : "Base Sepolia";
     return {
       name: "Network Validation",
       status: STATUS.PASS,
-      message: "Connected to Base Mainnet",
+      message: `Connected to ${networkName}`,
       critical: true,
     };
   } else {
@@ -76,7 +78,7 @@ export async function validateNetwork(): Promise<ValidationResult> {
       status: STATUS.FAIL,
       message: `Wrong network: ${network.name} (Chain ID: ${network.chainId})`,
       critical: true,
-      recommendation: "Switch to Base Mainnet",
+      recommendation: "Switch to Base Mainnet or Base Sepolia",
     };
   }
 }
