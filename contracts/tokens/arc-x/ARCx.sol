@@ -45,6 +45,7 @@ contract ARCxToken is ERC20, ERC20Burnable, AccessControl, Pausable {
         uint256 cap,
         address deployer
     ) ERC20(name, symbol) {
+        require(deployer != address(0), "Invalid deployer address");
         _grantRole(DEFAULT_ADMIN_ROLE, deployer);
         _grantRole(ADMIN_ROLE, deployer);
         _grantRole(PAUSER_ROLE, deployer);
