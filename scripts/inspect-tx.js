@@ -42,7 +42,7 @@ const { CONTRACTS } = require('./shared/constants');
     } catch(e) { console.error('ownerOf call failed:', e); }
   }
 
-    let arcxTransfers = [];
+    const arcxTransfers = [];
     for (const log of receipt.logs) {
       if (log.address.toLowerCase() === CONTRACTS.ARCX_TOKEN.toLowerCase() && log.topics[0] === transferTopic) {
         const decoded = erc20Iface.parseLog(log);

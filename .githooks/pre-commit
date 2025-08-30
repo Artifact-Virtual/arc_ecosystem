@@ -1,35 +1,54 @@
-#!/bin/sh
-# Git pre-commit hook: run the code indexer and stage generated reports.
-# Be tolerant: if python or the script aren't available, skip instead of blocking commits.
+#!/usr/bin/env bash
+# Fast pre-commit checks with security and quality enforcement
+set -e
 
-# Find repo root and tools script
+# 1) Prevent accidental .env or secret files
+if git diff --cached --name-only | grep -E '\.env|\.pem|\.key|id_rsa' >/dev/null; then
+  echo "Error: Attempt to commit secret file (.env/.key/.pem). Move secrets to env.example or secret store."
+  exit 1
+fi
+
+# 2) Run lint & format on staged files
+echo "Running ESLint..."
+npx eslint --max-warnings=0 || { echo "ESLint failed"; exit 1; }
+
+echo "Running Prettier check..."
+npx prettier --check . || { echo "Prettier check failed"; exit 1; }
+
+# 3) Quick compile to catch Solidity syntax errors
+echo "Running Hardhat compile..."
+npx hardhat compile --no-compile || { echo "Hardhat compile failed"; exit 1; }
+
+# 4) Run fast subset of unit tests (mark expensive tests with [slow] tag)
+echo "Running fast unit tests..."
+npx hardhat test test/fast || npx hardhat test --grep "fast" || { echo "Fast tests failed"; exit 1; }
+
+# 5) Run code indexer (existing functionality)
 REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || echo .)"
 TOOLS_PY="$REPO_ROOT/tools/code_indexer.py"
 
 if [ ! -f "$TOOLS_PY" ]; then
   echo "[code_indexer] tools/code_indexer.py not found, skipping."
-  exit 0
-fi
-
-# locate python
-if command -v python >/dev/null 2>&1; then
-  PY=python
-elif command -v python3 >/dev/null 2>&1; then
-  PY=python3
 else
-  echo "[code_indexer] python not found on PATH, skipping indexer."
-  exit 0
+  # locate python
+  if command -v python >/dev/null 2>&1; then
+    PY=python
+  elif command -v python3 >/dev/null 2>&1; then
+    PY=python3
+  else
+    echo "[code_indexer] python not found on PATH, skipping indexer."
+  fi
+
+  echo "[code_indexer] running indexer..."
+  "$PY" "$TOOLS_PY"
+  RC=$?
+  if [ $RC -ne 0 ]; then
+    echo "[code_indexer] indexer failed (exit $RC). Continuing commit (not blocking)."
+  else
+    # Stage generated reports if present
+    git add "$REPO_ROOT/reports/index_raw.md" "$REPO_ROOT/CODEBASE_OVERVIEW.md" 2>/dev/null || true
+  fi
 fi
 
-echo "[code_indexer] running indexer..."
-"$PY" "$TOOLS_PY"
-RC=$?
-if [ $RC -ne 0 ]; then
-  echo "[code_indexer] indexer failed (exit $RC). Continuing commit (not blocking)."
-else
-  # Stage generated reports if present
-  git add "$REPO_ROOT/reports/index_raw.md" "$REPO_ROOT/CODEBASE_OVERVIEW.md" 2>/dev/null || true
-fi
-
-echo "[code_indexer] done."
+echo "All pre-commit checks passed!"
 exit 0
