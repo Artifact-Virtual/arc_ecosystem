@@ -5,42 +5,7 @@ on:
   pull_request:
     branches: [ main ]
 
-permissions:
-  contents: read
-
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - name: Install deps
-        run: npm ci
-      - name: Compile
-        run: npx hardhat compile
-      - name: Run unit tests
-        run: npx hardhat test --no-compile
-      - name: Run coverage
-        run: npx hardhat coverage
-      - name: Run slither (via docker)
-        uses: docker://trailofbits/slither
-        with:
-          args: slither . --exclude-dependencies --exclude-informational --fail-high
-      - name: Upload coverage artifact
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: coverage
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: test-results/
   build-and-test:
     runs-on: ubuntu-latest
     steps:
