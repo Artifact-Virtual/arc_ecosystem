@@ -1,4 +1,4 @@
-# 🔒 ARCs Token Security Deployment Checklist
+# ARCs Token Security Deployment Checklist
 
 ## ✅ **Security Fixes Implemented**
 
@@ -16,7 +16,7 @@
 - [x] **Address Validation**: Validates vault and multisig addresses
 - [x] **Deployer Revocation**: Revokes admin role from deployer immediately
 
-## 📋 **Pre-Deployment Checklist**
+## **Pre-Deployment Checklist**
 
 ### Environment Setup
 
@@ -28,16 +28,16 @@
 ### Contract Verification
 
 - [ ] StakingVault contract is deployed and functional
-- [ ] Multisig has sufficient signers and is operational
-- [ ] All addresses are valid Ethereum addresses (no zero addresses)
+- [x] Multisig has sufficient signers and is operational
+- [x] All addresses are valid Ethereum addresses (no zero addresses)
 
 ### Network Configuration
 
-- [ ] Hardhat config has Base network properly configured
-- [ ] Infura/Alchemy API keys are set
-- [ ] Deployer private key is configured
+- [x] Hardhat config has Base network properly configured
+- [x] Infura/Alchemy API keys are set
+- [x] Deployer private key is configured
 
-## 🚀 **Deployment Steps**
+## **Deployment Steps**
 
 ### Step 1: Environment Setup
 
@@ -76,7 +76,7 @@ npx hardhat run scripts/deploy_arcs_token.ts --network base-sepolia
 - [ ] Confirm multisig can perform admin operations
 - [ ] Update documentation with new addresses
 
-## 🔍 **Security Verification**
+## **Security Verification**
 
 ### Role Verification
 
@@ -99,7 +99,7 @@ npx hardhat run scripts/deploy_arcs_token.ts --network base-sepolia
 - [ ] Multisig is operational and accessible
 - [ ] StakingVault contract is deployed and functional
 
-## 🚨 **Emergency Procedures**
+## **Emergency Procedures**
 
 ### If Deployment Fails
 
@@ -122,25 +122,25 @@ npx hardhat run scripts/deploy_arcs_token.ts --network base-sepolia
 - [ ] Confirm multisig has sufficient ETH
 - [ ] Test multisig transaction creation
 
-## 📊 **Success Metrics**
+## **Success Metrics**
 
 ### Deployment Success
 
-- [ ] ✅ Contract deployed without errors
-- [ ] ✅ All roles assigned correctly
-- [ ] ✅ Multisig controls admin functions
-- [ ] ✅ StakingVault can mint/burn
-- [ ] ✅ Deployer has no admin privileges
+- [ ] Contract deployed without errors
+- [ ] All roles assigned correctly
+- [ ] Multisig controls admin functions
+- [ ] StakingVault can mint/burn
+- [ ] Deployer has no admin privileges
 
 ### Security Success
 
-- [ ] ✅ No zero addresses
-- [ ] ✅ Proper role separation
-- [ ] ✅ Multisig control established
-- [ ] ✅ Upgrade safety maintained
-- [ ] ✅ Access control enforced
+- [ ] No zero addresses
+- [ ] Proper role separation
+- [ ] Multisig control established
+- [ ] Upgrade safety maintained
+- [ ] Access control enforced
 
-## 📝 **Documentation Updates**
+## **Documentation Updates**
 
 After successful deployment:
 
@@ -150,13 +150,13 @@ After successful deployment:
 - [ ] Create incident response documentation
 - [ ] Update security procedures
 
-## 🎯 **Final Status**
+## **Final Status**
 
-- [ ] **READY FOR PRODUCTION** - All security requirements met
-- [ ] **MULTISIG CONTROL** - Admin functions secured
-- [ ] **VAULT INTEGRATION** - Staking functionality enabled
-- [ ] **UPGRADE SAFE** - Future upgrades protected
-- [ ] **FULLY VERIFIED** - All checks passed
+- [ ] READY FOR PRODUCTION - All security requirements met
+- [ ] MULTISIG CONTROL - Admin functions secured
+- [ ] VAULT INTEGRATION - Staking functionality enabled
+- [ ] UPGRADE SAFE - Future upgrades protected
+- [ ] FULLY VERIFIED - All checks passed
 
 ---
 
@@ -166,3 +166,4 @@ After successful deployment:
 **Multisig Address**: ________
 **StakingVault Address**: ________
 **Network**: Base Mainnet / Base Sepolia
+
