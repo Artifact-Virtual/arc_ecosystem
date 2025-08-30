@@ -20,7 +20,7 @@
     "deploy:defi-dry": "npx hardhat run scripts/deploy_defi.ts --network base --dry-run",
     "test": "hardhat test",
     "test:coverage": "npx hardhat coverage",
-    "test:gas": "REPORT_GAS=true npx hardhat test",
+    "test:gas": "cross-env REPORT_GAS=true npx hardhat test",
     "test:security": "npx hardhat test tests/security/",
     "test:governance": "npx hardhat test tests/governance/",
     "test:fast": "npx hardhat test --grep fast",
