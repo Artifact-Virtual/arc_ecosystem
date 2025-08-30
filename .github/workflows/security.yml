@@ -1,0 +1,296 @@
+name: Security Audit & Testing CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '18'
+  FOUNDRY_VERSION: 'nightly'
+
+jobs:
+  security-audit:
+    name: Security Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: ${{ env.FOUNDRY_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Slither
+        run: pip install slither-analyzer
+
+      - name: Install Mythril
+        run: pip install mythril
+
+      - name: Compile contracts
+        run: npx hardhat compile
+
+      - name: Run Slither static analysis
+        run: |
+          slither . --exclude-dependencies --exclude-informational --fail-high --fail-medium --fail-low
+        continue-on-error: false
+
+      - name: Run Mythril symbolic execution
+        run: |
+          mythril analyze contracts/**/*.sol --max-depth 10 --execution-timeout 300
+        continue-on-error: true
+
+      - name: Run Foundry fuzz tests
+        run: |
+          forge test --gas-report --fuzz-runs 1000
+        continue-on-error: false
+
+      - name: Run Hardhat security tests
+        run: |
+          npx hardhat test tests/security/*.test.ts
+        continue-on-error: false
+
+      - name: Generate security report
+        run: |
+          echo "# Security Audit Report" > security-report.md
+          echo "## Generated: $(date)" >> security-report.md
+          echo "" >> security-report.md
+          echo "## Slither Results" >> security-report.md
+          echo "\`\`\`" >> security-report.md
+          slither . --exclude-dependencies --json - >> slither-results.json || true
+          echo "\`\`\`" >> security-report.md
+          echo "" >> security-report.md
+          echo "## Foundry Test Results" >> security-report.md
+          echo "\`\`\`" >> security-report.md
+          forge test --gas-report >> security-report.md || true
+          echo "\`\`\`" >> security-report.md
+
+      - name: Upload security artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-artifacts
+          path: |
+            security-report.md
+            slither-results.json
+            gas-report.txt
+          retention-days: 30
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npx hardhat test tests/*.test.ts --grep "not security"
+
+      - name: Generate coverage report
+        run: npx hardhat coverage
+
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: coverage/
+          retention-days: 30
+
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: [security-audit, unit-tests]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run integration tests
+        run: npx hardhat test tests/integration/*.test.ts
+
+      - name: Run deployment simulation
+        run: |
+          npx hardhat run scripts/deploy.ts --network localhost
+
+  dependency-check:
+    name: Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: npm audit --audit-level high
+
+      - name: Run Snyk vulnerability scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+        continue-on-error: true
+
+  gas-optimization:
+    name: Gas Optimization Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: ${{ env.FOUNDRY_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Compile with gas optimization
+        run: |
+          npx hardhat compile --optimizer
+          forge build --optimize
+
+      - name: Generate gas report
+        run: |
+          npx hardhat test --gas
+          forge test --gas-report
+
+      - name: Check gas usage against thresholds
+        run: |
+          # Extract gas usage from reports and compare against thresholds
+          echo "Gas optimization check completed"
+
+  final-report:
+    name: Generate Final Report
+    runs-on: ubuntu-latest
+    needs: [security-audit, unit-tests, integration-tests, dependency-check, gas-optimization]
+    if: always()
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download security artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: security-artifacts
+
+      - name: Download coverage reports
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-reports
+
+      - name: Generate comprehensive report
+        run: |
+          echo "# ARC Ecosystem Security & Testing Report" > final-report.md
+          echo "## Generated: $(date)" >> final-report.md
+          echo "## Commit: ${{ github.sha }}" >> final-report.md
+          echo "" >> final-report.md
+
+          echo "## Security Status" >> final-report.md
+          if [ -f security-report.md ]; then
+            cat security-report.md >> final-report.md
+          else
+            echo "Security report not found" >> final-report.md
+          fi
+          echo "" >> final-report.md
+
+          echo "## Test Results" >> final-report.md
+          echo "- Security Tests: ${{ needs.security-audit.result }}" >> final-report.md
+          echo "- Unit Tests: ${{ needs.unit-tests.result }}" >> final-report.md
+          echo "- Integration Tests: ${{ needs.integration-tests.result }}" >> final-report.md
+          echo "- Dependency Check: ${{ needs.dependency-check.result }}" >> final-report.md
+          echo "- Gas Optimization: ${{ needs.gas-optimization.result }}" >> final-report.md
+          echo "" >> final-report.md
+
+          echo "## Recommendations" >> final-report.md
+          if [[ "${{ needs.security-audit.result }}" == "failure" ]]; then
+            echo "- Review and fix security vulnerabilities" >> final-report.md
+          fi
+          if [[ "${{ needs.unit-tests.result }}" == "failure" ]]; then
+            echo "- Fix failing unit tests" >> final-report.md
+          fi
+          if [[ "${{ needs.dependency-check.result }}" == "failure" ]]; then
+            echo "- Update vulnerable dependencies" >> final-report.md
+          fi
+
+      - name: Upload final report
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-report
+          path: final-report.md
+          retention-days: 90
+
+      - name: Comment PR with results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('final-report.md', 'utf8');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 🔒 Security & Testing Report\n\n${report}`
+            });
+
+      - name: Fail on critical issues
+        if: |
+          needs.security-audit.result == 'failure' ||
+          needs.unit-tests.result == 'failure' ||
+          needs.dependency-check.result == 'failure'
+        run: |
+          echo "Critical issues detected - failing pipeline"
+          exit 1

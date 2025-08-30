@@ -22,9 +22,24 @@ const config: HardhatUserConfig = {
     settings: {
       optimizer: {
         enabled: true,
-        runs: 200,
+        runs: 1000000, // Maximum optimization for sub-cent fees
+        details: {
+          yul: true,
+          yulDetails: {
+            stackAllocation: true,
+            optimizerSteps: "dhfoDgvulfnTUtnIf [xa[r]scLM cCTUtTOntnfDIlTnT]"
+          }
+        }
       },
       viaIR: true,
+      metadata: {
+        bytecodeHash: "none"
+      },
+      outputSelection: {
+        "*": {
+          "*": ["evm.bytecode", "evm.deployedBytecode", "devdoc", "userdoc", "metadata", "abi", "storageLayout"]
+        }
+      }
     },
   },
   networks: {
