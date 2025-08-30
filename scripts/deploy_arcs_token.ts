@@ -7,6 +7,8 @@ import { displayScriptHeader, validateNetwork, checkEthBalance, printValidationR
 
 interface DeploymentOptions {
   confirm?: boolean;
+  vaultAddress?: string;
+  multisigAddress?: string;
 }
 
 async function main() {
@@ -19,7 +21,13 @@ async function main() {
   const args = process.argv.slice(2);
   const confirm = args.includes("--confirm");
 
+  // Parse vault and multisig addresses from environment or args
+  const vaultAddress = process.env.STAKING_VAULT_ADDRESS || CONTRACTS.ARC_STAKING_VAULT;
+  const multisigAddress = process.env.MULTISIG_ADDRESS || CONTRACTS.TREASURY_SAFE; // Treasury is already a multisig
+
   console.log(`✅ Auto Confirm: ${confirm ? "ENABLED" : "DISABLED"}`);
+  console.log(`🏦 Vault Address: ${vaultAddress}`);
+  console.log(`🔐 Multisig Address: ${multisigAddress} (Treasury Safe - Multisig)`);
 
   // Validation
   const validationResults = [];
@@ -33,7 +41,7 @@ async function main() {
 
   // Check network to determine required balance
   const network = await ethers.provider.getNetwork();
-  const isTestnet = network.chainId === 84532n; // Base Sepolia
+  const isTestnet = network.chainId === BigInt(84532); // Base Sepolia
   const requiredBalance = isTestnet ? "0.001" : "0.05"; // Lower requirement for testnet
 
   validationResults.push(await checkEthBalance(deployer.address, requiredBalance));
@@ -46,15 +54,18 @@ async function main() {
   }
 
   // Deploy ARCs Token
-  await deployARCsToken();
+  await deployARCsToken(vaultAddress, multisigAddress);
 
   console.log("\n🎉 ARCs TOKEN DEPLOYMENT COMPLETE");
   console.log("==================================");
 }
 
-async function deployARCsToken() {
+async function deployARCsToken(vaultAddress: string, multisigAddress: string) {
   console.log("\n🪙 ARCs TOKEN DEPLOYMENT");
   console.log("========================");
+
+  // Get deployer signer
+  const [deployer] = await ethers.getSigners();
 
   // Validate critical addresses are valid Ethereum addresses
   if (!ethers.isAddress(CONTRACTS.TREASURY_SAFE)) {
@@ -69,8 +80,23 @@ async function deployARCsToken() {
     return;
   }
 
+  // Validate vault and multisig addresses
+  if (!ethers.isAddress(vaultAddress)) {
+    console.log("❌ CRITICAL ERROR: Invalid vault address!");
+    console.log(`   Address: ${vaultAddress}`);
+    return;
+  }
+
+  if (!ethers.isAddress(multisigAddress)) {
+    console.log("❌ CRITICAL ERROR: Invalid multisig address!");
+    console.log(`   Address: ${multisigAddress}`);
+    return;
+  }
+
   console.log("✅ Treasury Safe:", CONTRACTS.TREASURY_SAFE);
   console.log("✅ Ecosystem Safe:", CONTRACTS.ECOSYSTEM_SAFE);
+  console.log("✅ Vault Address:", vaultAddress);
+  console.log("✅ Multisig Address:", multisigAddress);
 
   const tokenParams = {
     admin: CONTRACTS.TREASURY_SAFE,
@@ -93,46 +119,77 @@ async function deployARCsToken() {
     console.log("✅ ARCs Token deployed successfully!");
     console.log("Contract Address:", arcsAddress);
 
-    // Initialize the token
+    // Initialize the token with admin and optional vault
     console.log("\n🔧 Initializing ARCs Token...");
-    const initTx = await arcsToken.initialize(tokenParams.admin);
+    const initTx = await arcsToken.initialize(multisigAddress, vaultAddress);
     await initTx.wait();
 
     console.log("✅ ARCs Token initialized successfully!");
+    console.log(`   Admin: ${multisigAddress} (Multisig)`);
+    console.log(`   Vault: ${vaultAddress !== ethers.ZeroAddress ? vaultAddress : 'Deferred to post-deployment'}`);
 
-    // Setup roles
-    console.log("\n👥 Setting up roles...");
+    // Setup additional roles if vault was not provided during initialization
+    if (vaultAddress === ethers.ZeroAddress) {
+        console.log("\n👥 Setting up roles...");
 
-    // Grant vault role to treasury (for minting/burning staked tokens)
-    const vaultRole = await arcsToken.VAULT_ROLE();
-    const grantVaultTx = await arcsToken.grantRole(vaultRole, CONTRACTS.TREASURY_SAFE);
-    await grantVaultTx.wait();
+        // Grant vault role to the staking vault contract (NOT treasury)
+        const vaultRole = await arcsToken.VAULT_ROLE();
+        const grantVaultTx = await arcsToken.grantRole(vaultRole, CONTRACTS.ARC_STAKING_VAULT);
+        await grantVaultTx.wait();
 
-    // Grant upgrader role to ecosystem safe
-    const upgraderRole = await arcsToken.UPGRADER_ROLE();
-    const grantUpgraderTx = await arcsToken.grantRole(upgraderRole, CONTRACTS.ECOSYSTEM_SAFE);
-    await grantUpgraderTx.wait();
+        console.log("✅ Roles configured successfully!");
+    } else {
+        console.log("✅ Vault role granted during initialization");
+    }
 
-    console.log("✅ Roles configured successfully!");
+    // CRITICAL SECURITY: Ensure multisig has full control
+    console.log("\n🔐 Verifying multisig control...");
+    const defaultAdminRole = await arcsToken.DEFAULT_ADMIN_ROLE();
+    const multisigHasAdmin = await arcsToken.hasRole(defaultAdminRole, multisigAddress);
+    const deployerHasAdmin = await arcsToken.hasRole(defaultAdminRole, deployer.address);
+
+    if (!multisigHasAdmin) {
+        console.log("❌ Multisig does not have admin role - this is a security issue!");
+        return;
+    }
+
+    if (deployerHasAdmin) {
+        console.log("⚠️  Deployer still has admin role - revoke via multisig after deployment");
+    } else {
+        console.log("✅ Deployer admin role already revoked");
+    }
 
     // Verification
     console.log("\n🔍 Verifying deployment:");
     console.log("Name:", await arcsToken.name());
     console.log("Symbol:", await arcsToken.symbol());
-    console.log("Admin has UPGRADER_ROLE:", await arcsToken.hasRole(upgraderRole, tokenParams.admin));
-    console.log("Treasury has VAULT_ROLE:", await arcsToken.hasRole(vaultRole, CONTRACTS.TREASURY_SAFE));
+
+    // Get role constants
+    const upgraderRole = await arcsToken.UPGRADER_ROLE();
+    const vaultRole = await arcsToken.VAULT_ROLE();
+
+    console.log("Multisig has DEFAULT_ADMIN_ROLE:", await arcsToken.hasRole(defaultAdminRole, multisigAddress));
+    console.log("Ecosystem has UPGRADER_ROLE:", await arcsToken.hasRole(upgraderRole, CONTRACTS.ECOSYSTEM_SAFE));
+    if (vaultAddress !== ethers.ZeroAddress) {
+        console.log("Vault has VAULT_ROLE:", await arcsToken.hasRole(vaultRole, vaultAddress));
+    } else {
+        console.log("Vault role: Deferred to post-deployment");
+    }
+    console.log("Deployer has DEFAULT_ADMIN_ROLE:", await arcsToken.hasRole(defaultAdminRole, deployer.address));
 
     console.log("\n📋 NEXT STEPS:");
     console.log("1. Update constants.ts with ARCs token address");
-    console.log("2. Deploy staking vault contract");
+    console.log("2. Deploy staking vault contract (if not already deployed)");
     console.log("3. Setup initial liquidity");
     console.log("4. Verify contract on BaseScan");
     console.log("5. Update documentation");
 
     console.log("\n💡 USAGE:");
-    console.log("- ARCs tokens are minted when users stake ARCx");
-    console.log("- ARCs tokens are burned when users unstake ARCx");
-    console.log("- Treasury can mint/burn for rewards and penalties");
+    console.log("- ARCs tokens are minted when users stake ARCx (by vault contract)");
+    console.log("- ARCs tokens are burned when users unstake ARCx (by vault contract)");
+    console.log("- Only the designated vault contract can mint/burn tokens");
+    console.log("- Multisig controls all admin functions (upgrade, roles)");
+    console.log("- Deployer has no admin privileges after deployment");
 
   } catch (error: unknown) {
     console.log(`❌ ARCs Token deployment failed: ${error}`);
@@ -140,9 +197,15 @@ async function deployARCsToken() {
 }
 
 // Usage examples:
+// Set environment variables:
+// export STAKING_VAULT_ADDRESS="0x..."  # Your staking vault contract address
+// export MULTISIG_ADDRESS="0x..."       # Your multisig safe address
+//
 // npx hardhat run scripts/deploy_arcs_token.ts --network base
-// npx hardhat run scripts/deploy_arcs_token.ts --network base --dry-run
 // npx hardhat run scripts/deploy_arcs_token.ts --network base --confirm
+//
+// Or use command line arguments (future enhancement):
+// npx hardhat run scripts/deploy_arcs_token.ts --network base --vault 0x... --multisig 0x...
 
 main()
   .then(() => process.exit(0))

@@ -64,7 +64,7 @@ export async function validateNetwork(): Promise<ValidationResult> {
   const network = await ethers.provider.getNetwork();
   
   // Accept both Base mainnet (8453) and Base Sepolia testnet (84532)
-  if (network.chainId === NETWORK.CHAIN_ID || network.chainId === 84532n) {
+  if (network.chainId === NETWORK.CHAIN_ID || network.chainId === BigInt(84532)) {
     const networkName = network.chainId === NETWORK.CHAIN_ID ? "Base Mainnet" : "Base Sepolia";
     return {
       name: "Network Validation",

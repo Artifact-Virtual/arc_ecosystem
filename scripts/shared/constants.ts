@@ -59,7 +59,7 @@ export const AMOUNTS = {
 
 // Network Configuration
 export const NETWORK = {
-  CHAIN_ID: 8453n, // Base mainnet
+  CHAIN_ID: BigInt(8453), // Base mainnet
   NAME: "base",
   EXPLORER: "https://basescan.org",
 } as const;

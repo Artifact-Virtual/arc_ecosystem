@@ -20,7 +20,8 @@ contract ARCsToken is Initializable, ERC20Upgradeable, UUPSUpgradeable, AccessCo
 
     /// @notice Initialize the ARCs token
     /// @param admin the account to receive DEFAULT_ADMIN_ROLE and UPGRADER_ROLE
-    function initialize(address admin) public initializer {
+    /// @param vault optional vault address to receive VAULT_ROLE (pass address(0) to defer)
+    function initialize(address admin, address vault) public initializer {
         require(admin != address(0), "ARCs: admin is zero address");
         __ERC20_init("ARCx Staked", "ARCs");
         __AccessControl_init();
@@ -28,9 +29,24 @@ contract ARCsToken is Initializable, ERC20Upgradeable, UUPSUpgradeable, AccessCo
 
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         _grantRole(UPGRADER_ROLE, admin);
-        // NOTE: VAULT_ROLE is intentionally NOT granted here.
-        // Grant VAULT_ROLE to the vault contract via deployment script:
-        // await token.grantRole(VAULT_ROLE, vaultAddress);
+
+        // Optionally grant vault role atomically during initialize
+        if (vault != address(0)) {
+            _grantRole(VAULT_ROLE, vault);
+        }
+    }
+
+    /// @notice Grant VAULT_ROLE to a vault contract. Admin only.
+    /// @dev Use this if you deferred vault assignment at initialize time.
+    function grantVaultRole(address vault) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        require(vault != address(0), "ARCs: vault is zero");
+        _grantRole(VAULT_ROLE, vault);
+    }
+
+    /// @notice Revoke VAULT_ROLE from an address. Admin only.
+    function revokeVaultRole(address holder) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        require(holder != address(0), "ARCs: holder is zero");
+        _revokeRole(VAULT_ROLE, holder);
     }
 
     function mint(address to, uint256 amount) external onlyRole(VAULT_ROLE) {
