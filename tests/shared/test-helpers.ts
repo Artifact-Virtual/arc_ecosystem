@@ -13,6 +13,7 @@ export interface TestContext {
   executor: SignerWithAddress;
   stranger: SignerWithAddress;
   users: SignerWithAddress[];
+  timelockAdmin?: SignerWithAddress;
 }
 
 export interface GovernanceContracts {
