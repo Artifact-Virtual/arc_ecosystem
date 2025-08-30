@@ -23,13 +23,6 @@ const config: HardhatUserConfig = {
       optimizer: {
         enabled: true,
         runs: 1000000, // Maximum optimization for sub-cent fees
-        details: {
-          yul: true,
-          yulDetails: {
-            stackAllocation: true,
-            optimizerSteps: "dhfoDgvulfnTUtnIf [xa[r]scLM cCTUtTOntnfDIlTnT]"
-          }
-        }
       },
       viaIR: true,
       metadata: {
@@ -109,6 +102,8 @@ const config: HardhatUserConfig = {
     currency: "USD",
     outputFile: "gas-report.txt",
     noColors: true,
+    gasPrice: 20, // 20 gwei for mainnet estimation
+    coinmarketcap: process.env.COINMARKETCAP_API_KEY,
   },
   mocha: {
     timeout: 40000,

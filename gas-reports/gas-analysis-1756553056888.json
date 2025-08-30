@@ -1,0 +1,817 @@
+{
+  "timestamp": "2025-08-30T11:24:16.881Z",
+  "contracts": [
+    {
+      "path": "dao\\adam\\AdamHost.sol",
+      "name": "AdamHost",
+      "lines": 442,
+      "functions": [],
+      "savings": 600,
+      "issues": [
+        {
+          "type": "multiple_require",
+          "severity": "low",
+          "savings": 100,
+          "description": "Multiple require statements can be combined"
+        },
+        {
+          "type": "storage_to_memory",
+          "severity": "high",
+          "savings": 500,
+          "description": "Consider using memory instead of storage where possible"
+        }
+      ]
+    },
+    {
+      "path": "dao\\adam\\AdamRegistry.sol",
+      "name": "AdamRegistry",
+      "lines": 339,
+      "functions": [],
+      "savings": 700,
+      "issues": [
+        {
+          "type": "unchecked_loop",
+          "severity": "medium",
+          "savings": 200,
+          "description": "Consider using unchecked arithmetic in loops"
+        },
+        {
+          "type": "storage_to_memory",
+          "severity": "high",
+          "savings": 500,
+          "description": "Consider using memory instead of storage where possible"
+        }
+      ]
+    },
+    {
+      "path": "dao\\adam\\interfaces\\IAdamHost.sol",
+      "name": "IAdamHost",
+      "lines": 116,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "dao\\adam\\interfaces\\IAdamRegistry.sol",
+      "name": "IAdamRegistry",
+      "lines": 106,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "dao\\governance\\ARCDAO.sol",
+      "name": "ARCDAO",
+      "lines": 497,
+      "functions": [],
+      "savings": 900,
+      "issues": [
+        {
+          "type": "multiple_require",
+          "severity": "low",
+          "savings": 100,
+          "description": "Multiple require statements can be combined"
+        },
+        {
+          "type": "storage_to_memory",
+          "severity": "high",
+          "savings": 500,
+          "description": "Consider using memory instead of storage where possible"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "dao\\governance\\ARCGovernor.sol",
+      "name": "ARCGovernor",
+      "lines": 575,
+      "functions": [],
+      "savings": 1100,
+      "issues": [
+        {
+          "type": "unchecked_loop",
+          "severity": "medium",
+          "savings": 200,
+          "description": "Consider using unchecked arithmetic in loops"
+        },
+        {
+          "type": "multiple_require",
+          "severity": "low",
+          "savings": 100,
+          "description": "Multiple require statements can be combined"
+        },
+        {
+          "type": "storage_to_memory",
+          "severity": "high",
+          "savings": 500,
+          "description": "Consider using memory instead of storage where possible"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "dao\\governance\\ARCProposal.sol",
+      "name": "ARCProposal",
+      "lines": 654,
+      "functions": [],
+      "savings": 1100,
+      "issues": [
+        {
+          "type": "unchecked_loop",
+          "severity": "medium",
+          "savings": 200,
+          "description": "Consider using unchecked arithmetic in loops"
+        },
+        {
+          "type": "multiple_require",
+          "severity": "low",
+          "savings": 100,
+          "description": "Multiple require statements can be combined"
+        },
+        {
+          "type": "storage_to_memory",
+          "severity": "high",
+          "savings": 500,
+          "description": "Consider using memory instead of storage where possible"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "dao\\governance\\ARCTimelock.sol",
+      "name": "ARCTimelock",
+      "lines": 534,
+      "functions": [],
+      "savings": 1100,
+      "issues": [
+        {
+          "type": "unchecked_loop",
+          "severity": "medium",
+          "savings": 200,
+          "description": "Consider using unchecked arithmetic in loops"
+        },
+        {
+          "type": "multiple_require",
+          "severity": "low",
+          "savings": 100,
+          "description": "Multiple require statements can be combined"
+        },
+        {
+          "type": "storage_to_memory",
+          "severity": "high",
+          "savings": 500,
+          "description": "Consider using memory instead of storage where possible"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "dao\\governance\\ARCTreasury.sol",
+      "name": "ARCTreasury",
+      "lines": 527,
+      "functions": [],
+      "savings": 1100,
+      "issues": [
+        {
+          "type": "unchecked_loop",
+          "severity": "medium",
+          "savings": 200,
+          "description": "Consider using unchecked arithmetic in loops"
+        },
+        {
+          "type": "multiple_require",
+          "severity": "low",
+          "savings": 100,
+          "description": "Multiple require statements can be combined"
+        },
+        {
+          "type": "storage_to_memory",
+          "severity": "high",
+          "savings": 500,
+          "description": "Consider using memory instead of storage where possible"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "dao\\governance\\ARCVoting.sol",
+      "name": "ARCVoting",
+      "lines": 570,
+      "functions": [],
+      "savings": 1100,
+      "issues": [
+        {
+          "type": "unchecked_loop",
+          "severity": "medium",
+          "savings": 200,
+          "description": "Consider using unchecked arithmetic in loops"
+        },
+        {
+          "type": "multiple_require",
+          "severity": "low",
+          "savings": 100,
+          "description": "Multiple require statements can be combined"
+        },
+        {
+          "type": "storage_to_memory",
+          "severity": "high",
+          "savings": 500,
+          "description": "Consider using memory instead of storage where possible"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "dao\\governance\\interfaces\\IEligibility.sol",
+      "name": "IEligibility",
+      "lines": 75,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "dao\\interfaces\\IARCDAO.sol",
+      "name": "IARCDAO",
+      "lines": 102,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "dao\\interfaces\\IARCGovernor.sol",
+      "name": "IARCGovernor",
+      "lines": 93,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "dao\\interfaces\\IARCProposal.sol",
+      "name": "IARCProposal",
+      "lines": 106,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "dao\\interfaces\\IARCTimelock.sol",
+      "name": "IARCTimelock",
+      "lines": 90,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "dao\\interfaces\\IARCTreasury.sol",
+      "name": "IARCTreasury",
+      "lines": 110,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "dao\\interfaces\\IARCVoting.sol",
+      "name": "IARCVoting",
+      "lines": 110,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "defi\\ARCSwap.sol",
+      "name": "ARCSwap",
+      "lines": 504,
+      "functions": [],
+      "savings": 900,
+      "issues": [
+        {
+          "type": "multiple_require",
+          "severity": "low",
+          "savings": 100,
+          "description": "Multiple require statements can be combined"
+        },
+        {
+          "type": "storage_to_memory",
+          "severity": "high",
+          "savings": 500,
+          "description": "Consider using memory instead of storage where possible"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "defi\\ARCxDutchAuction.sol",
+      "name": "ARCxDutchAuction",
+      "lines": 371,
+      "functions": [],
+      "savings": 400,
+      "issues": [
+        {
+          "type": "multiple_require",
+          "severity": "low",
+          "savings": 100,
+          "description": "Multiple require statements can be combined"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "defi\\ARCxSmartAirdrop.sol",
+      "name": "ARCxSmartAirdrop",
+      "lines": 349,
+      "functions": [],
+      "savings": 300,
+      "issues": [
+        {
+          "type": "unchecked_loop",
+          "severity": "medium",
+          "savings": 200,
+          "description": "Consider using unchecked arithmetic in loops"
+        },
+        {
+          "type": "multiple_require",
+          "severity": "low",
+          "savings": 100,
+          "description": "Multiple require statements can be combined"
+        }
+      ]
+    },
+    {
+      "path": "defi\\ARCxStakingVault.sol",
+      "name": "ARCxStakingVault",
+      "lines": 245,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "defi\\ARCx_MVC.sol",
+      "name": "ARCx_MVC",
+      "lines": 334,
+      "functions": [],
+      "savings": 500,
+      "issues": [
+        {
+          "type": "unchecked_loop",
+          "severity": "medium",
+          "savings": 200,
+          "description": "Consider using unchecked arithmetic in loops"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "defi\\infrastructure\\ARCBridge.sol",
+      "name": "ARCBridge",
+      "lines": 609,
+      "functions": [],
+      "savings": 1100,
+      "issues": [
+        {
+          "type": "unchecked_loop",
+          "severity": "medium",
+          "savings": 200,
+          "description": "Consider using unchecked arithmetic in loops"
+        },
+        {
+          "type": "multiple_require",
+          "severity": "low",
+          "savings": 100,
+          "description": "Multiple require statements can be combined"
+        },
+        {
+          "type": "storage_to_memory",
+          "severity": "high",
+          "savings": 500,
+          "description": "Consider using memory instead of storage where possible"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "defi\\PenaltyVault.sol",
+      "name": "PenaltyVault",
+      "lines": 37,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "defi\\rwa\\ARC_RWARegistry.sol",
+      "name": "ARC_RWARegistry",
+      "lines": 537,
+      "functions": [],
+      "savings": 1000,
+      "issues": [
+        {
+          "type": "unchecked_loop",
+          "severity": "medium",
+          "savings": 200,
+          "description": "Consider using unchecked arithmetic in loops"
+        },
+        {
+          "type": "storage_to_memory",
+          "severity": "high",
+          "savings": 500,
+          "description": "Consider using memory instead of storage where possible"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "defi\\rwa\\IRWARegistry.sol",
+      "name": "IRWARegistry",
+      "lines": 233,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "defi\\rwa\\SlashingVault.sol",
+      "name": "SlashingVault",
+      "lines": 430,
+      "functions": [],
+      "savings": 800,
+      "issues": [
+        {
+          "type": "storage_to_memory",
+          "severity": "high",
+          "savings": 500,
+          "description": "Consider using memory instead of storage where possible"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "defi\\StakingVault.sol",
+      "name": "StakingVault",
+      "lines": 100,
+      "functions": [],
+      "savings": 350,
+      "issues": [
+        {
+          "type": "unnecessary_public",
+          "severity": "low",
+          "savings": 50,
+          "description": "Consider using external instead of public for better gas efficiency"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "defi\\TreasuryRewards.sol",
+      "name": "TreasuryRewards",
+      "lines": 96,
+      "functions": [],
+      "savings": 50,
+      "issues": [
+        {
+          "type": "unnecessary_public",
+          "severity": "low",
+          "savings": 50,
+          "description": "Consider using external instead of public for better gas efficiency"
+        }
+      ]
+    },
+    {
+      "path": "pool\\IPoolManager.sol",
+      "name": "IPoolManager",
+      "lines": 28,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "pool\\IPositionManager.sol",
+      "name": "IPositionManager",
+      "lines": 33,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "pool\\IWETH.sol",
+      "name": "IWETH",
+      "lines": 10,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "thirdparty\\GasOptimization.sol",
+      "name": "GasOptimization",
+      "lines": 294,
+      "functions": [],
+      "savings": 500,
+      "issues": [
+        {
+          "type": "unchecked_loop",
+          "severity": "medium",
+          "savings": 200,
+          "description": "Consider using unchecked arithmetic in loops"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "thirdparty\\uniswap-v4\\base\\ERC721Permit_v4.sol",
+      "name": "ERC721Permit_v4",
+      "lines": 1,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "thirdparty\\uniswap-v4\\hooks\\WETHHook.sol",
+      "name": "WETHHook",
+      "lines": 1,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "thirdparty\\uniswap-v4\\hooks\\WstETHHook.sol",
+      "name": "WstETHHook",
+      "lines": 1,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "thirdparty\\uniswap-v4\\interfaces\\IPermit2Forwarder.sol",
+      "name": "IPermit2Forwarder",
+      "lines": 1,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "thirdparty\\uniswap-v4\\libraries\\Descriptor.sol",
+      "name": "Descriptor",
+      "lines": 1,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "thirdparty\\uniswap-v4\\libraries\\SafeCurrencyMetadata.sol",
+      "name": "SafeCurrencyMetadata",
+      "lines": 1,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "thirdparty\\uniswap-v4\\libraries\\SVG.sol",
+      "name": "SVG",
+      "lines": 1,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "thirdparty\\uniswap-v4\\NonfungiblePositionManager.sol",
+      "name": "NonfungiblePositionManager",
+      "lines": 1,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "thirdparty\\uniswap-v4\\permit2\\src\\interfaces\\IAllowanceTransfer.sol",
+      "name": "IAllowanceTransfer",
+      "lines": 1,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "thirdparty\\uniswap-v4\\permit2\\src\\libraries\\SignatureVerification.sol",
+      "name": "SignatureVerification",
+      "lines": 1,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "thirdparty\\uniswap-v4\\PositionManager.sol",
+      "name": "PositionManager",
+      "lines": 1,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "thirdparty\\uniswap-v4-core\\ProtocolFees.sol",
+      "name": "ProtocolFees",
+      "lines": 1,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "tokens\\arc-s\\ARCs.sol",
+      "name": "ARCs",
+      "lines": 40,
+      "functions": [],
+      "savings": 50,
+      "issues": [
+        {
+          "type": "unnecessary_public",
+          "severity": "low",
+          "savings": 50,
+          "description": "Consider using external instead of public for better gas efficiency"
+        }
+      ]
+    },
+    {
+      "path": "tokens\\arc-x\\ARCx.sol",
+      "name": "ARCx",
+      "lines": 157,
+      "functions": [],
+      "savings": 300,
+      "issues": [
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "tokens\\arc-x\\GasOptimizedARCx.sol",
+      "name": "GasOptimizedARCx",
+      "lines": 270,
+      "functions": [],
+      "savings": 600,
+      "issues": [
+        {
+          "type": "unchecked_loop",
+          "severity": "medium",
+          "savings": 200,
+          "description": "Consider using unchecked arithmetic in loops"
+        },
+        {
+          "type": "multiple_require",
+          "severity": "low",
+          "savings": 100,
+          "description": "Multiple require statements can be combined"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    },
+    {
+      "path": "tokens\\arc-x\\interfaces\\IERC20.sol",
+      "name": "IERC20",
+      "lines": 15,
+      "functions": [],
+      "savings": 0,
+      "issues": []
+    },
+    {
+      "path": "tokens\\sbt\\ARC_Eligibility.sol",
+      "name": "ARC_Eligibility",
+      "lines": 411,
+      "functions": [],
+      "savings": 200,
+      "issues": [
+        {
+          "type": "unchecked_loop",
+          "severity": "medium",
+          "savings": 200,
+          "description": "Consider using unchecked arithmetic in loops"
+        }
+      ]
+    },
+    {
+      "path": "tokens\\sbt\\ARC_IdentitySBT.sol",
+      "name": "ARC_IdentitySBT",
+      "lines": 529,
+      "functions": [],
+      "savings": 1100,
+      "issues": [
+        {
+          "type": "unchecked_loop",
+          "severity": "medium",
+          "savings": 200,
+          "description": "Consider using unchecked arithmetic in loops"
+        },
+        {
+          "type": "multiple_require",
+          "severity": "low",
+          "savings": 100,
+          "description": "Multiple require statements can be combined"
+        },
+        {
+          "type": "storage_to_memory",
+          "severity": "high",
+          "savings": 500,
+          "description": "Consider using memory instead of storage where possible"
+        },
+        {
+          "type": "too_many_indexed",
+          "severity": "medium",
+          "savings": 300,
+          "description": "Too many indexed parameters in events"
+        }
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "high",
+      "action": "Implement comprehensive gas optimizations",
+      "expectedSavings": 15850,
+      "description": "Multiple optimization opportunities identified"
+    },
+    {
+      "priority": "medium",
+      "action": "Add unchecked arithmetic to loops",
+      "expectedSavings": 2800,
+      "description": "Use unchecked for loop counters to save gas"
+    },
+    {
+      "priority": "high",
+      "action": "Optimize storage usage",
+      "expectedSavings": 6500,
+      "description": "Replace storage with memory where appropriate"
+    }
+  ],
+  "totalSavings": 15850
+}
