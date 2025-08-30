@@ -30,14 +30,66 @@ describe("Security Test Suite", function () {
     );
     await tokenContract.waitForDeployment();
 
-    // Use simplified mock contracts for testing complex governance features
-    const MockTimelock = await ethers.getContractFactory("MockTimelock");
-    timelockContract = await MockTimelock.deploy();
+    // Deploy real ARCTimelock contract
+    const ARCTimelock = await ethers.getContractFactory("ARCTimelock");
+    timelockContract = await ARCTimelock.deploy();
     await timelockContract.waitForDeployment();
 
-    const MockGovernor = await ethers.getContractFactory("MockGovernor");
-    governorContract = await MockGovernor.deploy(await timelockContract.getAddress());
+    // Initialize timelock with proper config (only if not already initialized)
+    try {
+      const timelockConfig = {
+        minDelay: 24 * 60 * 60, // 24 hours
+        maxDelay: 30 * 24 * 60 * 60, // 30 days
+        gracePeriod: 14 * 24 * 60 * 60, // 14 days
+        emergencyDelay: 60 * 60, // 1 hour
+        maxOperationsPerBatch: 10,
+        emergencyEnabled: true,
+        requiredApprovals: 1
+      };
+
+      await timelockContract.initialize(ctx.deployer.address, timelockConfig);
+    } catch (error: any) {
+      // Contract might already be initialized, continue
+      if (!error.message.includes("already initialized")) {
+        throw error;
+      }
+    }
+
+    // Deploy real ARCGovernor contract
+    const ARCGovernor = await ethers.getContractFactory("ARCGovernor");
+    governorContract = await ARCGovernor.deploy();
     await governorContract.waitForDeployment();
+
+    // Initialize governor with proper config (only if not already initialized)
+    try {
+      const governorConfig = {
+        votingDelay: 1, // 1 block
+        votingPeriod: 50400, // ~7 days in blocks
+        proposalThreshold: ethers.parseEther("1000"),
+        quorumPercentage: 4, // 4%
+        timelockDelay: 24 * 60 * 60, // 24 hours
+        convictionGrowth: 100, // 1.0 growth rate
+        emergencyThreshold: ethers.parseEther("10000"),
+        quadraticVotingEnabled: false,
+        convictionVotingEnabled: false
+      };
+
+      await governorContract.initialize(
+        ctx.deployer.address,
+        await tokenContract.getAddress(),
+        await timelockContract.getAddress(),
+        ctx.deployer.address, // treasury address
+        governorConfig
+      );
+    } catch (error: any) {
+      // Contract might already be initialized, continue
+      if (!error.message.includes("already initialized")) {
+        throw error;
+      }
+    }
+
+    // Mint initial tokens to deployer
+    await tokenContract.mint(ctx.deployer.address, ethers.parseEther("10000000"));
 
     // Setup initial token balances for testing
     await tokenContract.connect(ctx.deployer).transfer(ctx.admin.address, ethers.parseEther("1000000"));

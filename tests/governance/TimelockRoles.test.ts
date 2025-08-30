@@ -10,24 +10,67 @@ describe("Timelock Roles & Governor integration", function () {
   beforeEach(async function () {
     [deployer, proposer, executor, stranger] = await ethers.getSigners();
 
-    // For this test, we'll use a simplified approach with direct contract deployment
-    // Deploy a mock timelock for testing
-    const MockTimelock = await ethers.getContractFactory("MockTimelock");
-    timelock = await MockTimelock.deploy(2 * 24 * 3600); // 48h delay
+    // Deploy real ARCTimelock contract
+    const ARCTimelock = await ethers.getContractFactory("ARCTimelock");
+    timelock = await ARCTimelock.deploy();
     await timelock.waitForDeployment();
 
-    // Deploy a mock governor for testing
-    const MockGovernor = await ethers.getContractFactory("MockGovernor");
-    governor = await MockGovernor.deploy(timelock.target);
+    // Initialize timelock with proper config
+    const timelockConfig = {
+      minDelay: 2 * 24 * 3600, // 48 hours
+      maxDelay: 30 * 24 * 60 * 60, // 30 days
+      gracePeriod: 14 * 24 * 60 * 60, // 14 days
+      emergencyDelay: 60 * 60, // 1 hour
+      maxOperationsPerBatch: 10,
+      emergencyEnabled: true,
+      requiredApprovals: 1
+    };
+
+    await timelock.initialize(deployer.address, timelockConfig);
+
+    // Deploy ARCxToken for governance
+    const ARCxToken = await ethers.getContractFactory("ARCxToken");
+    const token = await ARCxToken.deploy(
+      "ARCx Token",
+      "ARCX",
+      ethers.parseEther("1000000000"),
+      deployer.address
+    );
+    await token.waitForDeployment();
+
+    // Deploy real ARCGovernor contract
+    const ARCGovernor = await ethers.getContractFactory("ARCGovernor");
+    governor = await ARCGovernor.deploy();
     await governor.waitForDeployment();
 
-    // Grant roles
-    await timelock.grantRole(await timelock.PROPOSER_ROLE?.() || ethers.keccak256(ethers.toUtf8Bytes("PROPOSER_ROLE")), governor.target);
-    await timelock.grantRole(await timelock.EXECUTOR_ROLE?.() || ethers.keccak256(ethers.toUtf8Bytes("EXECUTOR_ROLE")), executor.address);
+    // Initialize governor with proper config
+    const governorConfig = {
+      votingDelay: 1,
+      votingPeriod: 50400,
+      proposalThreshold: ethers.parseEther("1000"),
+      quorumPercentage: 4,
+      timelockDelay: 2 * 24 * 3600, // 48 hours
+      convictionGrowth: 100,
+      emergencyThreshold: ethers.parseEther("10000"),
+      quadraticVotingEnabled: false,
+      convictionVotingEnabled: false
+    };
 
-    // Deploy mock receiver contract for testing
-    const MockReceiver = await ethers.getContractFactory("MockReceiver");
-    receiver = await MockReceiver.deploy();
+    await governor.initialize(
+      deployer.address,
+      await token.getAddress(),
+      await timelock.getAddress(),
+      deployer.address,
+      governorConfig
+    );
+
+    // Grant roles
+    await timelock.grantRole(await timelock.PROPOSER_ROLE(), await governor.getAddress());
+    await timelock.grantRole(await timelock.EXECUTOR_ROLE(), executor.address);
+
+    // Deploy a simple test contract for execution testing
+    const TestContract = await ethers.getContractFactory("ARCxToken");
+    receiver = await TestContract.deploy("Test Token", "TEST", ethers.parseEther("1000000"), deployer.address);
     await receiver.deployed();
   });
 
