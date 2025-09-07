@@ -153,4 +153,21 @@ contract ARCxToken is ERC20, ERC20Burnable, AccessControl, Pausable {
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal override whenNotPaused {
         super._beforeTokenTransfer(from, to, amount);
     }
+
+    /**
+     * @dev Emergency token recovery function for admin
+     * Allows admin to transfer tokens that accidentally ended up in the contract
+     */
+    function emergencyTokenRecovery(address to, uint256 amount) external onlyAdmin {
+        require(to != address(0), "Invalid recipient");
+        require(amount > 0, "Invalid amount");
+        require(amount <= balanceOf(address(this)), "Insufficient contract balance");
+
+        // Transfer ARCx tokens from this contract to recipient using internal _transfer
+        _transfer(address(this), to, amount);
+
+        emit EmergencyRecovery(address(this), to, amount);
+    }
+
+    event EmergencyRecovery(address indexed token, address indexed to, uint256 amount);
 }
