@@ -1,130 +1,172 @@
-## THE**ARC**
+# ARCx V2 Enhanced Ecosystem
 
-> Ecosystem Repository - Enhanced Token Live on Base L2
+> **LIVE ON BASE L2 MAINNET** • Revolutionary DeFi Token with Advanced Features
 
-A revolutionary DeFi token ecosystem featuring advanced yield generation, multi-tier staking, flash loans, and comprehensive governance - all optimized for Base L2's sub-cent transaction fees.
+A next-generation DeFi token ecosystem featuring advanced yield generation, multi-tier staking, flash loans, comprehensive governance, and Uniswap V4 integration - all optimized for Base L2's sub-cent transaction fees.
 
-[![Node.js](https://img.shields.io/badge/Node.js-16.x-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/) [![Hardhat](https://img.shields.io/badge/Hardhat-2.12.x-ff8c00?style=flat-square&logo=hardhat&logoColor=white)](https://hardhat.org/) [![OpenZeppelin](https://img.shields.io/badge/OpenZeppelin-4.8.x-205081?style=flat-square&logo=openzeppelin&logoColor=white)](https://openzeppelin.com/) [![Ethers.js](https://img.shields.io/badge/Ethers.js-5.x-3C3C3D?style=flat-square&logo=ethersdotjs&logoColor=white)](https://docs.ethers.io/v5/)
-[![Base L2](https://img.shields.io/badge/Base-L2-0052FF?style=flat-square&logo=ethereum&logoColor=white)](https://base.org/) [![Uniswap V4](https://img.shields.io/badge/Uniswap-V4-FF0080?style=flat-square&logo=uniswap&logoColor=white)](https://uniswap.org/) [![Solidity](https://img.shields.io/badge/Solidity-0.8.21-363636?style=flat-square&logo=ethereum&logoColor=white)](https://docs.soliditylang.org/) 
-[![Size Optimized](https://img.shields.io/badge/Size-24,255%20bytes-00FF88?style=flat-square&logo=ethereum&logoColor=white)](https://ethereum.org/) [![Security](https://img.shields.io/badge/Security-Enhanced-FF6B35?style=flat-square&logo=security&logoColor=white)](https://security.org/) [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square&logo=github&logoColor=white)](#license)
-
-
-## Overview
-
-ARCx V2 Enhanced is a next-generation DeFi token that combines advanced yield generation, multi-tier staking, flash loan capabilities, and comprehensive governance in a size-optimized contract deployed on Base L2.
-
-### Key Features
-
-1. **V1 Migration Bonus**: 11.1% bonus for early V1 token holders
-2. **Advanced Yield System**: 5-25% APY based on loyalty tier progression
-3. **Multi-Tier Staking**: 30-365 day periods with up to 2x reward multipliers
-4. **5-Tier Loyalty System**: Progressive benefits and yield boosts
-5. **Flash Loan System**: 0.3% fee with 50k max loan capacity
-6. **Enhanced Governance**: Proposal creation and voting mechanisms
-7. **Dynamic Fee System**: Configurable transfer and burn rates
-8. **UUPS Upgradeable**: Future enhancement capability
-
-### Technical Excellence
-
-- **Contract Size**: 24,255 bytes (optimized under 24,576 limit)
-- **Gas Efficiency**: Packed structs and external math libraries
-- **Security**: Comprehensive access controls and reentrancy protection
-- **Upgradeability**: UUPS proxy pattern for future enhancements
-
-### Project Scale
-
-1. **ARCx V2 Enhanced**
-
-> ✅ LIVE ON BASE L2 MAINNET
-> Address: 0xCa244C6dbAfF0219d0E40ab7942037a11302af33
-
-[![Live](https://img.shields.io/badge/Status-Live-00FF88?style=for-the-badge)](https://basescan.org/address/0xCa244C6dbAfF0219d0E40ab7942037a11302af33) ![Base](https://img.shields.io/badge/Network-Base%20L2-0052FF?style=for-the-badge) ![Enhanced](https://img.shields.io/badge/Version-V2%20Enhanced-FF0080?style=for-the-badge) ![Optimized](https://img.shields.io/badge/Size-Optimized-00FF88?style=for-the-badge)
-
-2. **Distribution & Liquidity**
-
-> 📝 IN PROGRESS
-> 1M Max Supply - No additional minting
-> 50% LP | 30% Vesting | 10% Airdrop | 10% Marketing
+[![Base L2](https://img.shields.io/badge/Base-L2%20LIVE-0052FF?style=for-the-badge&logo=ethereum&logoColor=white)](https://base.org/) [![Contract Size](https://img.shields.io/badge/Size-24,255%20bytes-00FF88?style=for-the-badge&logo=ethereum&logoColor=white)](https://ethereum.org/) [![Supply](https://img.shields.io/badge/Supply-1M%20ARCX2-FF0080?style=for-the-badge)](https://basescan.org/) [![Security](https://img.shields.io/badge/Security-Enhanced-FF6B35?style=for-the-badge&logo=security&logoColor=white)](#security)
 
 ---
 
-## Token Distribution (1M Total Supply)
+## 🚀 **DEPLOYMENT STATUS: COMPLETE ✅**
 
-### Allocation Breakdown
-- **🏦 Liquidity Pool**: 500,000 ARCx (50%) - Uniswap V4 with advanced hooks
-- **🔒 Vesting Contracts**: 300,000 ARCx (30%) - Ecosystem development & team
-- **🎁 Community Airdrop**: 100,000 ARCx (10%) - Early supporters & community
-- **📈 Marketing Fund**: 100,000 ARCx (10%) - Growth and partnerships
+### 📍 **Core Contracts (Base L2 Mainnet)**
 
-### Core Contracts
+| Contract | Address | Status |
+|----------|---------|--------|
+| **ARCx V2 Enhanced** | [`0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437`](https://basescan.org/address/0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437) | ✅ **LIVE** |
+| **Vesting Contract** | [`0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600`](https://basescan.org/address/0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600) | ✅ **DEPLOYED** |
+| **Airdrop System** | [`0x40fe447cf4B2af7aa41694a568d84F1065620298`](https://basescan.org/address/0x40fe447cf4B2af7aa41694a568d84F1065620298) | ✅ **DEPLOYED** |
+| **Uniswap V4 Hook** | [`0x30C539Da48507cE8b9c3a2Ff4dC1209eC8dd857f`](https://basescan.org/address/0x30C539Da48507cE8b9c3a2Ff4dC1209eC8dd857f) | ✅ **DEPLOYED** |
 
-#### 1. ARCGovernor.sol
+---
 
-- **Purpose**: Main governance contract implementing proposal lifecycle management
-- **Features**:
-  - Multiple voting mechanisms (standard, quadratic, conviction, ranked choice, weighted)
-  - Configurable voting periods and delays
-  - Proposal threshold requirements
-  - Quorum enforcement
-  - Integration with timelock for secure execution
+## 💎 **Token Details**
 
-#### 2. ARCTimelock.sol
+- **Name**: ARCx V2 Enhanced  
+- **Symbol**: ARCX2  
+- **Total Supply**: 1,000,000 tokens (finalized)  
+- **Decimals**: 18  
+- **Network**: Base L2 (Chain ID: 8453)  
+- **Contract Size**: 24,255 bytes (optimized under 24,576 limit)  
 
-- **Purpose**: Secure execution delays for governance actions
-- **Features**:
-  - Configurable delay periods
-  - Role-based access control (Proposer, Executor, Admin)
-  - Batch operation support
-  - Emergency execution capabilities
-  - Operation scheduling and cancellation
+### 🔐 **Import to Wallet**
+```
+Contract: 0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437
+Symbol: ARCX2  
+Decimals: 18
+Network: Base L2
+```
 
-#### 3. ARCProposal.sol
+---
 
-- **Purpose**: Proposal creation and management system
-- **Features**:
-  - Multiple proposal types (Basic, Treasury, Parameter, Upgrade)
-  - Proposal validation and categorization
-  - State management throughout proposal lifecycle
-  - Integration with voting and treasury systems
+## ⚡ **Enhanced Features**
 
-#### 4. ARCVoting.sol
+### 🏆 **Core Capabilities**
+- ✅ **V1 Migration Bonus** • 11.1% bonus for V1 token holders
+- ✅ **Advanced Yield System** • 5-25% APY based on loyalty tier
+- ✅ **Multi-Tier Staking** • 30-365 days with up to 2x multipliers
+- ✅ **5-Tier Loyalty System** • Progressive benefits and rewards
+- ✅ **Flash Loan System** • 0.3% fee with dynamic limits
+- ✅ **Enhanced Governance** • Proposal creation and voting
+- ✅ **Dynamic Fee System** • Configurable transfer and burn rates
+- ✅ **UUPS Upgradeable** • Future enhancement capability
 
-- **Purpose**: Flexible voting mechanisms for different governance needs
-- **Features**:
-  - Standard voting (one token, one vote)
-  - Quadratic voting (square root of tokens)
-  - Conviction voting (time-weighted)
-  - Ranked choice voting
-  - Weighted voting (custom weight distribution)
-  - Vote delegation support
+### 🛡️ **Security & Infrastructure**
+- ✅ **Advanced Vesting** • Cliff periods, penalties, governance
+- ✅ **Merkle Airdrop** • Anti-sybil protection, efficient distribution
+- ✅ **Uniswap V4 Hook** • MEV protection, dynamic fees, automation
+- ✅ **Access Control** • Role-based permissions and security
 
-#### 5. ARCTreasury.sol
+---
 
-- **Purpose**: Secure fund management and execution
-- **Features**:
-  - Multi-token support (native and ERC20)
-  - Proposal-based fund allocation
-  - Emergency withdrawal capabilities
-  - Balance tracking and reporting
-  - Integration with governance proposals
+## 📊 **Token Distribution**
 
-#### 6. ARCDAO.sol
+| Allocation | Amount | Status | Purpose |
+|------------|--------|--------|---------|
+| **Liquidity Pool** | 500,000 ARCX2 (50%) | 🔄 Ready | Uniswap V4 with hooks |
+| **Team Vesting** | 299,850 ARCX2 (30%) | ✅ Distributed | 2-3 year vesting |
+| **Airdrop** | 99,950 ARCX2 (10%) | ✅ Distributed | Community distribution |
+| **Marketing** | 100,000 ARCX2 (10%) | 📝 Reserved | Growth & partnerships |
 
-- **Purpose**: Main orchestrator contract unifying all governance components
-- **Features**:
-  - Unified interface for all governance operations
-  - Proposal lifecycle management
-  - Emergency functions
-  - State queries and reporting
-  - Role-based access control
+---
 
-## Installation & Setup
+## 🎯 **Getting Started**
 
-### Prerequisites
+### **For Users**
+1. **Add Token**: Import `0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437` to wallet
+2. **Stake Tokens**: Choose 30-365 day periods for rewards
+3. **Earn Yield**: Automatic 5-25% APY based on loyalty tier
+4. **Participate**: Vote on governance proposals
 
-- Node.js 16.x or higher
-- Hardhat 2.12.x or higher
-- OpenZeppelin Contracts 4.8.x or higher
+### **For Developers**
+```bash
+# Clone repository
+git clone https://github.com/Artifact-Virtual/arc_ecosystem.git
+cd arc_ecosystem
+
+# Install dependencies
+npm install
+
+# Compile contracts
+npx hardhat compile
+
+# Run tests
+npx hardhat test
+```
+
+---
+
+## 🌐 **Ecosystem Components**
+
+### **Uniswap V4 Integration**
+- **Advanced Hook**: `0x30C539Da48507cE8b9c3a2Ff4dC1209eC8dd857f`
+- **MEV Protection**: Front-running and sandwich attack prevention
+- **Dynamic Fees**: Automatic fee adjustment based on market conditions
+- **Liquidity Management**: Automated position optimization
+
+### **Vesting & Distribution**
+- **Core Team**: 120k tokens, 2-year linear, 6-month cliff
+- **Ecosystem**: 180k tokens, 3-year linear, 3-month cliff
+- **Governance**: Penalty system for early withdrawal attempts
+
+---
+
+## 🔧 **Technical Architecture**
+
+### **Size Optimization Achievement**
+- **Before**: 28,358 bytes (too large for deployment)
+- **After**: 24,255 bytes (successfully deployable)
+- **Method**: Packed structs, external libraries, gas optimization
+- **Result**: All 15+ features preserved in optimized contract
+
+### **Advanced Infrastructure**
+- **UUPS Proxy Pattern** for upgradeability
+- **Packed Structs** for gas efficiency  
+- **External Math Library** for size reduction
+- **Role-Based Access Control** for security
+- **Reentrancy Protection** for safety
+
+---
+
+## 📈 **Roadmap**
+
+### ✅ **Phase 1: Core Deployment** (COMPLETE)
+- Size optimization and contract deployment
+- Infrastructure contracts (vesting, airdrop, hooks)
+- Token minting and distribution
+
+### 🔄 **Phase 2: Ecosystem Launch** (IN PROGRESS)
+- Uniswap V4 pool deployment with hooks
+- Liquidity provisioning (500k ARCX2)
+- Vesting schedule activation
+
+### 📝 **Phase 3: Community Growth** (UPCOMING)
+- Airdrop campaign launch (100k tokens)
+- Governance system activation
+- V1 to V2 migration campaign
+
+---
+
+## 🔗 **Links**
+
+- **Contract**: [0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437](https://basescan.org/address/0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437)
+- **Base Explorer**: [basescan.org](https://basescan.org/)
+- **Uniswap V4**: [app.uniswap.org](https://app.uniswap.org/)
+- **Documentation**: [Full Docs](./docs/)
+
+---
+
+## 📄 **License**
+
+MIT License - see [LICENSE](./LICENSE) file for details.
+
+---
+
+<div align="center">
+<strong>🎉 ARCx V2 Enhanced - LIVE on Base L2 Mainnet! 🎉</strong><br/>
+<em>Advanced DeFi token with all features preserved and optimized</em>
+</div>
 
 ### Installation
 
