@@ -23,7 +23,7 @@ const config: HardhatUserConfig = {
     settings: {
       optimizer: {
         enabled: true,
-        runs: 10, // Very low runs for maximum size reduction
+        runs: 1, // Maximum size reduction
       },
       viaIR: true,
       metadata: {

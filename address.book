@@ -1,15 +1,14 @@
-# ARCx Token Project — Address Book (as of August 29, 2025)
+# ARCx Token Project — Address Book (as of September 7, 2025)
 
-## Core Contracts (Deployed)
-- ARCx Token: 0xA4093669DAFbD123E37d52e0939b3aB3C2272f44
-- Dutch Auction: 0x5Da5F567553C8D4F12542Ba608F41626f77Aa836
-- Smart Airdrop: 0x79166AbC8c17017436263BcE5f76DaB1c3dEa195
-- Vesting Contract: 0xEEc0298bE76C9C3224eA05a34687C1a1134d550B
+## Core Contracts (Deployed - Base L2 Mainnet)
+- ARCx V2 Enhanced: 0xCa244C6dbAfF0219d0E40ab7942037a11302af33 ✅ LIVE
+- ARCxMath Library: 0xdfB7271303467d58F6eFa10461c9870Ed244F530 ✅ LIVE
+- ARCx V1 (Legacy): 0xA4093669DAFbD123E37d52e0939b3aB3C2272f44 [MIGRATION SOURCE]
 
-## New Contracts (To Be Deployed)
-- ARC Identity SBT: 0x0000000000000000000000000000000000000000 [PLACEHOLDER - Deploy Citizenship SBT]
-- ARCs Token: 0x0000000000000000000000000000000000000000 [PLACEHOLDER - Deploy Staking Token]
-- ARCx Staking Vault: 0x0000000000000000000000000000000000000000 [PLACEHOLDER - Deploy DeFi Vault]
+## Infrastructure Contracts (To Be Deployed)
+- Vesting Contract: 0x0000000000000000000000000000000000000000 [PENDING - Ecosystem & Team]
+- Airdrop Contract: 0x0000000000000000000000000000000000000000 [PENDING - 100k Token Drop]
+- Uniswap V4 Hook: 0x0000000000000000000000000000000000000000 [PENDING - Advanced LP Management]
 
 ## Governance & Security
 - Treasury Safe: 0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38
@@ -33,21 +32,31 @@
 - USDC (Base): 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
 
 ## Deployment Status
-- ✅ ARCx Token: DEPLOYED
-- ✅ Dutch Auction: DEPLOYED
-- ✅ Smart Airdrop: DEPLOYED
-- ✅ Vesting Contract: DEPLOYED
-- ⏳ ARC Identity SBT: PENDING DEPLOYMENT
-- ⏳ ARCs Token: PENDING DEPLOYMENT
-- ⏳ ARCx Staking Vault: PENDING DEPLOYMENT
+- ✅ ARCx V2 Enhanced: DEPLOYED & LIVE
+- ✅ ARCxMath Library: DEPLOYED & LIVE  
+- ⏳ Vesting Contract: PENDING DEPLOYMENT
+- ⏳ Airdrop Contract: PENDING DEPLOYMENT
+- ⏳ Uniswap V4 Hook: PENDING DEPLOYMENT
+
+## Token Distribution Plan (1M Max Supply)
+- 🏦 Liquidity Pool: 500,000 ARCx (50%)
+- 🔒 Vesting (Ecosystem + Dev): 300,000 ARCx (30%)
+- 🎁 Airdrop: 100,000 ARCx (10%)
+- 📈 Marketing: 100,000 ARCx (10%)
 
 ## Deployment Commands
 ```bash
-# Deploy SBT (Citizenship)
-npm run deploy:sbt
+# Mint total supply and setup distribution
+npm run setup:distribution
 
-# Deploy ARCs Token (Staking)
-npm run deploy:arcs
+# Deploy vesting contracts
+npm run deploy:vesting
+
+# Deploy airdrop system
+npm run deploy:airdrop
+
+# Deploy Uniswap V4 with hooks
+npm run deploy:v4-lp
 
 # Deploy DeFi Infrastructure
 npm run deploy:defi
