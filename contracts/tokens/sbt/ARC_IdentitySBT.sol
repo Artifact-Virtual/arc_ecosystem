@@ -38,19 +38,11 @@ import { exp } from "@prb/math/src/ud60x18/Math.sol";
  * - Reputation scores decay over time requiring continuous engagement
  * - Higher reputation provides enhanced rewards and governance power
  * - Tokens can be revoked for malicious behavior or compliance issues
- * 
  * TROUBLESHOOTING:
  * - SBTs cannot be transferred - they are bound to original recipient
  * - Reputation decay requires periodic activity to maintain high scores
  * - Only authorized attestors can mint tokens with valid EAS proofs
  * - Revocation is irreversible and removes all associated benefits
- */
- * - Soulbound tokens (ERC-5192 locked)
- * - EAS attestation integration
- * - Decay-weighted reputation system
- * - Role-based eligibility masks
- * - Rate-limited issuance
- * - Comprehensive event emission
  */
 contract ARC_IdentitySBT is
     Initializable,

@@ -8,7 +8,7 @@
 ## Infrastructure Contracts (To Be Deployed)
 - Vesting Contract: 0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600 ✅ DEPLOYED
 - Airdrop Contract: 0x40fe447cf4B2af7aa41694a568d84F1065620298 ✅ DEPLOYED
-- Uniswap V4 Hook: 0x30C539Da48507cE8b9c3a2Ff4dC1209eC8dd857f ✅ DEPLOYED
+- Uniswap V4 Hook: 0x30C539Da48507cE8b9c3a2Ff4dC1209eC8dd857f ⚠️ NEEDS REDEPLOYMENT (Gas Issue Fixed)
 
 ## Governance & Security
 - Treasury Safe: 0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38

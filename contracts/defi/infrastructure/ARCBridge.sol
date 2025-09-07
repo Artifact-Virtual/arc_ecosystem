@@ -1,4 +1,8 @@
 // SPDX-License-Identifier: MIT
+// Upgradeable contract via UUPS proxy
+// Treasury Safe = owner/admin
+// Updated for ARCx V2 Enhanced integration
+
 pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
@@ -10,9 +14,33 @@ import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 
 /**
- * @title ARC Bridge
- * @dev Advanced cross-chain bridge for ARC Exchange
- * @notice Enterprise-grade bridge with ARC ecosystem integration and multi-chain support
+ * @title ARC Bridge V2 - Cross-Chain Infrastructure
+ * @dev Advanced multi-chain bridge with enterprise-grade security and ARCx V2 Enhanced integration
+ * @notice Secure cross-chain transfers for ARCx V2 tokens across supported blockchain networks
+ * 
+ * @custom:security-contact security@arcexchange.io
+ * @custom:version 2.0.0
+ * @custom:upgradeable UUPS proxy pattern
+ * 
+ * FEATURES:
+ * - Multi-chain bridge supporting Ethereum, Polygon, Arbitrum, Optimism, and Base
+ * - Enterprise-grade security with multi-signature validation and timelock delays
+ * - Automated liquidity management across destination chains
+ * - MEV protection and front-running prevention mechanisms
+ * - Emergency pause functionality with governance override capabilities
+ * - Gas optimization with batched transfers and layer-specific optimizations
+ * 
+ * USAGE:
+ * - Users deposit ARCx V2 tokens to bridge to destination chain
+ * - Validators confirm transactions via multi-signature consensus
+ * - Tokens are minted on destination or released from locked reserves
+ * - Cross-chain DeFi protocols can integrate for seamless liquidity
+ * 
+ * TROUBLESHOOTING:
+ * - Bridge delays during high network congestion are normal security measures
+ * - Failed transfers may indicate insufficient destination chain liquidity
+ * - Always verify destination address as cross-chain transfers are irreversible
+ * - Emergency pauses protect against detected security vulnerabilities
  */
 contract ARCBridge is
     Initializable,

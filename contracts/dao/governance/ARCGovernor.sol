@@ -1,4 +1,8 @@
 // SPDX-License-Identifier: MIT
+// Upgradeable contract via UUPS proxy
+// Treasury Safe = owner/admin
+// Updated for ARCx V2 Enhanced integration
+
 pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
@@ -12,21 +16,32 @@ import "@openzeppelin/contracts-upgradeable/utils/cryptography/ECDSAUpgradeable.
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/EIP712Upgradeable.sol";
 
 /**
- * @title ARC Governor
- * @dev Nobel-worthy governance system for ARC DAO
- * @notice Advanced on-chain governance with quadratic voting, conviction voting,
- *         delegation, and multi-stage proposal lifecycle
- *
- * Features:
- * - Quadratic voting for fair representation
- * - Conviction voting for long-term alignment
- * - Proposal delegation and voting power delegation
- * - Multi-stage proposal lifecycle (Draft → Active → Succeeded/Failed → Queued → Executed)
- * - Emergency governance mechanisms
- * - Cross-chain governance support
- * - Reputation-based voting weights
- * - Proposal templates and categorization
- * - Real-time governance analytics
+ * @title ARC Governor V2 - Advanced Decentralized Governance System
+ * @dev Nobel-tier governance system with sophisticated voting mechanisms and ARCx V2 integration
+ * @notice Multi-modal governance combining token voting, reputation scoring, and expertise-based decisions
+ * 
+ * @custom:security-contact security@arcexchange.io
+ * @custom:version 2.0.0
+ * @custom:upgradeable UUPS proxy pattern
+ * 
+ * FEATURES:
+ * - Quadratic voting to prevent whale dominance and encourage broad participation
+ * - Conviction voting for time-weighted decision commitment and long-term thinking
+ * - Delegation system allowing expertise-based vote proxy with granular controls
+ * - Multi-stage proposal lifecycle with discussion, voting, and execution phases
+ * - Integration with ARCx V2 Enhanced voting power and SBT reputation weighting
+ * - Emergency governance mechanisms for critical protocol upgrades
+ * 
+ * USAGE:
+ * - Token holders propose improvements and vote on protocol changes
+ * - Reputation scores from SBTs provide additional voting weight for experts
+ * - Delegation allows specialized voters to represent community interests
+ * - Time-locked execution ensures community review of passed proposals
+ * TROUBLESHOOTING:
+ * - Voting failures may indicate insufficient token balance or delegation setup
+ * - Proposal rejections require meeting minimum support and quorum thresholds
+ * - Emergency actions bypass normal timelock for critical security responses
+ * - Check SBT reputation status if voting power seems lower than expected
  */
 contract ARCGovernor is
     Initializable,

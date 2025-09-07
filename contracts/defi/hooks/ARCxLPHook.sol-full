@@ -1,4 +1,8 @@
 // SPDX-License-Identifier: MIT
+// Immutable contract
+// Treasury Safe = owner
+// Updated for ARCx V2 Enhanced integration
+
 pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -6,14 +10,34 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 /**
- * @title ARCxAdvancedHook
- * @dev Advanced Uniswap V4 hook for ARCx token with automated features:
- * - Dynamic fee adjustment based on volatility
- * - Automated liquidity rebalancing
- * - MEV protection mechanisms
- * - Flash loan integration protection
- * - Yield farming rewards distribution
- * - Anti-sandwich attack protection
+ * @title ARCx Advanced Uniswap V4 Hook - MEV Protection & Dynamic Features
+ * @dev Sophisticated hook contract providing advanced trading protections and automated optimizations
+ * @notice Integrates with Uniswap V4 pools to enhance ARCx V2 Enhanced token trading experience
+ * 
+ * @custom:security-contact security@arcexchange.io
+ * @custom:version 2.0.0
+ * @custom:deployed-on Base L2 Mainnet (Chain ID: 8453)
+ * @custom:contract-address 0x30C539Da48507cE8b9c3a2Ff4dC1209eC8dd857f
+ * 
+ * FEATURES:
+ * - Dynamic fee adjustment based on real-time volatility and network conditions
+ * - Automated liquidity rebalancing to maintain optimal price ranges
+ * - MEV (Maximum Extractable Value) protection against sandwich attacks
+ * - Flash loan integration safeguards and circuit breakers
+ * - Automated yield farming rewards distribution to liquidity providers
+ * - Anti-manipulation protection with whale detection algorithms
+ * 
+ * USAGE:
+ * - Automatically activated on all ARCX2 pool trades via Uniswap V4
+ * - Provides seamless protection without user intervention required
+ * - Dynamically adjusts fees during market stress to protect LPs
+ * - Distributes additional rewards to long-term liquidity providers
+ * 
+ * TROUBLESHOOTING:
+ * - Higher fees during volatility are intentional MEV protection
+ * - Blocked trades may indicate detected sandwich attack attempts
+ * - Rebalancing operations may temporarily affect large trades
+ * - Check hook status if unexpected behavior occurs during trading
  */
 contract ARCxAdvancedHook is Ownable, ReentrancyGuard {
     using SafeMath for uint256;

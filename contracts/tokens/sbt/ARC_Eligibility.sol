@@ -1,4 +1,8 @@
-// SPDX-License-Identifier: AGPL-3.0
+// SPDX-License-Identifier: MIT
+// Upgradeable contract via UUPS proxy
+// Treasury Safe = owner/admin
+// Updated for ARCx V2 Enhanced integration
+
 pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
@@ -8,16 +12,32 @@ import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 import "./ARC_IdentitySBT.sol";
 
 /**
- * @title ARCx Eligibility - Topic-Based Governance Eligibility
- * @dev Determines governance eligibility based on SBT roles and topic masks
- * @notice Calculates voting power and quorum requirements per topic
- *
- * Features:
- * - Topic-based eligibility checking
- * - Component weight calculation
- * - Quorum and supermajority validation
- * - Integration with Identity SBT
- * - Configurable topic parameters
+ * @title ARCx Eligibility - Advanced Governance Qualification System
+ * @dev Topic-based governance eligibility with role verification and weighted voting power
+ * @notice Determines voting rights and power based on SBT roles and specialized topic expertise
+ * 
+ * @custom:security-contact security@arcexchange.io
+ * @custom:version 2.0.0
+ * @custom:upgradeable UUPS proxy pattern
+ * 
+ * FEATURES:
+ * - Topic-specific governance eligibility based on proven expertise
+ * - Role-weighted voting power calculation using SBT reputation scores
+ * - Dynamic quorum requirements adjusted per topic complexity
+ * - Supermajority validation for critical protocol decisions
+ * - Anti-sybil protection through SBT role verification
+ * - Configurable topic parameters for different governance areas
+ * 
+ * USAGE:
+ * - Protocol automatically checks eligibility before allowing governance participation
+ * - Users with relevant SBT roles can vote on their expertise topics
+ * - Voting power scales with reputation score and role relevance
+ * - Critical decisions require higher quorum and supermajority thresholds
+ * TROUBLESHOOTING:
+ * - Voting rejections indicate insufficient SBT role or reputation for topic
+ * - Check Identity SBT contract for valid, non-revoked roles
+ * - Topic eligibility may require specific role combinations or minimum scores
+ * - Quorum failures mean insufficient qualified participants voted
  */
 contract ARC_Eligibility is
     Initializable,
