@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Immutable contract
 // Treasury Safe = owner
-// Updated for ARCx V2 Enhanced integration - Gas Optimized Advanced Hook
+// Gas-Fixed ARCx Hook for Uniswap V4
 
 pragma solidity ^0.8.21;
 
@@ -9,45 +9,148 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 /**
- * @title ARCx Advanced Uniswap V4 Hook - Gas Optimized
- * @dev Advanced hook with MEV protection and dynamic features, optimized to prevent gas estimation issues
- * @notice Sophisticated trading protections with predictable gas consumption for Uniswap V4 integration
+ * @title ARCx Advanced Uniswap V4 Hook - Gas Predictable
+ * @dev Simplified hook with predictable gas consumption for Uniswap V4 integration
+ * @notice Fixed gas estimation issues while maintaining core MEV protection
  * 
  * @custom:security-contact security@arcexchange.io
- * @custom:version 2.1.0-gas-optimized
+ * @custom:version 2.2.0-gas-fixed
  * @custom:deployed-on Base L2 Mainnet (Chain ID: 8453)
- * @custom:gas-optimized Fixed gas estimation issues while preserving advanced functionality
+ * @custom:gas-optimized Fixed "unpredictable gas limit" errors
  * 
  * FEATURES:
- * - Dynamic fee adjustment with bounded calculations
- * - MEV protection with efficient time-based checks  
- * - Anti-sandwich attack detection with gas limits
- * - Automated liquidity rebalancing with circuit breakers
- * - Reward distribution with batch processing capabilities
- * - Whale detection with optimized threshold checks
+ * - Simple fixed fee structure (no dynamic calculations)
+ * - Basic MEV protection with timestamp checks
+ * - Minimal state changes for predictable gas
+ * - Emergency controls maintained
  * 
- * USAGE:
- * - Automatically activated on all ARCX2 pool trades via Uniswap V4
- * - Gas-efficient operations with predictable costs
- * - All complex calculations bounded to prevent estimation failures
- * - Emergency pause functionality for critical situations
- * 
- * TROUBLESHOOTING:
- * - Gas-optimized to prevent "Unpredictable gas limit" errors
- * - All loops are bounded with maximum iteration limits
- * - External calls are wrapped with try/catch for predictability
- * - State changes are batched to minimize gas variation
+ * GAS OPTIMIZATIONS:
+ * - Removed complex volatility calculations
+ * - Simplified fee structure
+ * - Minimal storage reads/writes
+ * - No external calls during estimation
  */
 contract ARCxAdvancedHook is Ownable, ReentrancyGuard {
     
-    // Gas-optimized configuration struct
+    // Simplified configuration
     struct HookConfig {
-        uint64 baseFee;           // Base fee in basis points (0-10000)
-        uint64 maxFee;            // Maximum fee during volatility
-        uint64 mevDelay;          // MEV protection delay in seconds
-        uint64 maxTradesPerBlock; // Maximum trades per block per user
-        bool dynamicFeesEnabled;  // Enable dynamic fees
-        bool antiSandwichEnabled; // Enable sandwich protection
+        uint64 baseFee;           // Fixed fee in basis points
+        uint64 mevDelay;          // MEV protection delay
+        bool enabled;             // Hook enabled/disabled
+        bool paused;              // Emergency pause
+    }
+    
+    // Minimal trader tracking
+    mapping(address => uint256) public lastTradeTime;
+    
+    HookConfig public config;
+    
+    event FeeSet(uint64 newFee);
+    event HookPaused(bool paused);
+    event TradeBlocked(address trader, string reason);
+    
+    constructor() {
+        config = HookConfig({
+            baseFee: 25,      // 0.25%
+            mevDelay: 2,      // 2 seconds
+            enabled: true,
+            paused: false
+        });
+    }
+    
+    /**
+     * @dev Simple configuration update
+     */
+    function updateConfig(
+        uint64 _baseFee,
+        uint64 _mevDelay
+    ) external onlyOwner {
+        require(_baseFee <= 1000, "Fee too high"); // Max 10%
+        
+        config.baseFee = _baseFee;
+        config.mevDelay = _mevDelay;
+        
+        emit FeeSet(_baseFee);
+    }
+    
+    /**
+     * @dev Emergency controls
+     */
+    function setPaused(bool _paused) external onlyOwner {
+        config.paused = _paused;
+        emit HookPaused(_paused);
+    }
+    
+    /**
+     * @dev Before swap hook - simplified and gas predictable
+     */
+    function beforeSwap(
+        address trader,
+        uint256 /* amountIn */,
+        uint256 /* currentPrice */
+    ) external view returns (uint256 feeRate, bool allowed) {
+        // Check if hook is enabled and not paused
+        if (!config.enabled || config.paused) {
+            return (0, false);
+        }
+        
+        // Simple MEV protection check
+        if (config.mevDelay > 0 && lastTradeTime[trader] > 0) {
+            if (block.timestamp < lastTradeTime[trader] + config.mevDelay) {
+                return (0, false); // MEV protection triggered
+            }
+        }
+        
+        // Return fixed fee rate
+        return (config.baseFee, true);
+    }
+    
+    /**
+     * @dev After swap hook - minimal state update
+     */
+    function afterSwap(
+        address trader,
+        uint256 /* amountIn */,
+        uint256 /* newPrice */
+    ) external {
+        require(config.enabled && !config.paused, "Hook disabled");
+        
+        // Simple state update - just record timestamp
+        lastTradeTime[trader] = block.timestamp;
+    }
+    
+    /**
+     * @dev Toggle hook features
+     */
+    function toggleFeatures(
+        bool _enabled,
+        bool _paused
+    ) external onlyOwner {
+        config.enabled = _enabled;
+        config.paused = _paused;
+        
+        emit HookPaused(_paused);
+    }
+    
+    /**
+     * @dev View functions
+     */
+    function getConfig() external view returns (HookConfig memory) {
+        return config;
+    }
+    
+    function isTradeAllowed(address trader) external view returns (bool) {
+        if (!config.enabled || config.paused) {
+            return false;
+        }
+        
+        if (config.mevDelay > 0 && lastTradeTime[trader] > 0) {
+            return block.timestamp >= lastTradeTime[trader] + config.mevDelay;
+        }
+        
+        return true;
+    }
+}
         bool paused;              // Emergency pause
     }
     
