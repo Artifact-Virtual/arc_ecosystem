@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Immutable contract
 // Treasury Safe = owner
+// Updated for ARCx V2 Enhanced integration
 
 pragma solidity ^0.8.21;
 
@@ -8,11 +9,11 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-/// @title PenaltyVault - Collector of exit penalties
+/// @title PenaltyVault - Collector of exit penalties for ARCx V2 staking
 contract PenaltyVault is Ownable {
     using SafeERC20 for IERC20;
 
-    IERC20 public immutable arcx;
+    IERC20 public immutable arcx; // ARCx V2 Enhanced token
 
     constructor(address _arcx) {
         arcx = IERC20(_arcx);

@@ -16,7 +16,7 @@ async function main() {
     const ARCxV2Enhanced = await ethers.getContractFactory("ARCxV2Enhanced");
     const token = ARCxV2Enhanced.attach(tokenAddress);
     
-    const VestingContract = await ethers.getContractFactory("ARCxVesting");
+    const VestingContract = await ethers.getContractFactory("ARCxVestingContract");
     const vesting = VestingContract.attach(vestingAddress);
     
     try {
@@ -47,12 +47,12 @@ async function main() {
         console.log("📤 Setting up Core Team vesting (120k tokens, 2yr, 6mo cliff)...");
         const coreTeamTx = await vesting.createVestingSchedule(
             coreTeamBeneficiary,
-            coreTeamStart,
+            coreTeamAmount,
             coreTeamCliff,
             coreTeamDuration,
-            1, // slicePeriodSeconds
-            false, // not revocable
-            coreTeamAmount
+            2000, // 20% penalty rate
+            "Core Team",
+            false // not governance enabled
         );
         await coreTeamTx.wait();
         console.log("✅ Core Team vesting configured");
@@ -68,12 +68,12 @@ async function main() {
         console.log("📤 Setting up Ecosystem vesting (180k tokens, 3yr, 3mo cliff)...");
         const ecosystemTx = await vesting.createVestingSchedule(
             ecosystemBeneficiary,
-            ecosystemStart,
+            ecosystemAmount,
             ecosystemCliff,
             ecosystemDuration,
-            1, // slicePeriodSeconds
-            true, // revocable by governance
-            ecosystemAmount
+            1000, // 10% penalty rate
+            "Ecosystem Development",
+            true // governance enabled
         );
         await ecosystemTx.wait();
         console.log("✅ Ecosystem vesting configured");

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Staking Vault ERC-4626, Upgradeable with ARCs
+// Updated for ARCx V2 Enhanced integration
 
 pragma solidity ^0.8.21;
 
@@ -9,9 +10,10 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 
 import "../tokens/arc-s/ARCs.sol";
+import "../tokens/arc-x/ARCxV2.sol"; // ARCx V2 Enhanced integration
 import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
 
-/// @title StakingVault - ARCx → ARCxs staking vault
+/// @title StakingVault - ARCx V2 → ARCxs staking vault with enhanced features
 contract StakingVault is Initializable, ERC4626Upgradeable, UUPSUpgradeable, AccessControlUpgradeable {
     bytes32 public constant UPGRADER_ROLE = keccak256("UPGRADER_ROLE");
     bytes32 public constant PENALTY_MANAGER_ROLE = keccak256("PENALTY_MANAGER_ROLE");

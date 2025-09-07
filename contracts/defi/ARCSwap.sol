@@ -10,9 +10,11 @@ import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 
 /**
- * @title ARC Swap
+ * @title ARC Swap V2
  * @dev Advanced cross-chain swap contract for ARC Exchange
- * @notice Enterprise-grade DEX functionality with ARC ecosystem integration
+ * @notice Enterprise-grade DEX functionality with ARCx V2 Enhanced integration
+ * @custom:security-contact security@arcexchange.io
+ * @custom:version 2.0.0
  */
 contract ARCSwap is
     Initializable,
@@ -88,12 +90,13 @@ contract ARCSwap is
     FeeStructure public feeStructure;
     SwapAnalytics public analytics;
 
-    // ARC ecosystem integration
-    address public arcxToken;
+    // ARC ecosystem V2 integration
+    address public arcxToken; // ARCx V2 Enhanced token
     address public arcsToken;
     address public treasuryRewards;
     address public stakingVault;
     address public treasury;
+    address public uniswapV4Hook; // MEV protection integration
 
     uint256 public minSwapAmount;
     uint256 public maxSwapAmount;

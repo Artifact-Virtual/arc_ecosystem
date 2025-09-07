@@ -3,7 +3,7 @@
 // Upgradeable via UUPS.
 // Safe (Treasury) controls emission rate + destinations.
 // distribute() can be called manually, or by automation (cron, keeper, relayer).
-
+// Updated for ARCx V2 Enhanced integration
 
 pragma solidity ^0.8.21;
 
@@ -13,7 +13,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 
-/// @title TreasuryRewards - ARCx emission manager
+/// @title TreasuryRewards - ARCx V2 emission manager with enhanced tokenomics
 contract TreasuryRewards is Initializable, UUPSUpgradeable, AccessControlUpgradeable {
     bytes32 public constant UPGRADER_ROLE = keccak256("UPGRADER_ROLE");
     bytes32 public constant REWARD_MANAGER_ROLE = keccak256("REWARD_MANAGER_ROLE");
