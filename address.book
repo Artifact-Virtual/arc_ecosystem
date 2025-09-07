@@ -1,14 +1,14 @@
 # ARCx Token Project — Address Book (as of September 7, 2025)
 
 ## Core Contracts (Deployed - Base L2 Mainnet)
-- ARCx V2 Enhanced: 0xCa244C6dbAfF0219d0E40ab7942037a11302af33 ✅ LIVE
+- ARCx V2 Enhanced: 0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437 ✅ LIVE (UPDATED)
 - ARCxMath Library: 0xdfB7271303467d58F6eFa10461c9870Ed244F530 ✅ LIVE
 - ARCx V1 (Legacy): 0xA4093669DAFbD123E37d52e0939b3aB3C2272f44 [MIGRATION SOURCE]
 
 ## Infrastructure Contracts (To Be Deployed)
-- Vesting Contract: 0x0000000000000000000000000000000000000000 [PENDING - Ecosystem & Team]
-- Airdrop Contract: 0x0000000000000000000000000000000000000000 [PENDING - 100k Token Drop]
-- Uniswap V4 Hook: 0x0000000000000000000000000000000000000000 [PENDING - Advanced LP Management]
+- Vesting Contract: 0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600 ✅ DEPLOYED
+- Airdrop Contract: 0x40fe447cf4B2af7aa41694a568d84F1065620298 ✅ DEPLOYED
+- Uniswap V4 Hook: 0x30C539Da48507cE8b9c3a2Ff4dC1209eC8dd857f ✅ DEPLOYED
 
 ## Governance & Security
 - Treasury Safe: 0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38
@@ -34,9 +34,9 @@
 ## Deployment Status
 - ✅ ARCx V2 Enhanced: DEPLOYED & LIVE
 - ✅ ARCxMath Library: DEPLOYED & LIVE  
-- ⏳ Vesting Contract: PENDING DEPLOYMENT
-- ⏳ Airdrop Contract: PENDING DEPLOYMENT
-- ⏳ Uniswap V4 Hook: PENDING DEPLOYMENT
+- ✅ Vesting Contract: DEPLOYED & READY
+- ✅ Airdrop Contract: DEPLOYED & READY
+- ✅ Uniswap V4 Hook: DEPLOYED & READY
 
 ## Token Distribution Plan (1M Max Supply)
 - 🏦 Liquidity Pool: 500,000 ARCx (50%)
