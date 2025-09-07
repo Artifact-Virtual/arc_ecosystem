@@ -13,7 +13,6 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PermitUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20VotesUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/math/MathUpgradeable.sol";
 
 /// @title ARCx V2 Enhanced - God-Tier DeFi Token
 /// @notice Advanced token with yield generation, auto-compounding, governance, and profit-sharing mechanisms
@@ -29,7 +28,6 @@ contract ARCxV2Enhanced is
     ReentrancyGuardUpgradeable,
     UUPSUpgradeable 
 {
-    using MathUpgradeable for uint256;
 
     // ========== ROLES ==========
     bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");

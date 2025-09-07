@@ -151,6 +151,10 @@ jobs:
   dependency-check:
     name: Dependency Vulnerability Scan
     runs-on: ubuntu-latest
+    env:
+      # Pull the secret into the job env so step-level context access is valid;
+      # guard the Snyk step so it only runs when the secret is present.
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -168,12 +172,15 @@ jobs:
         run: npm audit --audit-level high
 
       - name: Run Snyk vulnerability scan
+        if: ${{ env.SNYK_TOKEN != '' }}
         uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --severity-threshold=high
         continue-on-error: true
+
+      - name: Skip Snyk scan if token is not configured
+        if: ${{ env.SNYK_TOKEN == '' }}
+        run: echo "SNYK_TOKEN not set; skipping Snyk vulnerability scan"
 
   gas-optimization:
     name: Gas Optimization Check
