@@ -133,7 +133,7 @@ bytes32 public constant VESTING_MANAGER_ROLE = keccak256("VESTING_MANAGER_ROLE")
 - **Referral bonuses** for community growth
 
 ### **3. Uniswap V4 Hook (Gas-Optimized)**
-**Address:** `0xCFcFBebe081Cd9337C232c0fD1C15e930B330485` ✅ **GAS ISSUES FIXED**
+**Address:** `0x551f6A0E5e4dA48d1cf1Bed2F61C880597B88aeE` ✅ **GAS ISSUES COMPLETELY FIXED**
 - **Fixed 0.25% fee** (no dynamic calculation for predictable gas)
 - **MEV protection** with 2-second delays
 - **Gas predictable** operations (resolved estimation issues)
@@ -360,7 +360,7 @@ npm run analytics:yield     # Yield system analytics
 - **ARCx V2 Enhanced**: [`0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437`](https://basescan.org/address/0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437)
 - **Vesting Contract**: [`0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600`](https://basescan.org/address/0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600)
 - **Airdrop System**: [`0x40fe447cf4B2af7aa41694a568d84F1065620298`](https://basescan.org/address/0x40fe447cf4B2af7aa41694a568d84F1065620298)
-- **Uniswap V4 Hook**: [`0xCFcFBebe081Cd9337C232c0fD1C15e930B330485`](https://basescan.org/address/0xCFcFBebe081Cd9337C232c0fD1C15e930B330485)
+- **Uniswap V4 Hook**: [`0x551f6A0E5e4dA48d1cf1Bed2F61C880597B88aeE`](https://basescan.org/address/0x551f6A0E5e4dA48d1cf1Bed2F61C880597B88aeE)
 
 ### **Multi-Sig Safes**
 - **Treasury Safe**: [`0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38`](https://basescan.org/address/0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38)
@@ -428,7 +428,7 @@ Contract Size: 24,255 bytes ✅
 ✅ Merkle tree verification ready
 
 # Uniswap V4 Hook (Gas-Fixed)
-✅ Address: 0xCFcFBebe081Cd9337C232c0fD1C15e930B330485
+✅ Address: 0x551f6A0E5e4dA48d1cf1Bed2F61C880597B88aeE
 ✅ Fixed fee: 0.25% (25 bps) - no dynamic calculation
 ✅ MEV delay: 2 seconds
 ✅ Gas optimized: TRUE (predictable gas usage)
