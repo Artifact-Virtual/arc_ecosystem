@@ -5,10 +5,10 @@
 - ARCxMath Library: 0xdfB7271303467d58F6eFa10461c9870Ed244F530 ✅ LIVE
 - ARCx V1 (Legacy): 0xA4093669DAFbD123E37d52e0939b3aB3C2272f44 [MIGRATION SOURCE]
 
-## Infrastructure Contracts (To Be Deployed)
-- Vesting Contract: 0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600 ✅ DEPLOYED
-- Airdrop Contract: 0x40fe447cf4B2af7aa41694a568d84F1065620298 ✅ DEPLOYED
-- Uniswap V4 Hook: 0x30C539Da48507cE8b9c3a2Ff4dC1209eC8dd857f ⚠️ NEEDS REDEPLOYMENT (Gas Issue Fixed)
+## Infrastructure Contracts (Deployed - Base L2 Mainnet)
+- Vesting Contract: 0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600 ✅ DEPLOYED & CONFIGURED
+- Airdrop Contract: 0x40fe447cf4B2af7aa41694a568d84F1065620298 ✅ DEPLOYED & CONFIGURED  
+- Uniswap V4 Hook: 0xDd7e514fFC3059D7eA3BAcEC017dd2B25A40e248 ✅ DEPLOYED & CONFIGURED
 
 ## Governance & Security
 - Treasury Safe: 0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38
@@ -32,11 +32,18 @@
 - USDC (Base): 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
 
 ## Deployment Status
-- ✅ ARCx V2 Enhanced: DEPLOYED & LIVE
+- ✅ ARCx V2 Enhanced: DEPLOYED & LIVE (1M supply finalized)
 - ✅ ARCxMath Library: DEPLOYED & LIVE  
-- ✅ Vesting Contract: DEPLOYED & READY
-- ✅ Airdrop Contract: DEPLOYED & READY
-- ✅ Uniswap V4 Hook: DEPLOYED & READY
+- ✅ Vesting Contract: DEPLOYED & CONFIGURED (300k tokens locked)
+- ✅ Airdrop Contract: DEPLOYED & CONFIGURED (100k tokens allocated)
+- ✅ Uniswap V4 Hook: DEPLOYED & CONFIGURED (MEV protection enabled)
+
+## Hook Configuration (0xDd7e514fFC3059D7eA3BAcEC017dd2B25A40e248)
+- Base Fee: 0.25% (ultra-low for stability)
+- Max Fee: 0.75% (capped during volatility)  
+- MEV Delay: 2 seconds (anti-sandwich protection)
+- Dynamic Fees: ENABLED (volatility-based adjustment)
+- Anti-Sandwich: ENABLED (front-running protection)
 
 ## Token Distribution Plan (1M Max Supply)
 - 🏦 Liquidity Pool: 500,000 ARCx (50%)
@@ -84,4 +91,4 @@ All addresses above are for reference only. No private keys are included.
 For any new contract or wallet, update this file immediately to avoid confusion.
 
 
-_Last updated: August 29, 2025_
+_Last updated: September 7, 2025 (v2.0.0 Release - All Systems Deployed)_
