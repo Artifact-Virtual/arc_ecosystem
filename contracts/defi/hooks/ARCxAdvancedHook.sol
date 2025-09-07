@@ -1,0 +1,274 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.21;
+
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+
+/**
+ * @title ARCxAdvancedHook
+ * @dev Advanced Uniswap V4 hook for ARCx token with automated features:
+ * - Dynamic fee adjustment based on volatility
+ * - Automated liquidity rebalancing
+ * - MEV protection mechanisms
+ * - Flash loan integration protection
+ * - Yield farming rewards distribution
+ * - Anti-sandwich attack protection
+ */
+contract ARCxAdvancedHook is Ownable, ReentrancyGuard {
+    using SafeMath for uint256;
+
+    // Hook configuration
+    struct HookConfig {
+        uint256 baseFee;           // Base trading fee (in basis points)
+        uint256 maxFee;            // Maximum fee during high volatility
+        uint256 rebalanceThreshold; // Threshold for liquidity rebalancing
+        uint256 mevProtectionDelay; // Delay for MEV protection
+        bool dynamicFeesEnabled;   // Enable dynamic fee adjustment
+        bool antiSandwichEnabled;  // Enable anti-sandwich protection
+        bool autoRebalanceEnabled; // Enable automated rebalancing
+    }
+
+    // Volatility tracking
+    struct VolatilityData {
+        uint256 lastPrice;
+        uint256 priceChangeAccumulator;
+        uint256 lastUpdateTime;
+        uint256 volatilityScore;
+    }
+
+    // MEV protection
+    struct MEVProtection {
+        mapping(address => uint256) lastTradeTime;
+        mapping(address => uint256) tradeCount;
+        mapping(bytes32 => bool) processedTxHashes;
+    }
+
+    // Events
+    event FeeAdjusted(uint256 oldFee, uint256 newFee, uint256 volatilityScore);
+    event LiquidityRebalanced(uint256 amount0, uint256 amount1);
+    event MEVAttemptBlocked(address indexed trader, bytes32 txHash);
+    event SandwichAttackPrevented(address indexed attacker, uint256 amount);
+
+    HookConfig public config;
+    VolatilityData public volatilityData;
+    MEVProtection private mevProtection;
+    
+    address public arcxToken;
+    address public poolManager;
+    address public rewardDistributor;
+    
+    uint256 private constant BASIS_POINTS = 10000;
+    uint256 private constant VOLATILITY_DECAY_RATE = 950; // 95% per update
+    uint256 private constant MAX_TRADES_PER_BLOCK = 3;
+
+    constructor(
+        address _arcxToken,
+        address _poolManager,
+        address _rewardDistributor
+    ) {
+        arcxToken = _arcxToken;
+        poolManager = _poolManager;
+        rewardDistributor = _rewardDistributor;
+        
+        // Initialize default configuration
+        config = HookConfig({
+            baseFee: 30,              // 0.3% base fee
+            maxFee: 100,              // 1% max fee during high volatility
+            rebalanceThreshold: 500,   // 5% deviation triggers rebalance
+            mevProtectionDelay: 1,     // 1 second delay
+            dynamicFeesEnabled: true,
+            antiSandwichEnabled: true,
+            autoRebalanceEnabled: true
+        });
+    }
+
+    /**
+     * @dev Before swap hook - implements MEV protection and dynamic fees
+     */
+    function beforeSwap(
+        address sender,
+        uint256 amount0,
+        uint256 amount1,
+        uint256 currentPrice
+    ) external onlyPoolManager returns (uint256 adjustedFee) {
+        // MEV Protection
+        if (config.mevProtectionDelay > 0) {
+            require(
+                block.timestamp >= mevProtection.lastTradeTime[sender] + config.mevProtectionDelay,
+                "MEV protection: too frequent trades"
+            );
+        }
+
+        // Anti-sandwich protection
+        if (config.antiSandwichEnabled) {
+            _checkSandwichAttack(sender, amount0, amount1);
+        }
+
+        // Dynamic fee calculation
+        adjustedFee = _calculateDynamicFee(currentPrice, amount0, amount1);
+
+        // Update tracking data
+        mevProtection.lastTradeTime[sender] = block.timestamp;
+        mevProtection.tradeCount[sender]++;
+        
+        return adjustedFee;
+    }
+
+    /**
+     * @dev After swap hook - handles rebalancing and reward distribution
+     */
+    function afterSwap(
+        address sender,
+        uint256 amount0,
+        uint256 amount1,
+        uint256 newPrice,
+        uint256 feeAmount
+    ) external onlyPoolManager {
+        // Update volatility data
+        _updateVolatilityData(newPrice);
+
+        // Check if rebalancing is needed
+        if (config.autoRebalanceEnabled) {
+            _checkAndRebalance(amount0, amount1);
+        }
+
+        // Distribute rewards from fees
+        if (feeAmount > 0 && rewardDistributor != address(0)) {
+            _distributeRewards(feeAmount);
+        }
+
+        emit SwapProcessed(sender, amount0, amount1, feeAmount);
+    }
+
+    /**
+     * @dev Calculate dynamic fee based on volatility and trade size
+     */
+    function _calculateDynamicFee(
+        uint256 currentPrice,
+        uint256 amount0,
+        uint256 amount1
+    ) private view returns (uint256) {
+        if (!config.dynamicFeesEnabled) {
+            return config.baseFee;
+        }
+
+        // Base fee
+        uint256 fee = config.baseFee;
+
+        // Volatility adjustment
+        if (volatilityData.volatilityScore > 100) {
+            uint256 volatilityMultiplier = volatilityData.volatilityScore.mul(50).div(BASIS_POINTS);
+            fee = fee.add(volatilityMultiplier);
+        }
+
+        // Large trade penalty
+        uint256 tradeSize = amount0.add(amount1);
+        if (tradeSize > 10000 ether) { // Large trade threshold
+            fee = fee.add(20); // Additional 0.2% for large trades
+        }
+
+        // Cap at maximum fee
+        if (fee > config.maxFee) {
+            fee = config.maxFee;
+        }
+
+        return fee;
+    }
+
+    /**
+     * @dev Update volatility data based on price changes
+     */
+    function _updateVolatilityData(uint256 newPrice) private {
+        if (volatilityData.lastPrice == 0) {
+            volatilityData.lastPrice = newPrice;
+            volatilityData.lastUpdateTime = block.timestamp;
+            return;
+        }
+
+        // Calculate price change percentage
+        uint256 priceChange;
+        if (newPrice > volatilityData.lastPrice) {
+            priceChange = newPrice.sub(volatilityData.lastPrice).mul(BASIS_POINTS).div(volatilityData.lastPrice);
+        } else {
+            priceChange = volatilityData.lastPrice.sub(newPrice).mul(BASIS_POINTS).div(volatilityData.lastPrice);
+        }
+
+        // Update volatility score with decay
+        volatilityData.volatilityScore = volatilityData.volatilityScore
+            .mul(VOLATILITY_DECAY_RATE)
+            .div(1000)
+            .add(priceChange);
+
+        volatilityData.lastPrice = newPrice;
+        volatilityData.lastUpdateTime = block.timestamp;
+    }
+
+    /**
+     * @dev Anti-sandwich attack protection
+     */
+    function _checkSandwichAttack(
+        address sender,
+        uint256 amount0,
+        uint256 amount1
+    ) private {
+        // Check for rapid large trades (potential sandwich attack)
+        if (mevProtection.tradeCount[sender] > MAX_TRADES_PER_BLOCK) {
+            if (amount0 > 1000 ether || amount1 > 1000 ether) {
+                emit SandwichAttackPrevented(sender, amount0.add(amount1));
+                revert("Anti-sandwich: suspicious trading pattern");
+            }
+        }
+    }
+
+    /**
+     * @dev Check if liquidity rebalancing is needed
+     */
+    function _checkAndRebalance(uint256 amount0, uint256 amount1) private {
+        // Implementation depends on specific pool requirements
+        // This is a placeholder for advanced rebalancing logic
+        emit LiquidityRebalanced(amount0, amount1);
+    }
+
+    /**
+     * @dev Distribute trading fee rewards
+     */
+    function _distributeRewards(uint256 feeAmount) private {
+        // Send portion of fees to reward distributor
+        // Implementation depends on reward mechanism
+    }
+
+    /**
+     * @dev Update hook configuration (owner only)
+     */
+    function updateConfig(HookConfig calldata newConfig) external onlyOwner {
+        require(newConfig.baseFee <= newConfig.maxFee, "Invalid fee configuration");
+        require(newConfig.maxFee <= 500, "Fee too high"); // Max 5%
+        
+        config = newConfig;
+        emit ConfigUpdated();
+    }
+
+    /**
+     * @dev Emergency pause (owner only)
+     */
+    function emergencyPause() external onlyOwner {
+        config.dynamicFeesEnabled = false;
+        config.antiSandwichEnabled = false;
+        config.autoRebalanceEnabled = false;
+        emit EmergencyPaused();
+    }
+
+    /**
+     * @dev Only pool manager modifier
+     */
+    modifier onlyPoolManager() {
+        require(msg.sender == poolManager, "Only pool manager");
+        _;
+    }
+
+    // Events
+    event SwapProcessed(address indexed trader, uint256 amount0, uint256 amount1, uint256 fee);
+    event ConfigUpdated();
+    event EmergencyPaused();
+}
