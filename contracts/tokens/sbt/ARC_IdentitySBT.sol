@@ -1,4 +1,8 @@
-// SPDX-License-Identifier: AGPL-3.0
+// SPDX-License-Identifier: MIT
+// Upgradeable contract via UUPS proxy
+// Treasury Safe = owner/admin
+// Updated for ARCx V2 Enhanced integration
+
 pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
@@ -13,11 +17,34 @@ import { wrap, unwrap } from "@prb/math/src/ud60x18/Casting.sol";
 import { exp } from "@prb/math/src/ud60x18/Math.sol";
 
 /**
- * @title ARCx Identity SBT - Soulbound Identity Tokens
- * @dev Non-transferable, revocable, EAS-gated SBTs proving roles
- * @notice Implements ERC-721 + ERC-5192 with decay-weighted reputation
- *
- * Features:
+ * @title ARCx Identity SBT - Soulbound Identity & Reputation System
+ * @dev Advanced non-transferable tokens with decay-weighted reputation and role verification
+ * @notice ERC721+ERC5192 compliant soulbound tokens with EAS attestation integration
+ * 
+ * @custom:security-contact security@arcexchange.io
+ * @custom:version 2.0.0
+ * @custom:upgradeable UUPS proxy pattern
+ * 
+ * FEATURES:
+ * - Soulbound (non-transferable) identity tokens with role-based attestations
+ * - Time-decay weighted reputation scoring with exponential mathematics
+ * - EAS (Ethereum Attestation Service) integration for verified credentials
+ * - Revocable tokens for compliance and fraud prevention
+ * - Multi-role support (Developer, Trader, Liquidity Provider, Governance)
+ * - Dynamic reputation calculation affecting ecosystem benefits
+ * 
+ * USAGE:
+ * - Users receive SBTs based on verified on-chain and off-chain activities
+ * - Reputation scores decay over time requiring continuous engagement
+ * - Higher reputation provides enhanced rewards and governance power
+ * - Tokens can be revoked for malicious behavior or compliance issues
+ * 
+ * TROUBLESHOOTING:
+ * - SBTs cannot be transferred - they are bound to original recipient
+ * - Reputation decay requires periodic activity to maintain high scores
+ * - Only authorized attestors can mint tokens with valid EAS proofs
+ * - Revocation is irreversible and removes all associated benefits
+ */
  * - Soulbound tokens (ERC-5192 locked)
  * - EAS attestation integration
  * - Decay-weighted reputation system

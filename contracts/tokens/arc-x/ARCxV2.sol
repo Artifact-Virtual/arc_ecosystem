@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
-// ARCx V2 Enhanced - Optimized for Size
+// Upgradeable contract via UUPS proxy
+// Treasury Safe = owner/admin
+// Updated for ARCx V2 Enhanced integration
 
 pragma solidity ^0.8.21;
 
@@ -14,8 +16,37 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PermitUp
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20VotesUpgradeable.sol";
 import "./ARCxMath.sol";
 
-/// @title ARCx V2 Enhanced - Optimized God-Tier DeFi Token
-/// @notice Advanced token with all features, optimized for deployment
+/**
+ * @title ARCx V2 Enhanced - Enterprise DeFi Token
+ * @dev Advanced ERC20 token with comprehensive DeFi features optimized for size
+ * @notice Main token contract for ARC ecosystem with staking, governance, flash loans, and dynamic fees
+ * 
+ * @custom:security-contact security@arcexchange.io
+ * @custom:version 2.0.0-enhanced
+ * @custom:deployed-on Base L2 Mainnet (Chain ID: 8453)
+ * @custom:contract-address 0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437
+ * 
+ * FEATURES:
+ * - Multi-tier staking system with dynamic yields
+ * - ERC20Votes governance integration
+ * - Flash loan provider with MEV protection
+ * - Dynamic fee structure based on network conditions
+ * - Anti-bot and whale protection mechanisms
+ * - Gas-optimized operations with external math library
+ * - Full ERC20 compatibility with permit functionality
+ * 
+ * USAGE:
+ * - Stake tokens to earn yield and governance power
+ * - Use for governance voting on protocol decisions
+ * - Provide/utilize flash loans for arbitrage opportunities
+ * - Trade with dynamic fees that adjust to market conditions
+ * 
+ * TROUBLESHOOTING:
+ * - If transactions fail, check if contract is paused by admin
+ * - For staking issues, verify minimum staking amounts and cooldown periods
+ * - Flash loan failures may be due to insufficient liquidity or callback errors
+ * - High fees during network congestion are intentional for MEV protection
+ */
 contract ARCxV2Enhanced is 
     Initializable,
     ERC20Upgradeable, 

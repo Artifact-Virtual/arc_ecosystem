@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
-// Upgradeable Streaming Rewards
-// Upgradeable via UUPS.
-// Safe (Treasury) controls emission rate + destinations.
-// distribute() can be called manually, or by automation (cron, keeper, relayer).
+// Upgradeable contract via UUPS proxy
+// Treasury Safe = owner/admin
 // Updated for ARCx V2 Enhanced integration
 
 pragma solidity ^0.8.21;
@@ -13,7 +11,34 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 
-/// @title TreasuryRewards - ARCx V2 emission manager with enhanced tokenomics
+/**
+ * @title Treasury Rewards - ARCx V2 Emission Management System
+ * @dev Upgradeable streaming rewards contract for managing token emissions across ecosystem
+ * @notice Distributes ARCx V2 Enhanced tokens to staking vault and LP staking based on emission schedule
+ * 
+ * @custom:security-contact security@arcexchange.io
+ * @custom:version 2.0.0
+ * @custom:upgradeable UUPS proxy pattern
+ * 
+ * FEATURES:
+ * - Block-based emission rate system for predictable reward distribution
+ * - Dual destination support (Staking Vault + LP Staking rewards)
+ * - Treasury Safe controlled emission parameters for governance oversight
+ * - Automated distribution callable by keepers or manual triggers
+ * - Upgradeable architecture for future tokenomics adjustments
+ * 
+ * USAGE:
+ * - Treasury Safe sets emission rate and destination contracts
+ * - Call distribute() manually or via automation to stream rewards
+ * - Emission rate represents ARCx tokens distributed per block
+ * - Rewards are split between staking vault and liquidity providers
+ * 
+ * TROUBLESHOOTING:
+ * - Distribution failures indicate insufficient contract balance or rate = 0
+ * - Ensure destination contracts are set before enabling distributions
+ * - Only REWARD_MANAGER_ROLE can modify emission parameters
+ * - Check block number progression to verify distribution timing
+ */
 contract TreasuryRewards is Initializable, UUPSUpgradeable, AccessControlUpgradeable {
     bytes32 public constant UPGRADER_ROLE = keccak256("UPGRADER_ROLE");
     bytes32 public constant REWARD_MANAGER_ROLE = keccak256("REWARD_MANAGER_ROLE");

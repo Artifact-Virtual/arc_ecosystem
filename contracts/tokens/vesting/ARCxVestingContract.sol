@@ -1,4 +1,8 @@
 // SPDX-License-Identifier: MIT
+// Immutable contract
+// Treasury Safe = owner
+// Updated for ARCx V2 Enhanced integration
+
 pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -7,13 +11,34 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 /**
- * @title ARCxVestingContract
- * @dev Advanced vesting contract for ARCx tokens with multiple features:
- * - Linear and cliff vesting schedules
- * - Early unlock penalties with yield redistribution
- * - Emergency revocation for terminated contributors
- * - Governance participation during vesting
- * - Staking integration for vested tokens
+ * @title ARCx Vesting Contract - Advanced Token Vesting System
+ * @dev Comprehensive vesting contract for ARCx V2 Enhanced tokens with enterprise features
+ * @notice Manages token vesting schedules for team, advisors, and ecosystem allocations
+ * 
+ * @custom:security-contact security@arcexchange.io
+ * @custom:version 2.0.0
+ * @custom:deployed-on Base L2 Mainnet (Chain ID: 8453)
+ * @custom:contract-address 0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600
+ * 
+ * FEATURES:
+ * - Linear and cliff vesting schedules with customizable parameters
+ * - Early unlock penalties with yield redistribution to other beneficiaries
+ * - Emergency revocation for terminated contributors or compliance issues
+ * - Governance participation during vesting period (vote delegation)
+ * - Staking integration allowing vested tokens to earn additional yield
+ * - Batch operations for efficient gas usage on multiple schedules
+ * 
+ * USAGE:
+ * - Treasury Safe creates vesting schedules for beneficiaries
+ * - Beneficiaries can claim vested tokens according to their schedule
+ * - Early unlocks available with penalty (redistributed to remaining schedules)
+ * - Governance voting power available immediately upon vesting start
+ * 
+ * TROUBLESHOOTING:
+ * - If claim fails, check if cliff period has passed and tokens are vested
+ * - Early unlock failures may be due to insufficient penalty tolerance settings
+ * - Revocation only available to owner and only for revocable schedules
+ * - Ensure sufficient contract balance before creating large vesting schedules
  */
 contract ARCxVestingContract is Ownable, ReentrancyGuard {
     using SafeMath for uint256;

@@ -1,4 +1,8 @@
 // SPDX-License-Identifier: MIT
+// Upgradeable contract via UUPS proxy
+// Treasury Safe = owner/admin
+// Updated for ARCx V2 Enhanced integration
+
 pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
@@ -10,11 +14,34 @@ import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 
 /**
- * @title ARC Swap V2
- * @dev Advanced cross-chain swap contract for ARC Exchange
- * @notice Enterprise-grade DEX functionality with ARCx V2 Enhanced integration
+ * @title ARC Swap V2 - Advanced Decentralized Exchange
+ * @dev Enterprise-grade cross-chain swap contract with sophisticated order types and MEV protection
+ * @notice Complete DEX functionality integrated with ARCx V2 Enhanced ecosystem and Uniswap V4 hooks
+ * 
  * @custom:security-contact security@arcexchange.io
  * @custom:version 2.0.0
+ * @custom:upgradeable UUPS proxy pattern
+ * 
+ * FEATURES:
+ * - Advanced order types: Market, Limit, Stop-Loss, Stop-Limit orders
+ * - Automated Market Maker (AMM) with dynamic liquidity pools
+ * - MEV protection via Uniswap V4 hook integration
+ * - Multi-tier fee structure with protocol, LP, and referral rewards
+ * - Cross-chain swap capabilities with bridge integrations
+ * - Real-time analytics and volume tracking for all trading pairs
+ * 
+ * USAGE:
+ * - Create market orders for immediate execution at current prices
+ * - Set limit orders to execute when target price is reached
+ * - Use stop-loss orders for automated risk management
+ * - Provide liquidity to earn fees from trading activity
+ * - Benefit from reduced fees when trading with ARCx V2 tokens
+ * 
+ * TROUBLESHOOTING:
+ * - Order failures may indicate insufficient liquidity or expired deadlines
+ * - Slippage protection prevents orders during high volatility periods
+ * - Check token approval and balance before creating orders
+ * - MEV protection may delay execution during network congestion
  */
 contract ARCSwap is
     Initializable,

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
-// Staking Vault ERC-4626, Upgradeable with ARCs
+// Upgradeable contract via UUPS proxy
+// Treasury Safe = owner/admin
 // Updated for ARCx V2 Enhanced integration
 
 pragma solidity ^0.8.21;
@@ -13,7 +14,34 @@ import "../tokens/arc-s/ARCs.sol";
 import "../tokens/arc-x/ARCxV2.sol"; // ARCx V2 Enhanced integration
 import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
 
-/// @title StakingVault - ARCx V2 → ARCxs staking vault with enhanced features
+/**
+ * @title ARCx Staking Vault - ERC4626 Yield Generation System
+ * @dev Advanced staking vault implementing ERC4626 standard with penalty mechanisms
+ * @notice Stake ARCx V2 Enhanced tokens to earn yield and receive ARCs rewards
+ * 
+ * @custom:security-contact security@arcexchange.io
+ * @custom:version 2.0.0
+ * @custom:upgradeable UUPS proxy pattern
+ * 
+ * FEATURES:
+ * - ERC4626 compliant vault for standardized yield farming
+ * - ARCx V2 Enhanced token staking with automatic yield calculation
+ * - ARCs token rewards minted proportionally to staking duration
+ * - Early withdrawal penalties to prevent gaming and ensure commitment
+ * - Penalty redistribution to remaining stakers for compound rewards
+ * 
+ * USAGE:
+ * - Deposit ARCx V2 tokens to receive vault shares and start earning yield
+ * - Vault shares represent pro-rata ownership of the underlying assets
+ * - ARCs rewards are minted continuously based on staking duration
+ * - Withdraw anytime but early exits incur penalties sent to penalty vault
+ * 
+ * TROUBLESHOOTING:
+ * - Deposit failures may indicate insufficient ARCx balance or approval
+ * - Withdrawal penalties are calculated as percentage of withdrawn amount
+ * - ARCs minting requires VAULT_ROLE to be granted to this contract
+ * - Ensure penalty vault address is set before enabling withdrawals
+ */
 contract StakingVault is Initializable, ERC4626Upgradeable, UUPSUpgradeable, AccessControlUpgradeable {
     bytes32 public constant UPGRADER_ROLE = keccak256("UPGRADER_ROLE");
     bytes32 public constant PENALTY_MANAGER_ROLE = keccak256("PENALTY_MANAGER_ROLE");

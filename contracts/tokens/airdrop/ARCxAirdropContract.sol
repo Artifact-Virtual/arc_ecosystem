@@ -1,4 +1,8 @@
 // SPDX-License-Identifier: MIT
+// Immutable contract
+// Treasury Safe = owner
+// Updated for ARCx V2 Enhanced integration
+
 pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -8,13 +12,34 @@ import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 /**
- * @title ARCxAirdropContract
- * @dev Advanced airdrop contract with multiple distribution mechanisms:
- * - Merkle tree verification for gas efficiency
- * - Tiered rewards based on historical participation
- * - Time-limited claiming with bonus multipliers
- * - Anti-sybil mechanisms
- * - Referral bonuses for community growth
+ * @title ARCx Smart Airdrop System - Community Distribution Platform
+ * @dev Advanced airdrop contract with intelligent distribution mechanisms and anti-sybil protection
+ * @notice Handles community airdrops for ARCx V2 Enhanced tokens with sophisticated claiming logic
+ * 
+ * @custom:security-contact security@arcexchange.io
+ * @custom:version 2.0.0
+ * @custom:deployed-on Base L2 Mainnet (Chain ID: 8453)
+ * @custom:contract-address 0x40fe447cf4B2af7aa41694a568d84F1065620298
+ * 
+ * FEATURES:
+ * - Merkle tree verification for gas-efficient proof-based claiming
+ * - Tiered reward system based on historical ecosystem participation
+ * - Time-limited claiming windows with early-bird bonus multipliers
+ * - Anti-sybil detection mechanisms and duplicate claim prevention
+ * - Referral bonuses to incentivize community growth and engagement
+ * - Batch claim processing for multiple beneficiaries
+ * 
+ * USAGE:
+ * - Eligible users provide Merkle proof to claim their allocated tokens
+ * - Higher tier users receive larger allocations based on past activity
+ * - Early claimers receive bonus multipliers during launch period
+ * - Referrers earn additional rewards when referred users claim
+ * 
+ * TROUBLESHOOTING:
+ * - Claim failures usually indicate invalid Merkle proof or already claimed
+ * - Ensure claiming within the active time window to avoid expiration
+ * - Anti-sybil checks may reject claims from flagged addresses
+ * - Check eligibility tier and ensure sufficient contract token balance
  */
 contract ARCxAirdropContract is Ownable, ReentrancyGuard {
     using SafeMath for uint256;

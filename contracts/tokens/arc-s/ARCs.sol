@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
-// Upgradeable ERC20
+// Upgradeable contract via UUPS proxy
+// Treasury Safe = owner/admin
+// Updated for ARCx V2 Enhanced integration
 
 pragma solidity ^0.8.21;
 
@@ -8,7 +10,34 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 
-/// @title ARCsToken - Staked ARCx derivative (Upgradeable)
+/**
+ * @title ARCs Token - Staked ARCx Derivative Rewards
+ * @dev Upgradeable ERC20 token representing staking rewards and ecosystem participation
+ * @notice Earn ARCs tokens by staking ARCx V2 Enhanced tokens in the ecosystem vaults
+ * 
+ * @custom:security-contact security@arcexchange.io
+ * @custom:version 2.0.0
+ * @custom:upgradeable UUPS proxy pattern
+ * 
+ * FEATURES:
+ * - ERC20 token representing staking rewards and ecosystem loyalty
+ * - Minted by authorized vault contracts when users stake ARCx V2 tokens
+ * - Non-transferable initially to prevent gaming of reward distribution
+ * - Future utility for governance, fee discounts, and exclusive features
+ * - Deflationary mechanics through burning for utility access
+ * 
+ * USAGE:
+ * - Automatically minted when staking ARCx V2 tokens in approved vaults
+ * - Rate of earning depends on staking duration and vault performance
+ * - Can be used for enhanced governance voting power (future)
+ * - Provides access to premium features and reduced fees
+ * 
+ * TROUBLESHOOTING:
+ * - Only vault contracts with VAULT_ROLE can mint new tokens
+ * - Initial non-transferability prevents secondary market speculation
+ * - Burning is irreversible so consider utility usage carefully
+ * - Check staking vault connection if ARCs are not being earned
+ */
 contract ARCsToken is Initializable, ERC20Upgradeable, UUPSUpgradeable, AccessControlUpgradeable {
     bytes32 public constant UPGRADER_ROLE = keccak256("UPGRADER_ROLE");
     bytes32 public constant VAULT_ROLE = keccak256("VAULT_ROLE");
