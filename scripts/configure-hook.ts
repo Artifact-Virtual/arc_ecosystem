@@ -1,7 +1,7 @@
 import { ethers } from "hardhat";
 
 async function main() {
-    const hookAddress = "0xDd7e514fFC3059D7eA3BAcEC017dd2B25A40e248";
+    const hookAddress = "0xCFcFBebe081Cd9337C232c0fD1C15e930B330485";
     const [deployer] = await ethers.getSigners();
     
     console.log("🔧 Configuring deployed hook at:", hookAddress);

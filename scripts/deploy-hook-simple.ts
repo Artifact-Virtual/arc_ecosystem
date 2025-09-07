@@ -1,20 +1,17 @@
 import { ethers } from "hardhat";
 
 async function main() {
-    console.log("🚀 Deploying ARCx Minimal Hook...");
+    console.log("🚀 Deploying ARCx Simple Hook...");
     
     const [deployer] = await ethers.getSigners();
     console.log("📍 Deployer:", deployer.address);
-    
-    // Get Pool Manager address for Base
-    const POOL_MANAGER = "0x498581ff718922c3f8e6a244956af099b2652b2b";
     
     // Deploy hook with fixed gas limit to avoid estimation
     const ARCxHook = await ethers.getContractFactory("ARCxHook");
     
     console.log("⏳ Deploying with fixed gas limit...");
-    const hook = await ARCxHook.deploy(POOL_MANAGER, {
-        gasLimit: 3000000  // Fixed 3M gas limit to avoid estimation
+    const hook = await ARCxHook.deploy({
+        gasLimit: 2000000  // Fixed 2M gas limit to avoid estimation
     });
     
     console.log("⏳ Waiting for confirmation...");
@@ -42,22 +39,14 @@ async function main() {
         paused: isPaused
     };
 }
-    
-    // Enable all advanced features
-    await hook.toggleFeatures(
-        true,  // Dynamic fees enabled
-        true,  // Anti-sandwich enabled
-        false  // Not paused
-    );
-    
-    return {
-        hook: hookAddress,
-        deployer: deployer.address
-    };
-}
 
 main()
-    .then(() => process.exit(0))
+    .then((result) => {
+        console.log("\n🎉 DEPLOYMENT SUCCESS!");
+        console.log("🔗 Hook Address:", result.hook);
+        process.exit(0);
+    })
     .catch((error) => {
-        throw error;
+        console.error("❌ Deployment failed:", error.message);
+        process.exit(1);
     });

@@ -17,7 +17,7 @@ A next-generation DeFi token ecosystem featuring advanced yield generation, mult
 | **ARCx V2 Enhanced** | [`0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437`](https://basescan.org/address/0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437) | ✅ **LIVE** |
 | **Vesting Contract** | [`0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600`](https://basescan.org/address/0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600) | ✅ **CONFIGURED** |
 | **Airdrop System** | [`0x40fe447cf4B2af7aa41694a568d84F1065620298`](https://basescan.org/address/0x40fe447cf4B2af7aa41694a568d84F1065620298) | ✅ **CONFIGURED** |
-| **Uniswap V4 Hook** | [`0xDd7e514fFC3059D7eA3BAcEC017dd2B25A40e248`](https://basescan.org/address/0xDd7e514fFC3059D7eA3BAcEC017dd2B25A40e248) | ✅ **MEV PROTECTED** |
+| **Uniswap V4 Hook** | [`0xCFcFBebe081Cd9337C232c0fD1C15e930B330485`](https://basescan.org/address/0xCFcFBebe081Cd9337C232c0fD1C15e930B330485) | ✅ **GAS OPTIMIZED** |
 
 ---
 
@@ -100,11 +100,11 @@ npx hardhat test
 ## 🌐 **Ecosystem Components**
 
 ### **Uniswap V4 Integration**
-- **Advanced Hook**: `0xDd7e514fFC3059D7eA3BAcEC017dd2B25A40e248` ✅ **CONFIGURED**
+- **Gas-Optimized Hook**: `0xCFcFBebe081Cd9337C232c0fD1C15e930B330485` ✅ **FIXED GAS ISSUES**
+- **Fixed Fee**: 0.25% (no dynamic calculation for predictable gas)
 - **MEV Protection**: 2-second delay prevents sandwich attacks
-- **Dynamic Fees**: 0.25% base, 0.75% max during volatility
-- **Anti-Sandwich**: Real-time front-running prevention
-- **Liquidity Management**: Automated position optimization
+- **Gas Predictable**: All operations have bounded gas usage
+- **Emergency Controls**: Pause/unpause functionality enabled
 
 ### **Vesting & Distribution**
 - **Core Team**: 120k tokens, 2-year linear, 6-month cliff
@@ -171,7 +171,7 @@ npx hardhat test
 | **ARCx V2 Enhanced** | `0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437` | 🟢 **LIVE** | 1M supply finalized |
 | **Vesting System** | `0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600` | 🟢 **CONFIGURED** | 300k tokens locked |
 | **Airdrop System** | `0x40fe447cf4B2af7aa41694a568d84F1065620298` | 🟢 **CONFIGURED** | 100k tokens allocated |
-| **Uniswap V4 Hook** | `0xDd7e514fFC3059D7eA3BAcEC017dd2B25A40e248` | 🟢 **MEV PROTECTED** | 0.25% fee, anti-sandwich |
+| **Uniswap V4 Hook** | `0xCFcFBebe081Cd9337C232c0fD1C15e930B330485` | 🟢 **GAS OPTIMIZED** | Fixed gas estimation issues |
 
 ### **🔥 Ecosystem Highlights**
 - ✅ **24,255 bytes** contract size (under 24,576 limit)
