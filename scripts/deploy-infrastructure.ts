@@ -11,7 +11,7 @@ async function main() {
     console.log("Network:", network.name, "(Chain ID:", Number(network.chainId) + ")");
     console.log("Balance:", ethers.formatEther(await ethers.provider.getBalance(deployer.address)), "ETH");
     
-    const TOKEN_ADDRESS = "0xCa244C6dbAfF0219d0E40ab7942037a11302af33";
+    const TOKEN_ADDRESS = "0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437";
     console.log("ARCx Token:", TOKEN_ADDRESS);
     
     console.log("\n📦 DEPLOYING VESTING CONTRACT...");

@@ -39,7 +39,7 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
  * - Rebalancing operations may temporarily affect large trades
  * - Check hook status if unexpected behavior occurs during trading
  */
-contract ARCxAdvancedHook is Ownable, ReentrancyGuard {
+contract ARCxLPHook is Ownable, ReentrancyGuard {
     using SafeMath for uint256;
 
     // Hook configuration
