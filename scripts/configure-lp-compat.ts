@@ -19,19 +19,21 @@ async function main() {
   }
 
   const token = await ethers.getContractAt("ARCxV2Enhanced", TOKEN_ADDRESS, signer);
+  const ADMIN_ROLE = ethers.id("ADMIN_ROLE");
+  const hasAdmin = await token.hasRole(ADMIN_ROLE, signer.address);
 
   // Fetch current config
   const cfg = await token.config();
 
   // 1) Ensure no transfer-side overhead for Uniswap: fee exempt and disable burn
   // Disable burn feature if enabled
-  if (cfg.burnEnabled) {
+  if (hasAdmin && cfg.burnEnabled) {
     await (await token.toggleFeatures(cfg.yieldEnabled, cfg.flashEnabled, cfg.migrationEnabled, false)).wait();
   }
 
   // Set fees to 0 if not already (transfer fee + burn rate)
   const currentVotingDays = Number(cfg.votingPeriod) / (24 * 60 * 60);
-  if (Number(cfg.transferFee) !== 0 || Number(cfg.burnRate) !== 0) {
+  if (hasAdmin && (Number(cfg.transferFee) !== 0 || Number(cfg.burnRate) !== 0)) {
     await (
       await token.updateConfig(
         cfg.baseYieldRate,
@@ -45,11 +47,20 @@ async function main() {
 
   // Mark Uniswap actors as fee exempt
   const addressesToExempt = [HOOK_ADDRESS, POOL_MANAGER].concat(POOL_ADDRESS ? [POOL_ADDRESS] : []);
-  for (const addr of addressesToExempt) {
-    const exempt = await token.feeExempt(addr);
-    if (!exempt) {
-      await (await token.setFeeExempt(addr, true)).wait();
+  if (hasAdmin) {
+    for (const addr of addressesToExempt) {
+      const exempt = await token.feeExempt(addr);
+      if (!exempt) {
+        await (await token.setFeeExempt(addr, true)).wait();
+      }
     }
+  }
+
+  if (!hasAdmin) {
+    console.log("Signer lacks ADMIN_ROLE. Ask an admin to run this script, or execute these calls:");
+    console.log("- toggleFeatures(yield, flash, migration, false)");
+    console.log("- updateConfig(baseYieldRate, flashFee, 0, 0, votingDays)");
+    console.log("- setFeeExempt(hook, true); setFeeExempt(poolManager, true); [pool optional]");
   }
 
   // Done
