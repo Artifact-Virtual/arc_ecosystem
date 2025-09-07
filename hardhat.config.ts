@@ -23,7 +23,7 @@ const config: HardhatUserConfig = {
     settings: {
       optimizer: {
         enabled: true,
-        runs: 1000000, // Maximum optimization for sub-cent fees
+        runs: 200, // Lower runs for smaller contract size
       },
       viaIR: true,
       metadata: {

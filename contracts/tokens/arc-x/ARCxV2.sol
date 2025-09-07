@@ -45,6 +45,7 @@ contract ARCxV2Enhanced is
     bool public mintingFinalized;
     
     // Migration from V1
+    /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
     address public immutable V1_TOKEN;
     mapping(address => bool) public v1Migrated;
     bool public migrationEnabled;
@@ -578,7 +579,7 @@ contract ARCxV2Enhanced is
         address from,
         address to,
         uint256 amount
-    ) internal override(ERC20Upgradeable, ERC20VotesUpgradeable) whenNotPaused {
+    ) internal override(ERC20Upgradeable) whenNotPaused {
         // Block self-transfers
         require(to != address(this), "Self-transfer blocked");
 
@@ -780,7 +781,7 @@ contract ARCxV2Enhanced is
     /**
      * @dev Get contract version
      */
-    function version() public pure override returns (string memory) {
+    function version() public pure returns (string memory) {
         return "2.1.0-Enhanced";
     }
 
