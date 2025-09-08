@@ -4,7 +4,15 @@
 
 A comprehensive decentralized autonomous organization (DAO) and governance system for the ARC ecosystem, featuring multiple voting mechanisms, secure timelock controls, modular contract architecture, and the ARCx V2 Enhanced token live on Base L2.
 
-[![Base L2](https://img.shields.io/badge/Base-L2%20LIVE-0052FF?style=flat-square&logo=ethereum&logoColor=white)](https://base.org/) [![Solidity](https://img.shields.io/badge/Solidity-0.8.21-363636?style=flat-square&logo=ethereum&logoColor=white)](https://docs.soliditylang.org/) [![Hardhat](https://img.shields.io/badge/Hardhat-2.26.x-ff8c00?style=flat-square&logo=hardhat&logoColor=white)](https://hardhat.org/) [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square&logo=github&logoColor=white)](#license)
+[![Base L2](https://img.shields.io/badge/Base-L2%20LIVE-0052FF?style=flat-square&logo=ethereum&logoColor=white)](https://base.org/)
+[![Solidity](https://img.shields.io/badge/Solidity-0.8.21-363636?style=flat-square&logo=solidity&logoColor=white)](https://docs.soliditylang.org/)
+[![OpenZeppelin](https://img.shields.io/badge/OpenZeppelin-Upgradeable-205081?style=flat-square&logo=openzeppelin&logoColor=white)](https://openzeppelin.com/)
+[![Ethers.js](https://img.shields.io/badge/Ethers.js-6.x-3C3C3D?style=flat-square&logo=ethereum&logoColor=white)](https://docs.ethers.org/v6/)
+[![Hardhat](https://img.shields.io/badge/Hardhat-2.26.x-ff8c00?style=flat-square&logo=hardhat&logoColor=white)](https://hardhat.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-18.x-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Uniswap](https://img.shields.io/badge/Uniswap-V4-FF007A?style=flat-square&logo=uniswap&logoColor=white)](https://app.uniswap.org/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square&logo=github&logoColor=white)](#license)
 
 ## Overview
 
@@ -20,13 +28,26 @@ The ARC ecosystem provides a robust framework for decentralized decision-making 
    - Contract Size: 24,255 bytes (under 24,576 limit)
    - DEX: Uniswap V4 — LP live (no hooks)
 
+  [![Status](https://img.shields.io/badge/Status-Live-00C853?style=flat-square)](https://basescan.org/address/0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437)
+  [![Network](https://img.shields.io/badge/Network-Base%20L2-0052FF?style=flat-square)](https://base.org/)
+  [![DEX](https://img.shields.io/badge/DEX-Uniswap%20V4-FF007A?style=flat-square&logo=uniswap&logoColor=white)](https://app.uniswap.org/)
+  [![Type](https://img.shields.io/badge/Type-ERC20%20%7C%20UUPS-6c47ff?style=flat-square)](https://docs.openzeppelin.com/contracts/4.x/upgradeable)
+
 1. **ARCs**
 
    - Status: In progress
 
+  ![Status](https://img.shields.io/badge/Status-In%20Progress-F9A825?style=flat-square)
+  ![Type](https://img.shields.io/badge/Type-ERC20-6c47ff?style=flat-square)
+  [![Solidity](https://img.shields.io/badge/Solidity-0.8.x-363636?style=flat-square&logo=solidity&logoColor=white)](https://docs.soliditylang.org/)
+
 1. **SoulBound NTT**
 
    - Status: Coming soon
+
+  ![Status](https://img.shields.io/badge/Status-Coming%20Soon-546E7A?style=flat-square)
+  [![Type](https://img.shields.io/badge/Type-SBT%20(ERC-5192)-795548?style=flat-square)](https://eips.ethereum.org/EIPS/eip-5192)
+  [![Solidity](https://img.shields.io/badge/Solidity-0.8.x-363636?style=flat-square&logo=solidity&logoColor=white)](https://docs.soliditylang.org/)
 
 ---
 
@@ -56,7 +77,7 @@ Note: A Uniswap V4 Hook exists at `0xBCc34Ad1bC78c71E86A04814e69F9Cc26A456aE0`, 
 
 ---
 
-## Uniswap V4 — Live LP (no hooks)
+## Uniswap V4 — Live LP
 
 - Pair: ARCX2 / WETH (Base L2)
 - Fee Tier: 0.05% (stable pairs)
@@ -72,6 +93,11 @@ Details and historical notes: `docs/environment/V4_LP_DEPLOYMENT_SUMMARY.md` (in
 ## Architecture
 
 ### Core Contracts
+
+[![Solidity](https://img.shields.io/badge/Solidity-0.8.21-363636?style=flat-square&logo=solidity&logoColor=white)](https://docs.soliditylang.org/)
+[![OpenZeppelin](https://img.shields.io/badge/OpenZeppelin-AccessControl-205081?style=flat-square&logo=openzeppelin&logoColor=white)](https://docs.openzeppelin.com/contracts)
+[![Upgradeable](https://img.shields.io/badge/Upgradeable-UUPS-4CAF50?style=flat-square)](https://docs.openzeppelin.com/contracts/4.x/upgradeable)
+[![Votes](https://img.shields.io/badge/Governance-ERC20Votes-7E57C2?style=flat-square)](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Votes)
 
 #### 1. ARCGovernor.sol
 
