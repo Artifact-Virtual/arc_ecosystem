@@ -8,6 +8,15 @@ Network: Base L2 Mainnet (Chain ID: 8453)
 
 ---
 
+## ✅ What’s Changed (assets & listings)
+
+- Finalized ARCx logo as a proper vector SVG at `docs/assets/logos/arcx_logo.svg`.
+- Updated token list to use the SVG at both list-level and token-level `logoURI`.
+- Removed the temporary `docs/assets/arcx2.svg` placeholder file (no remaining references).
+- Prepared docs for Uniswap token-list submission (see `docs/tokenlists/README.md`).
+
+---
+
 ## 📋 **Executive Summary**
 
 This release represents a **complete transformation** of the ARCx ecosystem from a basic token to a sophisticated DeFi platform. We have **rebuilt the entire architecture** with enterprise-grade features, gas optimization, and advanced tokenomics while maintaining backward compatibility through migration systems.
