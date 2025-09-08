@@ -1,10 +1,10 @@
 # ARCx Ecosystem v2.0.0 - Release Notes
-## 🚀 **MAJOR RELEASE: Complete Ecosystem Transformation**
 
-**Release Date:** September 7, 2025  
-**Previous Version:** [v1.0.0](https://github.com/Artifact-Virtual/arc_ecosystem/releases/tag/v1.0.0)  
-**Network:** Base L2 Mainnet (Chain ID: 8453)  
-**Status:** 🔴 **BREAKING CHANGES** - Complete architecture overhaul  
+## 🚀 Major Release Overview
+
+Release Date: September 7–8, 2025  
+Previous Version: v1.0.0  
+Network: Base L2 Mainnet (Chain ID: 8453)
 
 ---
 
@@ -13,6 +13,7 @@
 This release represents a **complete transformation** of the ARCx ecosystem from a basic token to a sophisticated DeFi platform. We have **rebuilt the entire architecture** with enterprise-grade features, gas optimization, and advanced tokenomics while maintaining backward compatibility through migration systems.
 
 ### 🎯 **Key Achievements**
+
 - ✅ **100% Gas Optimization**: Sub-cent transaction costs achieved on Base L2
 - ✅ **1M Token Supply**: Permanently capped with minting finalized
 - ✅ **Enterprise Security**: Multi-signature governance with comprehensive audit systems
@@ -23,6 +24,7 @@ This release represents a **complete transformation** of the ARCx ecosystem from
 ## 🔥 **BREAKING CHANGES**
 
 ### **1. Complete Token Architecture Rewrite**
+
 **Previous (v1.0.0):** Basic ERC20 token  
 **Current (v2.0.0):** Advanced DeFi token with 15+ integrated features
 
@@ -31,6 +33,7 @@ This release represents a **complete transformation** of the ARCx ecosystem from
 - V2 Token: `0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437`
 
 ### **2. New Contract Naming & Symbols**
+
 ```diff
 - Symbol: ARCx (v1.0.0)
 + Symbol: ARCX2 (v2.0.0)
@@ -40,6 +43,7 @@ This release represents a **complete transformation** of the ARCx ecosystem from
 ```
 
 ### **3. Deployment Network Change**
+
 ```diff
 - Network: Multiple testnets
 + Network: Base L2 Mainnet (Production)
@@ -49,17 +53,19 @@ This release represents a **complete transformation** of the ARCx ecosystem from
 
 ---
 
-## 🆕 **NEW FEATURES**
+## 🆕 New Features
 
 ### **🏆 Core Token Enhancements**
 
 #### **Advanced Yield System**
+
 - **5-25% APY** based on loyalty tier and lock period
 - **Multi-tier staking**: 30, 90, 180, 365 days with progressive multipliers
 - **Auto-compounding**: Set-and-forget yield generation
 - **Loyalty tiers**: Bronze → Silver → Gold → Platinum → Diamond
 
 #### **Flash Loan Integration**
+
 ```solidity
 // NEW: Built-in flash loans
 function flashLoan(uint256 amount, bytes calldata data) external
@@ -69,6 +75,7 @@ function flashLoan(uint256 amount, bytes calldata data) external
 - **Integrated into token contract** (not separate pool)
 
 #### **Dynamic Fee System**
+
 ```solidity
 // NEW: Configurable fee structures
 struct FeeConfig {
@@ -79,6 +86,7 @@ struct FeeConfig {
 ```
 
 #### **Enhanced Governance**
+
 - **ERC20Votes** compliance for snapshot governance
 - **Proposal creation** with minimum token thresholds
 - **Delegated voting** system
@@ -116,7 +124,7 @@ bytes32 public constant VESTING_MANAGER_ROLE = keccak256("VESTING_MANAGER_ROLE")
 
 ---
 
-## 🏗️ **NEW INFRASTRUCTURE CONTRACTS**
+## 🏗️ New Infrastructure Contracts
 
 ### **1. ARCx Vesting Contract**
 **Address:** `0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600`
@@ -157,7 +165,7 @@ bytes32 public constant VESTING_MANAGER_ROLE = keccak256("VESTING_MANAGER_ROLE")
 
 ---
 
-## 🎨 **ENHANCED DEFI ECOSYSTEM**
+## 🎨 Enhanced DeFi Ecosystem
 
 ### **ARCSwap - Advanced DEX**
 - **Multiple order types**: Market, Limit, Stop-Loss, Stop-Limit
@@ -180,7 +188,7 @@ bytes32 public constant VESTING_MANAGER_ROLE = keccak256("VESTING_MANAGER_ROLE")
 
 ---
 
-## 📊 **TOKEN DISTRIBUTION & ECONOMICS**
+## 📊 Token Distribution & Economics
 
 ### **Supply Structure (1,000,000 ARCX2 Total)**
 ```
@@ -207,7 +215,7 @@ bytes32 public constant VESTING_MANAGER_ROLE = keccak256("VESTING_MANAGER_ROLE")
 
 ---
 
-## ⚡ **PERFORMANCE IMPROVEMENTS**
+## ⚡ Performance Improvements
 
 ### **Gas Optimization Achievements**
 ```bash
@@ -237,7 +245,7 @@ Optimization Techniques:
 
 ---
 
-## 🔐 **SECURITY ENHANCEMENTS**
+## 🔐 Security Enhancements
 
 ### **Multi-Signature Governance**
 ```
@@ -272,7 +280,7 @@ npx hardhat run scripts/live-monitor.ts --network base
 
 ---
 
-## 🛠️ **DEVELOPER EXPERIENCE**
+## 🛠️ Developer Experience
 
 ### **New Development Stack**
 ```json
@@ -313,7 +321,7 @@ npm run analytics:yield     # Yield system analytics
 
 ---
 
-## 📈 **ROADMAP & PHASES**
+## 📈 Roadmap & Phases
 
 ### ✅ **Phase 1: Core Deployment** (COMPLETE)
 - Size optimization and contract deployment
@@ -332,7 +340,7 @@ npm run analytics:yield     # Yield system analytics
 
 ---
 
-## 🚨 **MIGRATION GUIDE**
+## 🚨 Migration Guide
 
 ### **For V1 Token Holders**
 1. **Visit Migration Portal**: [To be announced]
@@ -354,7 +362,7 @@ npm run analytics:yield     # Yield system analytics
 
 ---
 
-## 🔗 **IMPORTANT LINKS**
+## 🔗 Important Links
 
 ### **Contract Addresses**
 - **ARCx V2 Enhanced**: [`0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437`](https://basescan.org/address/0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437)
@@ -379,7 +387,7 @@ npm run analytics:yield     # Yield system analytics
 
 ---
 
-## ⚠️ **IMPORTANT NOTICES**
+## ⚠️ Important Notices
 
 ### **🔴 Breaking Changes**
 - **All V1 integrations must be updated** to work with V2
@@ -400,7 +408,7 @@ npm run analytics:yield     # Yield system analytics
 
 ---
 
-## ✅ **DEPLOYMENT VERIFICATION**
+## ✅ Deployment Verification
 
 **🎯 All systems deployed and verified on September 7, 2025**
 
@@ -465,7 +473,7 @@ Contract Size: 24,255 bytes ✅
 
 ---
 
-## 🙏 **ACKNOWLEDGMENTS**
+## 🙏 Acknowledgments
 
 This massive release was made possible through:
 - **Community Feedback**: Extensive testing and feature requests
@@ -476,7 +484,7 @@ This massive release was made possible through:
 
 ---
 
-## 📞 **SUPPORT & CONTACT**
+## 📞 Support & Contact
 
 - **GitHub Issues**: [Report bugs and request features](https://github.com/Artifact-Virtual/arc_ecosystem/issues)
 - **Security Contact**: security@arcexchange.io
@@ -492,4 +500,40 @@ This massive release was made possible through:
 ---
 
 *ARCx Ecosystem Team*  
-*September 7, 2025*
+*September 8, 2025*
+
+---
+
+## 📌 Updates Since Last Release (v1.0.0 → v2.0.0)
+
+This section consolidates all changes performed between the previous release and this release, beyond the new token deployment.
+
+### Documentation & Repository
+- Overhauled `README.md` to restore the comprehensive ecosystem overview and integrate ARCx V2 live state.
+- Added `docs/archive/README_legacy_full.md` to preserve the original full README content for reference.
+- Updated `docs/environment/V4_LP_DEPLOYMENT_SUMMARY.md` to reflect ARCX2 token, 0.05% fee tier, and 500k ARCX2 seeded liquidity.
+- Cleaned up references to hooks in the live LP path (LP is live without hooks).
+- Removed changelog section from README (now tracked solely in release notes).
+
+### Addresses & Configuration
+- Corrected ARCx token address to V2: `0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437` in docs and scripts.
+- Confirmed Uniswap infra addresses (Pool Manager, NFPM, Universal Router) and Base token addresses (WETH, USDC) across docs.
+- Ensured address alignment with the authoritative `address.book` file.
+
+### Uniswap V4 LP
+- Finalized LP configuration on Uniswap V4 with 0.05% fee tier for stable pairs.
+- Seeded liquidity: 500,000 ARCX2 (50% of total supply), with Treasury-managed WETH pairing.
+- Verified position creation and custody with the Treasury Safe.
+
+### Token Ops & Compatibility
+- Disabled transfer-time burn/fees and set `feeExempt` for Uniswap actors (Pool Manager, NFPM, Permit2, UR) to ensure predictable gas.
+- Granted ADMIN_ROLE to the deployer where authorized and executed exemption config scripts.
+- Approved allowances for ARCx and WETH to Permit2 and NFPM to enable UI flows.
+
+### Tooling & Scripts
+- Added/updated scripts: `check-lp-compat.ts`, `grant-exemptions.ts`, `grant-more-exemptions.ts`, `approve-lp-assets.ts`, and shared `constants.ts` with live addresses.
+- Consolidated documentation around Uniswap V4 addresses and removed duplicate/legacy references.
+
+### Security & Quality
+- Maintained sub-cent gas targets; preserved contract size at 24,255 bytes.
+- Updated repository docs to clearly separate release notes and ecosystem overview.

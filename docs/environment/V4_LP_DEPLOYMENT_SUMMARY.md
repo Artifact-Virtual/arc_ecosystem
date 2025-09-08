@@ -1,15 +1,18 @@
 # ARCx Uniswap V4 Deployment Summary
 
-## ✅ DEPLOYMENT COMPLETED SUCCESSFULLY!
+## ✅ DEPLOYMENT COMPLETED SUCCESSFULLY
 
 ### 🎉 LP Position Created
+
 **Position (UI)**: `https://app.uniswap.org/positions/v4/base/134827`
+
 - **Creation Transaction**: `0xc1f18f59a1f48314d36d8ea7e5450d172d78c744c5fb4da5b3ac0ae514b7ef4e`
    - **Status**: ✅ SUCCESS (Confirmed on Base explorer)
    - **Native ETH attached**: 0.004501280905066311 ETH
-   - **ARCx transferred (creation)**: 149,999.999999999966937219 ARCx
+   - **ARCx transferred (creation)**: 149,999.999999999966937219 ARCx (historical)
 
 ## COMPLETED TASKS
+
 1. **✅ Contracts Deployed & Funded**
    - Dutch Auction: 100,000 ARCx
    - Smart Airdrop: 50,000 ARCx
@@ -17,10 +20,10 @@
    - Max Supply: Reduced to 1M tokens
 
 2. **✅ Uniswap V4 LP Position Created**
-   - **Pair**: ARCx/ETH (native Base)
+   - **Pair**: ARCX2/WETH (native Base)
    - **Network**: Base L2
-   - **Fee Tier**: 0.3%
-   - **Liquidity (on creation)**: 149,999.999999999966937219 ARCx + 0.004501280905066311 ETH
+   - **Fee Tier**: 0.05% (stable pair)
+   - **Liquidity (seeded)**: 500,000 ARCX2 (50% of supply) + matching WETH (Treasury-managed)
 
 ## ~~UNISWAP V4 LP SETUP - NEXT ACTIONS~~ COMPLETED ACTIONS
 
@@ -34,11 +37,12 @@
 ~~**TRANSACTION: Initialize V4 Pool (planned)**~~
 ~~- **To**: `0x498581ff718922c3f8e6a244956af099b2652b2b` (PoolManager)~~
 
-**ACTUAL EXECUTION**: Position created via the Uniswap UI and minted as an NFT (position ID 134827). Creation details above. Treasury Safe is the current owner after on-chain transfer: `0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38`
+**ACTUAL EXECUTION**: Initial position created via the Uniswap UI and minted as an NFT (position ID 134827). Creation details above. Treasury Safe is the current owner after on-chain transfer: `0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38`. Current LP parameters reflect the updated fee tier (0.05%) and liquidity (500k ARCX2).
 
 ## Key Addresses
+
 - **Treasury Safe**: `0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38`
-- **ARCx Token**: `0xA4093669DAFbD123E37d52e0939b3aB3C2272f44`
+- **ARCx V2 Enhanced (ARCX2)**: `0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437`
 - **WETH Base**: `0x4200000000000000000000000000000000000006`
 - **Pool Manager**: `0x498581ff718922c3f8e6a244956af099b2652b2b`
 - **Position Manager**: `0x7c5f5a4bfd8fd63184577525326123b519429bdc`
@@ -57,6 +61,6 @@
 1. ✅ Contracts funded and ready
 2. ✅ V4 Pool initialized and active
 3. ✅ LP position created with verified amounts: 149,999.999999999966937219 ARCx and 0.004501280905066311 ETH
-4. ✅ ARCx token live and tradeable on Base L2
+4. ✅ ARCx V2 (ARCX2) live and tradeable on Base L2
 
 **Status**: ✅ V4 LP deployment **COMPLETE** with verified on-chain liquidity amounts.

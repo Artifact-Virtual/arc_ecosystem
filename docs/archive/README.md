@@ -8,5 +8,4 @@ This folder contains archived documentation files that have been merged, superse
 
 ---
 
-**Maintained by:** ARCx Genesis Token Project
-**Last updated:** [auto-generated]
+**Maintained by:** ARC Ecosystem

@@ -34,7 +34,7 @@ export const CONTRACTS = {
 
 // Pool Configuration
 export const POOL_CONFIG = {
-  FEE: 3000, // 0.3%
+  FEE: 500, // 0.05% (stable pairs)
   TICK_SPACING: 60,
   HOOKS: CONTRACTS.NULL_ADDRESS,
   MIN_TICK: -887272,
@@ -46,7 +46,7 @@ export const AMOUNTS = {
   // Distribution amounts
   AUCTION_TOKENS: "100000", // 100K ARCx
   AIRDROP_TOKENS: "50000", // 50K ARCx
-  LP_ARCX: "25000", // 25K ARCx
+  LP_ARCX: "500000", // 500K ARCX2 (50% supply)
   LP_ETH: "0.0016", // $4 USD worth ETH (at $2500/ETH = 0.0016 ETH)
   
   // Vesting amounts
