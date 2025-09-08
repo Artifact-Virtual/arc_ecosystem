@@ -1,8 +1,8 @@
-# ARCx V2 Enhanced Ecosystem
+# ARCx V2 Enhanced
 
-> **LIVE ON BASE L2 MAINNET** • Revolutionary DeFi Token with Advanced Features
+> **LIVE ON BASE L2 MAINNET** 
 
-A next-generation DeFi token ecosystem featuring advanced yield generation, multi-tier staking, flash loans, comprehensive governance, and Uniswap V4 integration - all optimized for Base L2's sub-cent transaction fees.
+A next-generation DeFi token featuring advanced yield generation, multi-tier staking, flash loans, comprehensive governance, and Uniswap V4 integration - all optimized for Base L2's sub-cent transaction fees.
 
 [![Base L2](https://img.shields.io/badge/Base-L2%20LIVE-0052FF?style=for-the-badge&logo=ethereum&logoColor=white)](https://base.org/) [![Contract Size](https://img.shields.io/badge/Size-24,255%20bytes-00FF88?style=for-the-badge&logo=ethereum&logoColor=white)](https://ethereum.org/) [![Supply](https://img.shields.io/badge/Supply-1M%20ARCX2-FF0080?style=for-the-badge)](https://basescan.org/) [![Security](https://img.shields.io/badge/Security-Enhanced-FF6B35?style=for-the-badge&logo=security&logoColor=white)](#security)
 
@@ -17,7 +17,7 @@ A next-generation DeFi token ecosystem featuring advanced yield generation, mult
 | **ARCx V2 Enhanced** | [`0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437`](https://basescan.org/address/0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437) | ✅ **LIVE** |
 | **Vesting Contract** | [`0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600`](https://basescan.org/address/0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600) | ✅ **CONFIGURED** |
 | **Airdrop System** | [`0x40fe447cf4B2af7aa41694a568d84F1065620298`](https://basescan.org/address/0x40fe447cf4B2af7aa41694a568d84F1065620298) | ✅ **CONFIGURED** |
-| **Uniswap V4 Hook** | [`0xBCc34Ad1bC78c71E86A04814e69F9Cc26A456aE0`](https://basescan.org/address/0xBCc34Ad1bC78c71E86A04814e69F9Cc26A456aE0) | ✅ **GAS-FIXED** |
+
 
 ---
 
@@ -55,7 +55,7 @@ Network: Base L2
 ### 🛡️ **Security & Infrastructure**
 - ✅ **Advanced Vesting** • Cliff periods, penalties, governance
 - ✅ **Merkle Airdrop** • Anti-sybil protection, efficient distribution
-- ✅ **Uniswap V4 Hook** • MEV protection, dynamic fees, automation
+
 - ✅ **Access Control** • Role-based permissions and security
 
 ---
@@ -64,7 +64,7 @@ Network: Base L2
 
 | Allocation | Amount | Status | Purpose |
 |------------|--------|--------|---------|
-| **Liquidity Pool** | 500,000 ARCX2 (50%) | 🔄 Ready | Uniswap V4 with hooks |
+| **Liquidity Pool** | 500,000 ARCX2 (50%) | � Live | Uniswap V4 (no hooks) |
 | **Team Vesting** | 299,850 ARCX2 (30%) | ✅ Distributed | 2-3 year vesting |
 | **Airdrop** | 99,950 ARCX2 (10%) | ✅ Distributed | Community distribution |
 | **Marketing** | 100,000 ARCX2 (10%) | 📝 Reserved | Growth & partnerships |
@@ -99,12 +99,13 @@ npx hardhat test
 
 ## 🌐 **Ecosystem Components**
 
-### **Uniswap V4 Integration**
-- **Gas-Fixed Hook**: `0xBCc34Ad1bC78c71E86A04814e69F9Cc26A456aE0` ✅ **GAS ISSUES COMPLETELY RESOLVED**
-- **Fixed Fee**: 0.25% (no dynamic calculation for predictable gas)
-- **MEV Protection**: 2-second delay prevents sandwich attacks
-- **Gas Predictable**: All operations have bounded gas usage
-- **Emergency Controls**: Pause/unpause functionality enabled
+### **Uniswap V4 Integration (Live, no hooks)**
+
+- LP live on Base L2; position created via the Uniswap UI
+- Pool Manager (Base): `0x498581ff718922c3f8e6a244956af099b2652b2b`
+- Position Manager: `0x7c5f5a4bfd8fd63184577525326123b519429bdc`
+- Universal Router: `0x6ff5693b99212da76ad316178a184ab56d299b43`
+- See detailed LP summary: [`docs/environment/V4_LP_DEPLOYMENT_SUMMARY.md`](./docs/environment/V4_LP_DEPLOYMENT_SUMMARY.md)
 
 ### **Vesting & Distribution**
 - **Core Team**: 120k tokens, 2-year linear, 6-month cliff
@@ -136,11 +137,12 @@ npx hardhat test
 - ✅ Size optimization (24,255 bytes under limit)
 - ✅ ARCx V2 Enhanced deployed & 1M supply finalized
 - ✅ Infrastructure contracts deployed (vesting, airdrop)
-- ✅ Uniswap V4 hook deployed with MEV protection
+
 - ✅ All contracts configured and operational
 
 ### 🔄 **Phase 2: Ecosystem Launch** (READY FOR EXECUTION)
-- 🎯 Uniswap V4 pool creation with advanced hook
+
+- 🟢 Uniswap V4 LP live (no hooks)
 - 🎯 Liquidity provisioning (500k ARCX2 allocated)
 - 🎯 Vesting schedules activation (300k tokens locked)
 - 🎯 Treasury and ecosystem safes operational
@@ -171,7 +173,7 @@ npx hardhat test
 | **ARCx V2 Enhanced** | `0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437` | 🟢 **LIVE** | 1M supply finalized |
 | **Vesting System** | `0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600` | 🟢 **CONFIGURED** | 300k tokens locked |
 | **Airdrop System** | `0x40fe447cf4B2af7aa41694a568d84F1065620298` | 🟢 **CONFIGURED** | 100k tokens allocated |
-| **Uniswap V4 Hook** | `0xBCc34Ad1bC78c71E86A04814e69F9Cc26A456aE0` | 🟢 **GAS FIXED** | Pure Solidity, predictable gas |
+
 
 ### **🔥 Ecosystem Highlights**
 - ✅ **24,255 bytes** contract size (under 24,576 limit)
