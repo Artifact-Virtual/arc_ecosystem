@@ -515,25 +515,39 @@ This section consolidates all changes performed between the previous release and
 - Cleaned up references to hooks in the live LP path (LP is live without hooks).
 - Removed changelog section from README (now tracked solely in release notes).
 
+- Added Safe Transaction Builder batch: `deployment/base/vesting-init-batch.json` (Approve + create two vesting schedules on Base).
+
+
 ### Addresses & Configuration
+
 - Corrected ARCx token address to V2: `0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437` in docs and scripts.
 - Confirmed Uniswap infra addresses (Pool Manager, NFPM, Universal Router) and Base token addresses (WETH, USDC) across docs.
 - Ensured address alignment with the authoritative `address.book` file.
 
+
 ### Uniswap V4 LP
+
 - Finalized LP configuration on Uniswap V4 with 0.05% fee tier for stable pairs.
 - Seeded liquidity: 500,000 ARCX2 (50% of total supply), with Treasury-managed WETH pairing.
 - Verified position creation and custody with the Treasury Safe.
 
+
 ### Token Ops & Compatibility
+
 - Disabled transfer-time burn/fees and set `feeExempt` for Uniswap actors (Pool Manager, NFPM, Permit2, UR) to ensure predictable gas.
 - Granted ADMIN_ROLE to the deployer where authorized and executed exemption config scripts.
 - Approved allowances for ARCx and WETH to Permit2 and NFPM to enable UI flows.
 
+
 ### Tooling & Scripts
+
 - Added/updated scripts: `check-lp-compat.ts`, `grant-exemptions.ts`, `grant-more-exemptions.ts`, `approve-lp-assets.ts`, and shared `constants.ts` with live addresses.
 - Consolidated documentation around Uniswap V4 addresses and removed duplicate/legacy references.
 
+- [WIP] Need to reach Uniswap to open a PR to get our token on their asset list. Tracking: [PR #2](https://github.com/Artifact-Virtual/arc_ecosystem/pull/2)
+
+
 ### Security & Quality
+
 - Maintained sub-cent gas targets; preserved contract size at 24,255 bytes.
 - Updated repository docs to clearly separate release notes and ecosystem overview.

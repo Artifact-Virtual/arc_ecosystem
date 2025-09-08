@@ -64,3 +64,11 @@
 4. ✅ ARCx V2 (ARCX2) live and tradeable on Base L2
 
 **Status**: ✅ V4 LP deployment **COMPLETE** with verified on-chain liquidity amounts.
+
+---
+
+Notes
+
+- Live LP uses no hooks; a hook contract exists but is not part of the active pool.
+- Gas predictability is ensured by disabling transfer-time fees/burn and marking Uniswap actors feeExempt.
+- Vesting initialization can be executed as a Safe batch using `deployment/base/vesting-init-batch.json` (Base chain).

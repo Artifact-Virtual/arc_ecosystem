@@ -1,0 +1,25 @@
+{
+  "name": "ARCx Ecosystem Token List",
+  "timestamp": "2025-09-08T00:00:00.000Z",
+  "version": { "major": 1, "minor": 0, "patch": 0 },
+  "tags": {},
+  "logoURI": "https://raw.githubusercontent.com/Artifact-Virtual/arc_ecosystem/main/docs/assets/logos/arcx_logo.svg",
+  "keywords": ["arcx", "arcx2", "defi", "base"],
+  "tokens": [
+    {
+      "chainId": 8453,
+      "address": "0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437",
+      "name": "ARCx V2 Enhanced",
+      "symbol": "ARCX2",
+      "decimals": 18,
+  "logoURI": "https://raw.githubusercontent.com/Artifact-Virtual/arc_ecosystem/main/docs/assets/logos/arcx_logo.svg",
+      "extensions": {
+        "bridgeInfo": {
+          "8453": { "tokenAddress": "0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437" }
+        },
+        "documentation": "https://github.com/Artifact-Virtual/arc_ecosystem",
+        "website": "https://arcexchange.io"
+      }
+    }
+  ]
+}
