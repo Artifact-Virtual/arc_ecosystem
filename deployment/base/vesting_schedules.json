@@ -1,83 +1,109 @@
 {
-	"version": "1.0",
-	"chainId": "8453",
-	"createdAt": 1757281200000,
-	"meta": {
-		"name": "ARCx V2 – Create Vesting Schedules (run from Treasury Safe)",
-		"description": "Create vesting schedules after ownership has been transferred to Treasury Safe. Treasury Safe must have 299,850 ARCX2 tokens.",
-		"txBuilderVersion": "1.16.6"
-	},
-	"transactions": [
-		{
-			"to": "0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437",
-			"value": "0",
-			"operation": 0,
-			"contractMethod": {
-				"name": "approve",
-				"payable": false,
-				"inputs": [
-					{ "name": "spender", "type": "address" },
-					{ "name": "amount", "type": "uint256" }
-				]
-			},
-			"contractInputsValues": {
-				"spender": "0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600",
-				"amount": "299850000000000000000000"
-			}
-		},
-		{
-			"to": "0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600",
-			"value": "0",
-			"operation": 0,
-			"contractMethod": {
-				"name": "createVestingSchedule",
-				"payable": false,
-				"inputs": [
-					{ "name": "beneficiary", "type": "address" },
-					{ "name": "totalAmount", "type": "uint256" },
-					{ "name": "cliffDuration", "type": "uint256" },
-					{ "name": "duration", "type": "uint256" },
-					{ "name": "penaltyRate", "type": "uint256" },
-					{ "name": "role", "type": "string" },
-					{ "name": "governanceEnabled", "type": "bool" }
-				]
-			},
-			"contractInputsValues": {
-				"beneficiary": "0x2b446CcB4c758c01C7D04a16E43758551F629102",
-				"totalAmount": "150000000000000000000000",
-				"cliffDuration": "7776000",
-				"duration": "93312000",
-				"penaltyRate": "2500",
-				"role": "TREASURY",
-				"governanceEnabled": true
-			}
-		},
-		{
-			"to": "0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600",
-			"value": "0",
-			"operation": 0,
-			"contractMethod": {
-				"name": "createVestingSchedule",
-				"payable": false,
-				"inputs": [
-					{ "name": "beneficiary", "type": "address" },
-					{ "name": "totalAmount", "type": "uint256" },
-					{ "name": "cliffDuration", "type": "uint256" },
-					{ "name": "duration", "type": "uint256" },
-					{ "name": "penaltyRate", "type": "uint256" },
-					{ "name": "role", "type": "string" },
-					{ "name": "governanceEnabled", "type": "bool" }
-				]
-			},
-			"contractInputsValues": {
-				"beneficiary": "0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38",
-				"totalAmount": "149850000000000000000000",
-				"cliffDuration": "15552000",
-				"duration": "124416000",
-				"penaltyRate": "2500",
-				"role": "ECOSYSTEM",
-				"governanceEnabled": true
-			}
-		}
-	]
+  "version": "1.0",
+  "chainId": "8453",
+  "createdAt": 1757424446000,
+  "meta": {
+    "name": "ARCx Create Vesting Schedules - CORRECTED",
+    "description": "Create Treasury and Ecosystem vesting schedules with correct 7-parameter function",
+    "txBuilderVersion": "1.16.5",
+    "checksum": "0x"
+  },
+  "transactions": [
+    {
+      "to": "0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600",
+      "value": "0",
+      "data": "0xb1bb356f0000000000000000000000008f8fdbfa1af9f53973a7003cbf26d854de9b2f3800000000000000000000000000000000000000000001fc3842bd1f071c000000000000000000000000000000000000000000000000000000000000068c02b3e0000000000000000000000000000000000000000000000000000000003c267000000000000000000000000000000000000000000000000000000000000278d0000000000000000000000000000000000000000000000000000000000000000e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000085472656173757279000000000000000000000000000000000000000000000000",
+      "contractMethod": {
+        "inputs": [
+          {
+            "name": "_beneficiary",
+            "type": "address"
+          },
+          {
+            "name": "_totalAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "_startTime",
+            "type": "uint256"
+          },
+          {
+            "name": "_duration",
+            "type": "uint256"
+          },
+          {
+            "name": "_cliff",
+            "type": "uint256"
+          },
+          {
+            "name": "_role",
+            "type": "string"
+          },
+          {
+            "name": "_revocable",
+            "type": "bool"
+          }
+        ],
+        "name": "createVestingSchedule",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "_beneficiary": "0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38",
+        "_totalAmount": "150000000000000000000000",
+        "_startTime": "1757424446",
+        "_duration": "63072000",
+        "_cliff": "2592000",
+        "_role": "Treasury",
+        "_revocable": false
+      }
+    },
+    {
+      "to": "0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600",
+      "value": "0",
+      "data": "0xb1bb356f000000000000000000000000dddddddddddddddddddddddddddddddddddddddd0000000000000000000000000000000000000001fbb6280c4ac5d2800000000000000000000000000000000000000000000000000000000000068c02b3e0000000000000000000000000000000000000000000000000000000003c267000000000000000000000000000000000000000000000000000000000000278d0000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000945636f73797374656d0000000000000000000000000000000000000000000000",
+      "contractMethod": {
+        "inputs": [
+          {
+            "name": "_beneficiary",
+            "type": "address"
+          },
+          {
+            "name": "_totalAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "_startTime",
+            "type": "uint256"
+          },
+          {
+            "name": "_duration",
+            "type": "uint256"
+          },
+          {
+            "name": "_cliff",
+            "type": "uint256"
+          },
+          {
+            "name": "_role",
+            "type": "string"
+          },
+          {
+            "name": "_revocable",
+            "type": "bool"
+          }
+        ],
+        "name": "createVestingSchedule",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "_beneficiary": "0xdddddddddddddddddddddddddddddddddddddddd",
+        "_totalAmount": "149850000000000000000000",
+        "_startTime": "1757424446",
+        "_duration": "63072000",
+        "_cliff": "2592000",
+        "_role": "Ecosystem",
+        "_revocable": false
+      }
+    }
+  ]
 }
