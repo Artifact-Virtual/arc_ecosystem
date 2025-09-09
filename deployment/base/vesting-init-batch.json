@@ -43,7 +43,7 @@
         ]
       },
       "contractInputsValues": {
-        "beneficiary": "0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38",
+  "beneficiary": "0x2b446CcB4c758c01C7D04a16E43758551F629102",
         "totalAmount": "150000000000000000000000",
         "cliffDuration": "7776000",
         "duration": "93312000",

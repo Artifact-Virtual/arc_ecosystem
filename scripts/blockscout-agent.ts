@@ -16,6 +16,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any, no-console */
 import hre from "hardhat";
+import * as realEthers from "ethers";
 import { URL } from "url";
 
 const { ethers } = hre;
@@ -76,7 +77,8 @@ async function computeBalancesFromTxs(txs: any[]) {
 async function computeBalancesFromLogs(token: string, startBlock?: number, endBlock?: number) {
   // Use provider.getLogs to gather Transfer events; may be heavy on long histories.
   const provider = ethers.provider;
-  const TRANSFER_SIG = (ethers as any).utils.id("Transfer(address,address,uint256)");
+  // canonical Transfer(topic) keccak256("Transfer(address,address,uint256)")
+  const TRANSFER_SIG = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
   const filter: any = {
     address: token,
     topics: [TRANSFER_SIG],
@@ -88,13 +90,14 @@ async function computeBalancesFromLogs(token: string, startBlock?: number, endBl
 
   console.log(`Fetching logs from ${filter.fromBlock} to ${filter.toBlock} (may take time)`);
   const logs = await provider.getLogs(filter);
-  const iface = new (ethers as any).utils.Interface(["event Transfer(address indexed from, address indexed to, uint256 value)"]);
   const balances: BigMap = new Map();
   for (const log of logs) {
-    const parsed = iface.parseLog(log);
-    const from = (parsed.args.from as string).toLowerCase();
-    const to = (parsed.args.to as string).toLowerCase();
-    const value = BigInt(parsed.args.value.toString());
+    // topics: [topic, from, to]
+    const t1 = log.topics && log.topics[1] ? log.topics[1] : null;
+    const t2 = log.topics && log.topics[2] ? log.topics[2] : null;
+    const from = t1 ? ("0x" + t1.slice(-40)).toLowerCase() : "0x0000000000000000000000000000000000000000";
+    const to = t2 ? ("0x" + t2.slice(-40)).toLowerCase() : "0x0000000000000000000000000000000000000000";
+    const value = log.data ? BigInt(log.data) : 0n;
     if (from !== "0x0000000000000000000000000000000000000000") subBalance(balances, from, value);
     addBalance(balances, to, value);
   }
