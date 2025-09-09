@@ -1,4 +1,6 @@
-# ARC Ecosystem — System Status and Security Posture (2025-09-08)
+# System Report
+
+> System Status, Threat Model & Security Posture (2025-09-08)
 
 This report provides an end-to-end snapshot of ARC’s security posture, operational state, compliance, and roadmap. It favors deterministic builds, least privilege, and auditable change control.
 
