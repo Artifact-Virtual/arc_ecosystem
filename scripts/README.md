@@ -81,6 +81,7 @@ npx hardhat run scripts/deploy.ts --network base all --confirm
 ```
 
 ### Liquidity Management
+
 ```bash
 # Check liquidity status
 npx hardhat run scripts/liquidity.ts --network base status
@@ -92,12 +93,23 @@ npx hardhat run scripts/liquidity.ts --network base setup --dry-run
 npx hardhat run scripts/liquidity.ts --network base add
 ```
 
+### Reverting temporary LP compatibility changes
+
+```bash
+# Revert exemptions and restore default burn settings (PowerShell)
+$env:UNISWAP_V4_POOL_MANAGER="0x498581ff718922c3f8e6a244956af099b2652b2b";
+$env:ARCX_HOOK_ADDRESS="0xBCc34Ad1bC78c71E86A04814e69F9Cc26A456aE0";
+npx hardhat run scripts/revert-lp-compat.ts --network base
+```
+
 ## Migration from Old Scripts
 
 ### Removed Scripts (21 total)
+
 The following redundant scripts have been consolidated:
 
 **Status Scripts → `status.ts`:**
+
 - `quick_status.ts`
 - `final_status.ts`
 - `deep_status.ts`
@@ -111,11 +123,13 @@ The following redundant scripts have been consolidated:
 - `check_liquidity.ts`
 
 **Deployment Scripts → `deploy.ts`:**
+
 - `deploy_dutch_auction.ts`
 - `EMERGENCY_deploy_dutch_auction.ts`
 - `EMERGENCY_deploy_smart_airdrop.ts`
 
 **Liquidity Scripts → `liquidity.ts`:**
+
 - `add_v4_liquidity.ts`
 - `provide_liquidity.ts`
 - `create_v4_liquidity_pool.ts`
@@ -127,6 +141,7 @@ The following redundant scripts have been consolidated:
 - `verify_liquidity_ready.ts`
 
 **Other:**
+
 - `finalize_auction.ts`
 - `burn_excess_tokens.ts`
 
@@ -160,6 +175,7 @@ The following redundant scripts have been consolidated:
 ## Development Notes
 
 ### Adding New Functionality
+
 1. Status checks: Add to `status.ts`
 2. Deployments: Add to `deploy.ts`
 3. Liquidity operations: Add to `liquidity.ts`
@@ -167,12 +183,15 @@ The following redundant scripts have been consolidated:
 5. Common functions: Add to `shared/utils.ts`
 
 ### Testing
+
 Always test with dry run mode first:
+
 ```bash
 npx hardhat run scripts/deploy.ts --network base auction --dry-run
 ```
 
 ### Safety Checklist
+
 - [ ] Network validation passes
 - [ ] Sufficient balances confirmed
 - [ ] Dry run executed successfully
@@ -182,6 +201,7 @@ npx hardhat run scripts/deploy.ts --network base auction --dry-run
 ## Emergency Recovery
 
 If you need any of the removed scripts:
+
 1. Check git history: `git log --oneline --name-only`
 2. Restore a specific file: `git checkout <commit> -- scripts/<file>`
 3. Or recreate functionality using the consolidated scripts
