@@ -19,10 +19,9 @@ import hre from "hardhat";
 import { URL } from "url";
 
 const { ethers } = hre;
-const ethersUtils = (ethers as any).utils;
 type BigMap = Map<string, bigint>;
 
-const TRANSFER_SIG = ethersUtils.id("Transfer(address,address,uint256)");
+// compute transfer signature at runtime via hre.ethers
 
 async function fetchExplorerTokenTxs(apiBase: string, token: string, page = 1, offset = 10000, apikey?: string) {
   const url = new URL(apiBase);
@@ -77,6 +76,7 @@ async function computeBalancesFromTxs(txs: any[]) {
 async function computeBalancesFromLogs(token: string, startBlock?: number, endBlock?: number) {
   // Use provider.getLogs to gather Transfer events; may be heavy on long histories.
   const provider = ethers.provider;
+  const TRANSFER_SIG = (ethers as any).utils.id("Transfer(address,address,uint256)");
   const filter: any = {
     address: token,
     topics: [TRANSFER_SIG],
@@ -88,7 +88,7 @@ async function computeBalancesFromLogs(token: string, startBlock?: number, endBl
 
   console.log(`Fetching logs from ${filter.fromBlock} to ${filter.toBlock} (may take time)`);
   const logs = await provider.getLogs(filter);
-  const iface = new ethersUtils.Interface(["event Transfer(address indexed from, address indexed to, uint256 value)"]);
+  const iface = new (ethers as any).utils.Interface(["event Transfer(address indexed from, address indexed to, uint256 value)"]);
   const balances: BigMap = new Map();
   for (const log of logs) {
     const parsed = iface.parseLog(log);
