@@ -1,3 +1,84 @@
+# ARC Ecosystem — System Status and Security Posture (2025-09-08)
+
+This report provides an end-to-end snapshot of ARC’s security posture, operational state, compliance, and roadmap. It favors deterministic builds, least privilege, and auditable change control.
+
+## On-chain status (Base mainnet)
+
+- Token (ARCx V2 Enhanced): 0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437
+- Vesting contract: 0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600
+- Treasury Safe: 0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38
+- Ecosystem Safe: 0x2ebCb38562051b02dae9cAca5ed8Ddb353d225eb
+- Smart Airdrop: 0x40fe447cf4B2af7aa41694a568d84F1065620298
+
+Holders snapshot (from transfer ledger reconstruction):
+
+- Vesting holds ~299,850 ARCX2
+- Airdrop holds ~99,950 ARCX2
+- Remainder sits with EOAs/LPs; total reconciles to 1,000,000 ARCX2
+
+## Recent operational changes
+
+- LP creation previously unblocked via operational mitigations (temporary fee-exempt allowlist and toggle during LP init; no redeploys). These temporary changes have now been reverted: burn restored to default (0.05%) and Uniswap actors are no longer fee-exempt.
+- Token-list and canonical SVG logo finalized (stable raw URLs)
+- Vesting batch updated: Core Dev beneficiary to 0x2b446CcB4c758c01C7D04a16E43758551F629102; Treasury schedule to Treasury Safe
+
+## CI/CD integrity and improvements
+
+- Node 18; npm cache enabled. Install strategy: use npm ci when lockfile is present; otherwise fallback to npm install (no forced lockfile creation)
+- Security gate: npm audit enforced (fail on high/critical). Coverage and test artifacts uploaded. Slither runs in Docker
+- test-results/ directory created pre-run to ensure artifact steps succeed
+
+## Security posture (design and ops)
+
+- Least privilege. Explicit allowlists for fee-exempt roles. Admin ops only via Gnosis Safe, with batch JSON committed pre-execution
+- Transfer hooks guarded by checks-effects-interactions; no external calls before state updates
+- Vesting approvals bounded; beneficiaries explicit; penalty/governance flags constrained
+- No silent changes: all config moves through reviewed PRs and on-chain multisig
+
+## Threat model and mitigations
+
+- Reentrancy: protected by function ordering and nonReentrant patterns where needed
+- Gas estimation/DoS via fees: mitigated by whitelisting LP actors and using operational toggles during bootstrap
+- Allowance races: approvals minimized/bounded; consider permit where practical
+- Upgrades/governance: any upgrade path (if used) goes through timelocked governance and Safe execution
+
+## Findings and gaps (actionable)
+
+- Tests: local runs show 0 passing tests. Reinstate explicit assertions and suites for ERC20 invariants, exemptions, LP init, vesting release/penalties, and airdrop claims
+- Invariants: add invariant tests for supply conservation, sum(vesting) ≤ approvals, and no unintended transfer restrictions
+- Monitoring: add on-chain alerting for admin ops, parameter flips, and abnormal transfer patterns
+- Formal checks: run symbolic execution and differential testing for token and vesting flows
+
+## Compliance and regulatory considerations
+
+- Governance/treasury controls: document signer policies; apply KYC/AML where jurisdictionally required
+- Disclosures: clear public risk statements; avoid promotional mischaracterizations
+- Data protection: if off-chain eligibility is stored, align with GDPR/CCPA
+- Sanctions: integrate OFAC/EU lists at distribution edges where applicable
+- Accounting/tax: keep audit trails for vesting and distributions
+- Frameworks to track (non-exhaustive): EU MiCA (ART/EMT applicability), eIDAS (signing), DORA (ops resilience), US FinCEN MSB guidance, SEC/CFTC posture, FATF travel rule
+
+## Roadmap (next 12–24 months)
+
+1. Restore and enforce CI tests (unit, fuzz, invariant) with thresholds
+2. Add monitoring/alerts and anomaly detection for transfers and admin ops
+3. Formal verification tracks for token/vesting
+4. Governance hardening with timelocks and emergency pausability runbooks
+5. Integration audits for hooks/partners pre-listing or incentives
+
+## Long-term outlook (5–10 years) and how to get there
+
+- Stability through conservative token mechanics and transparent governance
+- Security as process: continuous verification, external audits, provable invariants
+- Compliance modularity at distribution edges; adaptable policy modules as regulations evolve
+- Trust via reproducible builds and transparent Safe transactions
+
+Execution steps:
+
+- Quarter 1–2: re-enable tests, add invariants/fuzz, wire monitoring, first formal checks
+- Quarter 3–4: governance hardening, partner audits, publish security whitepaper/addenda
+- Year 2+: periodic external audits, continuous assurance pipeline, expansion with strict change control
+
 # ARC Ecosystem System Status Report
 
 **Report Date:** August 30, 2025

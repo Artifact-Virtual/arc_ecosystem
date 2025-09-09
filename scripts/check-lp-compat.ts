@@ -16,9 +16,15 @@ async function main() {
   const token = await ethers.getContractAt("ARCxV2Enhanced", TOKEN_ADDRESS, signer);
   const ADMIN_ROLE = ethers.id("ADMIN_ROLE");
 
-  const [cfg, isAdmin, exHook, exPM, exPool] = await Promise.all([
-    token.config(),
-    token.hasRole(ADMIN_ROLE, signer.address),
+  const cfg = await token.config();
+  let isAdmin = false;
+  try {
+    isAdmin = await token.hasRole(ADMIN_ROLE, signer.address);
+  } catch {
+    // Older ABI or proxy route may not expose hasRole; proceed without admin check.
+    isAdmin = false;
+  }
+  const [exHook, exPM, exPool] = await Promise.all([
     token.feeExempt(HOOK_ADDRESS),
     token.feeExempt(POOL_MANAGER),
     POOL_ADDRESS ? token.feeExempt(POOL_ADDRESS) : Promise.resolve(false),

@@ -212,7 +212,7 @@ test/
 - Multi-sig safes secure treasury and ecosystem funds
 - Role-based access control for administration and upgrades
 - Emergency pause mechanisms available where applicable
-- Gas predictability ensured for DEX interactions (fees disabled; feeExempt set for Uniswap actors)
+- Gas predictability under default token mechanics (burn enabled 0.05%; transfer fee 0%; no fee exemptions for Uniswap actors)
 
 ---
 
