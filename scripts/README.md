@@ -1,53 +1,79 @@
 # Script Suite – Consolidated Architecture
 
-This directory documents the streamlined script architecture for the ARCx ecosystem, designed to reduce redundancy and improve maintainability.
+This directory contains the streamlined script architecture for the ARCx ecosystem, designed to reduce redundancy and improve maintainability.
 
-## Script Structure
+## Master Scripts
 
-### Core Scripts (8 total)
+### Vesting Management
+- **`vesting-manager.ts`** – Comprehensive vesting operations
+  - Commands:
+    - `check-beneficiaries` – Check vesting schedules for beneficiaries
+    - `check-treasury` – Check treasury and vesting balances/allowances
+    - `check-status` – Check overall vesting and minting status
+    - `get-owner` – Get the owner of the vesting contract
+    - `setup-finalize` – Setup vesting schedules and finalize minting
+  - Usage: `npx hardhat run scripts/vesting-manager.ts --network base <command>`
 
-#### Status & Monitoring
-- **`status.ts`** – Comprehensive ecosystem status check  
-  - Replaces: `quick_status.ts`, `final_status.ts`, `deep_status.ts`, `current_deployment_status.ts`
-  - Usage:  
-    `npx hardhat run scripts/status.ts --network base`
+### LP Compatibility Management
+- **`lp-manager.ts`** – Uniswap V4 LP compatibility operations
+  - Commands:
+    - `check` – Check LP compatibility status
+    - `configure` – Configure for LP compatibility
+    - `revert` – Revert LP compatibility changes
+  - Usage: `npx hardhat run scripts/lp-manager.ts --network base <command>`
 
-#### Deployment Management
-- **`deploy.ts`** – Consolidated component deployment  
-  - Replaces: `deploy_dutch_auction.ts`, `EMERGENCY_deploy_dutch_auction.ts`, `EMERGENCY_deploy_smart_airdrop.ts`
-  - Usage:  
-    - `npx hardhat run scripts/deploy.ts --network base auction`
-    - `npx hardhat run scripts/deploy.ts --network base airdrop --dry-run`
-    - `npx hardhat run scripts/deploy.ts --network base all`
+### Deployment Management
+- **`deployment-manager.ts`** – Component deployment operations
+  - Commands:
+    - `infrastructure` – Deploy vesting, airdrop, and hook contracts
+    - `token` – Deploy the ARCx V2 Enhanced token
+  - Usage: `npx hardhat run scripts/deployment-manager.ts --network base <command>`
 
-#### Liquidity Management
-- **`liquidity.ts`** – Complete V4 liquidity operations  
-  - Replaces: `add_v4_liquidity.ts`, `provide_liquidity.ts`, `create_v4_liquidity_pool.ts`, `setup_uniswap_v4_pool.ts`, `initialize_v4_pool.ts`, `safe_lp_transaction.ts`
-  - Usage:  
-    - `npx hardhat run scripts/liquidity.ts --network base status`
-    - `npx hardhat run scripts/liquidity.ts --network base setup --dry-run`
-    - `npx hardhat run scripts/liquidity.ts --network base add`
+## Utility Scripts
 
-#### Core Deployment Scripts (Kept as-is)
-- **`01_validate_deployment_readiness.ts`** – Pre-deployment validation
-- **`02_deploy_arcx.ts`** – ARCx token deployment
-- **`03_deploy_vesting.ts`** – Vesting contract deployment
+### Blockscout Agent
+- **`blockscout-agent.ts`** – Reconstruct holders and verify supply
+  - Usage: `npx hardhat run scripts/blockscout-agent.ts --network base`
 
-#### Orchestration Scripts (Kept as-is)
-- **`98_orchestrate_full_deployment.ts`** – Full system deployment
-- **`99_orchestrate_lp_deployment.ts`** – LP deployment orchestration
+### Address Type Checker
+- **`check-address-type.ts`** – Check if an address is a contract or EOA
+  - Usage: `npx hardhat run scripts/check-address-type.ts --network base`
 
-### Shared Infrastructure
+### Token Distribution
+- **`distribute-tokens.ts`** – Distribute tokens
+  - Usage: `npx hardhat run scripts/distribute-tokens.ts --network base`
 
-#### `shared/constants.ts`
-Centralized contract addresses, amounts, and configuration:
-```typescript
-export const CONTRACTS = {
-  ARCX_TOKEN: "0xA4093669DAFbD123E37d52e0939b3aB3C2272f44",
-  DUTCH_AUCTION: "0x5Da5F567553C8D4F12542Ba608F41626f77Aa836",
-  // ... all addresses
-}
-```
+### Admin Finder
+- **`find-admins.ts`** – Find admin addresses
+  - Usage: `npx hardhat run scripts/find-admins.ts --network base`
+
+### Health Check
+- **`health-check.ts`** – Perform health checks
+  - Usage: `npx hardhat run scripts/health-check.ts --network base`
+
+### Token Balance Scanner
+- **`scan-token-balances.ts`** – Scan token balances
+  - Usage: `npx hardhat run scripts/scan-token-balances.ts --network base`
+
+## Shared Infrastructure
+
+- **`shared/`** – Shared utilities and constants
+
+## Environment Variables
+
+Set these environment variables as needed:
+
+- `ARCX_TOKEN_ADDRESS` – ARCx token address
+- `UNISWAP_V4_POOL_MANAGER` – Uniswap V4 pool manager address
+- `ARCX_HOOK_ADDRESS` – ARCx hook address
+- `UNISWAP_V4_POOL_ADDRESS` – Uniswap V4 pool address (optional)
+
+## Notes
+
+- All scripts use Hardhat and ethers v6
+- Scripts are designed to be run on Base mainnet
+- Ensure proper network configuration in hardhat.config.ts
+- Some scripts require ADMIN_ROLE for execution
 
 #### `shared/utils.ts`
 Common utilities and functions:
