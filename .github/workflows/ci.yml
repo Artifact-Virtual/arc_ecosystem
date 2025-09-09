@@ -14,8 +14,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: npm
+      - name: Ensure test-results directory exists
+        run: mkdir -p test-results
       - name: Install deps
-        run: npm ci
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci;
+          else
+            echo "No package-lock.json found; falling back to 'npm install'";
+            npm install;
+          fi
+      - name: Security audit (fail on high/critical)
+        run: npm audit --audit-level=high || (echo "Security audit found issues" && exit 1)
       - name: Compile
         run: npx hardhat compile
       - name: Run unit tests
@@ -26,6 +37,12 @@ jobs:
         uses: docker://trailofbits/slither
         with:
           args: slither . --exclude-dependencies --exclude-informational --fail-high
+      - name: Upload npm debug logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-debug-logs
+          path: /home/runner/.npm/_logs/
       - name: Upload coverage artifact
         if: always()
         uses: actions/upload-artifact@v4
