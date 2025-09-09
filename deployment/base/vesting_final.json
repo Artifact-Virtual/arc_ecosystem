@@ -3,37 +3,11 @@
 	"chainId": "8453",
 	"createdAt": 1757281200000,
 	"meta": {
-		"name": "ARCx V2 – Vesting Finalization (run from DEPLOYER owner)",
-		"description": "Single authoritative batch: recover tokens from vesting to current owner, approve vesting, create two schedules, then transfer vesting ownership to Treasury Safe.",
+		"name": "ARCx V2 – Vesting Schedule Creation (run from Treasury Safe)",
+		"description": "Create vesting schedules only - ownership is already with Treasury Safe.",
 		"txBuilderVersion": "1.16.6"
 	},
 	"transactions": [
-		{
-			"to": "0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600",
-			"value": "0",
-			"operation": 0,
-			"contractMethod": {
-				"name": "setEmergencyMode",
-				"payable": false,
-				"inputs": [
-					{ "name": "_emergencyMode", "type": "bool" }
-				]
-			},
-			"contractInputsValues": {
-				"_emergencyMode": true
-			}
-		},
-		{
-			"to": "0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600",
-			"value": "0",
-			"operation": 0,
-			"contractMethod": {
-				"name": "emergencyWithdraw",
-				"payable": false,
-				"inputs": []
-			},
-			"contractInputsValues": {}
-		},
 		{
 			"to": "0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437",
 			"value": "0",
@@ -103,36 +77,6 @@
 				"penaltyRate": "2500",
 				"role": "ECOSYSTEM",
 				"governanceEnabled": true
-			}
-		},
-				{
-					"to": "0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600",
-					"value": "0",
-					"operation": 0,
-					"contractMethod": {
-						"name": "setEmergencyMode",
-						"payable": false,
-						"inputs": [
-							{ "name": "_emergencyMode", "type": "bool" }
-						]
-					},
-					"contractInputsValues": {
-						"_emergencyMode": false
-					}
-				},
-		{
-			"to": "0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600",
-			"value": "0",
-			"operation": 0,
-			"contractMethod": {
-				"name": "transferOwnership",
-				"payable": false,
-				"inputs": [
-					{ "name": "newOwner", "type": "address" }
-				]
-			},
-			"contractInputsValues": {
-				"newOwner": "0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38"
 			}
 		}
 	]
