@@ -123,27 +123,29 @@ async function main() {
     const i = argv.findIndex((a) => a === `--${n}`);
     return i >= 0 ? argv[i + 1] : undefined;
   };
-  const token = getFlag("token");
+  const token = getFlag("token") || process.env.TOKEN || process.env.token;
   if (!token) {
-    console.error("--token <tokenAddress> is required");
+    console.error("--token <tokenAddress> is required (or set TOKEN env var)");
     process.exit(1);
   }
   const apiUrl = getFlag("apiUrl");
-  const apikey = getFlag("apiKey");
-  const topN = Number(getFlag("top") || "20");
-  const startBlock = getFlag("startBlock") ? Number(getFlag("startBlock")) : undefined;
-  const endBlock = getFlag("endBlock") ? Number(getFlag("endBlock")) : undefined;
+  const apikey = getFlag("apiKey") || process.env.API_KEY || process.env.apiKey;
+  const apiUrlEnv = process.env.API_URL || process.env.apiURL || process.env.EXPLORER_API;
+  const apiUrlFinal = apiUrl || apiUrlEnv;
+  const topN = Number(getFlag("top") || process.env.TOP || "20");
+  const startBlock = getFlag("startBlock") ? Number(getFlag("startBlock")) : process.env.START_BLOCK ? Number(process.env.START_BLOCK) : undefined;
+  const endBlock = getFlag("endBlock") ? Number(getFlag("endBlock")) : process.env.END_BLOCK ? Number(process.env.END_BLOCK) : undefined;
 
   let balances: BigMap | null = null;
 
-  if (apiUrl) {
+  if (apiUrlFinal) {
     try {
-      console.log(`Querying explorer API ${apiUrl} for token transfers (this may page)`);
+      console.log(`Querying explorer API ${apiUrlFinal} for token transfers (this may page)`);
       const pageSize = 10000;
       let page = 1;
       const allTxs: any[] = [];
       while (true) {
-        const txs = await fetchExplorerTokenTxs(apiUrl, token, page, pageSize, apikey);
+        const txs = await fetchExplorerTokenTxs(apiUrlFinal, token, page, pageSize, apikey);
         if (!txs || txs.length === 0) break;
         allTxs.push(...txs);
         if (txs.length < pageSize) break;
