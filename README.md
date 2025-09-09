@@ -1,18 +1,24 @@
-# THE**ARC**
+# THE|**ARC**
+
+![LEGENDARY](https://img.shields.io/badge/LEGENDARY-6A00FF?style=for-the-badge&labelColor=0D1117)
+[![License: MIT](https://img.shields.io/badge/License-MIT-00C853?style=for-the-badge&labelColor=0D1117&logo=opensourceinitiative&logoColor=white)](#license)
+[![Last Commit](https://img.shields.io/github/last-commit/ARTIFACT-VIRTUAL/arc_ecosystem?branch=main&style=for-the-badge&logo=github&labelColor=0D1117&color=6A00FF)](https://github.com/ARTIFACT-VIRTUAL/arc_ecosystem/commits/main)
+
+
 
 > Ecosystem Repository
 
 A comprehensive decentralized autonomous organization (DAO) and governance system for the ARC ecosystem, featuring multiple voting mechanisms, secure timelock controls, modular contract architecture, and the ARCx V2 Enhanced token live on Base L2.
 
-[![Base L2](https://img.shields.io/badge/Base-L2%20LIVE-0052FF?style=flat-square&logo=ethereum&logoColor=white)](https://base.org/)
-[![Solidity](https://img.shields.io/badge/Solidity-0.8.21-363636?style=flat-square&logo=solidity&logoColor=white)](https://docs.soliditylang.org/)
-[![OpenZeppelin](https://img.shields.io/badge/OpenZeppelin-Upgradeable-205081?style=flat-square&logo=openzeppelin&logoColor=white)](https://openzeppelin.com/)
-[![Ethers.js](https://img.shields.io/badge/Ethers.js-6.x-3C3C3D?style=flat-square&logo=ethereum&logoColor=white)](https://docs.ethers.org/v6/)
-[![Hardhat](https://img.shields.io/badge/Hardhat-2.26.x-ff8c00?style=flat-square&logo=hardhat&logoColor=white)](https://hardhat.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-18.x-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
-[![Uniswap](https://img.shields.io/badge/Uniswap-V4-FF007A?style=flat-square&logo=uniswap&logoColor=white)](https://app.uniswap.org/)
-[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square&logo=github&logoColor=white)](#license)
+
+[![Solidity](https://img.shields.io/badge/Solidity-0.8.21-363636?style=flat-square&logo=solidity&logoColor=white)](https://docs.soliditylang.org/)  
+[![OpenZeppelin](https://img.shields.io/badge/OpenZeppelin-Upgradeable-205081?style=flat-square&logo=openzeppelin&logoColor=white)](https://openzeppelin.com/)  
+[![Ethers.js](https://img.shields.io/badge/Ethers.js-6.x-3C3C3D?style=flat-square&logo=ethereum&logoColor=white)](https://docs.ethers.org/v6/)  
+[![Hardhat](https://img.shields.io/badge/Hardhat-2.26.x-ff8c00?style=flat-square&logo=hardhat&logoColor=white)](https://hardhat.org/)  
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)  
+[![Node.js](https://img.shields.io/badge/Node.js-18.x-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)  
+[![Uniswap](https://img.shields.io/badge/Uniswap-V4-FF007A?style=flat-square&logo=uniswap&logoColor=white)](https://app.uniswap.org/)  
+
 
 ## Overview
 
