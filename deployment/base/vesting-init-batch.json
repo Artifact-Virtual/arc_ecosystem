@@ -3,8 +3,8 @@
   "chainId": "8453",
   "createdAt": 1757280000000,
   "meta": {
-    "name": "ARCx V2 – Initialize Vesting (Treasury + Ecosystem)",
-    "description": "Batch: Approve ARCX2 to Vesting + create schedules for Treasury and Ecosystem safes.",
+    "name": "ARCx V2 – Initialize Vesting (All to Treasury Safe)",
+    "description": "Batch: Approve ARCX2 to Vesting + create two schedules, both releasing to the Treasury Safe.",
     "txBuilderVersion": "1.16.6"
   },
   "transactions": [
@@ -70,7 +70,7 @@
         ]
       },
       "contractInputsValues": {
-        "beneficiary": "0x2ebCb38562051b02dae9cAca5ed8Ddb353d225eb",
+        "beneficiary": "0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38",
         "totalAmount": "149850000000000000000000",
         "cliffDuration": "15552000",
         "duration": "124416000",
