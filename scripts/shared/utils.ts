@@ -87,7 +87,68 @@ export async function validateNetwork(): Promise<ValidationResult> {
  * Get token contract with standard ERC20 interface
  */
 export async function getTokenContract(address: string) {
-  return await ethers.getContractAt("ARCxToken", address);
+  // ARCx V2 Enhanced actual contract name
+  return await ethers.getContractAt("ARCxV2Enhanced", address);
+}
+
+/**
+ * Get vesting and airdrop contracts with proper names
+ */
+export async function getVestingContract(address: string) {
+  return await ethers.getContractAt("ARCxVestingContract", address);
+}
+
+export async function getAirdropContract(address: string) {
+  return await ethers.getContractAt("ARCxAirdropContract", address);
+}
+
+/**
+ * Simple owner() fetcher for Ownable contracts
+ */
+export async function getOwner(address: string): Promise<string | null> {
+  try {
+    const ownable = new ethers.Contract(address, ["function owner() view returns (address)"], ethers.provider);
+    return await ownable.owner();
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * AccessControl role checks for ARCxV2Enhanced
+ */
+export async function getRoleHolders(tokenAddress: string) {
+  const token = await getTokenContract(tokenAddress);
+  const ADMIN_ROLE = await token.ADMIN_ROLE();
+  const UPGRADER_ROLE = await token.UPGRADER_ROLE();
+  const DEFAULT_ADMIN_ROLE = ethers.ZeroHash;
+
+  const roles: Record<string, string[]> = {
+    ADMIN_ROLE: [],
+    UPGRADER_ROLE: [],
+    DEFAULT_ADMIN_ROLE: [],
+  };
+
+  // Probe known addresses
+  const candidates = [
+    CONTRACTS.TREASURY_SAFE,
+    CONTRACTS.ECOSYSTEM_SAFE,
+    CONTRACTS.DEPLOYER,
+  ];
+
+  for (const addr of candidates) {
+    try {
+      if (await token.hasRole(ADMIN_ROLE, addr)) roles.ADMIN_ROLE.push(addr);
+    } catch {}
+    try {
+      if (await token.hasRole(UPGRADER_ROLE, addr)) roles.UPGRADER_ROLE.push(addr);
+    } catch {}
+    try {
+      if (await token.hasRole(DEFAULT_ADMIN_ROLE, addr)) roles.DEFAULT_ADMIN_ROLE.push(addr);
+    } catch {}
+  }
+
+  return roles;
 }
 
 /**

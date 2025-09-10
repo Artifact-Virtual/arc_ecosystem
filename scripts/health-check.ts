@@ -4,13 +4,17 @@
 
 import { ethers } from "hardhat";
 import { CONTRACTS, AMOUNTS, NETWORK } from "./shared/constants";
-import { 
-  displayScriptHeader, 
+import {
+  displayScriptHeader,
   getTokenContract,
   safeContractCall,
   formatTimestamp,
   formatTimeRemaining,
-  isContractDeployed 
+  isContractDeployed,
+  getAirdropContract,
+  getVestingContract,
+  getOwner,
+  getRoleHolders,
 } from "./shared/utils";
 
 interface HealthStatus {
@@ -93,7 +97,7 @@ class ARCxHealthMonitor {
       const totalSupply = await safeContractCall(() => token.totalSupply(), "Failed to get total supply");
       const maxSupply = await safeContractCall(() => token.MAX_SUPPLY(), "Failed to get max supply");
       const paused = await safeContractCall(() => token.paused(), "Failed to get pause status");
-      const mintingFinalized = await safeContractCall(() => token.mintingFinalized(), "Failed to get minting status");
+  const roles = await getRoleHolders(CONTRACTS.ARCX_TOKEN);
       
       const issues: string[] = [];
       let status: "HEALTHY" | "WARNING" | "CRITICAL" = "HEALTHY";
@@ -117,7 +121,9 @@ class ARCxHealthMonitor {
       console.log(`✅ Total Supply: ${totalSupply ? ethers.formatEther(totalSupply) : 'Unknown'} ARCx`);
       console.log(`✅ Max Supply: ${maxSupply ? ethers.formatEther(maxSupply) : 'Unknown'} ARCx`);
       console.log(`${paused ? '⚠️' : '✅'} Paused: ${paused ? 'YES' : 'NO'}`);
-      console.log(`${mintingFinalized ? '✅' : '⚠️'} Minting Finalized: ${mintingFinalized ? 'YES' : 'NO'}`);
+  console.log(`✅ ADMIN_ROLE: ${roles.ADMIN_ROLE.join(', ') || 'None (known set)'}`);
+  console.log(`✅ UPGRADER_ROLE: ${roles.UPGRADER_ROLE.join(', ') || 'None (known set)'}`);
+  console.log(`✅ DEFAULT_ADMIN_ROLE: ${roles.DEFAULT_ADMIN_ROLE.join(', ') || 'None (known set)'}`);
       
       this.contractStatuses.push({
         name: "ARCx Token",
@@ -126,7 +132,7 @@ class ARCxHealthMonitor {
         ethBalance: ethers.formatEther(contractBalance),
         status: status,
         issues: issues,
-        data: { name, symbol, totalSupply, maxSupply, paused, mintingFinalized }
+  data: { name, symbol, totalSupply, maxSupply, paused, roles }
       });
       
       this.addHealthCheck("Token Contract", status, 
@@ -236,40 +242,30 @@ class ARCxHealthMonitor {
         return;
       }
       
-      const airdrop = await ethers.getContractAt("ARCxSmartAirdrop", CONTRACTS.SMART_AIRDROP);
+  const airdrop = await getAirdropContract(CONTRACTS.SMART_AIRDROP);
       const token = await getTokenContract(CONTRACTS.ARCX_TOKEN);
-      
-      const totalTokens = await safeContractCall(() => airdrop.totalTokens(), "Failed to get total tokens");
-      const claimDeadline = await safeContractCall(() => airdrop.claimDeadline(), "Failed to get claim deadline");
-      const merkleRoot = await safeContractCall(() => airdrop.merkleRoot(), "Failed to get merkle root");
       const tokenBalance = await safeContractCall(() => token.balanceOf(CONTRACTS.SMART_AIRDROP), "Failed to get token balance");
+  const stats = await safeContractCall(() => airdrop.getStats(), "Failed to get stats");
+  const owner = await getOwner(CONTRACTS.SMART_AIRDROP);
+  const emergencyStop = await safeContractCall(() => airdrop.emergencyStop(), "Failed to get emergencyStop");
       
       const issues: string[] = [];
       let status: "HEALTHY" | "WARNING" | "CRITICAL" = "HEALTHY";
       
       // Health analysis
-      const currentTime = Math.floor(Date.now() / 1000);
-      const isExpired = claimDeadline && currentTime > Number(claimDeadline);
-      const isDefaultRoot = merkleRoot === "0x0000000000000000000000000000000000000000000000000000000000000001";
-      
-      if (isDefaultRoot) {
-        issues.push("Merkle root not set (using default)");
-        status = "WARNING";
-      }
-      
-      if (isExpired) {
-        issues.push("Claim period has expired");
-        status = "WARNING";
-      }
-      
       if (tokenBalance && Number(tokenBalance) === 0) {
         issues.push("No tokens in airdrop contract");
         status = "CRITICAL";
       }
+      if (emergencyStop) {
+        issues.push("Emergency stop is active");
+        status = status === "CRITICAL" ? status : "WARNING";
+      }
       
-      console.log(`✅ Total Tokens: ${totalTokens ? ethers.formatEther(totalTokens) : 'Unknown'} ARCx`);
-      console.log(`${isExpired ? '🔴' : '🟢'} Claim Deadline: ${claimDeadline ? formatTimestamp(Number(claimDeadline)) : 'Unknown'}`);
-      console.log(`${isDefaultRoot ? '🔴' : '🟢'} Merkle Root: ${isDefaultRoot ? 'NOT SET' : 'CONFIGURED'}`);
+      console.log(`✅ Owner: ${owner ?? 'Unknown'}`);
+      console.log(`✅ Rounds: ${stats ? Number(stats.totalRounds) : 'Unknown'}`);
+      console.log(`✅ Total Distributed: ${stats ? ethers.formatEther(stats._totalDistributed) : 'Unknown'} ARCx`);
+      console.log(`✅ Remaining Balance: ${stats ? ethers.formatEther(stats.remainingBalance) : 'Unknown'} ARCx`);
       console.log(`✅ Contract Token Balance: ${tokenBalance ? ethers.formatEther(tokenBalance) : 'Unknown'} ARCx`);
       
       this.contractStatuses.push({
@@ -280,7 +276,7 @@ class ARCxHealthMonitor {
         tokenBalance: tokenBalance ? ethers.formatEther(tokenBalance) : undefined,
         status: status,
         issues: issues,
-        data: { totalTokens, claimDeadline, merkleRoot, isExpired, isDefaultRoot }
+  data: { stats, owner, emergencyStop }
       });
       
       this.addHealthCheck("Smart Airdrop", status, 
@@ -306,45 +302,40 @@ class ARCxHealthMonitor {
         return;
       }
       
-      const vesting = await ethers.getContractAt("ARCxMasterVesting", CONTRACTS.MASTER_VESTING);
+  const vesting = await getVestingContract(CONTRACTS.MASTER_VESTING);
       const token = await getTokenContract(CONTRACTS.ARCX_TOKEN);
       
-      const globalVestingStart = await safeContractCall(() => vesting.globalVestingStart(), "Failed to get vesting start");
-      const contractStats = await safeContractCall(() => vesting.getContractStats(), "Failed to get contract stats");
-      const paused = await safeContractCall(() => vesting.paused(), "Failed to get pause status");
+  const contractStats = await safeContractCall(() => vesting.getContractStats(), "Failed to get contract stats");
+  const emergencyMode = await safeContractCall(() => vesting.emergencyMode(), "Failed to get emergency mode");
       const tokenBalance = await safeContractCall(() => token.balanceOf(CONTRACTS.MASTER_VESTING), "Failed to get token balance");
+  const owner = await getOwner(CONTRACTS.MASTER_VESTING);
       
       const issues: string[] = [];
       let status: "HEALTHY" | "WARNING" | "CRITICAL" = "HEALTHY";
       
       // Health analysis
-      if (paused) {
-        issues.push("Vesting contract is paused");
+      if (emergencyMode) {
+        issues.push("Emergency mode is ON");
         status = "WARNING";
       }
       
       if (contractStats) {
-        const allocated = Number(contractStats.totalAllocated_);
-        const balance = Number(contractStats.contractBalance);
+        const allocated = Number(contractStats._totalAllocated);
         
-        if (allocated > balance && balance > 0) {
-          issues.push("Allocated tokens exceed contract balance");
-          status = "WARNING";
-        }
-        
-        if (allocated > 0 && balance === 0) {
+        if (allocated > 0 && (tokenBalance ? Number(tokenBalance) : 0) === 0) {
           issues.push("Tokens allocated but no balance in contract");
           status = "CRITICAL";
         }
       }
       
-      console.log(`✅ Vesting Start: ${globalVestingStart ? formatTimestamp(Number(globalVestingStart)) : 'Unknown'}`);
-      console.log(`${paused ? '⚠️' : '✅'} Paused: ${paused ? 'YES' : 'NO'}`);
+      console.log(`✅ Owner: ${owner ?? 'Unknown'}`);
+      console.log(`${emergencyMode ? '⚠️' : '✅'} Emergency Mode: ${emergencyMode ? 'ON' : 'OFF'}`);
       
       if (contractStats) {
-        console.log(`✅ Total Allocated: ${ethers.formatEther(contractStats.totalAllocated_)} ARCx`);
-        console.log(`✅ Total Released: ${ethers.formatEther(contractStats.totalReleased_)} ARCx`);
-        console.log(`✅ Contract Balance: ${ethers.formatEther(contractStats.contractBalance)} ARCx`);
+        console.log(`✅ Total Allocated: ${ethers.formatEther(contractStats._totalAllocated)} ARCx`);
+        console.log(`✅ Total Claimed: ${ethers.formatEther(contractStats._totalClaimed)} ARCx`);
+        console.log(`✅ Total Remaining: ${ethers.formatEther(contractStats._totalRemaining)} ARCx`);
+        console.log(`✅ Active Beneficiaries: ${contractStats._activeBeneficiaries}`);
       }
       
       this.contractStatuses.push({
@@ -352,10 +343,10 @@ class ARCxHealthMonitor {
         address: CONTRACTS.MASTER_VESTING,
         isDeployed: true,
         ethBalance: ethers.formatEther(contractBalance),
-        tokenBalance: contractStats ? ethers.formatEther(contractStats.contractBalance) : undefined,
+        tokenBalance: tokenBalance ? ethers.formatEther(tokenBalance) : undefined,
         status: status,
         issues: issues,
-        data: { globalVestingStart, contractStats, paused }
+        data: { owner, contractStats, emergencyMode }
       });
       
       this.addHealthCheck("Vesting Contract", status, 
@@ -505,9 +496,9 @@ class ARCxHealthMonitor {
       });
     }
     
-    // Check WETH balance
-    const wethBalance = await ethers.provider.getBalance(CONTRACTS.WETH_BASE);
-    console.log(`✅ WETH Contract: ${ethers.formatEther(wethBalance)} ETH`);
+  // WETH deployed check
+  const wethDeployed = await isContractDeployed(CONTRACTS.WETH_BASE);
+  console.log(`${wethDeployed ? '✅' : '❌'} WETH Contract deployed`);
     
     this.addHealthCheck("Liquidity Infrastructure", 
       allHealthy ? "HEALTHY" : "CRITICAL", 
