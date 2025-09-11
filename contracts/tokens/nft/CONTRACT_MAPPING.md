@@ -71,7 +71,7 @@ ModelRegistryUpgradeableSimple
 └── Standalone (simplified model storage)
 ```
 
-## 🎯 NEXT STEPS
+## To Do
 
 1. Fix ModelRegistry compilation error
 2. Add missing `attachTrait` function to EvolvingCompanion
