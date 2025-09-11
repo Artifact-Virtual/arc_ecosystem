@@ -81,4 +81,9 @@ contract TraitVaultUpgradeable is Initializable, ERC1155Upgradeable, AccessContr
         _safeTransferFrom(address(this), msg.sender, traitId, amount, "");
         emit TraitDetached(tokenId, traitId, msg.sender);
     }
+
+    // Override supportsInterface to handle multiple inheritance
+    function supportsInterface(bytes4 interfaceId) public view override(ERC1155Upgradeable, AccessControlUpgradeable) returns (bool) {
+        return super.supportsInterface(interfaceId);
+    }
 }

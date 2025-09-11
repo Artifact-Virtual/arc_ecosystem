@@ -72,8 +72,13 @@ contract EvolvingCompanionUpgradeable is Initializable, ERC721Upgradeable, Acces
     // for UUPS upgrades - admin only
     function _authorizeUpgrade(address newImplementation) internal override onlyRole(DEFAULT_ADMIN_ROLE) {}
 
+    // Override supportsInterface to handle multiple inheritance
+    function supportsInterface(bytes4 interfaceId) public view override(ERC721Upgradeable, AccessControlUpgradeable) returns (bool) {
+        return super.supportsInterface(interfaceId);
+    }
+
     // keep tokenBoundAccount mapping intact on transfer
-    function _afterTokenTransfer(address from, address to, uint256 tokenId) internal override {
-        super._afterTokenTransfer(from, to, tokenId);
+    function _afterTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize) internal override {
+        super._afterTokenTransfer(from, to, tokenId, batchSize);
     }
 }

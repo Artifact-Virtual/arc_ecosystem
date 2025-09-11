@@ -55,6 +55,18 @@ The ARC ecosystem provides a robust framework for decentralized decision-making 
   [![Type](https://img.shields.io/badge/Type-SBT%20(ERC-5192)-795548?style=flat-square)](https://eips.ethereum.org/EIPS/eip-5192)
   [![Solidity](https://img.shields.io/badge/Solidity-0.8.x-363636?style=flat-square&logo=solidity&logoColor=white)](https://docs.soliditylang.org/)
 
+1. **ARC NFT Ecosystem**
+
+   - Status: Production Ready
+   - Features: AI companions, trait system, XP progression, token-bound accounts
+   - Contracts: EvolvingCompanion (ERC721), TraitVault (ERC1155), ModuleMock
+   - Frontend: Next.js 13 with wagmi integration
+
+  ![Status](https://img.shields.io/badge/Status-Ready-00C853?style=flat-square)
+  ![Type](https://img.shields.io/badge/Type-ERC721%20%7C%20ERC1155-FF6B35?style=flat-square)
+  [![Solidity](https://img.shields.io/badge/Solidity-0.8.19-363636?style=flat-square&logo=solidity&logoColor=white)](https://docs.soliditylang.org/)
+  [![Frontend](https://img.shields.io/badge/Frontend-Next.js%2013-000000?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/)
+
 ---
 
 ## Deployed Addresses (Base L2)
@@ -203,9 +215,19 @@ contracts/
 ├── pool/
 ├── thirdparty/
 └── tokens/
+    ├── arc-x/          # ARCX2 token contracts
+    ├── arc-s/          # ARCs token contracts
+    ├── nft/            # NFT ecosystem contracts
+    │   ├── contracts/  # Smart contracts
+    │   ├── scripts/    # Deployment scripts
+    │   ├── test/       # Contract tests
+    │   └── frontend/   # React frontend
+    ├── sbt/            # SoulBound token contracts
+    └── vesting/        # Vesting contracts
 
 scripts/
 └── ...
+```
 
 test/
 └── ...
@@ -227,6 +249,8 @@ test/
 - Address Book (authoritative): `./address.book`
 - Release Notes: `./docs/RELEASE_NOTES.md`
 - Uniswap V4 LP Summary: `./docs/environment/V4_LP_DEPLOYMENT_SUMMARY.md`
+- NFT Ecosystem: `./contracts/tokens/nft/README.md`
+- NFT Frontend: `./contracts/tokens/nft/frontend/README.md`
 - Security: `./docs/SECURITY.md`
 - Full Docs: `./docs/`
 
