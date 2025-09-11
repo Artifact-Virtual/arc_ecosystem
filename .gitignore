@@ -10,6 +10,7 @@ cache/
 typechain-types/
 coverage/
 coverage.json
+alpha/*
 
 # TypeScript
 *.tsbuildinfo
