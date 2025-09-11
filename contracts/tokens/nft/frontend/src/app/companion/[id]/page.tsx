@@ -1,14 +1,16 @@
-import { useRouter } from 'next/router'
+"use client"
+
+import { useParams } from 'next/navigation'
 import CompanionProfile from '../../../components/CompanionProfile'
 
 export default function CompanionPage() {
-  const router = useRouter()
-  const { id } = router.query
+  const params = useParams()
+  const id = params.id as string
 
   const companionContract = "0xYourCompanionContract" // Update with deployed address
   const traitVaultContract = "0xYourTraitVaultContract" // Update with deployed address
 
-  if (!id || Array.isArray(id)) {
+  if (!id) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
         <div className="text-center">

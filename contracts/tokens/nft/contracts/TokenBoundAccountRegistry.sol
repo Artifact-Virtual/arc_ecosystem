@@ -18,7 +18,7 @@ contract TokenBoundAccountRegistry {
         accountImplementation = address(new TokenBoundAccount());
     }
 
-    function createAccount(address tokenContract, uint256 tokenId) external returns (address) {
+    function createAccount(address tokenContract, uint256 tokenId) public returns (address) {
         require(tokenContract != address(0), "Invalid token contract");
         require(tokenId > 0, "Invalid token ID");
 

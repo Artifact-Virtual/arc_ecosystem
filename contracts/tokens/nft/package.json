@@ -12,13 +12,13 @@
     "verify": "hardhat verify"
   },
   "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.2.4",
+    "@nomicfoundation/hardhat-ethers": "^3.0.5",
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
     "chai": "^4.3.7",
     "ethers": "^6.8.0",
     "hardhat": "^2.18.0",
     "@openzeppelin/contracts": "^4.9.3",
     "@openzeppelin/contracts-upgradeable": "^4.9.3",
-    "@openzeppelin/hardhat-upgrades": "^1.30.0",
-    "hardhat-deploy": "^0.12.5"
+    "@openzeppelin/hardhat-upgrades": "^3.0.3"
   }
 }
