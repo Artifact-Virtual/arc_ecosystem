@@ -227,12 +227,59 @@ contracts/
     └── vesting/        # Vesting contracts
 
 scripts/
-└── ...
-```
+├── ecosystem-manager.ts    # Master orchestrator for system health & status
+├── monitor.ts             # Real-time monitoring and reporting
+├── config.ts              # Configuration management and validation
+├── vesting-manager.ts     # Complete vesting schedule management
+├── lp-manager.ts          # Uniswap V4 LP compatibility management
+├── airdrop-manager.ts     # Complete airdrop campaign management
+├── deployment-manager.ts  # Contract deployment orchestration
+├── shared/
+│   ├── constants.ts       # Centralized address and configuration
+│   └── utils.ts           # Common utility functions
+└── README.md              # Comprehensive script documentation
 
 test/
 └── ...
 ```
+
+### Script Architecture
+
+The ARC ecosystem features a comprehensive, streamlined script architecture with proper separation of concerns:
+
+#### Core Management Scripts
+
+- **`ecosystem-manager.ts`** – Master orchestrator for system health checks and status reporting
+- **`monitor.ts`** – Real-time monitoring of token supply, vesting, and liquidity positions
+- **`config.ts`** – Environment and configuration management with validation
+
+#### Specialized Management Scripts
+
+- **`vesting-manager.ts`** – Complete vesting schedule management and beneficiary operations
+- **`lp-manager.ts`** – Uniswap V4 LP compatibility and management
+- **`airdrop-manager.ts`** – Complete airdrop lifecycle from setup to claiming
+- **`deployment-manager.ts`** – Contract deployment orchestration
+
+#### Quick Start Commands
+
+```bash
+# System health check
+npx hardhat run scripts/ecosystem-manager.ts --network base health
+
+# Full monitoring report
+npx hardhat run scripts/monitor.ts --network base report
+
+# Configuration validation
+npx hardhat run scripts/config.ts --network base validate
+
+# Vesting setup
+npx hardhat run scripts/vesting-manager.ts --network base setup-finalize
+
+# LP compatibility check
+npx hardhat run scripts/lp-manager.ts --network base check
+```
+
+For detailed script documentation and usage examples, see: `scripts/README.md`
 
 ---
 

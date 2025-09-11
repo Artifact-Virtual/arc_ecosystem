@@ -1,53 +1,170 @@
-# Script Suite – Consolidated Architecture
+# Script Suite – Comprehensive ARC Ecosystem Management
 
-This directory contains the streamlined script architecture for the ARCx ecosystem, designed to reduce redundancy and improve maintainability.
+This directory contains a streamlined, comprehensive script architecture for the ARCx ecosystem, designed with proper separation of concerns and conclusive functionality.
 
-## Master Scripts
+## Core Management Scripts
 
-### Vesting Management
-- **`vesting-manager.ts`** – Comprehensive vesting operations
-  - Commands:
-    - `check-beneficiaries` – Check vesting schedules for beneficiaries
-    - `check-treasury` – Check treasury and vesting balances/allowances
-    - `check-status` – Check overall vesting and minting status
-    - `get-owner` – Get the owner of the vesting contract
-    - `setup-finalize` – Setup vesting schedules and finalize minting
-  - Usage: `npx hardhat run scripts/vesting-manager.ts --network base <command>`
+### Ecosystem Manager (`ecosystem-manager.ts`)
 
-### LP Compatibility Management
-- **`lp-manager.ts`** – Uniswap V4 LP compatibility operations
-  - Commands:
-    - `check` – Check LP compatibility status
-    - `configure` – Configure for LP compatibility
-    - `revert` – Revert LP compatibility changes
-  - Usage: `npx hardhat run scripts/lp-manager.ts --network base <command>`
+#### Master orchestrator for the entire ARC ecosystem
 
-### Deployment Management
-- **`deployment-manager.ts`** – Component deployment operations
-  - Commands:
-    - `infrastructure` – Deploy vesting, airdrop, and hook contracts
-    - `token` – Deploy the ARCx V2 Enhanced token
-  - Usage: `npx hardhat run scripts/deployment-manager.ts --network base <command>`
+- Commands:
+  - `health` – Comprehensive system health check
+  - `status` – System status overview
+  - `addresses` – Display all contract addresses
+- Usage: `npx hardhat run scripts/ecosystem-manager.ts --network base <command>`
 
-## Utility Scripts
+### Monitor (`monitor.ts`)
 
-### Blockscout Agent
-- **`blockscout-agent.ts`** – Reconstruct holders and verify supply
-  - Usage: `npx hardhat run scripts/blockscout-agent.ts --network base`
+#### Real-time monitoring and reporting system
 
-### Address Type Checker
-- **`check-address-type.ts`** – Check if an address is a contract or EOA
-  - Usage: `npx hardhat run scripts/check-address-type.ts --network base`
+- Commands:
+  - `report` – Generate full monitoring report
+  - `supply` – Monitor token supply and holders
+  - `vesting` – Monitor vesting schedules
+  - `liquidity` – Monitor liquidity position
+  - `health` – Monitor system health
+- Usage: `npx hardhat run scripts/monitor.ts --network base <command>`
 
-### Token Distribution
-- **`distribute-tokens.ts`** – Distribute tokens
-  - Usage: `npx hardhat run scripts/distribute-tokens.ts --network base`
+### Configuration Manager (`config.ts`)
 
-### Admin Finder
-- **`find-admins.ts`** – Find admin addresses
-  - Usage: `npx hardhat run scripts/find-admins.ts --network base`
+#### Environment and configuration management
 
-### Health Check
+- Commands:
+  - `show` – Display current configuration
+  - `validate` – Validate contract deployments
+  - `env` – Generate .env.example file
+  - `update` – Update constants file with current addresses
+- Usage: `npx hardhat run scripts/config.ts --network base <command>`
+
+## Specialized Management Scripts
+
+### Vesting Manager (`vesting-manager.ts`)
+
+#### Complete vesting schedule management
+
+- Commands:
+  - `check-beneficiaries` – Check vesting schedules for beneficiaries
+  - `check-treasury` – Check treasury and vesting balances/allowances
+  - `check-status` – Check overall vesting and minting status
+  - `get-owner` – Get the owner of the vesting contract
+  - `setup-finalize` – Setup vesting schedules and finalize minting
+- Usage: `npx hardhat run scripts/vesting-manager.ts --network base <command>`
+
+### LP Manager (`lp-manager.ts`)
+
+#### Uniswap V4 LP compatibility and management
+
+- Commands:
+  - `check` – Check LP compatibility status
+  - `configure` – Configure for LP compatibility
+  - `revert` – Revert LP compatibility changes
+- Usage: `npx hardhat run scripts/lp-manager.ts --network base <command>`
+
+### Airdrop Manager (`airdrop-manager.ts`)
+
+#### Complete airdrop campaign management
+
+- Commands:
+  - `status` – Check airdrop status
+  - `setup` – Setup airdrop (owner only)
+  - `claim` – Claim airdrop tokens
+  - `withdraw` – Emergency withdraw (owner only)
+  - `merkle` – Generate merkle tree
+- Usage: `npx hardhat run scripts/airdrop-manager.ts --network base <command>`
+
+### Deployment Manager (`deployment-manager.ts`)
+
+#### Contract deployment orchestration
+
+- Commands:
+  - `infrastructure` – Deploy vesting, airdrop, and hook contracts
+  - `token` – Deploy the ARCx V2 Enhanced token
+- Usage: `npx hardhat run scripts/deployment-manager.ts --network base <command>`
+
+## Shared Resources
+
+### Constants (`shared/constants.ts`)
+
+Centralized address and configuration management
+
+### Utils (`shared/utils.ts`)
+
+Common utility functions and helpers
+
+## Quick Start Commands
+
+### System Health Check
+
+```bash
+npx hardhat run scripts/ecosystem-manager.ts --network base health
+```
+
+### Full Monitoring Report
+
+```bash
+npx hardhat run scripts/monitor.ts --network base report
+```
+
+### Configuration Validation
+
+```bash
+npx hardhat run scripts/config.ts --network base validate
+```
+
+### Vesting Setup
+
+```bash
+npx hardhat run scripts/vesting-manager.ts --network base setup-finalize
+```
+
+### LP Compatibility Check
+
+```bash
+npx hardhat run scripts/lp-manager.ts --network base check
+```
+
+## Environment Variables
+
+Required environment variables for full functionality:
+
+```bash
+# Core Contracts
+ARCX_TOKEN_ADDRESS=0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437
+VESTING_CONTRACT_ADDRESS=0x0bBf1fFda16C2d9833a972b0E9dE535Cf398B600
+AIRDROP_CONTRACT_ADDRESS=0x40fe447cf4B2af7aa41694a568d84F1065620298
+UNISWAP_HOOK_ADDRESS=0xBCc34Ad1bC78c71E86A04814e69F9Cc26A456aE0
+
+# Governance & Security
+TREASURY_SAFE_ADDRESS=0x8F8fdBFa1AF9f53973a7003CbF26D854De9b2f38
+ECOSYSTEM_SAFE_ADDRESS=0x2ebCb38562051b02dae9cAca5ed8Ddb353d225eb
+DEPLOYER_WALLET_ADDRESS=0x21E914dFBB137F7fEC896F11bC8BAd6BCCDB147B
+
+# Uniswap V4 Infrastructure
+UNISWAP_V4_POOL_MANAGER=0x498581ff718922c3f8e6a244956af099b2652b2b
+UNISWAP_V4_POSITION_MANAGER=0x7c5f5a4bbd8fd63184577525326123b519429bdc
+UNISWAP_V4_UNIVERSAL_ROUTER=0x6ff5693b99212da76ad316178a184ab56d299b43
+MAIN_LP_POSITION_ID=242940
+
+# Network Configuration
+BASE_RPC_URL=https://mainnet.base.org
+BASE_CHAIN_ID=8453
+```
+
+## Architecture Principles
+
+1. **Separation of Concerns** – Each script handles one major component
+2. **Comprehensive Coverage** – Every aspect of the ecosystem is managed
+3. **Consistent Interface** – All scripts follow the same command pattern
+4. **Error Handling** – Robust error handling and user feedback
+5. **Documentation** – Extensive inline documentation and usage examples
+
+## Maintenance
+
+- Run `npx hardhat run scripts/config.ts --network base update` after deployments
+- Use `npx hardhat run scripts/monitor.ts --network base report` for regular health checks
+- Update `shared/constants.ts` when addresses change
+- Generate new `.env.example` with `npx hardhat run scripts/config.ts --network base env`
 - **`health-check.ts`** – Perform health checks
   - Usage: `npx hardhat run scripts/health-check.ts --network base`
 
@@ -119,15 +236,6 @@ npx hardhat run scripts/liquidity.ts --network base setup --dry-run
 npx hardhat run scripts/liquidity.ts --network base add
 ```
 
-### Reverting temporary LP compatibility changes
-
-```bash
-# Revert exemptions and restore default burn settings (PowerShell)
-$env:UNISWAP_V4_POOL_MANAGER="0x498581ff718922c3f8e6a244956af099b2652b2b";
-$env:UNISWAP_V4_POSITION_MANAGER="0x7c5f5a4bbd8fd63184577525326123b519429bdc";
-$env:ARCX_HOOK_ADDRESS="0xBCc34Ad1bC78c71E86A04814e69F9Cc26A456aE0";
-npx hardhat run scripts/revert-lp-compat.ts --network base
-```
 
 ## Migration from Old Scripts
 
