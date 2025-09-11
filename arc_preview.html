@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ARC Ecosystem — Stakeholder Brief</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Core variables */
+    :root {
+      --bg: #0a0a0a;
+      --panel: #1e1e1e;
+      --muted: #888888;
+      --text: #e0e0e0;
+      --accent: #00ffff; /* A vibrant electric blue */
+      --accent-muted: #007777;
+      --border: #2c2c2c;
+      --radius: 8px;
+    }
+
+    /* Reset & typography */
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+      font-weight: 200; /* Ultra-light for a clean, minimalist feel */
+      letter-spacing: 0;
+      padding: 48px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    /* Layout shell */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      position: relative;
+      z-index: 2;
+    }
+
+    header {
+      margin-bottom: 28px;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: 0.5px;
+    }
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 26px;
+      align-items: start;
+    }
+
+    /* Main card style */
+    .card {
+      background-color: var(--panel);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      padding: 24px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    /* Content specifics */
+    .hero {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .hero .left {
+      flex: 1;
+    }
+    .kpis {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .kpi {
+      background-color: #2a2a2a;
+      border-radius: 6px;
+      padding: 12px 14px;
+      min-width: 130px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border: 1px solid #333;
+    }
+    .kpi .label {
+      font-size: 12px;
+      color: var(--accent-muted);
+      font-weight: 300;
+    }
+    .kpi .value {
+      font-size: 16px;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    h2.section-title {
+      margin: 0 0 12px 0;
+      font-size: 18px;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+    p, li {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0;
+      font-weight: 300;
+    }
+    ul {
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    /* Right column */
+    .side {
+      position: sticky;
+      top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    /* Cards layout within main column */
+    .section {
+      margin-bottom: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .address, .architecture, .distribution {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    code {
+      background-color: #2c2c2c;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #9a9a9a;
+      font-weight: 300;
+    }
+
+    /* Roadmap timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .milestone {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      border-left: 2px solid var(--accent-muted);
+      padding-left: 12px;
+      margin-left: 5px;
+    }
+    .milestone:last-child {
+      border-left: none;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex: 0 0 10px;
+      margin-left: -19px;
+      box-shadow: 0 0 10px var(--accent);
+    }
+    .milestone .meta {
+      display: flex;
+      flex-direction: column;
+    }
+    .milestone .meta .m-title {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 400;
+    }
+    .milestone .meta .m-desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Tables-like address list */
+    .addr-list {
+      display: grid;
+      gap: 8px;
+    }
+    .addr-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-radius: 6px;
+      background-color: #2a2a2a;
+      font-weight: 300;
+      color: var(--text);
+      transition: background-color 0.2s ease-in-out;
+    }
+    .addr-item:hover {
+      background-color: #383838;
+      cursor: pointer;
+    }
+    .addr-item span {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .addr-item code {
+      background: transparent;
+      padding: 0;
+      font-size: 12px;
+      color: var(--text);
+    }
+
+    /* Incentives & engagement */
+    .incentives {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .incentive {
+      padding: 16px;
+      border-radius: 8px;
+      background-color: #2a2a2a;
+      border: 1px solid #333;
+    }
+    .incentive h3 {
+      margin: 0;
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 400;
+    }
+    .incentive p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-weight: 300;
+      font-size: 13px;
+    }
+
+    footer {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 980px) {
+      body {
+        padding: 20px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .side {
+        position: static;
+      }
+      .incentives {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <h1>THE|ARC</h1>
+        <p class="subtitle">Concise, factual, and decision-focused overview of operations and functions for governance</p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- MAIN COLUMN -->
+      <main class="card" role="main" aria-labelledby="overview-title">
+        <section class="hero">
+          <div class="left">
+            <h2 id="overview-title" class="section-title">Overview</h2>
+            <p>The ARC ecosystem is a modular governance and DeFi framework with live token infrastructure on Base L2 and a production-ready NFT subsystem. This brief highlights status, key metrics, security posture, roadmap, and stakeholder engagement levers designed to support informed decisions.</p>
+            <div class="kpis" aria-hidden="false">
+              <div class="kpi">
+                <div class="label">Max Supply</div>
+                <div class="value">100,000,000</div>
+              </div>
+              <div class="kpi">
+                <div class="label">Total Supply</div>
+                <div class="value">1,000,000</div>
+              </div>
+              <div class="kpi">
+                <div class="label">Live Network</div>
+                <div class="value">Base L2 (Chain ID: 8453)</div>
+              </div>
+              <div class="kpi">
+                <div class="label">LP Seeded</div>
+                <div class="value">500,000 ARCX2 (50%)</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section card" aria-labelledby="scale-title">
+          <h2 id="scale-title" class="section-title">Project Scope & Status</h2>
+          <div>
+            <ul>
+              <li><strong>ARCx V2 Enhanced (LIVE):</strong> Contract deployed on Base L2. Address: <code>0xDb3C3f9E…c437</code></li>
+              <li><strong>ARCs:</strong> ERC20 experiments in progress — governance-ready design pending.</li>
+              <li><strong>SoulBound NTT:</strong> Architectural design ready; issuance policy pending from DAO.</li>
+              <li><strong>ARC NFT Ecosystem:</strong> Production-ready features: AI companions, trait system, XP progression, token-bound accounts.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section card" aria-labelledby="architecture-title">
+          <h2 id="architecture-title" class="section-title">Architecture & Core Contracts</h2>
+          <div class="architecture">
+            <p>Primary components and responsibilities (short):</p>
+            <ul>
+              <li><strong>ARCGovernor:</strong> Proposal lifecycle management, multiple voting modes.</li>
+              <li><strong>ARCTimelock:</strong> Secure execution, proposers/executors, emergency controls.</li>
+              <li><strong>ARCTreasury / ARCDAO:</strong> Fund orchestration and coordinated governance actions.</li>
+              <li><strong>NFT Subsystem:</strong> EvolvingCompanion (ERC721), TraitVault (ERC1155), TokenBoundAccount modules.</li>
+            </ul>
+            <p style="margin-top:8px;color:var(--muted)">Design emphasis: modularity, <strong>upgradeability (UUPS)</strong>, and <strong>role-based access control</strong> for secure evolution.</p>
+          </div>
+        </section>
+
+        <section class="section card" aria-labelledby="distribution-title">
+          <h2 id="distribution-title" class="section-title">Token Distribution & Financial Controls</h2>
+          <div class="distribution">
+            <p>Total supply: <strong>1,000,000 ARCX2</strong></p>
+            <ul>
+              <li>Liquidity Pool — 500,000 (50%)</li>
+              <li>Vesting — 300,000 (30%)</li>
+              <li>Airdrop — 100,000 (10%)</li>
+              <li>Marketing — 100,000 (10%)</li>
+            </ul>
+            <p style="margin-top:8px;color:var(--muted)">Treasury operations are controlled via <strong>multisig safes</strong> and proposal-driven disbursements. Vesting schedules are enforced by on-chain vesting contracts.</p>
+          </div>
+        </section>
+
+        <section class="section card" aria-labelledby="security-title">
+          <h2 id="security-title" class="section-title">Security, Ops & Risk Controls</h2>
+          <ul>
+            <li><strong>Multisig safes</strong> for treasury and ecosystem funds.</li>
+            <li><strong>Role-based AccessControl</strong> for upgrades and emergency operations.</li>
+            <li><strong>Timelock</strong> enforced execution for governance decisions.</li>
+            <li>Audit posture: standardized patterns (OpenZeppelin upgradeable + UUPS) — recommend periodic audits for new modules.</li>
+          </ul>
+
+          <div style="margin-top:12px;">
+            <h3 style="margin:0 0 6px 0;color:var(--text);font-size:13px;font-weight:300">Key Risks (concise)</h3>
+            <ul>
+              <li>Privileged admin keys — mitigated by multisig + timelock but requires ongoing rotation / governance policies.</li>
+              <li>Smart contract bugs in new NFT modules — recommend targeted audits & staged deployments.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section card" aria-labelledby="roadmap-title">
+          <h2 id="roadmap-title" class="section-title">Roadmap (Practical milestones)</h2>
+          <div class="timeline" role="list">
+            <div class="milestone">
+              <div class="dot" aria-hidden="true"></div>
+              <div class="meta">
+                <div class="m-title">Phase 1 — Stabilize Live Token</div>
+                <div class="m-desc">Confirm LP mechanics, monitor on-chain liquidity, finalize treasury policies.</div>
+              </div>
+            </div>
+
+            <div class="milestone">
+              <div class="dot" aria-hidden="true"></div>
+              <div class="meta">
+                <div class="m-title">Phase 2 — Governance Maturation</div>
+                <div class="m-desc">Introduce advanced voting modes, quorum tuning, and proposal templates for treasury ops.</div>
+              </div>
+            </div>
+
+            <div class="milestone">
+              <div class="dot" aria-hidden="true"></div>
+              <div class="meta">
+                <div class="m-title">Phase 3 — NFT Ecosystem Launch</div>
+                <div class="m-desc">Roll out companion NFTs, trait economy, and token-bound modules with staged audits.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section card" aria-labelledby="engage-title">
+          <h2 id="engage-title" class="section-title">Stakeholder Incentives & Engagement</h2>
+
+          <div class="incentives" role="list">
+            <div class="incentive">
+              <h3>Governance Participation</h3>
+              <p>Voting weight and early proposer privileges aligned with token stewardship. Incentivize active delegates via targeted rewards approved by on-chain proposals.</p>
+            </div>
+            <div class="incentive">
+              <h3>Developer Bounties & Audits</h3>
+              <p>Structured bounties for module contributions and a prioritized audit fund to secure new releases. Public bug disclosure and reward process recommended.</p>
+            </div>
+            <div class="incentive">
+              <h3>NFT Ecosystem Engagement</h3>
+              <p>XP progression and trait unlock mechanisms create on-chain incentives for long-term holders and community contributors.</p>
+            </div>
+            <div class="incentive">
+              <h3>Liquidity Stewardship</h3>
+              <p>Transparent LP policy and periodic on-chain reports to align market makers, stakers, and treasury managers.</p>
+            </div>
+          </div>
+        </section>
+
+        <footer>
+          <p>For operations: see <code>./address.book</code> and <code>./docs/</code>. This brief is non-promotional and intended for stakeholders to assess status and next actions.</p>
+        </footer>
+      </main>
+
+      <!-- SIDE COLUMN -->
+      <aside class="side">
+        <div class="card">
+          <h2 class="section-title">Deployed Addresses</h2>
+          <div class="addr-list">
+            <div class="addr-item"><span>ARCx V2 Enhanced</span> <code>0xDb3C3f9E…c437</code></div>
+            <div class="addr-item"><span>ARCxMath Library</span> <code>0xdfB72713…4530</code></div>
+            <div class="addr-item"><span>Vesting Contract</span> <code>0x0bBf1fFd…B600</code></div>
+            <div class="addr-item"><span>Airdrop Contract</span> <code>0x40fe447c…0298</code></div>
+            <div class="addr-item"><span>Treasury Safe</span> <code>0x8F8fdBFa…2f38</code></div>
+            <div class="addr-item"><span>Ecosystem Safe</span> <code>0x2ebCb385…25eb</code></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">Operations Roadmap</h2>
+          <ul id="quick-actions-list" style="margin-top:8px;">
+            <li>Periodic on-chain reports (monthly) — liquidity, treasury flows, and vesting draws.</li>
+            <li>Governance Group Conventions for voting thresholds and proposer incentives.</li>
+            <li>Security Audit for NFT modules before public mint stages.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">Developer Notes</h2>
+          <p style="margin-top:8px;color:var(--muted)">Prereqs: Node 16+, Hardhat 2.26+, OpenZeppelin upgradeable. Recommended CI: automated tests + static analysis + staged deployments to testnets before mainnet changes. ARC is an open-source project, we welcome contirbutions (PR template in repo)</p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <p>&copy; ARC Ecosystem — factual overview. Last updated: 2025.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll('.addr-item code').forEach(el=>{
+      el.style.cursor='copy';
+      el.title = 'Click to copy full address';
+      el.addEventListener('click', (e)=>{
+        try{
+          const textToCopy = el.textContent.replace(/\u2026.*$/,'');
+          
+          // Create a temporary input element
+          const tempInput = document.createElement('textarea');
+          tempInput.value = textToCopy;
+          document.body.appendChild(tempInput);
+          
+          // Select the text and copy
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+
+          // Give visual feedback
+          const prev = el.textContent;
+          el.textContent = 'Copied!';
+          setTimeout(()=> el.textContent = prev, 900);
+        }catch(err){
+          console.error('Failed to copy address:', err);
+          // Fallback for environments where execCommand is also restricted
+          const prev = el.textContent;
+          el.textContent = 'Error!';
+          setTimeout(()=> el.textContent = prev, 900);
+        }
+      });
+    });
+  </script>
+</body>
