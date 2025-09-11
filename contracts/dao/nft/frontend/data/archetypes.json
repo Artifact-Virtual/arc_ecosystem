@@ -1,0 +1,54 @@
+[
+  {
+    "id": "explorer",
+    "name": "Explorer",
+    "image": "/archetypes/explorer.png",
+    "description": "Adventurous and curious, always seeking new discoveries",
+    "baseStats": {
+      "strength": 3,
+      "agility": 5,
+      "intelligence": 4,
+      "charisma": 3
+    },
+    "metadataURI": "ipfs://QmExplorerMetadataHash"
+  },
+  {
+    "id": "healer",
+    "name": "Healer",
+    "image": "/archetypes/healer.png",
+    "description": "Protects and restores others with ancient wisdom",
+    "baseStats": {
+      "strength": 2,
+      "agility": 3,
+      "intelligence": 5,
+      "charisma": 4
+    },
+    "metadataURI": "ipfs://QmHealerMetadataHash"
+  },
+  {
+    "id": "fighter",
+    "name": "Fighter",
+    "image": "/archetypes/fighter.png",
+    "description": "Strong and battle-ready, a formidable warrior",
+    "baseStats": {
+      "strength": 5,
+      "agility": 4,
+      "intelligence": 2,
+      "charisma": 3
+    },
+    "metadataURI": "ipfs://QmFighterMetadataHash"
+  },
+  {
+    "id": "trickster",
+    "name": "Trickster",
+    "image": "/archetypes/trickster.png",
+    "description": "Clever and unpredictable, masters of deception",
+    "baseStats": {
+      "strength": 3,
+      "agility": 5,
+      "intelligence": 4,
+      "charisma": 4
+    },
+    "metadataURI": "ipfs://QmTricksterMetadataHash"
+  }
+]

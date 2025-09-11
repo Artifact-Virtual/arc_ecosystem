@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Fire Wings",
+    "image": "/traits/fire-wings.png",
+    "description": "Grants flight and fire-based attacks",
+    "rarity": "Rare"
+  },
+  {
+    "id": 2,
+    "name": "Healing Aura",
+    "image": "/traits/healing-aura.png",
+    "description": "Restores health to nearby allies",
+    "rarity": "Uncommon"
+  },
+  {
+    "id": 3,
+    "name": "Laser Eyes",
+    "image": "/traits/laser-eyes.png",
+    "description": "Powerful ranged energy attacks",
+    "rarity": "Epic"
+  },
+  {
+    "id": 4,
+    "name": "Crystal Armor",
+    "image": "/traits/crystal-armor.png",
+    "description": "Enhanced defense with reflective properties",
+    "rarity": "Rare"
+  },
+  {
+    "id": 5,
+    "name": "Shadow Cloak",
+    "image": "/traits/shadow-cloak.png",
+    "description": "Grants stealth and darkness manipulation",
+    "rarity": "Uncommon"
+  },
+  {
+    "id": 6,
+    "name": "Thunder Fist",
+    "image": "/traits/thunder-fist.png",
+    "description": "Electrifying melee attacks",
+    "rarity": "Rare"
+  }
+]

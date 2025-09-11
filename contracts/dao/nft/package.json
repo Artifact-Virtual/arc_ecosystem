@@ -1,0 +1,24 @@
+{
+  "name": "evolving-companion",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "hardhat test",
+    "compile": "hardhat compile",
+    "node": "hardhat node",
+    "deploy:local": "hardhat run scripts/deploy_upgradeable.js --network localhost",
+    "start:frontend": "cd frontend && npm run dev",
+    "clean": "hardhat clean",
+    "verify": "hardhat verify"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.4",
+    "chai": "^4.3.7",
+    "ethers": "^6.8.0",
+    "hardhat": "^2.18.0",
+    "@openzeppelin/contracts": "^4.9.3",
+    "@openzeppelin/contracts-upgradeable": "^4.9.3",
+    "@openzeppelin/hardhat-upgrades": "^1.30.0",
+    "hardhat-deploy": "^0.12.5"
+  }
+}
