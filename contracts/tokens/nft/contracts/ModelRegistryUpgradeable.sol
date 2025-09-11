@@ -117,7 +117,7 @@ contract ModelRegistryUpgradeable is OwnableUpgradeable, UUPSUpgradeable, Reentr
         string calldata ipfsHash,
         uint256[] calldata dependencies,
         bytes calldata signature
-    ) external onlyAuthorizedCreator nonReentrant returns (uint256) {
+    ) external onlyAuthorizedCreator returns (uint256) {
         require(bytes(name).length > 0 && bytes(name).length <= MAX_NAME_LENGTH, "Invalid name length");
         require(bytes(description).length <= MAX_DESC_LENGTH, "Description too long");
         require(bytes(ipfsHash).length > 0, "Invalid IPFS hash");
@@ -225,13 +225,14 @@ contract ModelRegistryUpgradeable is OwnableUpgradeable, UUPSUpgradeable, Reentr
     }
 
     // Batch operations
+    /*
     function batchCreateModels(
         string[] calldata names,
         string[] calldata descriptions,
         string[] calldata ipfsHashes,
         uint256[][] calldata dependenciesList,
         bytes[] calldata signatures
-    ) external onlyAuthorizedCreator nonReentrant returns (uint256[] memory) {
+    ) external onlyAuthorizedCreator returns (uint256[] memory) {
         require(
             names.length == descriptions.length &&
             descriptions.length == ipfsHashes.length &&
@@ -255,6 +256,7 @@ contract ModelRegistryUpgradeable is OwnableUpgradeable, UUPSUpgradeable, Reentr
 
         return modelIds;
     }
+    */
 
     // Emergency functions
     function emergencyDeactivateModel(uint256 modelId) external onlyOwner validModel(modelId) {

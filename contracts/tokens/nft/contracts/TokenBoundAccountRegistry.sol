@@ -33,15 +33,6 @@ contract TokenBoundAccountRegistry {
         return address(acct);
     }
 
-    function getAccount(address tokenContract, uint256 tokenId) external view returns (address) {
-        return accountOf[tokenContract][tokenId];
-    }
-
-    // EIP-6551 compatibility: predict account address without deployment
-    function account(address tokenContract, uint256 tokenId) external view returns (address) {
-        return accountOf[tokenContract][tokenId];
-    }
-
     // Batch creation for efficiency
     function createAccounts(address tokenContract, uint256[] calldata tokenIds) external returns (address[] memory) {
         address[] memory accounts = new address[](tokenIds.length);
@@ -49,6 +40,15 @@ contract TokenBoundAccountRegistry {
             accounts[i] = createAccount(tokenContract, tokenIds[i]);
         }
         return accounts;
+    }
+
+    function getAccount(address tokenContract, uint256 tokenId) external view returns (address) {
+        return accountOf[tokenContract][tokenId];
+    }
+
+    // EIP-6551 compatibility: predict account address without deployment
+    function account(address tokenContract, uint256 tokenId) external view returns (address) {
+        return accountOf[tokenContract][tokenId];
     }
 
     // View function to check if account exists
