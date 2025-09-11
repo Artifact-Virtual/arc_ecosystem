@@ -44,12 +44,17 @@ const config: HardhatUserConfig = {
         accountsBalance: "100000000000000000000", // 100 ETH
       },
     },
+    ganache: {
+      url: "http://127.0.0.1:8545",
+      accounts: [`0x${DEPLOYER_PRIVATE_KEY}`],
+      gasPrice: 2000000000,
+    },
     // Ethereum Mainnet
     ...(INFURA_PROJECT_ID && DEPLOYER_PRIVATE_KEY && DEPLOYER_PRIVATE_KEY.length === 64 ? {
       mainnet: {
         url: `https://mainnet.infura.io/v3/${INFURA_PROJECT_ID}`,
         accounts: [`0x${DEPLOYER_PRIVATE_KEY}`],
-        gasPrice: parseInt(GAS_PRICE_MAINNET) * 1000000000, // Convert gwei to wei
+        gasPrice: parseInt(GAS_PRICE_MAINNET) * 2000000000, // Convert gwei to wei
         timeout: 60000,
       }
     } : {}),
@@ -67,7 +72,7 @@ const config: HardhatUserConfig = {
       base: {
         url: `https://base-mainnet.infura.io/v3/${INFURA_PROJECT_ID}`,
         accounts: [`0x${DEPLOYER_PRIVATE_KEY}`],
-        gasPrice: Math.max(parseInt(GAS_PRICE_MAINNET) * 100000000, 50000000), // Minimum 0.05 gwei for Base
+        gasPrice: Math.max(parseInt(GAS_PRICE_MAINNET) * 100000000, 50000000), // Minimum 0.01 gwei for Base
         timeout: 60000,
       }
     } : {}),
