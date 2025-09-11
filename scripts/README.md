@@ -124,6 +124,7 @@ npx hardhat run scripts/liquidity.ts --network base add
 ```bash
 # Revert exemptions and restore default burn settings (PowerShell)
 $env:UNISWAP_V4_POOL_MANAGER="0x498581ff718922c3f8e6a244956af099b2652b2b";
+$env:UNISWAP_V4_POSITION_MANAGER="0x7c5f5a4bbd8fd63184577525326123b519429bdc";
 $env:ARCX_HOOK_ADDRESS="0xBCc34Ad1bC78c71E86A04814e69F9Cc26A456aE0";
 npx hardhat run scripts/revert-lp-compat.ts --network base
 ```

@@ -101,10 +101,11 @@ Note: A Uniswap V4 Hook exists at `0xBCc34Ad1bC78c71E86A04814e69F9Cc26A456aE0`, 
 - Fee Tier: 0.05% (stable pairs)
 - Seeded Liquidity: 500,000 ARCX2 (50% of supply)
 - Pool Manager: `0x498581ff718922c3f8e6a244956af099b2652b2b`
-- Position Manager (NFPM): `0x7c5f5a4bfd8fd63184577525326123b519429bdc`
+- Position Manager (NFPM): `0x7c5f5a4bbd8fd63184577525326123b519429bdc`
 - Universal Router: `0x6ff5693b99212da76ad316178a184ab56d299b43`
+- **Main LP Position**: `242940` - [Uniswap Position](https://app.uniswap.org/positions/v4/base/242940)
 
-Details and historical notes: `docs/environment/V4_LP_DEPLOYMENT_SUMMARY.md` (initial UI-created position referenced; current LP config is as above).
+Details and historical notes: `docs/environment/V4_LP_DEPLOYMENT_SUMMARY.md` (current LP config is as above).
 
 ---
 

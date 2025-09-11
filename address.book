@@ -23,9 +23,10 @@
 - BaseScan: https://basescan.org
 
 ## Uniswap V4 Infrastructure
-- Position Manager: 0x498581fF718922c3f8e6A244956aF099B2652b2b
+- Position Manager (NFPM): 0x7c5f5a4bbd8fd63184577525326123b519429bdc
 - Pool Manager: 0x498581ff718922c3f8e6a244956af099b2652b2b
 - Universal Router: 0x6ff5693b99212da76ad316178a184ab56d299b43
+- Main LP Position: 242940 (https://app.uniswap.org/positions/v4/base/242940)
 
 ## Base Network Tokens
 - WETH (Base): 0x4200000000000000000000000000000000000006
