@@ -1,8 +1,8 @@
 # ARC SoulBound Token (SBT) Contracts
 
-![Status](https://img.shields.io/badge/Status-Prototype-546E7A?style=for-the-badge)  
-[![Type](https://img.shields.io/badge/Type-SBT%20(ERC-5192)-795548?style=flat-square)](https://eips.ethereum.org/EIPS/eip-5192)  
-[![Solidity](https://img.shields.io/badge/Solidity-0.8.x-363636?style=flat-square&logo=solidity&logoColor=white)](https://docs.soliditylang.org/)
+![Status](https://img.shields.io/badge/Status-Prototype-546E7A?style=for-the-badge)
+[![Standard: ERC-5192](https://img.shields.io/badge/Standard-ERC--5192-795548?style=for-the-badge)](https://eips.ethereum.org/EIPS/eip-5192)
+[![Solidity](https://img.shields.io/badge/Solidity-0.8.x-363636?style=for-the-badge&logo=solidity)](https://docs.soliditylang.org/)
 
 ## Overview
 
