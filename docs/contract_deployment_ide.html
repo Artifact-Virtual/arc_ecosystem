@@ -740,10 +740,15 @@ contract CustomGovernor is Governor, GovernorSettings, GovernorCountingSimple, G
             document.getElementById('compileBtn').disabled = true;
             document.getElementById('compileBtn').innerHTML = '<span class="loading-spinner"></span> Compiling...';
 
-            // Simulate compilation (in production, this would call a compiler service)
+            // NOTE: This is a PROTOTYPE implementation using mock compilation
+            // Production version would integrate with:
+            // - Solidity compiler API (solc-js)
+            // - Backend compilation service
+            // - IPFS for contract storage
+            // - Etherscan verification API
             setTimeout(() => {
                 try {
-                    // Mock compilation success
+                    // Mock compilation success (production would return actual ABI and bytecode)
                     compiledContract = {
                         name: 'CustomToken',
                         abi: [],
@@ -811,22 +816,32 @@ contract CustomGovernor is Governor, GovernorSettings, GovernorCountingSimple, G
 
             // Collect constructor parameters
             const params = [];
-            compiledContract.constructorParams.forEach(param => {
-                const value = document.getElementById(`param-${param.name}`).value;
-                if (!value) {
-                    throw new Error(`Missing parameter: ${param.name}`);
-                }
-                params.push(value);
-            });
+            try {
+                compiledContract.constructorParams.forEach(param => {
+                    const value = document.getElementById(`param-${param.name}`).value;
+                    if (!value) {
+                        throw new Error(`Missing parameter: ${param.name}`);
+                    }
+                    params.push(value);
+                });
+            } catch (error) {
+                logToConsole(`Error: ${error.message}`, 'error');
+                return;
+            }
 
             logToConsole('Deploying contract...', 'info');
             logToConsole(`Network: ${document.getElementById('networkSelector').value}`, 'info');
             document.getElementById('deployBtn').disabled = true;
             document.getElementById('deployBtn').innerHTML = '<span class="loading-spinner"></span> Deploying...';
 
-            // Simulate deployment
+            // Simulate deployment (in production, this would call actual deployment service)
             setTimeout(() => {
-                const address = '0x' + Math.random().toString(16).substr(2, 40);
+                // Generate mock address (production would use actual deployed address)
+                const randomValues = new Uint8Array(20);
+                crypto.getRandomValues(randomValues);
+                const address = '0x' + Array.from(randomValues)
+                    .map(b => b.toString(16).padStart(2, '0'))
+                    .join('');
                 const deployment = {
                     name: compiledContract.name,
                     address: address,
@@ -871,7 +886,11 @@ contract CustomGovernor is Governor, GovernorSettings, GovernorCountingSimple, G
         // Switch tabs
         function switchTab(tabName) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
+            const activeTab = Array.from(document.querySelectorAll('.tab'))
+                .find(t => t.dataset.tab === tabName);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
             
             // In production, would switch between editor, compiled output, and deployed contracts
             logToConsole(`Switched to ${tabName} view`, 'info');
