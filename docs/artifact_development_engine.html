@@ -180,6 +180,14 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            display: block;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .dashboard-card:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
         }
 
         .dashboard-card::before {
@@ -470,7 +478,7 @@
         <!-- Main Dashboard Grid -->
         <div class="dashboard-grid">
             <!-- Contract IDE -->
-            <div class="dashboard-card" onclick="window.location.href='contract_deployment_ide.html'">
+            <a href="contract_deployment_ide.html" class="dashboard-card" role="article" aria-label="Contract IDE - Write, compile, and deploy smart contracts">
                 <span class="card-icon">💻</span>
                 <h3 class="card-title">Contract IDE</h3>
                 <p class="card-description">Write, compile, and deploy smart contracts with our Remix-like browser-based IDE.</p>
@@ -480,14 +488,14 @@
                     <li>Multi-network Deployment</li>
                     <li>MetaMask Integration</li>
                 </ul>
-                <a href="contract_deployment_ide.html" class="card-action">
+                <span class="card-action">
                     <span>Launch IDE</span>
                     <span>→</span>
-                </a>
-            </div>
+                </span>
+            </a>
 
             <!-- Token Factory -->
-            <div class="dashboard-card" onclick="window.location.href='contract_deployment_ide.html'">
+            <a href="contract_deployment_ide.html" class="dashboard-card" role="article" aria-label="Token Factory - Create custom ERC20 tokens">
                 <span class="card-icon">🪙</span>
                 <h3 class="card-title">Token Factory</h3>
                 <p class="card-description">Create custom ERC20 tokens with advanced features and tokenomics.</p>
@@ -497,14 +505,14 @@
                     <li>Deflationary Mechanics</li>
                     <li>Upgradeable Patterns</li>
                 </ul>
-                <a href="contract_deployment_ide.html" class="card-action">
+                <span class="card-action">
                     <span>Create Token</span>
                     <span>→</span>
-                </a>
-            </div>
+                </span>
+            </a>
 
             <!-- NFT Studio -->
-            <div class="dashboard-card" onclick="window.location.href='contract_deployment_ide.html'">
+            <a href="../contracts/tokens/nft/README.md" class="dashboard-card" role="article" aria-label="NFT Studio - Design and deploy NFT collections">
                 <span class="card-icon">🖼️</span>
                 <h3 class="card-title">NFT Studio</h3>
                 <p class="card-description">Design and deploy NFT collections with metadata management.</p>
@@ -514,14 +522,14 @@
                     <li>Trait Systems</li>
                     <li>Evolution Mechanics</li>
                 </ul>
-                <a href="../contracts/tokens/nft/README.md" class="card-action">
+                <span class="card-action">
                     <span>Launch Studio</span>
                     <span>→</span>
-                </a>
-            </div>
+                </span>
+            </a>
 
             <!-- SBT Creator -->
-            <div class="dashboard-card" onclick="window.location.href='contract_deployment_ide.html'">
+            <a href="contract_deployment_ide.html" class="dashboard-card" role="article" aria-label="SBT Creator - Build Soulbound Tokens">
                 <span class="card-icon">🎖️</span>
                 <h3 class="card-title">SBT Creator</h3>
                 <p class="card-description">Build Soulbound Tokens for credentials and identity.</p>
@@ -531,14 +539,14 @@
                     <li>Credential Issuance</li>
                     <li>Reputation Systems</li>
                 </ul>
-                <a href="contract_deployment_ide.html" class="card-action">
+                <span class="card-action">
                     <span>Create SBT</span>
                     <span>→</span>
-                </a>
-            </div>
+                </span>
+            </a>
 
             <!-- Governance Builder -->
-            <div class="dashboard-card" onclick="window.location.href='contract_deployment_ide.html'">
+            <a href="../contracts/dao/governance/README.md" class="dashboard-card" role="article" aria-label="Governance Builder - Deploy DAO contracts">
                 <span class="card-icon">🗳️</span>
                 <h3 class="card-title">Governance Builder</h3>
                 <p class="card-description">Deploy DAO contracts with advanced voting mechanisms.</p>
@@ -548,14 +556,14 @@
                     <li>Multi-sig Integration</li>
                     <li>Proposal Management</li>
                 </ul>
-                <a href="../contracts/dao/governance/README.md" class="card-action">
+                <span class="card-action">
                     <span>Build DAO</span>
                     <span>→</span>
-                </a>
-            </div>
+                </span>
+            </a>
 
             <!-- DeFi Tools -->
-            <div class="dashboard-card" onclick="window.location.href='bridge.html'">
+            <a href="bridge.html" class="dashboard-card" role="article" aria-label="DeFi Tools - Access bridges and liquidity tools">
                 <span class="card-icon">💹</span>
                 <h3 class="card-title">DeFi Tools</h3>
                 <p class="card-description">Access bridges, swaps, and liquidity management tools.</p>
@@ -565,11 +573,11 @@
                     <li>LP Management</li>
                     <li>Yield Farming</li>
                 </ul>
-                <a href="bridge.html" class="card-action">
+                <span class="card-action">
                     <span>Access Tools</span>
                     <span>→</span>
-                </a>
-            </div>
+                </span>
+            </a>
         </div>
 
         <!-- Development Zones -->
@@ -657,7 +665,7 @@
                 <span>📖</span>
                 <span>Documentation</span>
             </a>
-            <a href="SECURITY_AUDIT.md" class="quick-action-btn">
+            <a href="../SECURITY_AUDIT.md" class="quick-action-btn">
                 <span>🔐</span>
                 <span>Security Audit</span>
             </a>
