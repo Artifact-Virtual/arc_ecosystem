@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARC Contract Deployment IDE - Write, Compile & Deploy Smart Contracts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #b8002a;
+            --primary-dark: #8a0020;
+            --secondary: #ff3300;
+            --background: #000000;
+            --surface: #0a0a0a;
+            --surface-hover: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+            --danger: #ff0040;
+            --warning: #ff9944;
+            --success: #00ff88;
+        }
+
+        body {
+            font-family: 'Lexend', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-title {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* Editor Container */
+        .editor-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tabs {
+            display: flex;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-right: 1px solid var(--border);
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            background: var(--surface-hover);
+        }
+
+        .tab.active {
+            background: var(--background);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .editor {
+            flex: 1;
+            background: var(--background);
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            padding: 1rem;
+            overflow: auto;
+            resize: none;
+            border: none;
+            color: var(--text);
+        }
+
+        .editor:focus {
+            outline: none;
+        }
+
+        /* Right Panel */
+        .right-panel {
+            width: 400px;
+            background: var(--surface);
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .panel-section {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .panel-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.625rem 1.25rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--surface-hover);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            opacity: 0.9;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.625rem;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            font-size: 0.875rem;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Template Cards */
+        .template-card {
+            padding: 1rem;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .template-card:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        .template-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .template-desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Console */
+        .console {
+            background: var(--background);
+            padding: 1rem;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+            max-height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .console-log {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .console-success {
+            background: rgba(0, 200, 83, 0.1);
+            color: var(--success);
+        }
+
+        .console-error {
+            background: rgba(248, 81, 73, 0.1);
+            color: var(--danger);
+        }
+
+        .console-info {
+            color: var(--text-muted);
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-connected {
+            background: rgba(0, 200, 83, 0.1);
+            color: var(--success);
+        }
+
+        .status-disconnected {
+            background: rgba(248, 81, 73, 0.1);
+            color: var(--danger);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--surface-hover);
+        }
+
+        .network-selector {
+            padding: 0.5rem 1rem;
+            background: var(--surface-hover);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .code-line {
+            display: block;
+            padding-left: 3em;
+            text-indent: -2.5em;
+        }
+
+        .line-number {
+            display: inline-block;
+            width: 2.5em;
+            color: var(--text-muted);
+            user-select: none;
+        }
+
+        .deployment-params {
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .deployment-params.active {
+            display: block;
+        }
+
+        .info-box {
+            background: rgba(106, 0, 255, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .loading-spinner {
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">▲ ARC Contract <span>IDE</span></div>
+            <div class="header-actions">
+                <span id="walletStatus" class="status-badge status-disconnected">
+                    ⚠️ Not Connected
+                </span>
+                <select class="network-selector" id="networkSelector">
+                    <option value="base">Base Mainnet</option>
+                    <option value="base-sepolia">Base Sepolia</option>
+                    <option value="localhost" selected>Localhost</option>
+                    <option value="ethereum">Ethereum Mainnet</option>
+                </select>
+                <button class="btn btn-primary" id="connectWallet">Connect Wallet</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Contract Templates</div>
+                    <div class="template-card" data-template="erc20">
+                        <div class="template-title">ERC20 Token</div>
+                        <div class="template-desc">Standard fungible token</div>
+                    </div>
+                    <div class="template-card" data-template="erc721">
+                        <div class="template-title">ERC721 NFT</div>
+                        <div class="template-desc">Non-fungible token</div>
+                    </div>
+                    <div class="template-card" data-template="erc1155">
+                        <div class="template-title">ERC1155 Multi-Token</div>
+                        <div class="template-desc">Multi-token standard</div>
+                    </div>
+                    <div class="template-card" data-template="sbt">
+                        <div class="template-title">Soulbound Token (SBT)</div>
+                        <div class="template-desc">Non-transferable token</div>
+                    </div>
+                    <div class="template-card" data-template="governor">
+                        <div class="template-title">Governor Contract</div>
+                        <div class="template-desc">DAO governance</div>
+                    </div>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Recent Files</div>
+                    <div id="recentFiles" style="font-size: 0.875rem; color: var(--text-muted);">
+                        No recent files
+                    </div>
+                </div>
+            </div>
+
+            <!-- Editor -->
+            <div class="editor-container">
+                <div class="tabs">
+                    <div class="tab active" data-tab="editor">Editor</div>
+                    <div class="tab" data-tab="compiled">Compiled</div>
+                    <div class="tab" data-tab="deployed">Deployed</div>
+                </div>
+                <textarea class="editor" id="codeEditor" placeholder="// Write your Solidity contract here...
+// Example:
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+contract MyToken is ERC20 {
+    constructor() ERC20("MyToken", "MTK") {
+        _mint(msg.sender, 1000000 * 10 ** decimals());
+    }
+}"></textarea>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="right-panel">
+                <div class="panel-section">
+                    <div class="panel-title">⚙️ Compiler</div>
+                    <div class="form-group">
+                        <label class="form-label">Solidity Version</label>
+                        <select class="form-select" id="solidityVersion">
+                            <option value="0.8.21">0.8.21</option>
+                            <option value="0.8.20">0.8.20</option>
+                            <option value="0.8.19">0.8.19</option>
+                            <option value="0.8.0">0.8.0</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Optimization</label>
+                        <select class="form-select" id="optimization">
+                            <option value="200">Enabled (200 runs)</option>
+                            <option value="0">Disabled</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" id="compileBtn">
+                        🔨 Compile Contract
+                    </button>
+                </div>
+
+                <div class="panel-section">
+                    <div class="panel-title">🚀 Deploy</div>
+                    <div class="info-box">
+                        ℹ️ Compile your contract first to enable deployment
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Contract</label>
+                        <select class="form-select" id="contractSelect" disabled>
+                            <option>Compile to see contracts</option>
+                        </select>
+                    </div>
+                    <div id="constructorParams" class="deployment-params"></div>
+                    <button class="btn btn-success" style="width: 100%;" id="deployBtn" disabled>
+                        📤 Deploy Contract
+                    </button>
+                </div>
+
+                <div class="panel-section">
+                    <div class="panel-title">📊 Console</div>
+                    <div class="console" id="console">
+                        <div class="console-log console-info">Ready to compile and deploy contracts...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let wallet = null;
+        let compiledContract = null;
+        let deployedContracts = [];
+
+        // Contract Templates
+        const templates = {
+            erc20: `// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CustomToken is ERC20, Ownable {
+    constructor(
+        string memory name,
+        string memory symbol,
+        uint256 initialSupply
+    ) ERC20(name, symbol) {
+        _mint(msg.sender, initialSupply * 10 ** decimals());
+    }
+
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
+}`,
+            erc721: `// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CustomNFT is ERC721, ERC721URIStorage, Ownable {
+    uint256 private _tokenIdCounter;
+
+    constructor(
+        string memory name,
+        string memory symbol
+    ) ERC721(name, symbol) {}
+
+    function safeMint(address to, string memory uri) public onlyOwner {
+        uint256 tokenId = _tokenIdCounter;
+        _tokenIdCounter++;
+        _safeMint(to, tokenId);
+        _setTokenURI(tokenId, uri);
+    }
+
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        override(ERC721, ERC721URIStorage)
+        returns (string memory)
+    {
+        return super.tokenURI(tokenId);
+    }
+
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        override(ERC721, ERC721URIStorage)
+        returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
+    }
+
+    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+        super._burn(tokenId);
+    }
+}`,
+            erc1155: `// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CustomMultiToken is ERC1155, Ownable {
+    constructor() ERC1155("https://api.example.com/metadata/{id}.json") {}
+
+    function mint(
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+    ) public onlyOwner {
+        _mint(to, id, amount, data);
+    }
+
+    function mintBatch(
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) public onlyOwner {
+        _mintBatch(to, ids, amounts, data);
+    }
+}`,
+            sbt: `// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+/**
+ * @title SoulboundToken
+ * @dev Non-transferable NFT (Soulbound Token)
+ */
+contract SoulboundToken is ERC721, Ownable {
+    uint256 private _tokenIdCounter;
+
+    constructor(
+        string memory name,
+        string memory symbol
+    ) ERC721(name, symbol) {}
+
+    function mint(address to) public onlyOwner {
+        uint256 tokenId = _tokenIdCounter;
+        _tokenIdCounter++;
+        _safeMint(to, tokenId);
+    }
+
+    // Override transfers to make token non-transferable
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 tokenId,
+        uint256 batchSize
+    ) internal virtual override {
+        require(from == address(0) || to == address(0), "Soulbound: token is non-transferable");
+        super._beforeTokenTransfer(from, to, tokenId, batchSize);
+    }
+}`,
+            governor: `// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/governance/Governor.sol";
+import "@openzeppelin/contracts/governance/extensions/GovernorSettings.sol";
+import "@openzeppelin/contracts/governance/extensions/GovernorCountingSimple.sol";
+import "@openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
+
+contract CustomGovernor is Governor, GovernorSettings, GovernorCountingSimple, GovernorVotes {
+    constructor(
+        IVotes _token,
+        string memory name
+    )
+        Governor(name)
+        GovernorSettings(1, 50400, 0)
+        GovernorVotes(_token)
+    {}
+
+    function votingDelay() public view override(IGovernor, GovernorSettings) returns (uint256) {
+        return super.votingDelay();
+    }
+
+    function votingPeriod() public view override(IGovernor, GovernorSettings) returns (uint256) {
+        return super.votingPeriod();
+    }
+
+    function proposalThreshold() public view override(Governor, GovernorSettings) returns (uint256) {
+        return super.proposalThreshold();
+    }
+}`
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeEventListeners();
+            logToConsole('IDE initialized. Ready to write contracts!', 'info');
+        });
+
+        // Event Listeners
+        function initializeEventListeners() {
+            // Template selection
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const template = card.dataset.template;
+                    loadTemplate(template);
+                });
+            });
+
+            // Compile button
+            document.getElementById('compileBtn').addEventListener('click', compileContract);
+
+            // Deploy button
+            document.getElementById('deployBtn').addEventListener('click', deployContract);
+
+            // Connect wallet
+            document.getElementById('connectWallet').addEventListener('click', connectWallet);
+
+            // Tab switching
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+            });
+        }
+
+        // Load template
+        function loadTemplate(templateName) {
+            const code = templates[templateName];
+            if (code) {
+                document.getElementById('codeEditor').value = code;
+                logToConsole(`Loaded ${templateName.toUpperCase()} template`, 'success');
+            }
+        }
+
+        // Compile contract
+        async function compileContract() {
+            const code = document.getElementById('codeEditor').value;
+            const version = document.getElementById('solidityVersion').value;
+            const optimization = document.getElementById('optimization').value;
+
+            if (!code.trim()) {
+                logToConsole('Error: No contract code to compile', 'error');
+                return;
+            }
+
+            logToConsole('Compiling contract...', 'info');
+            document.getElementById('compileBtn').disabled = true;
+            document.getElementById('compileBtn').innerHTML = '<span class="loading-spinner"></span> Compiling...';
+
+            // NOTE: This is a PROTOTYPE implementation using mock compilation
+            // Production version would integrate with:
+            // - Solidity compiler API (solc-js)
+            // - Backend compilation service
+            // - IPFS for contract storage
+            // - Etherscan verification API
+            setTimeout(() => {
+                try {
+                    // Mock compilation success (production would return actual ABI and bytecode)
+                    compiledContract = {
+                        name: 'CustomToken',
+                        abi: [],
+                        bytecode: '0x...',
+                        constructorParams: [
+                            { name: 'name', type: 'string', placeholder: 'Token Name' },
+                            { name: 'symbol', type: 'string', placeholder: 'TOKEN' },
+                            { name: 'initialSupply', type: 'uint256', placeholder: '1000000' }
+                        ]
+                    };
+
+                    logToConsole('✓ Contract compiled successfully!', 'success');
+                    logToConsole(`Contract: ${compiledContract.name}`, 'info');
+                    
+                    // Enable deployment
+                    document.getElementById('contractSelect').disabled = false;
+                    document.getElementById('contractSelect').innerHTML = `<option>${compiledContract.name}</option>`;
+                    document.getElementById('deployBtn').disabled = false;
+                    
+                    // Show constructor params
+                    renderConstructorParams(compiledContract.constructorParams);
+
+                } catch (error) {
+                    logToConsole(`Compilation error: ${error.message}`, 'error');
+                } finally {
+                    document.getElementById('compileBtn').disabled = false;
+                    document.getElementById('compileBtn').innerHTML = '🔨 Compile Contract';
+                }
+            }, 2000);
+        }
+
+        // Render constructor parameters
+        function renderConstructorParams(params) {
+            const container = document.getElementById('constructorParams');
+            container.innerHTML = '';
+            
+            if (params && params.length > 0) {
+                container.classList.add('active');
+                params.forEach(param => {
+                    const formGroup = document.createElement('div');
+                    formGroup.className = 'form-group';
+                    formGroup.innerHTML = `
+                        <label class="form-label">${param.name} (${param.type})</label>
+                        <input type="text" class="form-input" id="param-${param.name}" 
+                               placeholder="${param.placeholder}" data-type="${param.type}">
+                    `;
+                    container.appendChild(formGroup);
+                });
+            } else {
+                container.classList.remove('active');
+            }
+        }
+
+        // Deploy contract
+        async function deployContract() {
+            if (!wallet) {
+                logToConsole('Error: Please connect wallet first', 'error');
+                return;
+            }
+
+            if (!compiledContract) {
+                logToConsole('Error: Compile contract first', 'error');
+                return;
+            }
+
+            // Collect constructor parameters
+            const params = [];
+            try {
+                compiledContract.constructorParams.forEach(param => {
+                    const value = document.getElementById(`param-${param.name}`).value;
+                    if (!value) {
+                        throw new Error(`Missing parameter: ${param.name}`);
+                    }
+                    params.push(value);
+                });
+            } catch (error) {
+                logToConsole(`Error: ${error.message}`, 'error');
+                return;
+            }
+
+            logToConsole('Deploying contract...', 'info');
+            logToConsole(`Network: ${document.getElementById('networkSelector').value}`, 'info');
+            document.getElementById('deployBtn').disabled = true;
+            document.getElementById('deployBtn').innerHTML = '<span class="loading-spinner"></span> Deploying...';
+
+            // Simulate deployment (in production, this would call actual deployment service)
+            setTimeout(() => {
+                // Generate mock address (production would use actual deployed address)
+                const randomValues = new Uint8Array(20);
+                crypto.getRandomValues(randomValues);
+                const address = '0x' + Array.from(randomValues)
+                    .map(b => b.toString(16).padStart(2, '0'))
+                    .join('');
+                const deployment = {
+                    name: compiledContract.name,
+                    address: address,
+                    network: document.getElementById('networkSelector').value,
+                    timestamp: new Date().toISOString()
+                };
+
+                deployedContracts.push(deployment);
+                
+                logToConsole('✓ Contract deployed successfully!', 'success');
+                logToConsole(`Address: ${address}`, 'success');
+                logToConsole(`Network: ${deployment.network}`, 'info');
+                logToConsole(`View on block explorer: https://explorer.com/address/${address}`, 'info');
+
+                document.getElementById('deployBtn').disabled = false;
+                document.getElementById('deployBtn').innerHTML = '📤 Deploy Contract';
+            }, 3000);
+        }
+
+        // Connect wallet
+        async function connectWallet() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    wallet = accounts[0];
+                    
+                    document.getElementById('walletStatus').className = 'status-badge status-connected';
+                    document.getElementById('walletStatus').innerHTML = `✓ ${wallet.substring(0, 6)}...${wallet.substring(38)}`;
+                    document.getElementById('connectWallet').textContent = 'Connected';
+                    document.getElementById('connectWallet').disabled = true;
+                    
+                    logToConsole(`Wallet connected: ${wallet}`, 'success');
+                } catch (error) {
+                    logToConsole(`Wallet connection failed: ${error.message}`, 'error');
+                }
+            } else {
+                logToConsole('MetaMask not detected. Please install MetaMask.', 'error');
+                alert('Please install MetaMask to use this feature.');
+            }
+        }
+
+        // Switch tabs
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            const activeTab = Array.from(document.querySelectorAll('.tab'))
+                .find(t => t.dataset.tab === tabName);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+            
+            // In production, would switch between editor, compiled output, and deployed contracts
+            logToConsole(`Switched to ${tabName} view`, 'info');
+        }
+
+        // Console logging
+        function logToConsole(message, type = 'info') {
+            const console = document.getElementById('console');
+            const log = document.createElement('div');
+            log.className = `console-log console-${type}`;
+            log.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            console.appendChild(log);
+            console.scrollTop = console.scrollHeight;
+        }
+    </script>
+</body>
+</html>

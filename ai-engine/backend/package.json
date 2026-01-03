@@ -1,0 +1,45 @@
+{
+  "name": "@arc/ai-engine-backend",
+  "version": "1.0.0",
+  "description": "AI Engine Backend - Production LLM integration with MCP protocol",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "jest --coverage",
+    "lint": "eslint src --ext .ts",
+    "setup": "node scripts/setup.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.21.1",
+    "@pinecone-database/pinecone": "^2.2.1",
+    "axios": "^1.6.8",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ethers": "^6.12.1",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "helmet": "^7.1.0",
+    "ioredis": "^5.4.1",
+    "morgan": "^1.10.0",
+    "openai": "^4.47.1",
+    "pg": "^8.11.5",
+    "pino": "^9.0.0",
+    "uuid": "^9.0.1",
+    "zod": "^3.23.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "eslint": "^8.57.0",
+    "tsx": "^4.7.3",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

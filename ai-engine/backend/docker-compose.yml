@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  ai-engine:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://arc:password@postgres:5432/arc_ai_engine
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: arc
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: arc_ai_engine
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+  redis-data:
+  ollama-data:
