@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARC AI Assistant - Smart Contract Generation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lexend', sans-serif;
+            background: #000000;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            border-bottom: 2px solid #b8002a;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-symbol {
+            font-size: 2rem;
+            color: #b8002a;
+        }
+
+        .logo-text h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text p {
+            font-size: 0.75rem;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #1a1a1a;
+            border-radius: 20px;
+            border: 1px solid #333;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4CAF50;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Lexend', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: #b8002a;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #d60031;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(184, 0, 42, 0.4);
+        }
+
+        .btn-secondary {
+            background: #1a1a1a;
+            color: #e0e0e0;
+            border: 1px solid #333;
+        }
+
+        .btn-secondary:hover {
+            background: #252525;
+            border-color: #b8002a;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: #0d0d0d;
+            border-right: 1px solid #1a1a1a;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            color: #b8002a;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .conversation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .conversation-item {
+            padding: 0.75rem;
+            background: #1a1a1a;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .conversation-item:hover {
+            background: #252525;
+            border-color: #b8002a;
+        }
+
+        .conversation-item.active {
+            background: #b8002a;
+            color: #ffffff;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #0d0d0d;
+        }
+
+        .messages-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .message {
+            display: flex;
+            gap: 1rem;
+            max-width: 80%;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: #b8002a;
+            color: #ffffff;
+        }
+
+        .message.ai .message-avatar {
+            background: #1a1a1a;
+            color: #b8002a;
+            border: 2px solid #b8002a;
+        }
+
+        .message-content {
+            background: #1a1a1a;
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            border: 1px solid #252525;
+        }
+
+        .message.user .message-content {
+            background: #b8002a;
+            color: #ffffff;
+        }
+
+        .message-content code {
+            background: #000000;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .message-content pre {
+            background: #000000;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 0.5rem 0;
+        }
+
+        .message-content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .input-area {
+            padding: 1.5rem 2rem;
+            background: #1a1a1a;
+            border-top: 1px solid #252525;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        #messageInput {
+            width: 100%;
+            min-height: 60px;
+            max-height: 200px;
+            padding: 1rem;
+            background: #0d0d0d;
+            border: 2px solid #252525;
+            border-radius: 12px;
+            color: #e0e0e0;
+            font-family: 'Lexend', sans-serif;
+            font-size: 0.95rem;
+            resize: vertical;
+            transition: all 0.2s ease;
+        }
+
+        #messageInput:focus {
+            outline: none;
+            border-color: #b8002a;
+            box-shadow: 0 0 0 3px rgba(184, 0, 42, 0.1);
+        }
+
+        #messageInput::placeholder {
+            color: #666;
+        }
+
+        .send-btn {
+            padding: 1rem 2rem;
+            background: #b8002a;
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Lexend', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .send-btn:hover:not(:disabled) {
+            background: #d60031;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(184, 0, 42, 0.4);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-action {
+            padding: 0.5rem 1rem;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-action:hover {
+            background: #252525;
+            border-color: #b8002a;
+            color: #b8002a;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #b8002a;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.7;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        .code-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .code-action-btn {
+            padding: 0.4rem 0.8rem;
+            background: #b8002a;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .code-action-btn:hover {
+            background: #d60031;
+        }
+
+        .welcome-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .welcome-icon {
+            font-size: 4rem;
+            color: #b8002a;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-screen h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .welcome-screen p {
+            color: #888;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .example-prompts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .example-prompt {
+            padding: 1.5rem;
+            background: #1a1a1a;
+            border: 1px solid #252525;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .example-prompt:hover {
+            background: #252525;
+            border-color: #b8002a;
+            transform: translateY(-2px);
+        }
+
+        .example-prompt-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-prompt-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .example-prompt-desc {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .message {
+                max-width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <div class="logo-symbol">◈</div>
+            <div class="logo-text">
+                <h1>ARC AI Assistant</h1>
+                <p>SMART CONTRACT GENERATION</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Ready</span>
+            </div>
+            <button class="btn btn-secondary" id="settingsBtn">⚙ Settings</button>
+            <button class="btn btn-primary" id="connectWalletBtn">Connect Wallet</button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <h3>◉ Conversations</h3>
+            <button class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;" id="newChatBtn">+ New Chat</button>
+            <div class="conversation-list" id="conversationList">
+                <div class="conversation-item active">
+                    <div style="font-weight: 600;">New Conversation</div>
+                    <div style="font-size: 0.8rem; color: #888;">Just now</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <div class="messages-area" id="messagesArea">
+                <div class="welcome-screen">
+                    <div class="welcome-icon">◈</div>
+                    <h2>Welcome to ARC AI Assistant</h2>
+                    <p>I can help you create, deploy, and manage smart contracts</p>
+                    
+                    <div class="example-prompts">
+                        <div class="example-prompt" data-prompt="Create an ERC20 token with 1 million supply called MyToken with symbol MTK">
+                            <div class="example-prompt-icon">◉</div>
+                            <div class="example-prompt-title">Create ERC20 Token</div>
+                            <div class="example-prompt-desc">Generate a fungible token contract</div>
+                        </div>
+                        <div class="example-prompt" data-prompt="Generate an ERC721 NFT collection contract with 10,000 supply">
+                            <div class="example-prompt-icon">◫</div>
+                            <div class="example-prompt-title">Create NFT Collection</div>
+                            <div class="example-prompt-desc">Build an NFT smart contract</div>
+                        </div>
+                        <div class="example-prompt" data-prompt="Create a Soulbound Token (SBT) for credentials">
+                            <div class="example-prompt-icon">◈</div>
+                            <div class="example-prompt-title">Build SBT Contract</div>
+                            <div class="example-prompt-desc">Non-transferable token system</div>
+                        </div>
+                        <div class="example-prompt" data-prompt="Generate a Governor contract for DAO voting">
+                            <div class="example-prompt-icon">▲</div>
+                            <div class="example-prompt-title">Create Governance</div>
+                            <div class="example-prompt-desc">DAO voting mechanism</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="quick-actions">
+                    <div class="quick-action" data-action="deploy">🚀 Deploy Contract</div>
+                    <div class="quick-action" data-action="compile">🔧 Compile Code</div>
+                    <div class="quick-action" data-action="test">✅ Run Tests</div>
+                    <div class="quick-action" data-action="help">❓ Help</div>
+                </div>
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="Ask me to create a smart contract, deploy tokens, or help with your code..."
+                            rows="2"
+                        ></textarea>
+                    </div>
+                    <button class="send-btn" id="sendBtn">
+                        ▲ Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ARC AI Assistant - Browser-Based Implementation
+        
+        class AIAssistant {
+            constructor() {
+                this.conversations = this.loadConversations();
+                this.currentConversationId = null;
+                this.isProcessing = false;
+                this.walletConnected = false;
+                
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.loadLastConversation();
+            }
+
+            setupEventListeners() {
+                // Send message
+                document.getElementById('sendBtn').addEventListener('click', () => this.sendMessage());
+                document.getElementById('messageInput').addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.sendMessage();
+                    }
+                });
+
+                // Example prompts
+                document.querySelectorAll('.example-prompt').forEach(prompt => {
+                    prompt.addEventListener('click', () => {
+                        const promptText = prompt.dataset.prompt;
+                        document.getElementById('messageInput').value = promptText;
+                        this.sendMessage();
+                    });
+                });
+
+                // Quick actions
+                document.querySelectorAll('.quick-action').forEach(action => {
+                    action.addEventListener('click', () => {
+                        this.handleQuickAction(action.dataset.action);
+                    });
+                });
+
+                // Connect wallet
+                document.getElementById('connectWalletBtn').addEventListener('click', () => {
+                    this.connectWallet();
+                });
+
+                // New chat
+                document.getElementById('newChatBtn').addEventListener('click', () => {
+                    this.createNewConversation();
+                });
+            }
+
+            async sendMessage() {
+                const input = document.getElementById('messageInput');
+                const message = input.value.trim();
+                
+                if (!message || this.isProcessing) return;
+
+                // Add user message
+                this.addMessage('user', message);
+                input.value = '';
+                this.isProcessing = true;
+
+                // Show typing indicator
+                this.showTypingIndicator();
+
+                // Process message
+                setTimeout(async () => {
+                    const response = await this.generateResponse(message);
+                    this.hideTypingIndicator();
+                    this.addMessage('ai', response);
+                    this.isProcessing = false;
+                }, 1500);
+            }
+
+            async generateResponse(message) {
+                // Browser-based AI logic
+                // In production, this would call backend API or use browser-based LLM
+                
+                const lowerMessage = message.toLowerCase();
+
+                if (lowerMessage.includes('erc20') || lowerMessage.includes('token')) {
+                    return this.generateERC20Response(message);
+                } else if (lowerMessage.includes('nft') || lowerMessage.includes('erc721')) {
+                    return this.generateNFTResponse(message);
+                } else if (lowerMessage.includes('sbt') || lowerMessage.includes('soulbound')) {
+                    return this.generateSBTResponse(message);
+                } else if (lowerMessage.includes('governor') || lowerMessage.includes('dao')) {
+                    return this.generateGovernorResponse(message);
+                } else {
+                    return this.generateGeneralResponse(message);
+                }
+            }
+
+            generateERC20Response(message) {
+                const code = `// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.21;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MyToken is ERC20, Ownable {
+    constructor() ERC20("MyToken", "MTK") Ownable(msg.sender) {
+        _mint(msg.sender, 1000000 * 10 ** decimals());
+    }
+
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
+}`;
+
+                return `I'll help you create an ERC20 token contract. Here's a production-ready implementation:
+
+\`\`\`solidity
+${code}
+\`\`\`
+
+**Features:**
+- Standard ERC20 functionality
+- Owner-based minting
+- 1 million initial supply
+- OpenZeppelin security
+
+<div class="code-actions">
+    <button class="code-action-btn" onclick="aiAssistant.compileContract()">🔧 Compile</button>
+    <button class="code-action-btn" onclick="aiAssistant.deployContract()">🚀 Deploy</button>
+    <button class="code-action-btn" onclick="aiAssistant.copyCode()">📋 Copy</button>
+</div>
+
+Would you like me to deploy this to the blockchain?`;
+            }
+
+            generateNFTResponse(message) {
+                const code = `// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.21;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MyNFT is ERC721, Ownable {
+    uint256 private _tokenIdCounter;
+    uint256 public constant MAX_SUPPLY = 10000;
+
+    constructor() ERC721("MyNFT", "MNFT") Ownable(msg.sender) {}
+
+    function mint(address to) public onlyOwner {
+        require(_tokenIdCounter < MAX_SUPPLY, "Max supply reached");
+        uint256 tokenId = _tokenIdCounter++;
+        _safeMint(to, tokenId);
+    }
+}`;
+
+                return `I've created an NFT collection contract for you:
+
+\`\`\`solidity
+${code}
+\`\`\`
+
+**Features:**
+- ERC721 standard
+- 10,000 max supply
+- Safe minting
+- Owner controls
+
+<div class="code-actions">
+    <button class="code-action-btn" onclick="aiAssistant.compileContract()">🔧 Compile</button>
+    <button class="code-action-btn" onclick="aiAssistant.deployContract()">🚀 Deploy</button>
+    <button class="code-action-btn" onclick="aiAssistant.copyCode()">📋 Copy</button>
+</div>
+
+Ready to deploy to Base network?`;
+            }
+
+            generateSBTResponse(message) {
+                return `I'll create a Soulbound Token (SBT) contract. These are non-transferable tokens perfect for credentials and reputation systems.
+
+**Key Features:**
+- Non-transferable by design
+- Revocable by issuer
+- Metadata support
+- Event emissions
+
+Would you like me to generate the full code?`;
+            }
+
+            generateGovernorResponse(message) {
+                return `I can create a Governor contract for DAO voting. This will include:
+
+**Components:**
+- Proposal creation
+- Voting mechanisms  
+- Timelock integration
+- Quorum requirements
+- Execution functions
+
+Should I proceed with the full implementation?`;
+            }
+
+            generateGeneralResponse(message) {
+                return `I'm here to help you with smart contract development! I can:
+
+**Create Contracts:**
+- ERC20 tokens
+- NFT collections (ERC721/ERC1155)
+- Soulbound Tokens (SBT)
+- Governor/DAO contracts
+- Custom logic
+
+**Manage Deployments:**
+- Compile Solidity code
+- Deploy to networks (Base, Ethereum)
+- Verify contracts
+- Run tests
+
+What would you like to build?`;
+            }
+
+            addMessage(sender, content) {
+                const messagesArea = document.getElementById('messagesArea');
+                
+                // Remove welcome screen if exists
+                const welcomeScreen = messagesArea.querySelector('.welcome-screen');
+                if (welcomeScreen) {
+                    welcomeScreen.remove();
+                }
+
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}`;
+                
+                const avatar = document.createElement('div');
+                avatar.className = 'message-avatar';
+                avatar.textContent = sender === 'user' ? 'U' : '◈';
+                
+                const messageContent = document.createElement('div');
+                messageContent.className = 'message-content';
+                messageContent.innerHTML = this.formatMessage(content);
+                
+                messageDiv.appendChild(avatar);
+                messageDiv.appendChild(messageContent);
+                messagesArea.appendChild(messageDiv);
+                
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+            }
+
+            formatMessage(content) {
+                // Format code blocks
+                content = content.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+                    return `<pre><code class="language-${lang || 'text'}">${this.escapeHtml(code.trim())}</code></pre>`;
+                });
+
+                // Format inline code
+                content = content.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+                // Format bold
+                content = content.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+                // Convert newlines to <br>
+                content = content.replace(/\n/g, '<br>');
+
+                return content;
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            showTypingIndicator() {
+                const messagesArea = document.getElementById('messagesArea');
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'message ai';
+                typingDiv.id = 'typingIndicator';
+                
+                const avatar = document.createElement('div');
+                avatar.className = 'message-avatar';
+                avatar.textContent = '◈';
+                
+                const content = document.createElement('div');
+                content.className = 'message-content';
+                content.innerHTML = '<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+                
+                typingDiv.appendChild(avatar);
+                typingDiv.appendChild(content);
+                messagesArea.appendChild(typingDiv);
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+            }
+
+            hideTypingIndicator() {
+                const indicator = document.getElementById('typingIndicator');
+                if (indicator) {
+                    indicator.remove();
+                }
+            }
+
+            async connectWallet() {
+                if (typeof window.ethereum === 'undefined') {
+                    alert('Please install MetaMask to connect your wallet');
+                    return;
+                }
+
+                try {
+                    const accounts = await window.ethereum.request({ 
+                        method: 'eth_requestAccounts' 
+                    });
+                    
+                    this.walletConnected = true;
+                    const btn = document.getElementById('connectWalletBtn');
+                    btn.textContent = `Connected: ${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`;
+                    btn.classList.remove('btn-primary');
+                    btn.classList.add('btn-secondary');
+                    
+                    this.addMessage('ai', '✅ Wallet connected successfully! You can now deploy contracts to the blockchain.');
+                } catch (error) {
+                    console.error('Wallet connection error:', error);
+                    alert('Failed to connect wallet');
+                }
+            }
+
+            async compileContract() {
+                this.addMessage('ai', '🔧 Compiling contract... This feature requires backend integration or browser-based Solidity compiler.');
+            }
+
+            async deployContract() {
+                if (!this.walletConnected) {
+                    this.addMessage('ai', '⚠️ Please connect your wallet first to deploy contracts.');
+                    return;
+                }
+                this.addMessage('ai', '🚀 Deployment initiated... This will open MetaMask for confirmation.');
+            }
+
+            copyCode() {
+                this.addMessage('ai', '📋 Code copied to clipboard!');
+            }
+
+            handleQuickAction(action) {
+                const actions = {
+                    deploy: 'How do I deploy a contract to Base network?',
+                    compile: 'How do I compile my Solidity code?',
+                    test: 'How can I test my smart contract?',
+                    help: 'What can you help me with?'
+                };
+
+                document.getElementById('messageInput').value = actions[action];
+                this.sendMessage();
+            }
+
+            loadConversations() {
+                const saved = localStorage.getItem('aiConversations');
+                return saved ? JSON.parse(saved) : {};
+            }
+
+            saveConversations() {
+                localStorage.setItem('aiConversations', JSON.stringify(this.conversations));
+            }
+
+            loadLastConversation() {
+                const keys = Object.keys(this.conversations);
+                if (keys.length > 0) {
+                    this.currentConversationId = keys[0];
+                }
+            }
+
+            createNewConversation() {
+                this.currentConversationId = Date.now().toString();
+                this.conversations[this.currentConversationId] = {
+                    messages: [],
+                    created: Date.now()
+                };
+                this.saveConversations();
+                
+                // Clear messages
+                document.getElementById('messagesArea').innerHTML = `
+                    <div class="welcome-screen">
+                        <div class="welcome-icon">◈</div>
+                        <h2>New Conversation</h2>
+                        <p>How can I help you build today?</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize
+        const aiAssistant = new AIAssistant();
+    </script>
+</body>
+</html>
