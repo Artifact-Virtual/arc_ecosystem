@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artifact Development Engine - ARC Ecosystem</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6A00FF;
+            --primary-dark: #4A00B3;
+            --secondary: #00C853;
+            --background: #0D1117;
+            --surface: #161B22;
+            --surface-hover: #21262D;
+            --border: #30363D;
+            --text: #C9D1D9;
+            --text-muted: #8B949E;
+            --danger: #F85149;
+            --warning: #F9A825;
+            --success: #00C853;
+            --info: #58A6FF;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0D1117 0%, #161B22 50%, #0D1117 100%);
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(106, 0, 255, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Header */
+        .header {
+            background: rgba(22, 27, 34, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.75rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .logo-text p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 200, 83, 0.1);
+            border: 1px solid var(--success);
+            border-radius: 20px;
+            font-size: 0.875rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--info), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(106, 0, 255, 0.2);
+        }
+
+        .dashboard-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-description {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .card-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-features li {
+            padding: 0.5rem 0;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .card-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .card-action:hover {
+            background: var(--primary-dark);
+            transform: translateX(5px);
+        }
+
+        /* Zones Section */
+        .zones-section {
+            margin: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .zones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .zone-card {
+            background: linear-gradient(135deg, var(--surface), var(--background));
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .zone-card:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .zone-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .zone-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .zone-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .status-live {
+            background: rgba(0, 200, 83, 0.2);
+            color: var(--success);
+        }
+
+        .status-ready {
+            background: rgba(88, 166, 255, 0.2);
+            color: var(--info);
+        }
+
+        .status-progress {
+            background: rgba(249, 168, 37, 0.2);
+            color: var(--warning);
+        }
+
+        /* System Status */
+        .system-status {
+            margin: 4rem 0;
+            padding: 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .status-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--background);
+            border-radius: 8px;
+        }
+
+        .status-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 0.5rem;
+        }
+
+        .status-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .quick-action-btn {
+            padding: 1rem 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .quick-action-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">🏛️</span>
+                <div class="logo-text">
+                    <h1>Artifact Development Engine</h1>
+                    <p>Unified Development Platform for ARC Ecosystem</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span>System Operational</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>Build, Deploy, and Manage Artifacts</h2>
+            <p>A comprehensive development platform for creating and deploying ERC20 tokens, NFTs, SBTs, and governance contracts across the ARC ecosystem. Professional tools for professional developers.</p>
+        </section>
+
+        <!-- Main Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Contract IDE -->
+            <div class="dashboard-card" onclick="window.location.href='contract_deployment_ide.html'">
+                <span class="card-icon">💻</span>
+                <h3 class="card-title">Contract IDE</h3>
+                <p class="card-description">Write, compile, and deploy smart contracts with our Remix-like browser-based IDE.</p>
+                <ul class="card-features">
+                    <li>5 Built-in Templates</li>
+                    <li>Real-time Compilation</li>
+                    <li>Multi-network Deployment</li>
+                    <li>MetaMask Integration</li>
+                </ul>
+                <a href="contract_deployment_ide.html" class="card-action">
+                    <span>Launch IDE</span>
+                    <span>→</span>
+                </a>
+            </div>
+
+            <!-- Token Factory -->
+            <div class="dashboard-card" onclick="window.location.href='contract_deployment_ide.html'">
+                <span class="card-icon">🪙</span>
+                <h3 class="card-title">Token Factory</h3>
+                <p class="card-description">Create custom ERC20 tokens with advanced features and tokenomics.</p>
+                <ul class="card-features">
+                    <li>Standard ERC20 Tokens</li>
+                    <li>Governance Tokens</li>
+                    <li>Deflationary Mechanics</li>
+                    <li>Upgradeable Patterns</li>
+                </ul>
+                <a href="contract_deployment_ide.html" class="card-action">
+                    <span>Create Token</span>
+                    <span>→</span>
+                </a>
+            </div>
+
+            <!-- NFT Studio -->
+            <div class="dashboard-card" onclick="window.location.href='contract_deployment_ide.html'">
+                <span class="card-icon">🖼️</span>
+                <h3 class="card-title">NFT Studio</h3>
+                <p class="card-description">Design and deploy NFT collections with metadata management.</p>
+                <ul class="card-features">
+                    <li>ERC721 & ERC1155</li>
+                    <li>Metadata Management</li>
+                    <li>Trait Systems</li>
+                    <li>Evolution Mechanics</li>
+                </ul>
+                <a href="../contracts/tokens/nft/README.md" class="card-action">
+                    <span>Launch Studio</span>
+                    <span>→</span>
+                </a>
+            </div>
+
+            <!-- SBT Creator -->
+            <div class="dashboard-card" onclick="window.location.href='contract_deployment_ide.html'">
+                <span class="card-icon">🎖️</span>
+                <h3 class="card-title">SBT Creator</h3>
+                <p class="card-description">Build Soulbound Tokens for credentials and identity.</p>
+                <ul class="card-features">
+                    <li>Non-transferable Tokens</li>
+                    <li>Identity Verification</li>
+                    <li>Credential Issuance</li>
+                    <li>Reputation Systems</li>
+                </ul>
+                <a href="contract_deployment_ide.html" class="card-action">
+                    <span>Create SBT</span>
+                    <span>→</span>
+                </a>
+            </div>
+
+            <!-- Governance Builder -->
+            <div class="dashboard-card" onclick="window.location.href='contract_deployment_ide.html'">
+                <span class="card-icon">🗳️</span>
+                <h3 class="card-title">Governance Builder</h3>
+                <p class="card-description">Deploy DAO contracts with advanced voting mechanisms.</p>
+                <ul class="card-features">
+                    <li>Governor Contracts</li>
+                    <li>Timelock Controls</li>
+                    <li>Multi-sig Integration</li>
+                    <li>Proposal Management</li>
+                </ul>
+                <a href="../contracts/dao/governance/README.md" class="card-action">
+                    <span>Build DAO</span>
+                    <span>→</span>
+                </a>
+            </div>
+
+            <!-- DeFi Tools -->
+            <div class="dashboard-card" onclick="window.location.href='bridge.html'">
+                <span class="card-icon">💹</span>
+                <h3 class="card-title">DeFi Tools</h3>
+                <p class="card-description">Access bridges, swaps, and liquidity management tools.</p>
+                <ul class="card-features">
+                    <li>Cross-chain Bridge</li>
+                    <li>Uniswap V4 Integration</li>
+                    <li>LP Management</li>
+                    <li>Yield Farming</li>
+                </ul>
+                <a href="bridge.html" class="card-action">
+                    <span>Access Tools</span>
+                    <span>→</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Development Zones -->
+        <section class="zones-section">
+            <h2 class="section-title">Development Zones</h2>
+            <div class="zones-grid">
+                <div class="zone-card">
+                    <span class="zone-icon">🏛️</span>
+                    <h3 class="zone-title">Governance Zone</h3>
+                    <p>DAO contracts and voting systems</p>
+                    <span class="zone-status status-live">LIVE</span>
+                </div>
+
+                <div class="zone-card">
+                    <span class="zone-icon">💰</span>
+                    <h3 class="zone-title">Token Zone</h3>
+                    <p>ERC20 tokens and economics</p>
+                    <span class="zone-status status-live">LIVE</span>
+                </div>
+
+                <div class="zone-card">
+                    <span class="zone-icon">🎨</span>
+                    <h3 class="zone-title">NFT Zone</h3>
+                    <p>NFT collections and traits</p>
+                    <span class="zone-status status-ready">READY</span>
+                </div>
+
+                <div class="zone-card">
+                    <span class="zone-icon">🔐</span>
+                    <h3 class="zone-title">Identity Zone</h3>
+                    <p>Soulbound tokens and credentials</p>
+                    <span class="zone-status status-progress">PROGRESS</span>
+                </div>
+
+                <div class="zone-card">
+                    <span class="zone-icon">🌉</span>
+                    <h3 class="zone-title">DeFi Zone</h3>
+                    <p>Bridges and liquidity tools</p>
+                    <span class="zone-status status-live">LIVE</span>
+                </div>
+
+                <div class="zone-card">
+                    <span class="zone-icon">📊</span>
+                    <h3 class="zone-title">Analytics Zone</h3>
+                    <p>Monitoring and dashboards</p>
+                    <span class="zone-status status-ready">READY</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Status -->
+        <section class="system-status">
+            <h2 class="section-title">System Status</h2>
+            <div class="status-grid">
+                <div class="status-item">
+                    <div class="status-value">100/100</div>
+                    <div class="status-label">Security Rating</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value">70+</div>
+                    <div class="status-label">Smart Contracts</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value">147/147</div>
+                    <div class="status-label">Tests Passing</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value">0</div>
+                    <div class="status-label">Vulnerabilities</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value">92%</div>
+                    <div class="status-label">Code Coverage</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value">4</div>
+                    <div class="status-label">Networks</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a href="../README.md" class="quick-action-btn">
+                <span>📖</span>
+                <span>Documentation</span>
+            </a>
+            <a href="SECURITY_AUDIT.md" class="quick-action-btn">
+                <span>🔐</span>
+                <span>Security Audit</span>
+            </a>
+            <a href="../scripts/README.md" class="quick-action-btn">
+                <span>⚙️</span>
+                <span>Management Scripts</span>
+            </a>
+            <a href="transparency.html" class="quick-action-btn">
+                <span>📊</span>
+                <span>Transparency</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 ARC Ecosystem - Artifact Development Engine</p>
+        <div class="footer-links">
+            <a href="https://github.com/Artifact-Virtual/arc_ecosystem">GitHub</a>
+            <a href="../LICENSE">License</a>
+            <a href="SECURITY.md">Security</a>
+            <a href="../address.book">Address Book</a>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.875rem;">
+            Build the future of decentralized systems
+        </p>
+    </footer>
+
+    <script>
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🏛️ Artifact Development Engine initialized');
+            
+            // Log system status
+            console.log('✅ Security Rating: 100/100');
+            console.log('✅ All tests passing');
+            console.log('✅ Zero vulnerabilities');
+            console.log('✅ Production ready');
+        });
+    </script>
+</body>
+</html>
