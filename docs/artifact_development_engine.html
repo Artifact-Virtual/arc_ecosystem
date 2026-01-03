@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artifact Development Engine - ARC Ecosystem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,23 +13,25 @@
         }
 
         :root {
-            --primary: #6A00FF;
-            --primary-dark: #4A00B3;
-            --secondary: #00C853;
-            --background: #0D1117;
-            --surface: #161B22;
-            --surface-hover: #21262D;
-            --border: #30363D;
-            --text: #C9D1D9;
-            --text-muted: #8B949E;
-            --danger: #F85149;
-            --warning: #F9A825;
-            --success: #00C853;
-            --info: #58A6FF;
+            --primary: #b8002a;
+            --primary-dark: #8a0020;
+            --secondary: #ff3300;
+            --tertiary: #ff9944;
+            --background: #000000;
+            --surface: #0a0a0a;
+            --surface-hover: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+            --danger: #ff0040;
+            --warning: #ff9944;
+            --success: #00ff88;
+            --info: #00ffff;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            font-family: 'Lexend', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--background);
             color: var(--text);
             overflow-x: hidden;
@@ -90,11 +93,14 @@
 
         .logo-text h1 {
             font-size: 1.75rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--text);
             font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 2px;
+        }
+        
+        .logo-text h1 span {
+            color: var(--primary);
         }
 
         .logo-text p {
@@ -150,10 +156,10 @@
         .hero h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--info), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            letter-spacing: 3px;
         }
 
         .hero p {
@@ -277,10 +283,10 @@
             font-size: 2rem;
             text-align: center;
             margin-bottom: 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            letter-spacing: 2px;
         }
 
         .zones-grid {
@@ -452,9 +458,9 @@
     <header class="header">
         <div class="header-content">
             <div class="logo">
-                <span class="logo-icon">🏛️</span>
+                <span class="logo-icon">▲</span>
                 <div class="logo-text">
-                    <h1>Artifact Development Engine</h1>
+                    <h1>Artifact Development <span>Engine</span></h1>
                     <p>Unified Development Platform for ARC Ecosystem</p>
                 </div>
             </div>
@@ -479,7 +485,7 @@
         <div class="dashboard-grid">
             <!-- Contract IDE -->
             <a href="contract_deployment_ide.html" class="dashboard-card" role="article" aria-label="Contract IDE - Write, compile, and deploy smart contracts">
-                <span class="card-icon">💻</span>
+                <span class="card-icon">⟨⟩</span>
                 <h3 class="card-title">Contract IDE</h3>
                 <p class="card-description">Write, compile, and deploy smart contracts with our Remix-like browser-based IDE.</p>
                 <ul class="card-features">
@@ -496,7 +502,7 @@
 
             <!-- Token Factory -->
             <a href="contract_deployment_ide.html" class="dashboard-card" role="article" aria-label="Token Factory - Create custom ERC20 tokens">
-                <span class="card-icon">🪙</span>
+                <span class="card-icon">◉</span>
                 <h3 class="card-title">Token Factory</h3>
                 <p class="card-description">Create custom ERC20 tokens with advanced features and tokenomics.</p>
                 <ul class="card-features">
@@ -513,7 +519,7 @@
 
             <!-- NFT Studio -->
             <a href="../contracts/tokens/nft/README.md" class="dashboard-card" role="article" aria-label="NFT Studio - Design and deploy NFT collections">
-                <span class="card-icon">🖼️</span>
+                <span class="card-icon">◫</span>
                 <h3 class="card-title">NFT Studio</h3>
                 <p class="card-description">Design and deploy NFT collections with metadata management.</p>
                 <ul class="card-features">
@@ -530,7 +536,7 @@
 
             <!-- SBT Creator -->
             <a href="contract_deployment_ide.html" class="dashboard-card" role="article" aria-label="SBT Creator - Build Soulbound Tokens">
-                <span class="card-icon">🎖️</span>
+                <span class="card-icon">◈</span>
                 <h3 class="card-title">SBT Creator</h3>
                 <p class="card-description">Build Soulbound Tokens for credentials and identity.</p>
                 <ul class="card-features">
@@ -547,7 +553,7 @@
 
             <!-- Governance Builder -->
             <a href="../contracts/dao/governance/README.md" class="dashboard-card" role="article" aria-label="Governance Builder - Deploy DAO contracts">
-                <span class="card-icon">🗳️</span>
+                <span class="card-icon">◐</span>
                 <h3 class="card-title">Governance Builder</h3>
                 <p class="card-description">Deploy DAO contracts with advanced voting mechanisms.</p>
                 <ul class="card-features">
@@ -564,7 +570,7 @@
 
             <!-- DeFi Tools -->
             <a href="bridge.html" class="dashboard-card" role="article" aria-label="DeFi Tools - Access bridges and liquidity tools">
-                <span class="card-icon">💹</span>
+                <span class="card-icon">◬</span>
                 <h3 class="card-title">DeFi Tools</h3>
                 <p class="card-description">Access bridges, swaps, and liquidity management tools.</p>
                 <ul class="card-features">
@@ -585,42 +591,42 @@
             <h2 class="section-title">Development Zones</h2>
             <div class="zones-grid">
                 <div class="zone-card">
-                    <span class="zone-icon">🏛️</span>
+                    <span class="zone-icon">▲</span>
                     <h3 class="zone-title">Governance Zone</h3>
                     <p>DAO contracts and voting systems</p>
                     <span class="zone-status status-live">LIVE</span>
                 </div>
 
                 <div class="zone-card">
-                    <span class="zone-icon">💰</span>
+                    <span class="zone-icon">◉</span>
                     <h3 class="zone-title">Token Zone</h3>
                     <p>ERC20 tokens and economics</p>
                     <span class="zone-status status-live">LIVE</span>
                 </div>
 
                 <div class="zone-card">
-                    <span class="zone-icon">🎨</span>
+                    <span class="zone-icon">◫</span>
                     <h3 class="zone-title">NFT Zone</h3>
                     <p>NFT collections and traits</p>
                     <span class="zone-status status-ready">READY</span>
                 </div>
 
                 <div class="zone-card">
-                    <span class="zone-icon">🔐</span>
+                    <span class="zone-icon">◈</span>
                     <h3 class="zone-title">Identity Zone</h3>
                     <p>Soulbound tokens and credentials</p>
                     <span class="zone-status status-progress">PROGRESS</span>
                 </div>
 
                 <div class="zone-card">
-                    <span class="zone-icon">🌉</span>
+                    <span class="zone-icon">◬</span>
                     <h3 class="zone-title">DeFi Zone</h3>
                     <p>Bridges and liquidity tools</p>
                     <span class="zone-status status-live">LIVE</span>
                 </div>
 
                 <div class="zone-card">
-                    <span class="zone-icon">📊</span>
+                    <span class="zone-icon">◧</span>
                     <h3 class="zone-title">Analytics Zone</h3>
                     <p>Monitoring and dashboards</p>
                     <span class="zone-status status-ready">READY</span>
@@ -662,19 +668,19 @@
         <!-- Quick Actions -->
         <div class="quick-actions">
             <a href="../README.md" class="quick-action-btn">
-                <span>📖</span>
+                <span>◉</span>
                 <span>Documentation</span>
             </a>
             <a href="../SECURITY_AUDIT.md" class="quick-action-btn">
-                <span>🔐</span>
+                <span>◈</span>
                 <span>Security Audit</span>
             </a>
             <a href="../scripts/README.md" class="quick-action-btn">
-                <span>⚙️</span>
+                <span>◬</span>
                 <span>Management Scripts</span>
             </a>
             <a href="transparency.html" class="quick-action-btn">
-                <span>📊</span>
+                <span>◧</span>
                 <span>Transparency</span>
             </a>
         </div>
