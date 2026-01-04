@@ -16,7 +16,7 @@ interface PolicyConfig {
 
 async function main() {
   console.log("\n⚙️  ADAM Policy Chain Setup\n");
-  console.log("=" .repeat(70));
+  console.log("=".repeat(70));
 
   const [admin] = await ethers.getSigners();
   console.log("Admin address:", admin.address);
@@ -114,7 +114,7 @@ async function main() {
     console.log("Available actions: status, add-policy, remove-policy");
   }
 
-  console.log("\n" + "=" .repeat(70));
+  console.log("\n" + "=".repeat(70));
   console.log("\n✅ ADAM policy setup complete!\n");
 }
 

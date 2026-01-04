@@ -1,5 +1,4 @@
 import { ethers, upgrades } from "hardhat";
-import { Contract } from "ethers";
 
 /**
  * Deploy ADAM Constitutional Policy Engine
@@ -17,7 +16,7 @@ import { Contract } from "ethers";
 
 async function main() {
   console.log("\n🏛️  ADAM Constitutional Policy Engine Deployment\n");
-  console.log("=" .repeat(70));
+  console.log("=".repeat(70));
 
   const [deployer] = await ethers.getSigners();
   console.log("Deployer address:", deployer.address);
@@ -91,6 +90,8 @@ async function main() {
   console.log("📜 Step 3: Deploying Constitutional Policies...");
   
   // Generate placeholder Wasm hashes (in production, these would be real Wasm program hashes)
+  // WARNING: These are test hashes only! In production, replace with actual compiled Wasm program hashes
+  // Production deployment should validate that these are real Wasm hashes, not placeholders
   const paramsGuardWasm = ethers.keccak256(ethers.toUtf8Bytes("ParamsGuardPolicy-v1.0.0"));
   const treasuryLimiterWasm = ethers.keccak256(ethers.toUtf8Bytes("TreasuryLimiterPolicy-v1.0.0"));
   const rwaRecencyWasm = ethers.keccak256(ethers.toUtf8Bytes("RWARecencyPolicy-v1.0.0"));
@@ -161,10 +162,8 @@ async function main() {
   console.log("⛓️  Step 5: Registering policy chains...");
   
   // Get hook constants from AdamHost
-  const HOOK_SUBMIT = await adamHost.HOOK_SUBMIT();
   const HOOK_TALLY = await adamHost.HOOK_TALLY();
   const HOOK_QUEUE = await adamHost.HOOK_QUEUE();
-  const HOOK_EXECUTE = await adamHost.HOOK_EXECUTE();
   const HOOK_RWA_UPDATE = await adamHost.HOOK_RWA_UPDATE();
 
   // Topic constants
@@ -172,7 +171,6 @@ async function main() {
   const TOPIC_PARAMS = 1;
   const TOPIC_ENERGY = 2;
   const TOPIC_CARBON = 3;
-  const TOPIC_GRANTS = 4;
 
   // Register TREASURY policies
   console.log("  Registering TREASURY policies...");
@@ -201,7 +199,7 @@ async function main() {
   console.log();
 
   // Summary
-  console.log("=" .repeat(70));
+  console.log("=".repeat(70));
   console.log("\n📋 DEPLOYMENT SUMMARY\n");
   console.log("Core Contracts:");
   console.log("  AdamRegistry:", registryAddress);
@@ -219,7 +217,7 @@ async function main() {
   console.log("  RWARecency:", rwaRecencyWasm);
   console.log("  Dual2FA:", dual2FAWasm);
   console.log();
-  console.log("=" .repeat(70));
+  console.log("=".repeat(70));
   console.log("\n✅ ADAM Constitutional Policy Engine deployment complete!\n");
 
   // Save deployment info

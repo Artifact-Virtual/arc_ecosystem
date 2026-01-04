@@ -28,11 +28,19 @@ abstract contract AdamGovernorIntegration {
         uint8 verdict,
         bytes newDiff
     );
+    event AdamValidationSkipped(uint256 indexed proposalId, string reason);
+    event AdamEvaluationError(uint256 indexed proposalId, bytes4 hook, string error);
+
+    // Track initialization
+    bool private _adamInitialized;
 
     /**
-     * @dev Initialize ADAM integration
+     * @dev Initialize ADAM integration (should only be called once during initialization)
      */
     function _initializeAdamIntegration(address _adamHost) internal {
+        require(!_adamInitialized, "AdamIntegration: already initialized");
+        _adamInitialized = true;
+        
         adamHost = IAdamHost(_adamHost);
         adamEnabled = _adamHost != address(0);
         
@@ -53,6 +61,7 @@ abstract contract AdamGovernorIntegration {
         bytes calldata diff
     ) internal returns (bool) {
         if (!adamEnabled || address(adamHost) == address(0)) {
+            emit AdamValidationSkipped(proposalId, "ADAM not enabled");
             return true; // Skip validation if ADAM not enabled
         }
 
@@ -67,8 +76,11 @@ abstract contract AdamGovernorIntegration {
             
             // ALLOW (0) or AMEND (2) are acceptable
             return verdict == 0 || verdict == 2;
-        } catch {
-            // If ADAM evaluation fails, reject proposal
+        } catch Error(string memory reason) {
+            emit AdamEvaluationError(proposalId, hook, reason);
+            return false;
+        } catch (bytes memory lowLevelData) {
+            emit AdamEvaluationError(proposalId, hook, "Low-level error");
             return false;
         }
     }
@@ -83,6 +95,7 @@ abstract contract AdamGovernorIntegration {
         bytes calldata diff
     ) internal returns (bool) {
         if (!adamEnabled || address(adamHost) == address(0)) {
+            emit AdamValidationSkipped(proposalId, "ADAM not enabled");
             return true;
         }
 
@@ -95,7 +108,11 @@ abstract contract AdamGovernorIntegration {
         ) {
             emit ProposalValidatedByAdam(proposalId, hook, verdict, newDiff);
             return verdict == 0 || verdict == 2;
-        } catch {
+        } catch Error(string memory reason) {
+            emit AdamEvaluationError(proposalId, hook, reason);
+            return false;
+        } catch (bytes memory) {
+            emit AdamEvaluationError(proposalId, hook, "Low-level error");
             return false;
         }
     }
@@ -110,6 +127,7 @@ abstract contract AdamGovernorIntegration {
         bytes calldata diff
     ) internal returns (bool) {
         if (!adamEnabled || address(adamHost) == address(0)) {
+            emit AdamValidationSkipped(proposalId, "ADAM not enabled");
             return true;
         }
 
@@ -122,7 +140,11 @@ abstract contract AdamGovernorIntegration {
         ) {
             emit ProposalValidatedByAdam(proposalId, hook, verdict, newDiff);
             return verdict == 0 || verdict == 2;
-        } catch {
+        } catch Error(string memory reason) {
+            emit AdamEvaluationError(proposalId, hook, reason);
+            return false;
+        } catch (bytes memory) {
+            emit AdamEvaluationError(proposalId, hook, "Low-level error");
             return false;
         }
     }
@@ -137,6 +159,7 @@ abstract contract AdamGovernorIntegration {
         bytes calldata diff
     ) internal returns (bool, bool) {
         if (!adamEnabled || address(adamHost) == address(0)) {
+            emit AdamValidationSkipped(proposalId, "ADAM not enabled");
             return (true, false);
         }
 
@@ -155,7 +178,11 @@ abstract contract AdamGovernorIntegration {
             }
             
             return (verdict == 0 || verdict == 2, false);
-        } catch {
+        } catch Error(string memory reason) {
+            emit AdamEvaluationError(proposalId, hook, reason);
+            return (false, false);
+        } catch (bytes memory) {
+            emit AdamEvaluationError(proposalId, hook, "Low-level error");
             return (false, false);
         }
     }
@@ -170,6 +197,7 @@ abstract contract AdamGovernorIntegration {
         bytes calldata diff
     ) internal returns (bool) {
         if (!adamEnabled || address(adamHost) == address(0)) {
+            emit AdamValidationSkipped(proposalId, "ADAM not enabled");
             return true;
         }
 
@@ -182,7 +210,11 @@ abstract contract AdamGovernorIntegration {
         ) {
             emit ProposalValidatedByAdam(proposalId, hook, verdict, newDiff);
             return verdict == 0 || verdict == 2;
-        } catch {
+        } catch Error(string memory reason) {
+            emit AdamEvaluationError(proposalId, hook, reason);
+            return false;
+        } catch (bytes memory) {
+            emit AdamEvaluationError(proposalId, hook, "Low-level error");
             return false;
         }
     }

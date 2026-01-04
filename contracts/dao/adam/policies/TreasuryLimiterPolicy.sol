@@ -73,6 +73,12 @@ contract TreasuryLimiterPolicy is IAdamPolicy {
      * @param ctx Context containing treasury action details
      * @return verdict ALLOW, DENY, or REQUIRE_2FA based on evaluation
      * @return data Empty bytes or reason for denial
+     * 
+     * @notice This function is view-only and checks against current epoch budget.
+     * To prevent race conditions where multiple proposals pass validation but together
+     * exceed the budget, the actual execution should call recordSpending() atomically
+     * and enforce the budget check at execution time. The treasury contract should
+     * implement a mechanism to reserve or lock budget during proposal queuing.
      */
     function evaluate(bytes calldata ctx) external view override returns (uint8 verdict, bytes memory data) {
         if (ctx.length == 0) {
@@ -148,10 +154,10 @@ contract TreasuryLimiterPolicy is IAdamPolicy {
     }
 
     /**
-     * @dev Record spending (called by treasury after successful execution)
+     * @dev Record spending (only callable by treasury to prevent admin manipulation)
      */
     function recordSpending(uint256 amount) external {
-        require(msg.sender == treasury || msg.sender == admin, "TreasuryLimiter: not authorized");
+        require(msg.sender == treasury, "TreasuryLimiter: only treasury");
         
         // Check if epoch needs reset
         if (block.timestamp >= epochStartTime + epochDuration) {

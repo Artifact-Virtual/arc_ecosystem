@@ -103,6 +103,11 @@ contract RWARecencyPolicy is IAdamPolicy {
             return (VERDICT_DENY, "Recency window not configured for topic");
         }
         
+        // Check timestamp is not in the future
+        if (timestamp > block.timestamp) {
+            return (VERDICT_DENY, "Oracle timestamp in the future");
+        }
+        
         if (block.timestamp - timestamp > recencyWindow) {
             return (VERDICT_DENY, "Oracle data too old");
         }
@@ -114,7 +119,7 @@ contract RWARecencyPolicy is IAdamPolicy {
         }
 
         // Check operators
-        uint256 expectedOperatorBytes = numOracles * 32; // 20 bytes address + 12 bytes padding
+        uint256 expectedOperatorBytes = numOracles * 32; // Addresses padded to 32 bytes
         if (ctx.length < 96 + expectedOperatorBytes) {
             return (VERDICT_DENY, "Incomplete operator data");
         }
@@ -122,7 +127,8 @@ contract RWARecencyPolicy is IAdamPolicy {
         // Validate each operator
         for (uint256 i = 0; i < numOracles; i++) {
             uint256 offset = 96 + (i * 32);
-            address operator = address(bytes20(ctx[offset:offset + 20]));
+            // Extract 20-byte address from 32-byte padded slot
+            address operator = address(uint160(uint256(bytes32(ctx[offset:offset + 32]))));
             
             // Check if operator is active
             if (!operatorActive[operator]) {

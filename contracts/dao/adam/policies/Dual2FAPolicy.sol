@@ -60,10 +60,10 @@ contract Dual2FAPolicy is IAdamPolicy {
         paramChangeThreshold = _paramChangeThreshold;
 
         // Initialize critical parameters
-        _setCriticalParam("QUORUM_PCT", true);
-        _setCriticalParam("VOTING_PERIOD", true);
-        _setCriticalParam("TIMELOCK_DELAY", true);
-        _setCriticalParam("PROPOSAL_THRESHOLD", true);
+        _setCriticalParam(keccak256(abi.encodePacked("QUORUM_PCT")), true);
+        _setCriticalParam(keccak256(abi.encodePacked("VOTING_PERIOD")), true);
+        _setCriticalParam(keccak256(abi.encodePacked("TIMELOCK_DELAY")), true);
+        _setCriticalParam(keccak256(abi.encodePacked("PROPOSAL_THRESHOLD")), true);
     }
 
     /**
@@ -95,14 +95,12 @@ contract Dual2FAPolicy is IAdamPolicy {
 
         // Check if emergency action
         if (topicId == TOPIC_EMERGENCY) {
-            emit TwoFARequired(identifier, "Emergency action always requires 2FA");
             return (VERDICT_REQUIRE_2FA, "Emergency action");
         }
 
         // Check treasury actions
         if (topicId == TOPIC_TREASURY) {
             if (value >= treasuryThreshold) {
-                emit TwoFARequired(identifier, "Treasury amount exceeds threshold");
                 return (VERDICT_REQUIRE_2FA, "Large treasury transaction");
             }
         }
@@ -111,14 +109,12 @@ contract Dual2FAPolicy is IAdamPolicy {
         if (topicId == TOPIC_PARAMS) {
             // Check if this is a critical parameter
             if (criticalParams[identifier]) {
-                emit TwoFARequired(identifier, "Critical parameter change");
                 return (VERDICT_REQUIRE_2FA, "Critical parameter");
             }
             
             // Check if change magnitude exceeds threshold
             if (actionType == 1) { // Parameter update
                 if (value >= paramChangeThreshold) {
-                    emit TwoFARequired(identifier, "Parameter change exceeds threshold");
                     return (VERDICT_REQUIRE_2FA, "Large parameter change");
                 }
             }
@@ -127,7 +123,6 @@ contract Dual2FAPolicy is IAdamPolicy {
         // Check if action explicitly requires 2FA
         bytes32 actionId = keccak256(abi.encodePacked(topicId, actionType, identifier));
         if (requires2FA[actionId]) {
-            emit TwoFARequired(actionId, "Action configured to require 2FA");
             return (VERDICT_REQUIRE_2FA, "Configured 2FA requirement");
         }
 

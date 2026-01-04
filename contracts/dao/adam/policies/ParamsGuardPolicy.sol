@@ -50,13 +50,13 @@ contract ParamsGuardPolicy is IAdamPolicy {
         _wasmHash = wasmHashValue;
 
         // Initialize common parameter bounds (in WAD format: 1e18 = 100%)
-        _setParamBounds("FEE_BPS", 0, 500, false, false); // 0-5%
-        _setParamBounds("QUORUM_PCT", 30e16, 200e16, true, false); // 30%-200%, can only increase
-        _setParamBounds("VOTING_PERIOD", 1 days, 30 days, false, false); // 1-30 days
-        _setParamBounds("TIMELOCK_DELAY", 1 days, 14 days, false, false); // 1-14 days
-        _setParamBounds("PROPOSAL_THRESHOLD", 1e18, 1000000e18, false, false); // 1-1M tokens
-        _setParamBounds("ENERGY_CAP", 0, type(uint256).max, false, false); // No upper limit
-        _setParamBounds("CARBON_CAP", 0, type(uint256).max, false, false); // No upper limit
+        _setParamBounds(keccak256(abi.encodePacked("FEE_BPS")), 0, 500, false, false); // 0-5%
+        _setParamBounds(keccak256(abi.encodePacked("QUORUM_PCT")), 30e16, 200e16, true, false); // 30%-200%, can only increase
+        _setParamBounds(keccak256(abi.encodePacked("VOTING_PERIOD")), 1 days, 30 days, false, false); // 1-30 days
+        _setParamBounds(keccak256(abi.encodePacked("TIMELOCK_DELAY")), 1 days, 14 days, false, false); // 1-14 days
+        _setParamBounds(keccak256(abi.encodePacked("PROPOSAL_THRESHOLD")), 1e18, 1000000e18, false, false); // 1-1M tokens
+        _setParamBounds(keccak256(abi.encodePacked("ENERGY_CAP")), 0, type(uint256).max, false, false); // No upper limit
+        _setParamBounds(keccak256(abi.encodePacked("CARBON_CAP")), 0, type(uint256).max, false, false); // No upper limit
     }
 
     /**
