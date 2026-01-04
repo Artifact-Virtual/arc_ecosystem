@@ -75,23 +75,22 @@ contract Dual2FAPolicy is IAdamPolicy {
 
     /**
      * @dev Evaluate if action requires 2FA
-     * @param ctx Context containing action details
+     * @param ctx Context containing action details (ABI-encoded)
      * @return verdict ALLOW, DENY, or REQUIRE_2FA based on evaluation
      * @return data Reason or empty
+     * 
+     * @notice Context format: abi.encode(topicId, actionType, identifier, value)
      */
     function evaluate(bytes calldata ctx) external view override returns (uint8 verdict, bytes memory data) {
         if (ctx.length == 0) {
             return (VERDICT_DENY, "Empty context");
         }
 
-        // Parse context - expect: (topicId, actionType, value/paramKey, amount)
-        // Format: 32 bytes topicId, 32 bytes actionType, 32 bytes identifier, 32 bytes value
-        require(ctx.length >= 128, "Dual2FA: invalid context length");
-        
-        uint256 topicId = uint256(bytes32(ctx[0:32]));
-        uint256 actionType = uint256(bytes32(ctx[32:64]));
-        bytes32 identifier = bytes32(ctx[64:96]);
-        uint256 value = uint256(bytes32(ctx[96:128]));
+        // Decode context using ABI encoding
+        (uint256 topicId, uint256 actionType, bytes32 identifier, uint256 value) = abi.decode(
+            ctx,
+            (uint256, uint256, bytes32, uint256)
+        );
 
         // Check if emergency action
         if (topicId == TOPIC_EMERGENCY) {

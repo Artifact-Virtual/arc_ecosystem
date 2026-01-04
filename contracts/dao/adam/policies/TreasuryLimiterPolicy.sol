@@ -30,15 +30,21 @@ contract TreasuryLimiterPolicy is IAdamPolicy {
     uint256 public epochStartTime;
     uint256 public epochBudgetCap;
     uint256 public epochSpent;
+    uint256 public epochReserved; // Reserved budget for queued proposals
     uint256 public largeTxThreshold;
 
     // Grant tracking
     mapping(bytes32 => bool) public approvedGrants;
+    
+    // Budget reservations for proposals
+    mapping(uint256 => uint256) public proposalReservations;
 
     event EpochBudgetSet(uint256 indexed epoch, uint256 cap);
     event EpochReset(uint256 indexed epoch, uint256 timestamp);
     event GrantApproved(bytes32 indexed grantId);
     event SpendingRecorded(uint256 indexed epoch, uint256 amount, uint256 totalSpent);
+    event BudgetReserved(uint256 indexed proposalId, uint256 amount, uint256 totalReserved);
+    event BudgetReleased(uint256 indexed proposalId, uint256 amount, uint256 totalReserved);
 
     modifier onlyAdmin() {
         require(msg.sender == admin, "TreasuryLimiter: not admin");
@@ -75,10 +81,8 @@ contract TreasuryLimiterPolicy is IAdamPolicy {
      * @return data Empty bytes or reason for denial
      * 
      * @notice This function is view-only and checks against current epoch budget.
-     * To prevent race conditions where multiple proposals pass validation but together
-     * exceed the budget, the actual execution should call recordSpending() atomically
-     * and enforce the budget check at execution time. The treasury contract should
-     * implement a mechanism to reserve or lock budget during proposal queuing.
+     * Budget reservation should be done via reserveBudget() after this check passes
+     * to prevent TOCTOU race conditions.
      */
     function evaluate(bytes calldata ctx) external view override returns (uint8 verdict, bytes memory data) {
         if (ctx.length == 0) {
@@ -92,16 +96,14 @@ contract TreasuryLimiterPolicy is IAdamPolicy {
             return _evaluateWithFreshBudget(ctx);
         }
 
-        // Parse context - expect: (amount, recipient, grantId)
-        // Format: 32 bytes amount, 20 bytes recipient, 32 bytes grantId
-        require(ctx.length >= 84, "TreasuryLimiter: invalid context length");
-        
-        uint256 amount = uint256(bytes32(ctx[0:32]));
-        address recipient = address(bytes20(ctx[32:52]));
-        bytes32 grantId = bytes32(ctx[52:84]);
+        // Parse context using ABI encoding - expect: (proposalId, amount, recipient, grantId)
+        (uint256 proposalId, uint256 amount, address recipient, bytes32 grantId) = abi.decode(
+            ctx,
+            (uint256, uint256, address, bytes32)
+        );
 
-        // Check if this would exceed budget
-        if (epochSpent + amount > epochBudgetCap) {
+        // Check if this would exceed budget (including reserved amounts)
+        if (epochSpent + epochReserved + amount > epochBudgetCap) {
             return (VERDICT_DENY, "Epoch budget exceeded");
         }
 
@@ -129,9 +131,10 @@ contract TreasuryLimiterPolicy is IAdamPolicy {
      * @dev Evaluate with fresh budget (for new epoch)
      */
     function _evaluateWithFreshBudget(bytes calldata ctx) internal view returns (uint8, bytes memory) {
-        uint256 amount = uint256(bytes32(ctx[0:32]));
-        address recipient = address(bytes20(ctx[32:52]));
-        bytes32 grantId = bytes32(ctx[52:84]);
+        (uint256 proposalId, uint256 amount, address recipient, bytes32 grantId) = abi.decode(
+            ctx,
+            (uint256, uint256, address, bytes32)
+        );
 
         // Check if amount exceeds cap for a single epoch
         if (amount > epochBudgetCap) {
@@ -154,14 +157,71 @@ contract TreasuryLimiterPolicy is IAdamPolicy {
     }
 
     /**
-     * @dev Record spending (only callable by treasury to prevent admin manipulation)
+     * @dev Reserve budget for a queued proposal (prevents TOCTOU race condition)
+     * @param proposalId The proposal ID to reserve budget for
+     * @param amount The amount to reserve
      */
-    function recordSpending(uint256 amount) external {
+    function reserveBudget(uint256 proposalId, uint256 amount) external {
+        require(msg.sender == treasury, "TreasuryLimiter: only treasury");
+        require(proposalReservations[proposalId] == 0, "TreasuryLimiter: already reserved");
+        
+        // Check if epoch needs reset
+        if (block.timestamp >= epochStartTime + epochDuration) {
+            _resetEpoch();
+        }
+
+        // Check if reservation would exceed budget
+        require(
+            epochSpent + epochReserved + amount <= epochBudgetCap,
+            "TreasuryLimiter: reservation would exceed budget"
+        );
+
+        proposalReservations[proposalId] = amount;
+        epochReserved += amount;
+        
+        emit BudgetReserved(proposalId, amount, epochReserved);
+    }
+
+    /**
+     * @dev Release budget reservation for a cancelled/rejected proposal
+     * @param proposalId The proposal ID to release budget for
+     */
+    function releaseBudget(uint256 proposalId) external {
+        require(msg.sender == treasury, "TreasuryLimiter: only treasury");
+        
+        uint256 reserved = proposalReservations[proposalId];
+        require(reserved > 0, "TreasuryLimiter: no reservation");
+        
+        proposalReservations[proposalId] = 0;
+        epochReserved -= reserved;
+        
+        emit BudgetReleased(proposalId, reserved, epochReserved);
+    }
+
+    /**
+     * @dev Record spending (only callable by treasury to prevent admin manipulation)
+     * @param proposalId The proposal ID being executed
+     * @param amount The amount being spent
+     */
+    function recordSpending(uint256 proposalId, uint256 amount) external {
         require(msg.sender == treasury, "TreasuryLimiter: only treasury");
         
         // Check if epoch needs reset
         if (block.timestamp >= epochStartTime + epochDuration) {
             _resetEpoch();
+        }
+
+        // If there was a reservation, release it first
+        uint256 reserved = proposalReservations[proposalId];
+        if (reserved > 0) {
+            proposalReservations[proposalId] = 0;
+            epochReserved -= reserved;
+            
+            // Use the actual amount, not the reserved amount (could be different)
+            require(amount <= epochBudgetCap - epochSpent, "TreasuryLimiter: exceeds budget");
+        } else {
+            // No reservation - check budget directly
+            require(epochSpent + amount <= epochBudgetCap, "TreasuryLimiter: exceeds budget");
         }
 
         epochSpent += amount;

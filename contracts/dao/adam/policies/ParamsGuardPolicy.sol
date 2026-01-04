@@ -68,28 +68,31 @@ contract ParamsGuardPolicy is IAdamPolicy {
 
     /**
      * @dev Evaluate parameter change against constitutional rules
-     * @param ctx Context containing parameter changes to validate
+     * @param ctx Context containing parameter changes to validate (ABI-encoded)
      * @return verdict ALLOW if all changes valid, DENY otherwise
      * @return data Empty bytes
+     * 
+     * @notice Context format: abi.encode(ParamChange[])
+     * where ParamChange = (bytes32 key, uint256 oldValue, uint256 newValue)
      */
     function evaluate(bytes calldata ctx) external view override returns (uint8 verdict, bytes memory data) {
-        // Decode context - expect array of parameter changes
-        // Format: [(key, oldValue, newValue), ...]
-        
         if (ctx.length == 0) {
             return (VERDICT_ALLOW, "");
         }
 
-        // Parse context as parameter changes
-        uint256 numChanges = ctx.length / 96; // Each change is 3x32 bytes
+        // Decode parameter changes using ABI encoding
+        // Expected format: array of (bytes32 key, uint256 oldValue, uint256 newValue) tuples
+        (bytes32[] memory keys, uint256[] memory oldValues, uint256[] memory newValues) = abi.decode(
+            ctx,
+            (bytes32[], uint256[], uint256[])
+        );
         
-        for (uint256 i = 0; i < numChanges; i++) {
-            uint256 offset = i * 96;
-            
-            // Extract parameter key, old value, new value
-            bytes32 paramKey = bytes32(ctx[offset:offset + 32]);
-            uint256 oldValue = uint256(bytes32(ctx[offset + 32:offset + 64]));
-            uint256 newValue = uint256(bytes32(ctx[offset + 64:offset + 96]));
+        require(keys.length == oldValues.length && keys.length == newValues.length, "ParamsGuard: array length mismatch");
+        
+        for (uint256 i = 0; i < keys.length; i++) {
+            bytes32 paramKey = keys[i];
+            uint256 oldValue = oldValues[i];
+            uint256 newValue = newValues[i];
             
             // Check if parameter is in allowlist
             if (!allowlist[paramKey]) {

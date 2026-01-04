@@ -80,22 +80,24 @@ contract RWARecencyPolicy is IAdamPolicy {
 
     /**
      * @dev Evaluate RWA update against recency and operator requirements
-     * @param ctx Context containing RWA update details
+     * @param ctx Context containing RWA update details (ABI-encoded)
      * @return verdict ALLOW if valid, DENY otherwise
      * @return data Reason for verdict
+     * 
+     * @notice Context format: abi.encode(topicId, timestamp, operators[])
      */
     function evaluate(bytes calldata ctx) external view override returns (uint8 verdict, bytes memory data) {
         if (ctx.length == 0) {
             return (VERDICT_DENY, "Empty context");
         }
 
-        // Parse context - expect: (topicId, numOracles, timestamp, operators[])
-        // Format: 32 bytes topicId, 32 bytes numOracles, 32 bytes timestamp, then operator addresses
-        require(ctx.length >= 96, "RWARecency: invalid context length");
+        // Decode context using ABI encoding
+        (uint256 topicId, uint256 timestamp, address[] memory operators) = abi.decode(
+            ctx,
+            (uint256, uint256, address[])
+        );
         
-        uint256 topicId = uint256(bytes32(ctx[0:32]));
-        uint256 numOracles = uint256(bytes32(ctx[32:64]));
-        uint256 timestamp = uint256(bytes32(ctx[64:96]));
+        uint256 numOracles = operators.length;
 
         // Check recency
         uint256 recencyWindow = topicRecencyWindow[topicId];
@@ -118,17 +120,9 @@ contract RWARecencyPolicy is IAdamPolicy {
             return (VERDICT_DENY, "Insufficient oracle confirmations");
         }
 
-        // Check operators
-        uint256 expectedOperatorBytes = numOracles * 32; // Addresses padded to 32 bytes
-        if (ctx.length < 96 + expectedOperatorBytes) {
-            return (VERDICT_DENY, "Incomplete operator data");
-        }
-
         // Validate each operator
         for (uint256 i = 0; i < numOracles; i++) {
-            uint256 offset = 96 + (i * 32);
-            // Extract 20-byte address from 32-byte padded slot
-            address operator = address(uint160(uint256(bytes32(ctx[offset:offset + 32]))));
+            address operator = operators[i];
             
             // Check if operator is active
             if (!operatorActive[operator]) {
