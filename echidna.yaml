@@ -1,0 +1,57 @@
+# Echidna Configuration for ADAM Policy Fuzzing
+# Run with: echidna-test . --contract AdamPolicyFuzzTest --config echidna.yaml
+
+# Test mode
+testMode: assertion
+
+# Execution parameters
+testLimit: 50000        # Number of test sequences
+seqLen: 100             # Length of each test sequence
+shrinkLimit: 5000       # Shrinking attempts for counterexamples
+
+# Contract deployment
+deployContracts:
+  - AdamPolicyFuzzTest
+
+# Coverage options
+coverage: true
+coverageFormats:
+  - html
+  - txt
+
+# Corpus and seed management
+corpusDir: tests/fuzz/corpus
+seed: 42
+
+# Transaction parameters
+maxGasPerBlock: 12000000
+maxTimeDelay: 86400     # 1 day
+maxBlockDelay: 100
+
+# Worker configuration
+workers: 4              # Parallel workers
+timeout: 3600           # 1 hour timeout
+
+# Optimization
+cryticArgs:
+  - --compile-force-framework
+  - hardhat
+
+# Dashboard
+dashboard: true
+dashboard-port: 3001
+
+# Filter functions
+filterFunctions:
+  - "echidna_*"         # Invariant tests
+  - "fuzz_*"            # Property tests
+
+# Assertion checking
+checkAsserts: true
+assertionCheck: true
+
+# Format
+format: text
+
+# Output
+quiet: false

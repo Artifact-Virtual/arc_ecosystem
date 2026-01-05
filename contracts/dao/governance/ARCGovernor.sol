@@ -14,6 +14,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/ECDSAUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/EIP712Upgradeable.sol";
+import "./AdamGovernorIntegration.sol";
 
 /**
  * @title ARC Governor V2 - Advanced Decentralized Governance System
@@ -49,7 +50,8 @@ contract ARCGovernor is
     AccessControlUpgradeable,
     ReentrancyGuardUpgradeable,
     PausableUpgradeable,
-    EIP712Upgradeable
+    EIP712Upgradeable,
+    AdamGovernorIntegration
 {
     using SafeERC20Upgradeable for IERC20Upgradeable;
     using ECDSAUpgradeable for bytes32;
@@ -224,7 +226,8 @@ contract ARCGovernor is
         address _governanceToken,
         address _timelock,
         address _treasury,
-        GovernanceConfig memory _config
+        GovernanceConfig memory _config,
+        address _adamHost
     ) public initializer {
         __AccessControl_init();
         __ReentrancyGuard_init();
@@ -243,6 +246,9 @@ contract ARCGovernor is
         timelock = _timelock;
         treasury = _treasury;
         config = _config;
+        
+        // Initialize ADAM integration
+        _initializeAdamIntegration(_adamHost);
     }
 
     /**
@@ -294,6 +300,17 @@ contract ARCGovernor is
         proposal.proposalHash = keccak256(abi.encode(
             targets, values, calldatas, block.timestamp, msg.sender
         ));
+
+        // ADAM Constitutional Validation at submission
+        bytes memory emptyProof = "";
+        bytes memory diff = abi.encode(targets, values, calldatas);
+        bool adamApproved = _validateWithAdamOnSubmit(
+            proposalId,
+            uint8(category),
+            emptyProof,
+            diff
+        );
+        require(adamApproved, "Proposal rejected by ADAM constitutional validation");
 
         analytics.totalProposals++;
 
@@ -361,13 +378,43 @@ contract ARCGovernor is
     }
 
     /**
-     * @dev Execute successful proposal
+     * @dev Queue successful proposal with ADAM validation
+     */
+    function queue(uint256 proposalId) external nonReentrant whenNotPaused {
+        Proposal storage proposal = proposals[proposalId];
+        ProposalState currentState = getProposalState(proposalId);
+        require(currentState == ProposalState.Succeeded, "Proposal not succeeded");
+        require(proposal.state != ProposalState.Queued, "Already queued");
+
+        // ADAM Constitutional Validation at queue
+        bytes memory emptyProof = "";
+        bytes memory diff = abi.encode(proposal.targets, proposal.values, proposal.calldatas);
+        (bool adamApproved, bool needs2FA) = _validateWithAdamOnQueue(
+            proposalId,
+            uint8(proposal.category),
+            emptyProof,
+            diff
+        );
+        
+        if (needs2FA) {
+            // Store that 2FA is required - this would need additional state management
+            // For now, we reject and emit event for off-chain 2FA handling
+            revert("Proposal requires 2FA satisfaction before queueing");
+        }
+        
+        require(adamApproved, "Proposal rejected by ADAM at queue");
+
+        proposal.state = ProposalState.Queued;
+    }
+
+    /**
+     * @dev Execute successful proposal with ADAM validation
      */
     function execute(
         uint256 proposalId
     ) external nonReentrant whenNotPaused onlyRole(EXECUTOR_ROLE) {
         Proposal storage proposal = proposals[proposalId];
-        require(proposal.state == ProposalState.Succeeded, "Proposal not succeeded");
+        require(proposal.state == ProposalState.Queued || proposal.state == ProposalState.Succeeded, "Proposal not ready");
         require(!proposal.executed, "Already executed");
 
         // Check timelock delay
@@ -375,6 +422,17 @@ contract ARCGovernor is
             block.timestamp >= proposal.endBlock + proposal.timelockDelay,
             "Timelock delay not met"
         );
+
+        // ADAM Constitutional Validation at execution
+        bytes memory emptyProof = "";
+        bytes memory diff = abi.encode(proposal.targets, proposal.values, proposal.calldatas);
+        bool adamApproved = _validateWithAdamOnExecute(
+            proposalId,
+            uint8(proposal.category),
+            emptyProof,
+            diff
+        );
+        require(adamApproved, "Proposal rejected by ADAM at execution");
 
         proposal.executed = true;
         proposal.state = ProposalState.Executed;
