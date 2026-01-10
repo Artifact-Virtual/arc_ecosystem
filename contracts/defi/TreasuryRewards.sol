@@ -71,6 +71,9 @@ contract TreasuryRewards is Initializable, UUPSUpgradeable, AccessControlUpgrade
     }
 
     function setDestinations(address _vault, address _lpStaking) external onlyRole(REWARD_MANAGER_ROLE) {
+
+        //Added input validation
+        require(_vault != address(0) || _lpStaking != address(0), "At least one destination required");
         vault = _vault;
         lpStaking = _lpStaking;
     }
