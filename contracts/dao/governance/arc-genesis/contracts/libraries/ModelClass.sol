@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.21;
+// SPDX-License-Identifier: AGPL-3.0
+pragma solidity ^0.8.26;
 
 /**
  * @title ModelClass
@@ -10,38 +10,20 @@ pragma solidity ^0.8.21;
  * Each class represents a specific category of AI model.
  */
 library ModelClass {
-    // Model class identifiers
-    uint8 public constant GENERATIVE = 1;
-    uint8 public constant DISCRIMINATIVE = 2;
-    uint8 public constant REINFORCEMENT = 3;
-    uint8 public constant TRANSFORMER = 4;
-    uint8 public constant DIFFUSION = 5;
-    uint8 public constant CONSTITUTIONAL = 6;
-    
-    // Maximum valid class ID
-    uint8 public constant MAX_CLASS_ID = 6;
-    
-    /**
-     * @notice Check if a model class ID is valid
-     * @param classId The class ID to validate
-     * @return bool True if valid, false otherwise
-     */
-    function isValid(uint8 classId) internal pure returns (bool) {
-        return classId > 0 && classId <= MAX_CLASS_ID;
-    }
-    
-    /**
-     * @notice Get human-readable name for a model class
-     * @param classId The class ID
-     * @return string The class name
-     */
-    function getName(uint8 classId) internal pure returns (string memory) {
-        if (classId == GENERATIVE) return "Generative";
-        if (classId == DISCRIMINATIVE) return "Discriminative";
-        if (classId == REINFORCEMENT) return "Reinforcement";
-        if (classId == TRANSFORMER) return "Transformer";
-        if (classId == DIFFUSION) return "Diffusion";
-        if (classId == CONSTITUTIONAL) return "Constitutional";
-        return "Unknown";
+    bytes32 internal constant REASONING_CORE =
+        keccak256("ARC::MODEL::REASONING_CORE");
+    bytes32 internal constant GENERATIVE_INTERFACE =
+        keccak256("ARC::MODEL::GENERATIVE_INTERFACE");
+    bytes32 internal constant OPERATIONAL_AGENT =
+        keccak256("ARC::MODEL::OPERATIONAL_AGENT");
+    bytes32 internal constant VERIFIER_AUDITOR =
+        keccak256("ARC::MODEL::VERIFIER_AUDITOR");
+
+    function isValid(bytes32 classId) internal pure returns (bool) {
+        return
+            classId == REASONING_CORE ||
+            classId == GENERATIVE_INTERFACE ||
+            classId == OPERATIONAL_AGENT ||
+            classId == VERIFIER_AUDITOR;
     }
 }

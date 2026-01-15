@@ -1,280 +1,108 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.21;
+// SPDX-License-Identifier: AGPL-3.0
+pragma solidity ^0.8.26;
 
-import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
-
-import "./IARCModelSBT.sol";
-import "../registry/IARCModelRegistry.sol";
-import "../libraries/ModelClass.sol";
-import "../libraries/Errors.sol";
+interface IARCModelRegistry {
+    function modelClass(bytes32 modelId) external view returns (bytes32);
+}
 
 /**
  * @title ARCModelSBT
  * @notice Soulbound token identity layer for AI models
- * @dev ERC721-based non-transferable tokens (ERC-5192 compliant)
+ * @dev Non-transferable tokens (ERC-5192 compliant)
  * 
- * RESPONSIBILITIES:
- * - Issue soulbound identity to models
- * - Encode class, version, lineage on-chain
- * - Enforce non-transferability
- * - Support revocation for compliance
+ * This is delicate and quite hot. Handle with care.
  * 
  * This is how GLADIUS comes to life - each model gets a unique,
- * non-transferable identity token that proves its existence and
- * encodes its fundamental properties.
- * 
- * @custom:security-contact security@arcexchange.io
+ * non-transferable identity token.
  */
-contract ARCModelSBT is
-    IARCModelSBT,
-    Initializable,
-    ERC721Upgradeable,
-    UUPSUpgradeable,
-    AccessControlUpgradeable,
-    PausableUpgradeable
-{
-    // Roles
-    bytes32 public constant ISSUER_ROLE = keccak256("ISSUER_ROLE");
-    bytes32 public constant REVOKER_ROLE = keccak256("REVOKER_ROLE");
-    
-    // Reference to Registry contract
-    IARCModelRegistry public registry;
-    
-    // Token ID counter
-    uint256 private _nextTokenId;
-    
-    // Token metadata
-    mapping(uint256 => SBTMetadata) private _metadata;
-    
-    // Owner => token IDs
-    mapping(address => uint256[]) private _ownedTokens;
-    
-    // ModelId => tokenId (for uniqueness check)
-    mapping(bytes32 => uint256) private _modelToToken;
-    
-    /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor() {
-        _disableInitializers();
+contract ARCModelSBT {
+    error NotRegistry();
+    error AlreadyMinted();
+    error NonTransferable();
+    error InvalidModel();
+
+    event ModelMinted(
+        uint256 indexed tokenId,
+        bytes32 indexed modelId,
+        bytes32 indexed classId
+    );
+
+    event ModelRevoked(uint256 indexed tokenId);
+
+    string public name = "ARC Model Identity";
+    string public symbol = "ARC-MODEL";
+
+    address public immutable registry;
+    address public immutable governance;
+
+    uint256 private _nextId = 1;
+
+    mapping(uint256 => bytes32) public tokenModel;
+    mapping(bytes32 => uint256) public modelToken;
+    mapping(uint256 => bool) public revoked;
+
+    constructor(address registry_, address governance_) {
+        registry = registry_;
+        governance = governance_;
     }
-    
-    /**
-     * @notice Initialize the SBT contract
-     * @param registry_ Address of the ARCModelRegistry contract
-     * @param governance Address to receive admin roles
-     * @param name_ Token name
-     * @param symbol_ Token symbol
-     */
-    function initialize(
-        address registry_,
-        address governance,
-        string memory name_,
-        string memory symbol_
-    ) external initializer {
-        if (registry_ == address(0) || governance == address(0)) {
-            revert Errors.ZeroAddress();
-        }
-        
-        __ERC721_init(name_, symbol_);
-        __UUPSUpgradeable_init();
-        __AccessControl_init();
-        __Pausable_init();
-        
-        registry = IARCModelRegistry(registry_);
-        
-        // Setup roles
-        _grantRole(DEFAULT_ADMIN_ROLE, governance);
-        _grantRole(ISSUER_ROLE, governance);
-        _grantRole(REVOKER_ROLE, governance);
-        
-        _nextTokenId = 1; // Start from 1
+
+    modifier onlyRegistry() {
+        if (msg.sender != registry) revert NotRegistry();
+        _;
     }
-    
-    /**
-     * @notice Issue a soulbound token
-     * @param to Address to receive the SBT
-     * @param modelId Model ID from registry
-     * @param classId Model class
-     * @param version Model version
-     * @param lineageHash Lineage hash
-     * @return tokenId The issued token ID
-     */
-    function issueSBT(
-        address to,
-        bytes32 modelId,
-        uint8 classId,
-        uint256 version,
-        bytes32 lineageHash
-    ) external override onlyRole(ISSUER_ROLE) whenNotPaused returns (uint256 tokenId) {
-        // Validate recipient
-        if (to == address(0)) {
-            revert Errors.InvalidOwner(to);
-        }
-        
-        // Validate model class
-        if (!ModelClass.isValid(classId)) {
-            revert Errors.InvalidModelClass(classId);
-        }
-        
-        // Verify model exists in registry and is active
-        if (!registry.isModelActive(modelId)) {
-            revert Errors.ModelNotRegistered(modelId);
-        }
-        
-        // Check if SBT already issued for this model
-        if (_modelToToken[modelId] != 0) {
-            revert Errors.SBTAlreadyIssued(to);
-        }
-        
-        // Mint token
-        tokenId = _nextTokenId++;
-        _safeMint(to, tokenId);
-        
-        // Store metadata
-        _metadata[tokenId] = SBTMetadata({
-            modelId: modelId,
-            classId: classId,
-            version: version,
-            lineageHash: lineageHash,
-            issuedAt: block.timestamp,
-            revoked: false
-        });
-        
-        // Update indices
-        _ownedTokens[to].push(tokenId);
-        _modelToToken[modelId] = tokenId;
-        
-        emit SBTIssued(to, tokenId, modelId, classId);
-        
-        return tokenId;
+
+    modifier onlyGovernance() {
+        require(msg.sender == governance, "NOT_GOVERNANCE");
+        _;
     }
-    
-    /**
-     * @notice Revoke an SBT
-     * @param tokenId The token to revoke
-     * @param reason Reason for revocation
-     */
-    function revokeSBT(
-        uint256 tokenId,
-        string calldata reason
-    ) external override onlyRole(REVOKER_ROLE) {
-        if (!_exists(tokenId)) {
-            revert Errors.InvalidTokenId(tokenId);
-        }
-        
-        SBTMetadata storage metadata = _metadata[tokenId];
-        
-        if (metadata.revoked) {
-            revert Errors.SBTRevoked(tokenId);
-        }
-        
-        metadata.revoked = true;
-        
-        emit SBTRevoked(tokenId, reason);
+
+    function mint(bytes32 modelId) external onlyRegistry returns (uint256 tokenId) {
+        if (modelToken[modelId] != 0) revert AlreadyMinted();
+
+        bytes32 classId = IARCModelRegistry(registry).modelClass(modelId);
+        if (classId == bytes32(0)) revert InvalidModel();
+
+        tokenId = _nextId++;
+        tokenModel[tokenId] = modelId;
+        modelToken[modelId] = tokenId;
+
+        emit ModelMinted(tokenId, modelId, classId);
     }
-    
-    /**
-     * @notice Get SBT metadata
-     * @param tokenId The token ID
-     * @return SBTMetadata The metadata
-     */
-    function getSBTMetadata(uint256 tokenId) external view override returns (SBTMetadata memory) {
-        if (!_exists(tokenId)) {
-            revert Errors.InvalidTokenId(tokenId);
-        }
-        return _metadata[tokenId];
+
+    function revoke(uint256 tokenId) external onlyGovernance {
+        revoked[tokenId] = true;
+        emit ModelRevoked(tokenId);
     }
-    
-    /**
-     * @notice Check if an SBT is revoked
-     * @param tokenId The token ID
-     * @return bool True if revoked
-     */
-    function isRevoked(uint256 tokenId) external view override returns (bool) {
-        if (!_exists(tokenId)) {
-            revert Errors.InvalidTokenId(tokenId);
-        }
-        return _metadata[tokenId].revoked;
+
+    /* ========= ERC-721 MINIMAL SURFACE ========= */
+
+    function ownerOf(uint256) external pure returns (address) {
+        revert NonTransferable();
     }
-    
-    /**
-     * @notice Get SBTs owned by an address
-     * @param owner The owner address
-     * @return uint256[] Array of token IDs
-     */
-    function getSBTsByOwner(address owner) external view override returns (uint256[] memory) {
-        return _ownedTokens[owner];
+
+    function balanceOf(address) external pure returns (uint256) {
+        revert NonTransferable();
     }
-    
-    /**
-     * @notice Check if an address owns an SBT for a specific model
-     * @param owner The owner address
-     * @param modelId The model ID
-     * @return bool True if owns
-     */
-    function hasSBTForModel(address owner, bytes32 modelId) external view override returns (bool) {
-        uint256 tokenId = _modelToToken[modelId];
-        if (tokenId == 0) {
-            return false;
-        }
-        return ownerOf(tokenId) == owner && !_metadata[tokenId].revoked;
+
+    function transferFrom(address, address, uint256) external pure {
+        revert NonTransferable();
     }
-    
-    /**
-     * @notice Override transfer functions to make tokens soulbound
-     */
-    function _beforeTokenTransfer(
-        address from,
-        address to,
-        uint256 tokenId,
-        uint256 batchSize
-    ) internal virtual override {
-        super._beforeTokenTransfer(from, to, tokenId, batchSize);
-        
-        // Allow minting (from == address(0))
-        // Allow burning (to == address(0))
-        // Block all other transfers
-        if (from != address(0) && to != address(0)) {
-            emit TransferAttempted(from, to, tokenId);
-            revert Errors.SBTTransferNotAllowed();
-        }
+
+    function approve(address, uint256) external pure {
+        revert NonTransferable();
     }
-    
-    /**
-     * @notice Check if token exists
-     */
-    function _exists(uint256 tokenId) internal view returns (bool) {
-        return _ownerOf(tokenId) != address(0);
+
+    function getApproved(uint256) external pure returns (address) {
+        return address(0);
     }
-    
-    /**
-     * @notice Pause the contract
-     */
-    function pause() external onlyRole(DEFAULT_ADMIN_ROLE) {
-        _pause();
+
+    function isApprovedForAll(address, address) external pure returns (bool) {
+        return false;
     }
-    
-    /**
-     * @notice Unpause the contract
-     */
-    function unpause() external onlyRole(DEFAULT_ADMIN_ROLE) {
-        _unpause();
-    }
-    
-    /**
-     * @notice Authorize upgrade
-     */
-    function _authorizeUpgrade(address newImplementation) internal override onlyRole(DEFAULT_ADMIN_ROLE) {}
-    
-    /**
-     * @notice ERC165 support
-     */
-    function supportsInterface(
-        bytes4 interfaceId
-    ) public view virtual override(ERC721Upgradeable, AccessControlUpgradeable) returns (bool) {
-        return super.supportsInterface(interfaceId);
+
+    /* ========= ERC-5192 ========= */
+
+    function locked(uint256) external pure returns (bool) {
+        return true;
     }
 }
