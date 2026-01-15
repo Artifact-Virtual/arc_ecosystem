@@ -7,7 +7,7 @@
 
 ---
 
-## 🏛️ Artifact Development Engine
+## 🏛️ ARC Development Engine
 
 **Professional Development Platform for Building Smart Contract Artifacts**
 
