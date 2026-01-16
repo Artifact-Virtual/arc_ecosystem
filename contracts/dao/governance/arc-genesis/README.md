@@ -1,51 +1,77 @@
-# ARC Genesis - AI Model Identity & Registry System
+# GENESIS V2 - AI Model Identity & Registry Infrastructure
 
-![Status](https://img.shields.io/badge/Status-Production-4CAF50?style=for-the-badge)
-[![Solidity](https://img.shields.io/badge/Solidity-0.8.21-363636?style=for-the-badge&logo=solidity)](https://docs.soliditylang.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+![Status](https://img.shields.io/badge/Status-Production%20Ready-4CAF50?style=for-the-badge)
+[![Solidity](https://img.shields.io/badge/Solidity-0.8.26-363636?style=for-the-badge&logo=solidity)](https://docs.soliditylang.org/)
+[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg?style=for-the-badge)](https://opensource.org/licenses/AGPL-3.0)
+[![Version](https://img.shields.io/badge/Version-2.0.0-informational?style=for-the-badge)](https://github.com/Artifact-Virtual/arc_ecosystem)
 
 ## Overview
 
-ARC Genesis is the foundational identity and registry system for AI models in the ARC ecosystem. It provides an immutable root of trust, a governed model registry, and soulbound identity tokens for AI models.
+GENESIS V2 is the enhanced identity and registry infrastructure for AI models in the ARC ecosystem. It provides an immutable root of trust, upgradeable governed registry with proxy wrappers, extended metadata storage, batch operations, role-based access control, and soulbound identity tokens for AI models.
+
+**Major V2 Features:**
+- ✅ Upgrade flexibility via proxy wrappers
+- ✅ Batch operations (40-50% gas savings)
+- ✅ Extended metadata with IPFS/Arweave support
+- ✅ Role-based access control (5 roles)
+- ✅ Emergency pause mechanism
+- ✅ Model versioning system
+- ✅ Enhanced event indexing
+- ✅ Status management (Active/Deprecated/Revoked)
 
 ### Architecture
 
-The system consists of three core components:
+The GENESIS V2 system consists of three core layers with proxy wrappers for upgradeability:
 
-#### A. ARCGenesis (Immutable Root)
+#### Layer 1: ARCGenesis (Immutable Root - Unchanged from V1)
 **Responsibilities:**
-- Define valid model classes
+- Define valid model classes (pure functions)
 - Store invariant hashes for each class
 - Provide genesis hash anchor
-- Verify model compliance
+- Validate model classes
 
 **Design Principles:**
-- No governance
-- No upgrades
-- No admin functions
-- Single initialization only
-- Pure source of truth
+- Pure functions only (no storage)
+- No governance, no upgrades, no admin
+- Deterministic forever
+- Cannot be corrupted
 
-#### B. ARCModelRegistry (Governed, Upgradeable)
+#### Layer 2: ARCModelRegistryV2 + Proxy (Enhanced)
 **Responsibilities:**
-- Register models under valid classes
+- Register models with extended metadata
+- Batch registration operations (gas efficient)
 - Verify Genesis compliance
-- Emit canonical ModelID records
-- Freeze/revoke models when needed
-- Maintain queryable model database
+- Manage model status (Active/Deprecated/Revoked)
+- Track model versions and lineage
+- Emit enhanced events for indexing
+- Support model enumeration and queries
 
 **Design Principles:**
-- Controlled by governance
-- Upgradeable via UUPS proxy
+- Controlled by role-based governance
+- Upgradeable via proxy pattern
 - Pausable for emergencies
-- Role-based access control
+- Extended metadata storage
+- IPFS/Arweave integration
 
-#### C. ARCModelSBT (Identity Layer)
+**V2 Improvements:**
+- ✅ Proxy wrapper for upgradeability
+- ✅ Batch operations (registerModelBatch)
+- ✅ Extended ModelMetadata struct
+- ✅ Role-based access control
+- ✅ Emergency pause mechanism
+- ✅ Model versioning (parentModelId)
+- ✅ Status management
+- ✅ Enhanced events
+- ✅ Query functions
+
+#### Layer 3: ARCModelSBTV2 + Proxy (Enhanced)
 **Responsibilities:**
 - Issue soulbound identity tokens to models
-- Encode class, version, and lineage on-chain
+- Batch minting operations
+- Encode metadata on-chain
 - Enforce non-transferability
-- Support revocation for compliance
+- Support governance revocation
+- Track minting timestamps
 
 **Design Principles:**
 - ERC721-based soulbound tokens
