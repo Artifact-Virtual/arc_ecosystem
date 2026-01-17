@@ -1925,3 +1925,507 @@ In the next chapter, we'll explore the model classification system in greater de
 
 ---
 
+
+
+## 6. Model Classification System {#model-classification}
+
+### 6.1 Philosophy of Classification
+
+The model classification system in ARCGenesis represents a fundamental design choice: rather than attempting to classify AI models by their internal architecture, training methodology, or performance characteristics, we classify them by **capability and constraint**. This philosophical approach has deep implications for how the system operates and what guarantees it can provide.
+
+This chapter examines the taxonomy of the four model classes, exploring their design rationale, interaction patterns, and how they enable secure capability-based access control in decentralized AI systems. We'll see how ARCGenesis's simple yet powerful classification framework provides the foundation for complex multi-agent workflows while maintaining security through separation of duties.
+
+### 6.2 Capability-Based Classification Rationale
+
+Traditional AI taxonomies focus on implementation:
+- **By Architecture**: CNNs, RNNs, Transformers, GANs
+- **By Training**: Supervised, Unsupervised, Reinforcement Learning
+- **By Domain**: Vision, NLP, Speech, Time Series
+
+ARCGenesis rejects implementation-based classification in favor of **capability-based classification**. The critical question is not "what architecture does this model use?" but "**what is this model allowed to do?**"
+
+**Security Through Least Privilege**: Models receive only the capabilities they need. REASONING_CORE models don't need execution privileges, so they don't get them.
+
+**Implementation Agnostic**: Classification doesn't depend on whether a model uses transformers or decision trees. This future-proofs against AI architecture advances.
+
+**Verifiable Constraints**: While internal architecture is hard to verify on-chain, capability constraints can be enforced at the application layer through access control.
+
+### 6.3 The Four Classes in Depth
+
+#### 6.3.1 REASONING_CORE: Analysis Without Execution
+
+**Design Philosophy**: Separate decision-making from action-taking.
+
+**Invariant Constraints**: `NO_EXECUTION|NO_ASSETS|ADVISORY_ONLY`
+
+**Detailed Capabilities**:
+- Analyze complex data and scenarios
+- Generate recommendations and insights
+- Participate in governance discussions (but not execute votes)
+- Provide risk assessments
+- Simulate outcomes of proposed actions
+
+**Prohibited Actions**:
+- Execute any on-chain transaction
+- Hold or transfer assets
+- Implement recommendations without human/governance approval
+- Verify other models (that's VERIFIER_AUDITOR's role)
+
+**Use Cases in Practice**:
+1. **DAO Governance Analysis**: A REASONING_CORE model reviews a proposal to change treasury allocation. It simulates various market scenarios, estimates risks, and recommends "Support" with 85% confidence. Token holders read the analysis and vote accordingly.
+
+2. **DeFi Strategy Optimization**: Users input their portfolio and risk tolerance. REASONING_CORE analyzes DeFi opportunities and suggests an optimal yield farming strategy. Users manually implement the strategy (or delegate to OPERATIONAL_AGENT).
+
+3. **Smart Contract Audit Assistance**: Auditors use REASONING_CORE to identify potential vulnerabilities in code. The model flags suspicious patterns, but human auditors make final determinations.
+
+**Security Rationale**: Even if a REASONING_CORE model is compromised or makes catastrophically bad recommendations, it cannot directly cause harm. Its outputs are always subject to human review or governance approval before execution.
+
+#### 6.3.2 GENERATIVE_INTERFACE: Content Creation Boundary
+
+**Design Philosophy**: Models that generate outputs for human consumption must be isolated from operational control.
+
+**Invariant Constraints**: `NO_GOV|NO_VERIFY|NO_EXEC`
+
+**Detailed Capabilities**:
+- Generate text, images, multimedia content
+- Create user interfaces dynamically
+- Format data for human readability
+- Translate between representations
+- Produce documentation and reports
+
+**Prohibited Actions**:
+- Participate in governance votes
+- Audit or verify other models or systems
+- Execute operational tasks
+- Manage assets or execute transactions
+
+**Use Cases in Practice**:
+1. **Automated Reporting**: GENERATIVE_INTERFACE produces weekly DAO financial reports, converting raw blockchain data into readable markdown with charts.
+
+2. **Dynamic UI Generation**: Based on user preferences and context, generates customized dashboards for interacting with DeFi protocols.
+
+3. **Documentation Generation**: Creates human-readable documentation from smart contract code and NatSpec comments.
+
+**Security Rationale**: Generative models are powerful but potentially manipulable (prompt injection, training data poisoning). By isolating them from governance and execution, we prevent attackers from using generated content to gain unauthorized control.
+
+**Example Attack Prevented**: An attacker poisons a generative model's training to produce malicious governance proposals disguised as legitimate ones. Because GENERATIVE_INTERFACE cannot participate in governance, the attack fails—proposals must still be submitted through proper channels.
+
+#### 6.3.3 OPERATIONAL_AGENT: Bounded Autonomous Execution
+
+**Design Philosophy**: Enable automation while maintaining strict bounds and oversight.
+
+**Invariant Constraints**: `EXEC_ONLY|NO_POLICY|NO_VERIFY`
+
+**Detailed Capabilities**:
+- Execute transactions within approved parameters
+- Trigger automated actions based on conditions
+- Manage routine operational tasks
+- Interact with smart contracts on behalf of users or DAOs
+- Rebalance portfolios, execute trades, process payments
+
+**Prohibited Actions**:
+- Set or modify the parameters they operate under
+- Verify their own behavior or other models
+- Participate in policy-making governance
+- Operate outside pre-approved bounds
+
+**Use Cases in Practice**:
+1. **Treasury Rebalancing**: DAO governance sets target allocations (60% stablecoins, 30% ETH, 10% governance tokens). OPERATIONAL_AGENT automatically rebalances when allocations drift beyond thresholds.
+
+2. **Automated Market Making**: Within risk parameters (max position size, slippage tolerance), provides liquidity to DEX pools.
+
+3. **Bill Payment Automation**: Pays recurring on-chain expenses (oracle fees, infrastructure costs) on schedule.
+
+**Security Rationale**: OPERATIONAL_AGENT models have dangerous privileges (execution), but these are bounded:
+- **Parameters Set by Governance**: Can't change its own risk limits
+- **Independent Verification**: VERIFIER_AUDITOR models monitor all actions
+- **Revocability**: Governance can revoke SBT if model misbehaves
+
+**Separation of Duties**: OPERATIONAL_AGENT executes but doesn't decide strategy. REASONING_CORE decides strategy but can't execute.
+
+#### 6.3.4 VERIFIER_AUDITOR: Independent Oversight
+
+**Design Philosophy**: Verification must be independent from execution and policy-setting.
+
+**Invariant Constraints**: `VERIFY_ONLY|NO_EXEC|NO_POLICY`
+
+**Detailed Capabilities**:
+- Audit other models' behavior
+- Verify compliance with policies
+- Check system invariants
+- Validate cryptographic proofs
+- Monitor for anomalies and raise alerts
+
+**Prohibited Actions**:
+- Execute operational tasks
+- Set or modify policies
+- Remediate issues (can only report them)
+
+**Use Cases in Practice**:
+1. **Real-Time Compliance Monitoring**: Watches every OPERATIONAL_AGENT transaction, verifying compliance with risk parameters. Raises alerts if violations detected.
+
+2. **Cross-Model Behavioral Analysis**: Analyzes patterns across multiple models to detect coordinated misbehavior or emergent risks.
+
+3. **Cryptographic Proof Validation**: Verifies zero-knowledge proofs or other cryptographic attestations used in the ecosystem.
+
+**Security Rationale**: Verifiers must be independent:
+- **No Execution**: Can't "fix" problems they find, preventing cover-ups
+- **No Policy Setting**: Can't change rules they verify against, ensuring objectivity
+- **Pure Verification**: Role is to observe and report, maintaining independence
+
+**Example**: VERIFIER_AUDITOR detects that an OPERATIONAL_AGENT executed a trade exceeding approved slippage tolerance. It cannot execute a corrective trade itself (would need OPERATIONAL privileges) or change the slippage parameter (would need policy privileges). It can only raise an alert for governance to address.
+
+### 6.4 Class Interaction Patterns
+
+Understanding how classes work together is crucial for building secure applications.
+
+#### 6.4.1 Pattern: Decision-Execution-Verification Loop
+
+Many workflows follow this pattern:
+
+```
+1. REASONING_CORE analyzes situation → generates recommendation
+2. Governance or user reviews → approves action
+3. OPERATIONAL_AGENT executes → within approved parameters
+4. VERIFIER_AUDITOR monitors → confirms compliance
+5. If violation: Alert raised → Governance investigates
+```
+
+**Example - Treasury Management**:
+- **Weekly**: REASONING_CORE analyzes market conditions, recommends rebalancing strategy
+- **Governance**: Reviews and votes to approve strategy for next week
+- **Daily**: OPERATIONAL_AGENT rebalances as needed within strategy bounds
+- **Continuous**: VERIFIER_AUDITOR watches all rebalancing trades
+- **On Alert**: Governance reviews and may revoke OPERATIONAL_AGENT SBT
+
+**Key Property**: No single model controls the entire process. Compromise of any one model requires compromise of others to cause maximum damage.
+
+#### 6.4.2 Pattern: Content Generation with Verification
+
+For user-facing content:
+
+```
+1. Application requests content from GENERATIVE_INTERFACE
+2. GENERATIVE_INTERFACE produces output
+3. VERIFIER_AUDITOR checks output for policy compliance (e.g., no harmful content)
+4. If approved: Display to user
+5. If rejected: Log incident, potentially revoke model SBT
+```
+
+**Example - Social Protocol**:
+- User requests AI-generated summary of governance discussion
+- GENERATIVE_INTERFACE produces summary
+- VERIFIER_AUDITOR checks for bias, misinformation, or manipulation
+- Approved summaries displayed; rejected ones logged for review
+
+#### 6.4.3 Pattern: Multi-Model Consensus
+
+For high-stakes decisions, use multiple models:
+
+```
+1. Deploy 3+ REASONING_CORE models from different providers
+2. All analyze same proposal independently
+3. Aggregate recommendations (e.g., require 2/3 agreement)
+4. Only execute if consensus reached
+```
+
+**Example - High-Value Governance**:
+- Critical proposal affecting $10M+ in treasury
+- Three REASONING_CORE models (GLADIUS-Reasoning, CompetitorModel-1, CompetitorModel-2) analyze independently
+- If 2/3 recommend "Support": Governance leans toward approval
+- If disagreement: Triggers deeper human review
+
+**Benefit**: Reduces risk of single model compromise or error.
+
+### 6.5 Evolution and Future Classes
+
+#### 6.5.1 Sufficiency of Four Classes
+
+Are four classes enough? Analysis suggests yes, for the foreseeable future:
+
+**Exhaustiveness Check**:
+- **Analysis/Advice**: REASONING_CORE ✓
+- **Content Creation**: GENERATIVE_INTERFACE ✓
+- **Execution**: OPERATIONAL_AGENT ✓
+- **Verification**: VERIFIER_AUDITOR ✓
+
+**Edge Cases**:
+- **Oracles**: Not AI models; separate infrastructure
+- **Indexers/APIs**: Off-chain infrastructure
+- **Coordinators**: Can be modeled as OPERATIONAL_AGENT with specific constraints
+
+#### 6.5.2 Adding New Classes (Rare Event)
+
+If fundamentally new capabilities arise, new classes can be added via ARCGenesis v2.0.0 deployment. Examples that might justify new classes:
+
+**Hypothetical: QUANTUM_SOLVER**
+- **Why**: Quantum AI could break classical cryptography
+- **Constraints**: Restricted from accessing certain cryptographic operations
+- **Justification**: Can't fit safely into existing classes
+
+**Hypothetical: CROSS_CHAIN_COORDINATOR**
+- **Why**: Coordinates actions across multiple blockchains
+- **Constraints**: Can observe and verify, but requires multi-sig approval for actual bridging
+- **Justification**: Cross-chain operations have unique risk profile
+
+**Process**: Major version upgrade, requiring:
+- Community discussion and consensus
+- Updated ARCGenesis contract
+- Governance vote (super-majority, e.g., 75%)
+- Coordinated ecosystem migration
+
+### 6.6 Case Studies
+
+#### Case Study 1: GLADIUS Multi-Instance Deployment
+
+GLADIUS is deployed as multiple instances:
+- **GLADIUS-Reasoning** (REASONING_CORE): Analyzes proposals
+- **GLADIUS-Execution** (OPERATIONAL_AGENT): Executes approved operations
+
+**Why Separate?**
+- **Security**: Compromise of reasoning doesn't grant execution privileges
+- **Auditability**: Clear separation in logs
+- **Flexibility**: Can update or replace independently
+
+**Workflow**:
+1. Governance proposes new parameter
+2. GLADIUS-Reasoning analyzes impact → recommends approval
+3. Governance votes → passes
+4. GLADIUS-Execution implements new parameter
+5. VERIFIER_AUDITOR confirms correct implementation
+
+#### Case Study 2: DeFi Yield Aggregator
+
+**Architecture**:
+- **Strategy Analyzer** (REASONING_CORE): Finds optimal yield opportunities
+- **Executor** (OPERATIONAL_AGENT): Moves funds between protocols
+- **Report Generator** (GENERATIVE_INTERFACE): Creates user reports
+- **Compliance Monitor** (VERIFIER_AUDITOR): Ensures all moves comply with risk limits
+
+**Daily Operation**:
+- Strategy Analyzer: "Move 30% of USDC from Aave to Compound (APY: 4.2% → 5.1%)"
+- User reviews recommendation → approves
+- Executor: Withdraws from Aave, deposits to Compound
+- Compliance Monitor: Verifies trade size, slippage, final allocation all within limits
+- Report Generator: Updates user dashboard with new allocation
+
+**Security**: Each component has minimal necessary privileges. Compromise of any single component doesn't grant full system control.
+
+### 6.7 Summary
+
+The model classification system provides:
+
+- **Security through separation of duties**: No single model has complete control
+- **Flexibility**: Classes cover diverse use cases
+- **Future-proof design**: Implementation-agnostic, focuses on capabilities
+- **Composability**: Applications combine multiple classes for complex workflows
+- **Verifiability**: Constraints can be enforced at application layer
+
+The four classes—REASONING_CORE, GENERATIVE_INTERFACE, OPERATIONAL_AGENT, VERIFIER_AUDITOR—form a complete, minimal taxonomy for AI models in decentralized systems.
+
+---
+
+# Part III: Security and Verification
+
+---
+
+## 7. Security Model and Guarantees {#security-model}
+
+### 7.1 Threat Model
+
+Effective security analysis requires a rigorous threat model defining adversaries, their capabilities, objectives, and the assets they target.
+
+#### 7.1.1 Adversary Classification
+
+**Type 1: Opportunistic Attackers**
+- **Resources**: Low (automated scanners, public exploits)
+- **Capabilities**: Can call public functions, submit transactions
+- **Knowledge**: Limited understanding of system internals
+- **Objectives**: Low-effort exploits, automated vulnerability scanning
+- **Defense**: Standard smart contract security prevents most attacks
+
+**Type 2: Sophisticated Adversaries**
+- **Resources**: High (skilled engineers, significant compute)
+- **Capabilities**: Deep protocol understanding, custom exploits
+- **Knowledge**: Can reverse-engineer contracts, analyze edge cases
+- **Objectives**: Financial gain, reputational damage, competitive advantage
+- **Defense**: Defense in depth, formal verification, extensive testing
+
+**Type 3: Governance Capture**
+- **Resources**: High (significant token holdings or social engineering)
+- **Capabilities**: Can influence or control governance decisions
+- **Knowledge**: Insider knowledge of governance processes
+- **Objectives**: Register malicious models, manipulate model classifications
+- **Defense**: Multi-sig, timelocks, transparency, community oversight
+
+**Type 4: Supply Chain Compromise**
+- **Resources**: Variable (depends on target)
+- **Capabilities**: Compromise development tools, libraries, compilers
+- **Knowledge**: Software supply chain vulnerabilities
+- **Objectives**: Insert backdoors, introduce subtle vulnerabilities
+- **Defense**: Minimal dependencies, reproducible builds, bytecode verification
+
+**Type 5: Blockchain-Level Attacks**
+- **Resources**: Extreme (51% attack resources)
+- **Capabilities**: Consensus manipulation, censorship
+- **Knowledge**: Deep blockchain protocol knowledge
+- **Objectives**: Rewrite history, censor transactions
+- **Defense**: Deploy on secure chains (Ethereum), accept as residual risk
+
+#### 7.1.2 Protected Assets
+
+**Critical Assets**:
+1. **Classification Integrity**: Correctness of class definitions
+2. **Genesis Hash Uniqueness**: Authenticity of genesis anchor
+3. **Validation Consistency**: `isValidClass()` determinism
+4. **Immutability**: Guarantee that code won't change
+
+**Dependent Assets** (protected by other layers):
+5. Model registration integrity (ARCModelRegistry)
+6. Identity token authenticity (ARCModelSBT)
+7. Application-level constraint enforcement
+
+#### 7.1.3 Attack Scenarios and Defenses
+
+**Scenario 1: Corrupt Class Definitions**
+
+*Attack*: Modify REASONING_CORE to allow execution privileges
+
+*Defense*:
+- Immutable bytecode (cannot be modified post-deployment)
+- Pure functions (no storage to manipulate)
+- Public verification (anyone can verify bytecode matches source)
+
+*Residual Risk*: **None** (mathematically impossible without blockchain compromise)
+
+**Scenario 2: Register Invalid Model**
+
+*Attack*: Register model with fake or undefined class
+
+*Defense*:
+- `isValidClass()` enforced by registry before registration
+- Registry cannot bypass Genesis validation
+- Failed attempts revert on-chain (visible to all)
+
+*Residual Risk*: **Governance Layer** (if governance deploys malicious registry that skips validation)
+
+*Mitigation*: Applications verify models through official registry; community monitors registry deployments
+
+**Scenario 3: Privilege Escalation**
+
+*Attack*: Grant execution privileges to REASONING_CORE model
+
+*Defense*:
+- ARCGenesis defines NO_EXECUTION constraint
+- Applications responsible for enforcement
+- Best practices and integration libraries assist developers
+
+*Residual Risk*: **Application Layer** (misconfigured applications)
+
+*Mitigation*: Auditing of application access control; community-vetted integration libraries; security checklists
+
+**Scenario 4: Identity Impersonation**
+
+*Attack*: Claim to be "GLADIUS" without proper credentials
+
+*Defense*:
+- ARCModelSBT provides non-transferable identity tokens
+- Applications verify SBT ownership before granting access
+- Cryptographic signatures prove identity
+
+*Residual Risk*: **Authentication Layer** (applications that don't check identity)
+
+*Mitigation*: Developer education; integration libraries that enforce identity checks
+
+### 7.2 Formal Security Properties
+
+#### 7.2.1 Provable Invariants
+
+**Invariant 1: Classification Consistency**
+
+*Formal Statement*:
+```
+∀ classId ∈ bytes32, ∀ t1, t2 ∈ ℕ (block numbers):
+  isValidClass(classId) at t1 = isValidClass(classId) at t2
+```
+
+*Proof*:
+- `isValidClass` is pure → no state dependencies
+- Pure functions are deterministic → same input yields same output
+- Valid classes hardcoded at deployment → cannot change
+- ∴ Output consistent across all time ∎
+
+**Invariant 2: Constraint Hash Determinism**
+
+*Formal Statement*:
+```
+∀ classId ∈ ValidClasses, ∀ t1, t2 ∈ ℕ:
+  invariantHash(classId) at t1 = invariantHash(classId) at t2
+```
+
+*Proof*:
+- `invariantHash` computes keccak256 of string literals
+- String literals immutable in bytecode
+- Keccak256 deterministic → same input yields same hash
+- ∴ Hash consistent across all time ∎
+
+**Invariant 3: No State Modification**
+
+*Formal Statement*:
+```
+∀ f ∈ Functions(ARCGenesis), ∀ s1, s2 ∈ BlockchainState:
+  Executing f changes no state variables
+```
+
+*Proof*:
+- All functions marked `pure`
+- Solidity compiler enforces: pure functions cannot modify state
+- Compilation verification ensures enforcement
+- ∴ No state modification possible ∎
+
+### 7.3 Cryptographic Security
+
+#### 7.3.1 Hash Function Properties
+
+ARCGenesis relies on Keccak-256 (SHA-3 variant):
+
+**Collision Resistance**: Finding `x ≠ y` where `keccak256(x) = keccak256(y)` requires ~2^128 operations
+
+**Pre-image Resistance**: Given `h = keccak256(x)`, finding `x` requires brute force
+
+**Second Pre-image Resistance**: Given `x`, finding `y ≠ x` where `keccak256(x) = keccak256(y)` requires ~2^256 operations
+
+**Practical Security**:
+- 2^128 operations ≈ 3.4 × 10^38 hashes
+- At 1 billion hashes/second: 10^21 years (far exceeding universe age)
+- Current fastest supercomputers: still infeasible
+
+**Quantum Resistance**: Grover's algorithm reduces security to 2^64, still infeasible with foreseeable quantum computers
+
+### 7.4 Gas Econom Security
+
+ARCGenesis design prevents gas-based attacks:
+
+**DoS via Gas Exhaustion**: Impossible
+- Pure functions have low, predictable gas costs
+- No loops or unbounded operations
+- External calls are free (view functions)
+
+**Gas Price Manipulation**: Limited impact
+- View calls unaffected by gas prices
+- Model registration (in registry) can wait for low gas periods
+- Layer 2 deployment option for lower costs
+
+### 7.5 Summary
+
+ARCGenesis achieves exceptional security through:
+- **Mathematical guarantees** via pure functions and immutability
+- **Minimal attack surface** with only 55 lines of code
+- **Cryptographic anchors** resistant to forgery
+- **Defense in depth** across ecosystem layers
+- **Formal verifiability** enabling mathematical proofs of correctness
+
+Residual risks exist only in dependent layers (governance, applications) and are managed through best practices and community oversight.
+
+---
+
