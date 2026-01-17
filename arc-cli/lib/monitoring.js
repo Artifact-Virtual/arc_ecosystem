@@ -237,7 +237,8 @@ class MonitoringModule {
         colWidths: [20, 15, 20, 20]
       });
 
-      const ethPrice = 2500; // Mock ETH price
+      // Mock prices for demonstration (in production, fetch from price oracle/API)
+      const MOCK_ETH_PRICE_USD = 2500;
       const gasInGwei = Number(baseFee) / 1e9;
       
       const operations = [
@@ -252,7 +253,7 @@ class MonitoringModule {
           theme.value(op),
           theme.number(gas.toLocaleString()),
           theme.number(`${costEth.toFixed(8)}`),
-          Utils.formatUSD(costEth * ethPrice)
+          Utils.formatUSD(costEth * MOCK_ETH_PRICE_USD)
         ]);
       });
 

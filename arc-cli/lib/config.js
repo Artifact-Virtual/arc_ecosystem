@@ -1,7 +1,20 @@
 const fs = require('fs');
 const path = require('path');
 const { ethers } = require('ethers');
-require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+
+// Try to load .env from multiple possible locations
+const possibleEnvPaths = [
+  path.join(__dirname, '../../.env'),
+  path.join(process.cwd(), '.env'),
+  path.join(process.env.HOME || process.env.USERPROFILE, '.arc-cli', '.env')
+];
+
+for (const envPath of possibleEnvPaths) {
+  if (fs.existsSync(envPath)) {
+    require('dotenv').config({ path: envPath });
+    break;
+  }
+}
 
 class Config {
   constructor() {

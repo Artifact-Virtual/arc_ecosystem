@@ -15,6 +15,9 @@ class Utils {
   // Format token amount
   static formatAmount(amount, decimals = 18, symbol = '') {
     try {
+      if (amount == null) {
+        return theme.muted('0');
+      }
       const formatted = ethers.formatUnits(amount.toString(), decimals);
       const num = parseFloat(formatted);
       

@@ -251,11 +251,14 @@ class TokensModule {
       const sharePercent = (parseFloat(ethers.formatUnits(balance, decimals)) / 
                             parseFloat(ethers.formatUnits(totalSupply, decimals)) * 100).toFixed(4);
 
+      // Mock price for demonstration (in production, fetch from price oracle/API)
+      const MOCK_ARCX_PRICE_USD = 1.25;
+
       table.push(
         ['Address', Utils.formatAddress(address)],
         ['Balance', Utils.formatAmount(balance, decimals, symbol)],
         ['Share of Supply', theme.number(`${sharePercent}%`)],
-        ['USD Value (Mock)', Utils.formatUSD(parseFloat(ethers.formatUnits(balance, decimals)) * 1.25)]
+        ['USD Value (Mock)', Utils.formatUSD(parseFloat(ethers.formatUnits(balance, decimals)) * MOCK_ARCX_PRICE_USD)]
       );
 
       console.log(table.toString());
