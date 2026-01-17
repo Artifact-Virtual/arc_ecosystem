@@ -20,6 +20,7 @@ class Navigation {
     
     const choices = [
       { name: theme.primary('🌐 Ecosystem Overview'), value: 'ecosystem' },
+      { name: theme.highlight('🎛️  Management Dashboard'), value: 'management' },
       { name: theme.info('🚀 Deployments'), value: 'deployments' },
       { name: theme.success('🪙  Tokens (ARCx)'), value: 'tokens' },
       { name: theme.accent('🎨 NFTs Management'), value: 'nfts' },
@@ -244,6 +245,7 @@ class Navigation {
     
     console.log(Utils.section('Available Modules'));
     console.log(theme.primary('• Ecosystem Overview') + ' - View system status and metrics');
+    console.log(theme.highlight('• Management Dashboard') + ' - Central control for entire system');
     console.log(theme.info('• Deployments') + ' - Manage contract deployments');
     console.log(theme.success('• Tokens') + ' - ARCx token management and operations');
     console.log(theme.accent('• NFTs') + ' - NFT collection management');
