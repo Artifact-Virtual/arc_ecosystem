@@ -17,6 +17,7 @@ const tokens = require('./lib/tokens');
 const nfts = require('./lib/nfts');
 const sbts = require('./lib/sbts');
 const monitoring = require('./lib/monitoring');
+const management = require('./lib/management');
 const config = require('./lib/config');
 const theme = require('./lib/theme');
 const Utils = require('./lib/utils');
@@ -45,6 +46,7 @@ class ARCli {
     navigation.register('nfts', nfts);
     navigation.register('sbts', sbts);
     navigation.register('monitoring', monitoring);
+    navigation.register('management', management);
   }
 
   // Start the application

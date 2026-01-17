@@ -145,13 +145,20 @@ ARC/
 │   ├── dao/           # Governance and DAO contracts
 │   ├── tokens/        # Token contracts (ARCx, ARCs, NFT, SBT)
 │   ├── defi/          # DeFi integration contracts
-│   └── pool/          # Liquidity pool contracts
+│   ├── pool/          # Liquidity pool contracts
+│   └── ai/            # AI attestation contracts (NEW)
 ├── scripts/           # Deployment and management scripts
+│   └── deploy-test-ecosystem.ts  # Test deployment suite (NEW)
 ├── tests/             # Test suite
 ├── docs/              # Comprehensive documentation
+│   ├── AI_ATTESTATION_SERVICE.md  # AI attestation docs (NEW)
+│   └── ...
 ├── arc-cli/           # Terminal UI system management
+│   └── lib/management.js  # Management dashboard (NEW)
 ├── tools/             # Development tools
-└── ai-engine/         # AI-powered features
+├── ai-engine/         # AI-powered features
+├── SYSTEM_MAP.md      # Complete system reference (NEW)
+└── ...
 
 ```
 
