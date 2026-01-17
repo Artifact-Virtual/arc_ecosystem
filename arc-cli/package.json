@@ -1,0 +1,39 @@
+{
+  "name": "arc-cli",
+  "version": "1.0.0",
+  "description": "Professional Terminal UI for ARC Ecosystem Management",
+  "main": "index.js",
+  "bin": {
+    "arc": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "arc",
+    "arcx",
+    "blockchain",
+    "cli",
+    "terminal",
+    "defi",
+    "base-l2"
+  ],
+  "author": "Artifact Virtual",
+  "license": "MIT",
+  "dependencies": {
+    "inquirer": "^8.2.5",
+    "chalk": "^4.1.2",
+    "ora": "^5.4.1",
+    "cli-table3": "^0.6.3",
+    "boxen": "^5.1.2",
+    "figlet": "^1.7.0",
+    "ethers": "^6.13.4",
+    "dotenv": "^16.4.5",
+    "axios": "^1.7.7"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

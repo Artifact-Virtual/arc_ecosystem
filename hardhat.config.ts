@@ -18,23 +18,57 @@ const {
 } = process.env;
 
 const config: HardhatUserConfig = {
+  paths: {
+    sources: "./contracts",
+    tests: "./tests",
+    cache: "./cache",
+    artifacts: "./artifacts"
+  },
   solidity: {
-    version: "0.8.21",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 1, // Maximum size reduction
+    compilers: [
+      {
+        // Primary version for ARCx V2 and main contracts
+        // Uses aggressive optimization (runs: 1) to minimize contract size
+        version: "0.8.21",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1, // Maximum size reduction for large contracts
+          },
+          viaIR: true,
+          metadata: {
+            bytecodeHash: "none"
+          },
+          outputSelection: {
+            "*": {
+              "*": ["evm.bytecode", "evm.deployedBytecode", "devdoc", "userdoc", "metadata", "abi", "storageLayout"]
+            }
+          }
+        },
       },
-      viaIR: true,
-      metadata: {
-        bytecodeHash: "none"
+      {
+        // For NFT contracts and frequently called functions
+        // Uses balanced optimization (runs: 200) for gas efficiency
+        version: "0.8.19",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
       },
-      outputSelection: {
-        "*": {
-          "*": ["evm.bytecode", "evm.deployedBytecode", "devdoc", "userdoc", "metadata", "abi", "storageLayout"]
-        }
+      {
+        // For Genesis and ADAM policy contracts
+        // Uses balanced optimization (runs: 200)
+        version: "0.8.26",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
       }
-    },
+    ]
   },
   networks: {
     hardhat: {
