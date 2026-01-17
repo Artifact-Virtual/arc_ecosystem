@@ -12,7 +12,7 @@
 **ARC** is a comprehensive decentralized autonomous organization (DAO) and governance system featuring multiple voting mechanisms, secure timelock controls, modular contract architecture, and the ARCx V2 Enhanced token live on Base L2.
 
 [![Launch CLI](https://img.shields.io/badge/🚀_Launch-Terminal_UI-6A00FF?style=for-the-badge)](./arc-cli)
-[![Launch Engine](https://img.shields.io/badge/💻_Launch-Development_Engine-00C853?style=for-the-badge)](./docs/02_DEVELOPMENT_ENGINE.html)
+[![Launch Engine](https://img.shields.io/badge/💻_Launch-Development_Engine-00C853?style=for-the-badge)](./docs/html/artifact_development_engine.html)
 [![View Docs](https://img.shields.io/badge/📚_View-Documentation-58A6FF?style=for-the-badge)](./docs)
 
 ---
@@ -160,9 +160,9 @@ ARC/
 ## 🔗 Important Links
 
 ### Live Applications
-- 🏛️ **[Development Engine](./docs/02_DEVELOPMENT_ENGINE.html)** - Unified development platform
-- 💻 **[Contract IDE](./docs/contract_deployment_ide.html)** - Write, compile & deploy
-- 🌉 **[Bridge Interface](./docs/bridge.html)** - Cross-chain transfers
+- 🏛️ **[Development Engine](./docs/html/artifact_development_engine.html)** - Unified development platform
+- 💻 **[Contract IDE](./docs/html/contract_deployment_ide.html)** - Write, compile & deploy
+- 🌉 **[Bridge Interface](./docs/html/bridge.html)** - Cross-chain transfers
 - 🎨 **[NFT Interface](./contracts/tokens/nft/frontend)** - NFT minting and management
 
 ### Documentation
