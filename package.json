@@ -47,6 +47,8 @@
     "airdrop:merkle": "npx hardhat run scripts/airdrop-manager.ts --network base merkle",
     "deploy:infrastructure": "npx hardhat run scripts/deployment-manager.ts --network base infrastructure",
     "deploy:token": "npx hardhat run scripts/deployment-manager.ts --network base token",
+    "cli": "node arc-cli/index.js",
+    "cli:dev": "cd arc-cli && npm start",
     "test": "hardhat test",
     "test:coverage": "npx hardhat coverage",
     "test:gas": "cross-env REPORT_GAS=true npx hardhat test",
