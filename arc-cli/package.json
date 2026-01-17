@@ -23,7 +23,7 @@
   "author": "Artifact Virtual",
   "license": "MIT",
   "dependencies": {
-    "inquirer": "^9.2.12",
+    "inquirer": "^8.2.5",
     "chalk": "^4.1.2",
     "ora": "^5.4.1",
     "cli-table3": "^0.6.3",

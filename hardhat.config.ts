@@ -18,23 +18,51 @@ const {
 } = process.env;
 
 const config: HardhatUserConfig = {
+  paths: {
+    sources: "./contracts",
+    tests: "./tests",
+    cache: "./cache",
+    artifacts: "./artifacts"
+  },
   solidity: {
-    version: "0.8.21",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 1, // Maximum size reduction
+    compilers: [
+      {
+        version: "0.8.21",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1, // Maximum size reduction
+          },
+          viaIR: true,
+          metadata: {
+            bytecodeHash: "none"
+          },
+          outputSelection: {
+            "*": {
+              "*": ["evm.bytecode", "evm.deployedBytecode", "devdoc", "userdoc", "metadata", "abi", "storageLayout"]
+            }
+          }
+        },
       },
-      viaIR: true,
-      metadata: {
-        bytecodeHash: "none"
+      {
+        version: "0.8.19",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
       },
-      outputSelection: {
-        "*": {
-          "*": ["evm.bytecode", "evm.deployedBytecode", "devdoc", "userdoc", "metadata", "abi", "storageLayout"]
-        }
+      {
+        version: "0.8.26",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
       }
-    },
+    ]
   },
   networks: {
     hardhat: {
