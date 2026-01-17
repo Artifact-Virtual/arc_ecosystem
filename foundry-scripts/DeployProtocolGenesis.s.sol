@@ -13,7 +13,7 @@ import {L2GenesisVerifier} from "../contracts/L2GenesisVerifier.sol";
  * Usage:
  * 
  * For L1 (Ethereum mainnet or Sepolia testnet):
- * forge script scripts/DeployProtocolGenesis.s.sol:DeployProtocolGenesis \
+ * forge script foundry-scripts/DeployProtocolGenesis.s.sol:DeployProtocolGenesis \
  *     --rpc-url $RPC_URL \
  *     --private-key $DEPLOYER_PRIVATE_KEY \
  *     --broadcast \
@@ -21,7 +21,7 @@ import {L2GenesisVerifier} from "../contracts/L2GenesisVerifier.sol";
  * 
  * For L2 (Base, Optimism, Arbitrum):
  * Set L1_GENESIS_HASH and L1_GENESIS_ADDRESS environment variables
- * forge script scripts/DeployProtocolGenesis.s.sol:DeployProtocolGenesis \
+ * forge script foundry-scripts/DeployProtocolGenesis.s.sol:DeployProtocolGenesis \
  *     --rpc-url $L2_RPC_URL \
  *     --private-key $DEPLOYER_PRIVATE_KEY \
  *     --broadcast \

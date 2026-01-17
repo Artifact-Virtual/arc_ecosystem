@@ -27,11 +27,13 @@ const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
+        // Primary version for ARCx V2 and main contracts
+        // Uses aggressive optimization (runs: 1) to minimize contract size
         version: "0.8.21",
         settings: {
           optimizer: {
             enabled: true,
-            runs: 1, // Maximum size reduction
+            runs: 1, // Maximum size reduction for large contracts
           },
           viaIR: true,
           metadata: {
@@ -45,6 +47,8 @@ const config: HardhatUserConfig = {
         },
       },
       {
+        // For NFT contracts and frequently called functions
+        // Uses balanced optimization (runs: 200) for gas efficiency
         version: "0.8.19",
         settings: {
           optimizer: {
@@ -54,6 +58,8 @@ const config: HardhatUserConfig = {
         },
       },
       {
+        // For Genesis and ADAM policy contracts
+        // Uses balanced optimization (runs: 200)
         version: "0.8.26",
         settings: {
           optimizer: {
