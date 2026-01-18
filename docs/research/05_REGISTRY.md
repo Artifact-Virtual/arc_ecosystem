@@ -1223,7 +1223,7 @@ flowchart TD
     Auth -->|No| Revert1[❌ Revert:<br/>NOT_GOVERNANCE]
     Auth -->|Yes ✓| ValidClass{Valid Class?<br/>genesis.isValidClass}
     ValidClass -->|No| Revert2[❌ Revert:<br/>InvalidClass]
-    ValidClass -->|Yes ✓| ComputeID[Compute modelId:<br/>keccak256name‖version‖class‖genesis]
+    ValidClass -->|Yes ✓| ComputeID[Compute modelId:<br/>keccak256 name ‖ version ‖ class ‖ genesis]
     ComputeID --> CheckExists{Already Exists?<br/>_modelClass[modelId] ≠ 0}
     CheckExists -->|Yes| Revert3[❌ Revert:<br/>ModelAlreadyExists]
     CheckExists -->|No ✓| Store[Store:<br/>_modelClass[modelId] = classId]
@@ -1448,18 +1448,18 @@ graph TB
 $$\forall \text{modelId}: \text{\_modelClass}[\text{modelId}] \neq 0 \Rightarrow \text{genesis.isValidClass}(\text{\_modelClass}[\text{modelId}]) = \text{true}$$
 
 This is enforced at registration time and cannot be violated because:
-- Genesis address is immutable
-- Class validation happens before storage
-- No function can modify `_modelClass` to invalid class
+▸ Genesis address is immutable
+▸ Class validation happens before storage
+▸ No function can modify `_modelClass` to invalid class
 
 **Invariant 2: Model IDs are unique**
 
 $$\forall m_1, m_2: (n_1, v_1, c_1) \neq (n_2, v_2, c_2) \Rightarrow H(n_1 \parallel v_1 \parallel c_1 \parallel g) \neq H(n_2 \parallel v_2 \parallel c_2 \parallel g)$$
 
 where:
-- $(n, v, c)$ = (name, version, classId)
-- $H$ = Keccak-256 hash function
-- $g$ = genesis hash
+▸ $(n, v, c)$ = (name, version, classId)
+▸ $H$ = Keccak-256 hash function
+▸ $g$ = genesis hash
 
 Collision probability: $P(\text{collision}) < 2^{-255}$ (cryptographically negligible)
 
@@ -1972,14 +1972,14 @@ graph TB
 $$\text{Execute}(tx) \iff \sum_{i=1}^{N} \text{signed}_i(tx) \geq M$$
 
 where:
-- $N$ = total number of signers
-- $M$ = threshold required (e.g., 3-of-5)
-- $\text{signed}_i(tx) \in \{0, 1\}$
+▸ $N$ = total number of signers
+▸ $M$ = threshold required (e.g., 3-of-5)
+▸ $\text{signed}_i(tx) \in \{0, 1\}$
 
 Common configurations:
-- 2-of-3 for small teams
-- 3-of-5 for medium DAOs  
-- 5-of-9 for large organizations
+▸ 2-of-3 for small teams
+▸ 3-of-5 for medium DAOs  
+▸ 5-of-9 for large organizations
 
 ---
 
@@ -2080,14 +2080,14 @@ sequenceDiagram
 
 **Upgrade Safety Checklist:**
 
-- [ ] Storage layout preserved
-- [ ] No selfdestruct in implementation
-- [ ] Initialize functions protected
-- [ ] No constructor logic (use initializer)
-- [ ] Existing data remains valid
-- [ ] Governance-only upgrade authority
-- [ ] Timelock delay enforced
-- [ ] Audit completed
+◆ Storage layout preserved
+◆ No selfdestruct in implementation
+◆ Initialize functions protected
+◆ No constructor logic (use initializer)
+◆ Existing data remains valid
+◆ Governance-only upgrade authority
+◆ Timelock delay enforced
+◆ Audit completed
 
 ### 15.4 Migration Strategies
 
@@ -2165,33 +2165,33 @@ graph TB
 $$\forall op \in \text{StateChanging}: \text{execute}(op) \Rightarrow \text{authorized}(\text{msg.sender}, op)$$
 
 **Proof:**
-- All state-changing functions have `onlyGovernance` modifier
-- Modifier checks: `require(msg.sender == governance)`
-- Governance is immutable (set in constructor)
-- Therefore, only governance address can execute state-changing operations ∎
+▸ All state-changing functions have `onlyGovernance` modifier
+▸ Modifier checks: `require(msg.sender == governance)`
+▸ Governance is immutable (set in constructor)
+▸ Therefore, only governance address can execute state-changing operations ∎
 
 **Property 2: Registration Uniqueness**
 
 $$\forall m_1, m_2: \text{registered}(m_1) \land \text{registered}(m_2) \land m_1 \neq m_2 \Rightarrow \text{modelId}(m_1) \neq \text{modelId}(m_2)$$
 
 **Proof:**
-- Model ID = $H(\text{name} \parallel \text{version} \parallel \text{classId} \parallel H_{\text{genesis}})$
-- $H$ is Keccak-256 with collision resistance property
-- For $m_1 \neq m_2$, at least one input differs
-- By collision resistance: $P(\text{modelId}(m_1) = \text{modelId}(m_2)) < 2^{-255}$
-- Registry also checks `_modelClass[modelId] == 0` before registration
-- Therefore, duplicate registration is prevented both cryptographically and programmatically ∎
+▸ Model ID = $H(\text{name} \parallel \text{version} \parallel \text{classId} \parallel H_{\text{genesis}})$
+▸ $H$ is Keccak-256 with collision resistance property
+▸ For $m_1 \neq m_2$, at least one input differs
+▸ By collision resistance: $P(\text{modelId}(m_1) = \text{modelId}(m_2)) < 2^{-255}$
+▸ Registry also checks `_modelClass[modelId] == 0` before registration
+▸ Therefore, duplicate registration is prevented both cryptographically and programmatically ∎
 
 **Property 3: Genesis Binding Integrity**
 
 $$\forall m: \text{registered}(m) \Rightarrow \text{genesis.isValidClass}(\text{classId}(m)) = \text{true}$$
 
 **Proof:**
-- Registration requires: `if (!genesis.isValidClass(classId)) revert InvalidClass();`
-- This check occurs before storage write
-- Genesis reference is immutable (cannot be changed)
-- Transaction reverts if class invalid
-- Therefore, all registered models have genesis-validated classes ∎
+▸ Registration requires: `if (!genesis.isValidClass(classId)) revert InvalidClass();`
+▸ This check occurs before storage write
+▸ Genesis reference is immutable (cannot be changed)
+▸ Transaction reverts if class invalid
+▸ Therefore, all registered models have genesis-validated classes ∎
 
 ### 14.3 Attack Scenarios and Defenses
 
@@ -2716,18 +2716,18 @@ $$\text{AtomicCommit}(c_1, ..., c_n) = \bigwedge_{i=1}^{n} \text{Commit}(c_i) \l
 How to verify model behavior on-chain without full execution?
 
 **Proposed Approach:**
-- zkSNARK proofs of execution
-- Optimistic evaluation with challenge period
-- Sampling-based verification
+▸ zkSNARK proofs of execution
+▸ Optimistic evaluation with challenge period
+▸ Sampling-based verification
 
 **Problem 3: Adaptive Governance**
 
 How to make governance responsive to rapid AI development cycles?
 
 **Proposed Approach:**
-- Reputation-weighted fast-track proposals
-- Expert committees for technical decisions
-- Graduated autonomy for trusted developers
+▸ Reputation-weighted fast-track proposals
+▸ Expert committees for technical decisions
+▸ Graduated autonomy for trusted developers
 
 ### 24.3 Integration Opportunities
 
