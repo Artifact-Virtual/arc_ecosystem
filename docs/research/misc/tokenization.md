@@ -1,13 +1,10 @@
-Financial stability implications of tokenisation – Executive 
-Summary 
-Tokenisation refers to the use of new technologies, such as distributed ledger technology (DLT), to issue 
-or represent assets in digital form as tokens. These tokens can represent traditional financial assets, such 
-as securities and bank deposits; physical assets like real estate; or new assets representing claims against 
-the issuer.  
-Tokenisation is currently small in scale but growing, with potential benefits including improved 
-efficiency, reduced costs, increased transparency and broader investor access through asset 
-fractionalisation. However, many of these benefits are unproven and may involve trade-offs, such as 
-increased operational complexity, liquidity pressures and regulatory uncertainty. 
+# Financial Stability Implications of Tokenisation
+
+## Executive Summary
+
+Tokenisation refers to the use of new technologies, such as distributed ledger technology (DLT), to issue or represent assets in digital form as tokens. These tokens can represent traditional financial assets, such as securities and bank deposits; physical assets like real estate; or new assets representing claims against the issuer.
+
+Tokenisation is currently small in scale but growing, with potential benefits including improved efficiency, reduced costs, increased transparency and broader investor access through asset fractionalisation. However, many of these benefits are unproven and may involve trade-offs, such as increased operational complexity, liquidity pressures and regulatory uncertainty. 
 Against this background, in October 2024, the Financial Stability Board (FSB) published the report 
 The Financial Stability Implications of Tokenisation to examine current developments in tokenisation, assess 
 associated financial stability vulnerabilities and identify policy issues for consideration. 
