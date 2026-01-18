@@ -1,4 +1,4 @@
-# Codebase overview — Devs & Contributors
+# Canonical Codebase Overview
 
 *Generated: 2026-01-18T08:24:01.271798 UTC*
 
