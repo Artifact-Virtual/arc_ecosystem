@@ -111,6 +111,12 @@ After reading this document, you will:
 ---
 
 ### Book 4: ARCGenesis - The Immutable Foundation
+**File**: `04_ARCGenesis.md`  
+**Size**: ~370 pages | 116KB  
+**Level**: Foundation  
+
+#### Synopsis
+ARCGenesis is the immutable root of trust for the entire ARC ecosystem. This comprehensive volume explores how blockchain immutability, cryptographic anchoring, and pure functional design create an unchangeable foundation for decentralized AI model identity.
 
 #### Key Topics
 - Blockchain immutability and root of trust concepts
@@ -137,7 +143,7 @@ After reading this book, you will:
 ---
 
 ### Book 5: ARCModelRegistry - Governed Model Registration
-**File**: `02_registry/ARCModelRegistry.md`  
+**File**: `05_ARCModelRegistry.md`  
 **Size**: ~280 pages | 41KB  
 **Level**: Intermediate  
 
@@ -171,7 +177,7 @@ After reading this book, you will:
 ---
 
 ### Book 6: ARCModelSBT - Soulbound Identity Tokens
-**File**: `03_identity/ARCModelSBT.md`  
+**File**: `06_ARCModelSBT.md`  
 **Size**: ~190 pages | 22KB  
 **Level**: Intermediate-Advanced  
 
@@ -205,7 +211,7 @@ After reading this book, you will:
 ---
 
 ### Book 7: GLADIUS - Constitutional AI Orchestration
-**File**: `04_models/GLADIUS.md`  
+**File**: `07_GLADIUS.md`  
 **Size**: ~235 pages | 23KB  
 **Level**: Advanced  
 
@@ -239,7 +245,7 @@ After reading this book, you will:
 ---
 
 ### Book 8: Model Jobs - Universal AI Capability Taxonomy
-**File**: `05_jobs/Model_Jobs.md`  
+**File**: `08_Model_Jobs.md`  
 **Size**: ~200 pages | 22KB  
 **Level**: Advanced  
 
@@ -758,11 +764,11 @@ Special thanks to:
 - [Book 1: ARC Ecosystem](./01_ECOSYSTEM.md)
 - [Book 2: Constitutional Architecture](./02_GOVERNANCE.md)
 - [Book 3: Model, Roles and Attribution](./03_ATTRIBUTES.md)
-- [Book 4: ARCGenesis](./01_genesis/ARCGenesis.md)
-- [Book 5: ARCModelRegistry](./02_registry/ARCModelRegistry.md)
-- [Book 6: ARCModelSBT](./03_identity/ARCModelSBT.md)
-- [Book 7: GLADIUS](./04_models/GLADIUS.md)
-- [Book 8: Model Jobs](./05_jobs/Model_Jobs.md)
+- [Book 4: ARCGenesis](./04_ARCGenesis.md)
+- [Book 5: ARCModelRegistry](./05_ARCModelRegistry.md)
+- [Book 6: ARCModelSBT](./06_ARCModelSBT.md)
+- [Book 7: GLADIUS](./07_GLADIUS.md)
+- [Book 8: Model Jobs](./08_Model_Jobs.md)
 
 ### Jump to Sections
 
