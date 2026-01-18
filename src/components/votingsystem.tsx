@@ -109,6 +109,15 @@ const BlockchainVoting: React.FC = () => {
     requiredQuorum: '100'
   });
 
+  // Add validation rules
+const validateProposal = () => {
+  const errors = [];
+  if (newProposal.title.length < 10) errors.push('Title must be at least 10 characters');
+  if (newProposal.description.length < 50) errors.push('Description must be at least 50 characters');
+  if (parseInt(newProposal.requiredQuorum) < 1) errors.push('Quorum must be at least 1');
+  return errors;
+};
+
   const [userAddress] = useState('0x742d35Cc6634C0532925a3b8D4C0532925a3b8D4');
   const [selectedProposal, setSelectedProposal] = useState<string | null>(null);
   const [currentBlockHeight] = useState(18420234);
