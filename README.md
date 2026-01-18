@@ -5,7 +5,7 @@
 ![Last Commit](https://img.shields.io/github/last-commit/ARTIFACT-VIRTUAL/arc_ecosystem?branch=main&style=for-the-badge&logo=github&labelColor=0D1117&color=6A00FF)
 [![Security](https://img.shields.io/badge/Security-100%2F100-00C853?style=for-the-badge&labelColor=0D1117)](#security--operations)
 
-> **ARC (Artifact Realm Coordinate)** - Decentralized AI Model Identity, Governance, and Orchestration Infrastructure
+> Decentralized AI Model Identity, Governance, and Orchestration Infrastructure
 
 ---
 
