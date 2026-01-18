@@ -1268,7 +1268,7 @@ function registerModelBatch(
 
 **Benefits**:
 ▸ Single transaction for multiple registrations
-▸ Saves ~21k gas per model (transaction overhead)
+▸ Saves $(n-1) \times 21000$ gas total (amortized transaction overhead)
 ▸ Atomic operation (all succeed or all revert)
 
 ```mermaid
@@ -2289,6 +2289,32 @@ Key invariants:
 
 ## Appendix B: Gas Cost Analysis {#appendix-b}
 
+### B.0 Gas Cost Constants
+
+Throughout this analysis, we use the following standardized gas cost constants:
+
+| Constant | Value | Description |
+|----------|-------|-------------|
+| $G_{\text{base}}$ | 21,000 | Base transaction cost (intrinsic gas) |
+| $G_{\text{dispatch}}$ | 100 | Function dispatch overhead |
+| $G_{\text{governance}}$ | 200 | Access control check (SLOAD warm) |
+| $G_{\text{genesis-call}}$ | 2,600 | External call to ARCGenesis (cold) |
+| $G_{\text{genesis-exec}}$ | 500 | Genesis pure function execution |
+| $G_{\text{hash}}$ | 66 | Keccak-256 computation (~6 words) |
+| $G_{\text{sload-cold}}$ | 2,100 | Cold storage read |
+| $G_{\text{sload-warm}}$ | 100 | Warm storage read |
+| $G_{\text{sstore-cold}}$ | 20,000 | Cold storage write (first time) |
+| $G_{\text{sstore-warm}}$ | 5,000 | Warm storage write (update) |
+| $G_{\text{event}}$ | 1,500 | Event emission with indexed params |
+| $G_{\text{return}}$ | 50 | Return value memory copy |
+
+**Per-registration cost** (excluding base TX):
+$$G_{\text{register}} = G_{\text{dispatch}} + G_{\text{governance}} + G_{\text{genesis-call}} + G_{\text{genesis-exec}} + G_{\text{hash}} + G_{\text{sload-cold}} + G_{\text{sstore-cold}} + G_{\text{event}} + G_{\text{return}}$$
+$$= 100 + 200 + 2600 + 500 + 66 + 2100 + 20000 + 1500 + 50 = 27,116 \text{ gas}$$
+
+**Total single transaction cost**:
+$$G_{\text{single}} = G_{\text{base}} + G_{\text{register}} = 21000 + 27116 = 48,116 \text{ gas}$$
+
 ### B.1 Detailed Gas Breakdown
 
 **Single Registration:**
@@ -2305,23 +2331,26 @@ Key invariants:
 | SSTORE (first write) | 20,000 | Cold storage write |
 | Event emission | 1,500 | LOG with indexed params |
 | Return value | 50 | Memory copy and return |
-| **Total** | **~48,116** | **Per registration** |
+| **Total (single TX)** | **~48,116** | **Includes 21k base cost** |
+| **Per-registration cost** | **~27,116** | **Excluding base TX cost** |
 
 **Batch Registration (n models):**
 
-$$C_{\text{batch}}(n) = 21000 + n \cdot (100 + 200 + 3100 + 66 + 2100 + 20000 + 1500)$$
-$$= 21000 + n \cdot 27066$$
+$$C_{\text{batch}}(n) = 21000 + n \cdot 27116$$
 
-For $n = 10$: $C_{\text{batch}}(10) = 291,660$ gas
-For $n = 100$: $C_{\text{batch}}(100) = 2,727,600$ gas
+where the per-registration cost includes:
+$$27116 = 100 + 200 + 3100 + 66 + 2100 + 20000 + 1500 + 50$$
+
+For $n = 10$: $C_{\text{batch}}(10) = 21000 + 10 \cdot 27116 = 292,160$ gas
+For $n = 100$: $C_{\text{batch}}(100) = 21000 + 100 \cdot 27116 = 2,732,600$ gas
 
 Sequential cost comparison:
 $$C_{\text{sequential}}(10) = 10 \cdot 48,116 = 481,160 \text{ gas}$$
 $$C_{\text{sequential}}(100) = 100 \cdot 48,116 = 4,811,600 \text{ gas}$$
 
 **Savings:**
-- 10 models: $189,500$ gas $(39\%)$
-- 100 models: $2,084,000$ gas $(43\%)$
+▸ 10 models: $481,160 - 292,160 = 189,000$ gas $(39.3\%)$
+▸ 100 models: $4,811,600 - 2,732,600 = 2,079,000$ gas $(43.2\%)$
 
 ### B.2 Query Operations
 
@@ -2358,7 +2387,7 @@ graph TB
 
 The batch operation becomes cost-effective when:
 
-$$n > \frac{21000}{48116 - 27066} \approx 1$$
+$$n > \frac{21000}{48116 - 27116} = \frac{21000}{21000} = 1$$
 
 Therefore, **batch operations are always more efficient** for $n \geq 2$.
 
