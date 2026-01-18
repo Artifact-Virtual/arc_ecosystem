@@ -2143,7 +2143,7 @@ graph TB
         T6[Threat 6:<br/>Denial of Service] --> M6[Mitigation:<br/>Gas limits & batching]
         
         M1 --> S1[✓ Access control enforced]
-        M2 --> S2[✓ P collision ≈ 2⁻²⁵⁶]
+        M2 --> S2[✓ P collision ≈ 2^-256]
         M3 --> S3[✓ Cannot overwrite existing]
         M4 --> S4[✓ Cannot change genesis]
         M5 --> S5[✓ Governance-controlled]
