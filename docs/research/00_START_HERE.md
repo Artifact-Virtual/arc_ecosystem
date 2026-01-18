@@ -1,4 +1,5 @@
-# ARC Research Comprehensive Book Series
+# ARC RESEARCH COLLECTIVE
+
 ## Master Index and Navigation Guide
 
 **Version**: 1.0  
@@ -7,7 +8,7 @@
 
 ---
 
-## 📚 About This Series
+## About This Series
 
 This comprehensive research series provides in-depth academic and practical knowledge about the ARC (Artifact Realm Coordinate) ecosystem—a decentralized infrastructure for AI model identity, governance, and orchestration. Each volume in this series is designed to be both an academic textbook and a practical implementation guide.
 
@@ -22,22 +23,94 @@ This comprehensive research series provides in-depth academic and practical know
 
 ### How to Use This Series
 
-1. **For Beginners**: Start with Book 1 (ARCGenesis) to understand foundational concepts
-2. **For Developers**: Read Books 1-3 sequentially for implementation knowledge
+1. **For Beginners**: Start with Book 1 (ARC Ecosystem) to understand foundational concepts
+2. **For Developers**: Read Books 4-6 sequentially for implementation knowledge
 3. **For Researchers**: Focus on theoretical sections and academic citations in each book
-4. **For Enterprise**: Prioritize Books 4-5 for practical applications and job taxonomies
+4. **For Enterprise**: Prioritize Books 7-8 for practical applications and job taxonomies
 
 ---
 
-## 📖 Book Series Overview
+## Series Overview
 
-### Book 1: ARCGenesis - The Immutable Foundation
-**File**: `01_genesis/ARCGenesis.md`  
-**Size**: ~370 pages | 116KB  
+### Book 1: ARC Ecosystem - Deterministic Computation
+**File**: `01_ECOSYSTEM.md`  
+**Size**: ~259 lines  
 **Level**: Foundation  
 
 #### Synopsis
-ARCGenesis is the immutable root of trust for the entire ARC ecosystem. This comprehensive volume explores how blockchain immutability, cryptographic anchoring, and pure functional design create an unchangeable foundation for decentralized AI model identity.
+The evolution of artificial intelligence from probabilistic generation toward deterministic reasoning. This document explores the ARC framework, conceptualizing the "Job" as the atomic unit of work, establishing a Job Schema that is bounded, auditable, and inherently deterministic.
+
+#### Key Topics
+- ARC Job: Deterministic Specification for Bounded Computation
+- Logical Definition and Invariants
+- Composed models under constitutional constraints
+- Security implications
+
+#### Learning Outcomes
+After reading this document, you will:
+- Understand deterministic AI systems
+- Comprehend the ARC Job Schema
+- Learn about fail-closed protocols
+
+#### Prerequisites
+- Basic understanding of AI concepts
+- Familiarity with blockchain (helpful)
+
+---
+
+### Book 2: Constitutional Architecture - Governance in Autonomous Reasoning Networks
+**File**: `02_GOVERNANCE.md`  
+**Size**: ~162 lines  
+**Level**: Foundation-Intermediate  
+
+#### Synopsis
+The ARC Genesis Constitution, an immutable charter that establishes the root-of-trust for all agentic systems. This document analyzes the cryptographic governance, authority structures, and implications for AI safety.
+
+#### Key Topics
+- Genesis Event and Cryptographic Root-of-Trust
+- Constitutional Authority Structures
+- AI Safety and Economic Integration
+- Prevention of Systemic Subversion
+
+#### Learning Outcomes
+After reading this document, you will:
+- Understand cryptographic governance in AI networks
+- Comprehend the ARC Constitution
+- Learn about authority derivation and legitimacy
+
+#### Prerequisites
+- Completion of Book 1
+- Understanding of blockchain concepts
+
+---
+
+### Book 3: Model, Roles and Attribution - Formal Specification of Model Composition
+**File**: `03_ATTRIBUTES.md`  
+**Size**: ~278 lines  
+**Level**: Intermediate  
+
+#### Synopsis
+The ARC Model Composition Rules for governing interaction, delegation, and cooperation of models within the Sovereign Constitution Fabric. This document explores the C-ALM framework and Authority Conservation Principle.
+
+#### Key Topics
+- Theoretical Foundations and C-ALM Framework
+- Authority Conservation Principle
+- Model Roles and Composition Rules
+- Security Constraints
+
+#### Learning Outcomes
+After reading this document, you will:
+- Understand model composition in ARC
+- Learn about Authority vs Liberty in AI systems
+- Comprehend formal specifications for AI governance
+
+#### Prerequisites
+- Completion of Books 1-2
+- Understanding of AI agent systems
+
+---
+
+### Book 4: ARCGenesis - The Immutable Foundation
 
 #### Key Topics
 - Blockchain immutability and root of trust concepts
@@ -57,13 +130,13 @@ After reading this book, you will:
 - Master cryptographic verification techniques
 
 #### Prerequisites
+- Completion of Books 1-3
 - Basic understanding of blockchain concepts
 - Familiarity with smart contracts (helpful but not required)
-- No prior ARC ecosystem knowledge needed
 
 ---
 
-### Book 2: ARCModelRegistry - Governed Model Registration
+### Book 5: ARCModelRegistry - Governed Model Registration
 **File**: `02_registry/ARCModelRegistry.md`  
 **Size**: ~280 pages | 41KB  
 **Level**: Intermediate  
@@ -91,13 +164,13 @@ After reading this book, you will:
 - Implement secure status management
 
 #### Prerequisites
-- Completion of Book 1 (ARCGenesis)
+- Completion of Books 1-4
 - Understanding of smart contract upgradeability
 - Basic Solidity programming knowledge
 
 ---
 
-### Book 3: ARCModelSBT - Soulbound Identity Tokens
+### Book 6: ARCModelSBT - Soulbound Identity Tokens
 **File**: `03_identity/ARCModelSBT.md`  
 **Size**: ~190 pages | 22KB  
 **Level**: Intermediate-Advanced  
@@ -125,13 +198,13 @@ After reading this book, you will:
 - Integrate SBTs with existing ecosystems
 
 #### Prerequisites
-- Completion of Books 1-2
+- Completion of Books 1-5
 - Understanding of ERC-721 (NFT) standard
 - Familiarity with identity systems
 
 ---
 
-### Book 4: GLADIUS - Constitutional AI Orchestration
+### Book 7: GLADIUS - Constitutional AI Orchestration
 **File**: `04_models/GLADIUS.md`  
 **Size**: ~235 pages | 23KB  
 **Level**: Advanced  
@@ -159,13 +232,13 @@ After reading this book, you will:
 - Handle emergency scenarios in autonomous systems
 
 #### Prerequisites
-- Completion of Books 1-3
+- Completion of Books 1-6
 - Understanding of AI agent systems
 - Familiarity with governance mechanisms
 
 ---
 
-### Book 5: Model Jobs - Universal AI Capability Taxonomy
+### Book 8: Model Jobs - Universal AI Capability Taxonomy
 **File**: `05_jobs/Model_Jobs.md`  
 **Size**: ~200 pages | 22KB  
 **Level**: Advanced  
@@ -193,7 +266,7 @@ After reading this book, you will:
 - Coordinate multi-agent systems effectively
 
 #### Prerequisites
-- Completion of Books 1-4
+- Completion of Books 1-7
 - Understanding of multi-agent systems
 - Familiarity with access control models
 
@@ -203,28 +276,28 @@ After reading this book, you will:
 
 ### Path 1: Foundation to Advanced (Recommended for Most Readers)
 ```
-Book 1 → Book 2 → Book 3 → Book 4 → Book 5
+Book 1 → Book 2 → Book 3 → Book 4 → Book 5 → Book 6 → Book 7 → Book 8
 ```
 **Timeline**: 4-6 weeks  
 **Outcome**: Complete understanding of ARC ecosystem
 
 ### Path 2: Developer Fast Track
 ```
-Book 1 (Chapters 1-5) → Book 2 (All) → Book 3 (Chapters 1-4) → Book 4 (Chapters 3-5)
+Book 4 (Chapters 1-5) → Book 5 (All) → Book 6 (Chapters 1-4) → Book 7 (Chapters 3-5)
 ```
 **Timeline**: 2-3 weeks  
 **Outcome**: Practical implementation knowledge
 
 ### Path 3: Research Focus
 ```
-Book 1 (Theory sections) → Book 3 (All) → Book 5 (All) → Book 2 (Governance) → Book 4 (Constitutional AI)
+Book 4 (Theory sections) → Book 6 (All) → Book 8 (All) → Book 5 (Governance) → Book 7 (Constitutional AI)
 ```
 **Timeline**: 3-4 weeks  
 **Outcome**: Academic research foundation
 
 ### Path 4: Enterprise Architecture
 ```
-Book 1 (Overview) → Book 4 (All) → Book 5 (All) → Book 2 (Integration patterns)
+Book 4 (Overview) → Book 7 (All) → Book 8 (All) → Book 5 (Integration patterns)
 ```
 **Timeline**: 2 weeks  
 **Outcome**: Enterprise deployment readiness
@@ -236,35 +309,37 @@ Book 1 (Overview) → Book 4 (All) → Book 5 (All) → Book 2 (Integration patt
 ### Conceptual Dependencies
 
 ```
-ARCGenesis (Foundation)
+ARC Ecosystem (Book 1) → Constitutional Architecture (Book 2) → Model, Roles and Attribution (Book 3)
     ↓
-    ├→ ARCModelRegistry (State Layer)
+ARCGenesis (Book 4, Foundation)
+    ↓
+    ├→ ARCModelRegistry (Book 5, State Layer)
     │       ↓
-    │       └→ ARCModelSBT (Identity Layer)
+    │       └→ ARCModelSBT (Book 6, Identity Layer)
     │               ↓
-    │               ├→ GLADIUS (Application)
-    │               └→ Model Jobs (Classification)
+    │               ├→ GLADIUS (Book 7, Application)
+    │               └→ Model Jobs (Book 8, Classification)
     └→ All books reference genesis concepts
 ```
 
 ### Technical Integration Points
 
-1. **Genesis → Registry**
+1. **Book 4 (Genesis) → Book 5 (Registry)**
    - Registry validates all models against genesis
    - Genesis hash anchoring
    - Model class validation
 
-2. **Registry → SBT**
+2. **Book 5 (Registry) → Book 6 (SBT)**
    - SBTs bind to registered models
    - Registry provides model metadata
    - Status synchronization
 
-3. **SBT → GLADIUS**
+3. **Book 6 (SBT) → Book 7 (GLADIUS)**
    - GLADIUS identity verified via SBT
    - Governance weight from SBT properties
    - Capability proofs through SBT
 
-4. **SBT → Model Jobs**
+4. **Book 6 (SBT) → Book 8 (Model Jobs)**
    - Job assignments bound to SBTs
    - Capability hashes in SBT metadata
    - Job-based access control via SBT
@@ -275,8 +350,8 @@ ARCGenesis (Foundation)
 
 ### Overall Series Statistics
 
-- **Total Pages**: ~1,275 pages
-- **Total Words**: ~500,000+ words
+- **Total Pages**: ~1,500 pages
+- **Total Words**: ~600,000+ words
 - **Total Code Examples**: 150+ examples
 - **Academic Citations**: 200+ references
 - **Diagrams and Figures**: 80+ visual aids
@@ -288,16 +363,16 @@ ARCGenesis (Foundation)
 | Category | Percentage | Books |
 |----------|------------|-------|
 | **Theory** | 30% | All books |
-| **Implementation** | 35% | Books 2-5 |
+| **Implementation** | 35% | Books 5-8 |
 | **Security** | 20% | All books |
-| **Use Cases** | 15% | Books 4-5 |
+| **Use Cases** | 15% | Books 7-8 |
 
 ### Difficulty Distribution
 
 ```
-Foundation (Books 1-2):     40%
-Intermediate (Book 3):       25%
-Advanced (Books 4-5):        35%
+Foundation (Books 1-5):     50%
+Intermediate (Book 6):       20%
+Advanced (Books 7-8):        30%
 ```
 
 ---
@@ -339,15 +414,15 @@ All code examples in this series are based on the actual ARC codebase:
 contracts/
 ├── dao/
 │   └── governance/
-│       ├── arc-genesis/              → Book 1
+│       ├── arc-genesis/              → Book 4
 │       │   ├── contracts/genesis/
-│       │   ├── contracts/registry/   → Book 2
-│       │   └── contracts/sbt/        → Book 3
-│       └── ARCGovernor.sol           → Books 2, 4
+│       │   ├── contracts/registry/   → Book 5
+│       │   └── contracts/sbt/        → Book 6
+│       └── ARCGovernor.sol           → Books 5, 7
 ├── tokens/
-│   ├── nft/                          → Book 3
-│   └── sbt/                          → Book 3
-└── ... (other components)            → Books 4-5
+│   ├── nft/                          → Book 6
+│   └── sbt/                          → Book 6
+└── ... (other components)            → Books 7-8
 ```
 
 ### Deployment Addresses (Base L2)
@@ -402,23 +477,23 @@ This series is designed to be used as:
 ### Suggested Course Structures
 
 #### Undergraduate Course: "Introduction to Decentralized AI"
-- **Week 1-3**: Book 1 (ARCGenesis)
-- **Week 4-6**: Book 2 (ARCModelRegistry)
-- **Week 7-9**: Book 3 (ARCModelSBT)
-- **Week 10-12**: Books 4-5 (Applications)
-- **Week 13-15**: Project work
+- **Week 1-3**: Books 1-3 (Foundation Concepts)
+- **Week 4-6**: Book 4 (ARCGenesis)
+- **Week 7-9**: Book 5 (ARCModelRegistry)
+- **Week 10-12**: Book 6 (ARCModelSBT)
+- **Week 13-15**: Books 7-8 (Applications)
 
 #### Graduate Seminar: "Advanced Topics in AI Governance"
-- **Week 1-2**: Review of Book 1
-- **Week 3-5**: Book 3 (Deep dive on SBTs)
-- **Week 6-8**: Book 4 (Constitutional AI)
-- **Week 9-11**: Book 5 (Job taxonomies)
+- **Week 1-2**: Review of Books 1-4
+- **Week 3-5**: Book 6 (Deep dive on SBTs)
+- **Week 6-8**: Book 7 (Constitutional AI)
+- **Week 9-11**: Book 8 (Job taxonomies)
 - **Week 12-15**: Research project
 
 #### Professional Workshop: "Building on ARC"
-- **Day 1 Morning**: Books 1-2 overview
-- **Day 1 Afternoon**: Book 2 implementation
-- **Day 2 Morning**: Book 3 + integration
+- **Day 1 Morning**: Books 4-5 overview
+- **Day 1 Afternoon**: Book 5 implementation
+- **Day 2 Morning**: Book 6 + integration
 - **Day 2 Afternoon**: Hands-on project
 
 ---
@@ -429,22 +504,22 @@ Each book includes comprehensive security analysis. Key security themes across t
 
 ### Security Principles
 
-1. **Immutability as Security** (Book 1)
+1. **Immutability as Security** (Book 4)
    - How immutability prevents tampering
    - Trade-offs with flexibility
    - Genesis as security anchor
 
-2. **Governed Upgradeability** (Book 2)
+2. **Governed Upgradeability** (Book 5)
    - Secure upgrade patterns
    - Governance as security layer
    - Proxy pattern vulnerabilities
 
-3. **Identity Security** (Book 3)
+3. **Identity Security** (Book 6)
    - Non-transferability enforcement
    - Revocation mechanisms
    - Privacy preservation
 
-4. **Operational Security** (Books 4-5)
+4. **Operational Security** (Books 7-8)
    - Emergency coordination
    - Slashing mechanisms
    - Byzantine fault tolerance
@@ -470,7 +545,7 @@ Before deploying systems based on this series:
    - Choose your reading path
    - Identify prerequisite knowledge
 
-2. **Start with Book 1** (1-2 weeks)
+2. **Start with Book 4** (1-2 weeks)
    - Focus on Chapters 1-5 first
    - Complete exercises
    - Review code examples
@@ -540,9 +615,9 @@ Under the following terms:
 ## 📝 Version History
 
 ### Version 1.0 (2026-01-17)
-- Initial release of complete 5-book series
-- ~1,275 pages of comprehensive documentation
-- 500,000+ words of educational content
+- Initial release of complete 8-book series
+- ~1,500 pages of comprehensive documentation
+- 600,000+ words of educational content
 - 150+ code examples
 - 200+ academic citations
 
@@ -668,14 +743,6 @@ We welcome feedback on this comprehensive series!
 
 ## 🙏 Acknowledgments
 
-This research series was made possible through:
-
-- **Academic Partnerships**: Universities and research institutions
-- **Open Source Community**: Contributors and reviewers
-- **Research Foundations**: Anthropic, OpenAI, Ethereum Foundation
-- **Industry Partners**: Organizations building on ARC
-- **Early Adopters**: Developers providing feedback
-
 Special thanks to:
 - The Ethereum developer community
 - OpenZeppelin for security frameworks
@@ -688,11 +755,14 @@ Special thanks to:
 
 ### Jump to Books
 
-- [Book 1: ARCGenesis](./01_genesis/ARCGenesis.md)
-- [Book 2: ARCModelRegistry](./02_registry/ARCModelRegistry.md)
-- [Book 3: ARCModelSBT](./03_identity/ARCModelSBT.md)
-- [Book 4: GLADIUS](./04_models/GLADIUS.md)
-- [Book 5: Model Jobs](./05_jobs/Model_Jobs.md)
+- [Book 1: ARC Ecosystem](./01_ECOSYSTEM.md)
+- [Book 2: Constitutional Architecture](./02_GOVERNANCE.md)
+- [Book 3: Model, Roles and Attribution](./03_ATTRIBUTES.md)
+- [Book 4: ARCGenesis](./01_genesis/ARCGenesis.md)
+- [Book 5: ARCModelRegistry](./02_registry/ARCModelRegistry.md)
+- [Book 6: ARCModelSBT](./03_identity/ARCModelSBT.md)
+- [Book 7: GLADIUS](./04_models/GLADIUS.md)
+- [Book 8: Model Jobs](./05_jobs/Model_Jobs.md)
 
 ### Jump to Sections
 
@@ -706,7 +776,7 @@ Special thanks to:
 **Document Version**: 1.0  
 **Last Updated**: 2026-01-17  
 **Series Status**: Complete  
-**Total Content**: ~1,275 pages | ~500,000 words  
+**Total Content**: ~1,500 pages | ~600,000 words  
 **License**: CC BY-SA 4.0  
 
 ---
