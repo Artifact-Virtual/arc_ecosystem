@@ -466,14 +466,14 @@ where:
 For ARC tasks, this translates to finding transformation rules $T$ that minimize:
 
 $$
-T^* = \arg\min_{T \in \mathcal{T}} \left( |T| + \sum_{i=1}^{n} |o_i - T(i_i)| \right)
+T^* = \arg\min_{T \in \mathcal{T}} \left( |T| + \sum_{k=1}^{n} |o_k - T(i_k)| \right)
 $$
 
 where:
 - $T^*$ is the optimal transformation
 - $\mathcal{T}$ is the space of possible transformations
 - $|T|$ represents the complexity of the transformation
-- $i_i$ and $o_i$ are input-output example pairs
+- $i_k$ and $o_k$ are the $k$-th input-output example pairs
 
 The "Compositional-ARC" dataset further pushes these boundaries by evaluating the model's capacity to systematically generalize novel combinations of transformations. In the context of a RESEARCH Job, this capability allows an ARC agent to discover new procedural knowledge and store it in a reusable "Model Context Protocol (MCP) Box" for future inference.
 
