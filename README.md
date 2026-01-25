@@ -27,7 +27,7 @@
 - **Address**: `0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437`
 - **Network**: Base L2 Mainnet (Chain ID: 8453)
 - **Symbol**: ARCX2 • **Decimals**: 18 • **Total Supply**: 1,000,000 (finalized)
-- **Contract Size**: 24,255 bytes (under 24,576 limit)
+- **Contract Size**: 24,255 bytes (under 24,577 limit)
 - **DEX**: Uniswap V4 — LP live (no hooks)
 - **Status**: [![Status](https://img.shields.io/badge/Status-Live-00C853?style=flat-square)](https://basescan.org/address/0xDb3C3f9ECb93f3532b4FD5B050245dd2F2Eec437)
 - **Network**: [![Network](https://img.shields.io/badge/Network-Base%20L2-0052FF?style=flat-square)](https://base.org/)
